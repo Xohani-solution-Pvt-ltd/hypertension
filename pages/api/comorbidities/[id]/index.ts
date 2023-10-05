@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { connectMongo } from "../../../../utils/mongodb";
 import SymptomModel from "../../../../models/symptom.model";
-import ComorbiditiesModel from "../../../../models/comorbidities";
+import ComorbiditiesModel from "../../../../models/comorbidities.model";
 
 
 

@@ -1,9 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { connectMongo } from "../../../utils/mongodb";
- import ComorbiditiesModel from "../../../models/symptom.model";
+ import ComorbiditiesModel from "../../../models/comorbidities.model";
 import { verifyJWTandCheckUser } from "../../../utils/userFromJWT";
 import { setCookie } from "cookies-next";
-import SymptomModel from "../../../models/symptom.model";
 
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -36,7 +35,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const savedComorbidities = await newComorbidities.save();
       if(savedComorbidities)
       {
-        setCookie('comorbiditiesId', savedComorbidities._id, { req, res, maxAge: 60 * 60 * 24 });
+        setCookie('comorbiditiesId', savedComorbidities._id, { req, res });
       }
       res.status(201).json({
         success: true,

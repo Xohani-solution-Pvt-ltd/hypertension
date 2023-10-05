@@ -6,6 +6,7 @@ import { submitComorbiditiesAPI, getComorbiditiesDetailsAPI } from '../../servic
 import { getCookie } from 'cookies-next';
 import notify from "../../helpers/notify";
 import { ComorbiditiesInterface, initialComorbiditiesValues } from '../../interfaces/comorbidities';
+import { Col, Row } from 'react-bootstrap';
 
 const validationSchema = Yup.object({
   cva: Yup.boolean(),
@@ -48,7 +49,7 @@ const Comorbidities = ({submit}) => {
     }
   };
   useEffect(() => {
-    const id = getCookie('diagnosisId')
+    const id = getCookie('comorbidiId')
     setComorbiditiesId(id)
   }, [1]);
 
@@ -83,7 +84,7 @@ const Comorbidities = ({submit}) => {
                       }
                     }
                     if (comorbiditiesId) {
-                      setFieldValue('comorbiditiesid', comorbiditiesId);
+                      setFieldValue('comorbiditiesId', comorbiditiesId);
                       fetchDiagnosisDetailData();
                     }
                   }, [comorbiditiesId]);

@@ -1,5 +1,4 @@
 import { models, model, Schema, SchemaTypes, SchemaType, Model } from 'mongoose';
-import { boolean } from 'yup';
 
 const ComorbiditiesSchema:Schema= new Schema({
     userid: { type: SchemaTypes.ObjectId, ref: "User" , index: true,unique: true },
@@ -7,23 +6,23 @@ const ComorbiditiesSchema:Schema= new Schema({
          type:Boolean,
          default: false
        },
-      heartFailure: {
+    heartFailure: {
         type: Boolean,
         default: false
       },
-      diabetes: {
+    diabetes: {
         type: Boolean,
         default: false
       },
-      pregnancy: {
+    pregnancy: {
         type: Boolean,
         default: false
       },
-      lungDisease: {
+    lungDisease: {
         type: Boolean,
         default: false
       },
-      coronaryArteryDisease: { userid: { type: SchemaTypes.ObjectId, ref: "User" , index: true,unique: true },
+    coronaryArteryDisease: {
         type: Boolean,
        default: false
       },
@@ -32,3 +31,5 @@ const ComorbiditiesSchema:Schema= new Schema({
 const ComorbiditiesModel= models.Comorbidities || model('Comorbidities',ComorbiditiesSchema)
 
 export default ComorbiditiesModel;
+
+

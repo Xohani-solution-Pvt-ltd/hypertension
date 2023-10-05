@@ -1,26 +1,51 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { connectMongo } from "../../../utils/mongodb";
  import SymptomModel from "../../../models/symptom.model";
+import { verifyJWTandCheckUser } from "../../../utils/userFromJWT";
+import { setCookie } from "cookies-next";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   connectMongo()
 
-  const { userid,diagnosisid,coronaryArteryDisease,breathlessness,minorNYHA,majorNYHA,legSwelling} = req.body;
-
-    if(req.method === "POST"){
-      try {
-        const symptomData = req.body;
-        const symptom = new SymptomModel(symptomData);
-        await symptom.save();
-        res.status(201).json({
-          success: true,
-          data: symptom
+  if (req.method === "POST") {
+    const { previousHeartAttacks,breathlessness,minorNYHA,majorNYHA,legSwelling} = req.body;
+    try {
+      const { token } = req.headers;
+      if (!token) {
+        throw new Error("Token not available");
+      }
+      const [error, user] = await verifyJWTandCheckUser(token);
+      if (error) {
+        res.status(401).json({
+          success: false,
+          message: error,
         });
-      } catch (error) {
-          res.status(500).json({ 
-            success: false,
-            message: "Failed to create the symptom" });
-         }
+        return;
+      }
+      const newSymptoms = new SymptomModel({
+        userid : user._id,
+        previousHeartAttacks,
+        breathlessness,
+        minorNYHA,
+        majorNYHA,
+        legSwelling
+      });
+      const savedSymptoms = await newSymptoms.save();
+      if(savedSymptoms)
+      {
+        setCookie('symptomsId', savedSymptoms._id, { req, res });
+      }
+      res.status(201).json({
+        success: true,
+        message: "Symptoms created successfully",
+        data: savedSymptoms,
+      });
+    } catch (error) {
+      res.status(400).json({
+        success: false,
+        message: error.message,
+      });
+    }
     }else if(req.method === "GET"){
       try {
         const symptoms = await SymptomModel.findOne({diagnosisid : req.query.id });

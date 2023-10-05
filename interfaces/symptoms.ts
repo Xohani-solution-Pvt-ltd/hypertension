@@ -1,5 +1,5 @@
 export interface SymptomsInterface{
-    coronaryArteryDisease :boolean,
+    previousHeartAttacks :boolean,
     breathlessness :boolean,
     minorNYHA :boolean,
     majorNYHA :boolean,
@@ -7,7 +7,7 @@ export interface SymptomsInterface{
 }
 
 export const initialSymptomsValue : SymptomsInterface={
-    coronaryArteryDisease :undefined,
+    previousHeartAttacks :undefined,
     breathlessness :undefined,
     minorNYHA :undefined,
     majorNYHA :undefined,
