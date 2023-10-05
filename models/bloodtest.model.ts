@@ -1,25 +1,18 @@
 import { models, model, Schema, SchemaTypes } from 'mongoose';
 
 const BloodTestSchema: Schema = new Schema({
-    userid: { type: SchemaTypes.ObjectId, ref: "User", index: true },
-    diagnosisid: { type: SchemaTypes.ObjectId, ref: "Diagnosis" , index: true},
+    userid: { type: SchemaTypes.ObjectId, ref: "User", index: true,unique: true},
+    // diagnosisid: { type: SchemaTypes.ObjectId, ref: "Diagnosis" , index: true},
     hbA1cLevel: {
         type: Number,
         required: true
     },
-    normalHbA1c: {
-        type: Number,
-        required: true
-    },
+
     hBA1CInterpretation: {
         type: String,
         required: true
     },
     totalCholesterol: {
-        type: Number,
-        required: true
-    },
-    lipidNormal: {
         type: Number,
         required: true
     },
@@ -31,10 +24,7 @@ const BloodTestSchema: Schema = new Schema({
         type: Number,
         required: true
     },
-    hdlNormal: {
-        type: Number,
-        required: true
-    },
+
     hdlInterpretation: {
         type: String,
         required: true
@@ -43,19 +33,11 @@ const BloodTestSchema: Schema = new Schema({
         type: Number,
         required: true
     },
-    lcdNormal: {
-        type: Number,
-        required: true
-    },
     lcdInterpretation: {
         type: String,
         required: true
     },
     triglycerides: {
-        type: Number,
-        required: true
-    },
-    triglyceridesNormal: {
         type: Number,
         required: true
     },
@@ -96,10 +78,6 @@ const BloodTestSchema: Schema = new Schema({
         required: true
     },
     tshLevel: {
-        type: Number,
-        required: true
-    },
-    tshRange: {
         type: Number,
         required: true
     },

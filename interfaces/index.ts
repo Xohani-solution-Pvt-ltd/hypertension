@@ -10,6 +10,13 @@ export interface User {
   gender?: string;
 }
 
+export interface Diagnosis{
+  _id?: string;
+  systolic: string;
+  diastolic: string;
+  pulseRate: string;
+}
+
 export type LayoutProps = {
   children?: ReactNode;
   title?: string;

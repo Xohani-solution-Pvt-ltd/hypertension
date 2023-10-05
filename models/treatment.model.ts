@@ -1,7 +1,7 @@
 import { models, model, Schema, SchemaTypes } from 'mongoose';
 
 const TreatmentSchema: Schema = new Schema({
-    userid: { type: SchemaTypes.ObjectId, ref: "User" , index: true},
+    userid: { type: SchemaTypes.ObjectId, ref: "User" , index: true,unique:true},
     dateOfBirth: {
         type: Date,
         required: true

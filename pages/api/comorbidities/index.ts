@@ -1,26 +1,43 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { connectMongo } from "../../../utils/mongodb";
  import ComorbiditiesModel from "../../../models/symptom.model";
+import { verifyJWTandCheckUser } from "../../../utils/userFromJWT";
+import { setCookie } from "cookies-next";
+import SymptomModel from "../../../models/symptom.model";
 
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   connectMongo()
 
-  if(req.method === "POST") {
-
-    const { userid, cva, previousHeartAttacks, heartFailure,diabetes,pregnancy,lungDisease,coronaryArteryDisease } = req.body;
+  if (req.method === "POST") {
+    const { cva,coronaryArteryDisease,heartFailure,diabetes,pregnancy,lungDisease} = req.body;
     try {
-            const newComorbidities = new ComorbiditiesModel({
-                cva,
-                previousHeartAttacks,
-                heartFailure,
-                diabetes,
-                pregnancy,
-                lungDisease,
-                coronaryArteryDisease
-              });
-              const savedComorbidities = await newComorbidities.save();
-        
+      const { token } = req.headers;
+      if (!token) {
+        throw new Error("Token not available");
+      }
+      const [error, user] = await verifyJWTandCheckUser(token);
+      if (error) {
+        res.status(401).json({
+          success: false,
+          message: error,
+        });
+        return;
+      }
+      const newComorbidities = new ComorbiditiesModel({
+        userid : user._id,
+        cva,
+        coronaryArteryDisease,
+        heartFailure,
+        diabetes,
+        pregnancy,
+        lungDisease
+      });
+      const savedComorbidities = await newComorbidities.save();
+      if(savedComorbidities)
+      {
+        setCookie('comorbiditiesId', savedComorbidities._id, { req, res, maxAge: 60 * 60 * 24 });
+      }
       res.status(201).json({
         success: true,
         message: "Comorbidities created successfully",

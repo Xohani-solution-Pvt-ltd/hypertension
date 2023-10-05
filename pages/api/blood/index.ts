@@ -5,7 +5,7 @@ import { connectMongo } from "../../../utils/mongodb";
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   connectMongo()
 
-  const { userid,hbA1cLevel,normalHbA1c,hBA1CInterpretation,totalCholesterol,lipidNormal,lipidInterpretation,hdlCholesterol,hdlNormal,hdlInterpretation,lcdCholesterol,lcdNormal,lcdInterpretation,triglycerides,triglyceridesNormal,triglyceridesInterpretation,albumin, creatinine ,acrResult, eGFRResult,sodium,potassium,uricAcid,kidneyInterpretation,tshLevel,tshRange,tshInterpretation,renalArteryDoppler,coronaryArteryDisease,hfrEF,hfpeEF,ejectionFraction} = req.body;
+  const { userid,hbA1cLevel,hBA1CInterpretation,totalCholesterol,lipidInterpretation,hdlCholesterol,hdlInterpretation,lcdCholesterol,lcdInterpretation,triglycerides,triglyceridesInterpretation,albumin, creatinine ,acrResult, eGFRResult,sodium,potassium,uricAcid,kidneyInterpretation,tshLevel,tshInterpretation,renalArteryDoppler,coronaryArteryDisease,hfrEF,hfpeEF,ejectionFraction} = req.body;
 
     if(req.method === "POST"){
       try {
