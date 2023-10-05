@@ -1,0 +1,63 @@
+{
+  "name": "next-img",
+  "version": "0.0.1-dev-a",
+  "description": "Webapp to convert text to image using Deep Learning",
+  "author": "Ved Gupta vedgupta@protonmail.com https://github.com/innovatorved/",
+  "contributors": [
+    {
+      "name": "Ved Prakash Gupta",
+      "email": "vedgupta@protonmail.com",
+      "url": "https://github.com/innovatorved/"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/innovatorved/authneu.git"
+  },
+  "private": true,
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "pretify": "prettier --write .",
+    "type-check": "tsc"
+  },
+  "dependencies": {
+    "@iconify/react": "^4.1.1",
+    "@next/font": "^13.1.6",
+    "axios": "^1.4.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "bootstrap": "^5.3.1",
+    "cookies-next": "^2.1.2",
+    "formidable": "^3.5.0",
+    "formik": "^2.4.3",
+    "google-map-react": "^2.2.1",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.3.2",
+    "next": "latest",
+    "next-auth": "^4.22.1",
+    "nodemailer": "^6.9.3",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.8.0",
+    "react-bootstrap-icons": "^1.10.3",
+    "react-devtools": "^4.28.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.16.0",
+    "react-spinners": "^0.13.8",
+    "react-toastify": "^9.1.1",
+    "styled-components": "^6.0.7",
+    "yup": "^1.2.0"
+  },
+  "devDependencies": {
+    "@types/cookie": "^0.5.1",
+    "@types/node": "^12.12.21",
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.1",
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.21",
+    "postcss-preset-env": "^8.0.1",
+    "prettier": "^2.8.3",
+    "typescript": "^4.8.3"
+  }
+}
