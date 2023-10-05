@@ -1,9 +1,5 @@
-import React, { useEffect, useRef, useState, useMemo } from 'react';
-import Image from 'next/image';
+import React, { useEffect,  useState, useMemo } from 'react';
 import { useRouter } from 'next/router';
-import AccusureImg from "../../assets/images/accusure.jpeg";
-import Link from 'next/link';
-import { Container, Row, Col, Button, Nav, Tab, Card } from 'react-bootstrap';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { submitComorbiditiesAPI, getComorbiditiesDetailsAPI } from '../../services/call';
