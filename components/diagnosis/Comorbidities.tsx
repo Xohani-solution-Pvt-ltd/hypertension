@@ -13,7 +13,7 @@ import { ComorbiditiesInterface, initialComorbiditiesValues } from '../../interf
 
 const validationSchema = Yup.object({
   cva: Yup.boolean(),
-  previousHeartAttacks: Yup.boolean(),
+  coronaryArteryDisease: Yup.boolean(),
   heartFailure: Yup.boolean(),
   diabetes: Yup.boolean(),
   pregnancy: Yup.boolean(),
@@ -23,13 +23,13 @@ const validationSchema = Yup.object({
 const Comorbidities = ({submit}) => {
   const router = useRouter();
   const [processing, setProcessing] = useState(false);
-  const [diagnosisId, setDiagnosisId] = useState(undefined);
+  const [comorbiditiesId, setComorbiditiesId] = useState(undefined);
   const [atLeastOneCheckboxChecked, setAtLeastOneCheckboxChecked] = useState(false);
 
   const handleSubmit = async (values: ComorbiditiesInterface) => {
     if (
       !values.cva &&
-      !values.previousHeartAttacks &&
+      !values.coronaryArteryDisease &&
       !values.heartFailure &&
       !values.diabetes &&
       !values.pregnancy &&
@@ -53,7 +53,7 @@ const Comorbidities = ({submit}) => {
   };
   useEffect(() => {
     const id = getCookie('diagnosisId')
-    setDiagnosisId(id)
+    setComorbiditiesId(id)
   }, [1]);
 
   return (
@@ -67,13 +67,13 @@ const Comorbidities = ({submit}) => {
                 {({ setFieldValue }) => {
                   useEffect(() => {
                     const fetchDiagnosisDetailData = async () => {
-                      const [data, err] = await getComorbiditiesDetailsAPI(diagnosisId);
+                      const [data, err] = await getComorbiditiesDetailsAPI(comorbiditiesId);
                       console.log('data',data);
                       
                         if(data){
-                        const { cva, previousHeartAttacks, heartFailure, diabetes, pregnancy, lungDisease } = data
+                        const { cva, coronaryArteryDisease, heartFailure, diabetes, pregnancy, lungDisease } = data
                         setFieldValue('cva', cva);
-                        setFieldValue('previousHeartAttacks', previousHeartAttacks);
+                        setFieldValue('coronaryArteryDisease', coronaryArteryDisease);
                         setFieldValue('heartFailure', heartFailure);
                         setFieldValue('diabetes', diabetes);
                         setFieldValue('pregnancy', pregnancy);
@@ -86,11 +86,11 @@ const Comorbidities = ({submit}) => {
                         }, 1000);
                       }
                     }
-                    if (diagnosisId) {
-                      setFieldValue('diagnosisid', diagnosisId);
+                    if (comorbiditiesId) {
+                      setFieldValue('comorbiditiesid', comorbiditiesId);
                       fetchDiagnosisDetailData();
                     }
-                  }, [diagnosisId]);
+                  }, [comorbiditiesId]);
 
                   return (
                     <Form>
@@ -105,12 +105,12 @@ const Comorbidities = ({submit}) => {
                       </div>
                       <div className="p-2">
                         <label>
-                          <Field type="checkbox" id="previousHeartAttacks" name="previousHeartAttacks" className="me-4" onChange={(e) => { setFieldValue('previousHeartAttacks', e.target.checked);
+                          <Field type="checkbox" id="coronaryArteryDisease" name="coronaryArteryDisease" className="me-4" onChange={(e) => { setFieldValue('coronaryArteryDisease', e.target.checked);
                                    setAtLeastOneCheckboxChecked(e.target.checked);
                                    }}/>
                           Coronary artery disease / Previous heart attacks
                         </label>
-                        <ErrorMessage name="previousHeartAttacks" component="div" className="text-danger"/>
+                        <ErrorMessage name="coronaryArteryDisease" component="div" className="text-danger"/>
                       </div>
                       <div className="p-2">
                         <label>

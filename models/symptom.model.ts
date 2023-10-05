@@ -1,8 +1,8 @@
 import { models, model, Schema, SchemaTypes } from 'mongoose';
 
 const SymptomSchema: Schema = new Schema({
-  userid: { type: SchemaTypes.ObjectId, ref: "User" , index: true},
-  diagnosisid: { type: SchemaTypes.ObjectId, ref: "Diagnosis" , index: true},
+  userid: { type: SchemaTypes.ObjectId, ref: "User" , index: true,unique: true },
+  // diagnosisid: { type: SchemaTypes.ObjectId, ref: "Diagnosis" , index: true},
   cva: {
     type: Boolean,
     default: false

@@ -8,13 +8,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "PUT") {
     const { id } = req.query; 
     const {
-      hbA1cLevel,normalHbA1c,hBA1CInterpretation,totalCholesterol,lipidNormal,lipidInterpretation,hdlCholesterol,hdlNormal,hdlInterpretation,lcdCholesterol,lcdNormal,lcdInterpretation,triglycerides,triglyceridesNormal,triglyceridesInterpretation,albumin, creatinine ,acrResult, eGFRResult,sodium,potassium,uricAcid,kidneyInterpretation,tshLevel,tshRange,tshInterpretation,renalArteryDoppler,coronaryArteryDisease,hfrEF,hfpeEF,ejectionFraction } = req.body;
+      hbA1cLevel,hBA1CInterpretation,totalCholesterol,lipidInterpretation,hdlCholesterol,hdlInterpretation,lcdCholesterol,lcdInterpretation,triglycerides,triglyceridesInterpretation,albumin, creatinine ,acrResult, eGFRResult,sodium,potassium,uricAcid,kidneyInterpretation,tshLevel,tshInterpretation,renalArteryDoppler,coronaryArteryDisease,hfrEF,hfpeEF,ejectionFraction } = req.body;
     
     try {
       const updatedBloodTest = await BloodTestModel.findByIdAndUpdate(
         id,
         {
-          hbA1cLevel,normalHbA1c,hBA1CInterpretation,totalCholesterol,lipidNormal,lipidInterpretation,hdlCholesterol,hdlNormal,hdlInterpretation,lcdCholesterol,lcdNormal,lcdInterpretation,triglycerides,triglyceridesNormal,triglyceridesInterpretation,albumin, creatinine ,acrResult, eGFRResult,sodium,potassium,uricAcid,kidneyInterpretation,tshLevel,tshRange,tshInterpretation,renalArteryDoppler,coronaryArteryDisease,hfrEF,hfpeEF,ejectionFraction
+          hbA1cLevel,hBA1CInterpretation,totalCholesterol,lipidInterpretation,hdlCholesterol,hdlInterpretation,lcdCholesterol,lcdInterpretation,triglycerides,triglyceridesInterpretation,albumin, creatinine ,acrResult, eGFRResult,sodium,potassium,uricAcid,kidneyInterpretation,tshLevel,tshInterpretation,renalArteryDoppler,coronaryArteryDisease,hfrEF,hfpeEF,ejectionFraction
         },
         { new: true }
       );

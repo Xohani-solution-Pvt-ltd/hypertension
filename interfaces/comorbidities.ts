@@ -1,6 +1,6 @@
 export interface ComorbiditiesInterface {
   cva:boolean,
-  previousHeartAttacks: boolean,
+  coronaryArteryDisease: boolean,
   heartFailure: boolean,
   diabetes: boolean,
   pregnancy: boolean,
@@ -8,7 +8,7 @@ export interface ComorbiditiesInterface {
 }
 export const initialComorbiditiesValues: ComorbiditiesInterface = {
   cva:undefined,
-  previousHeartAttacks: undefined,
+  coronaryArteryDisease: undefined,
   heartFailure: undefined,
   diabetes: undefined,
   pregnancy: undefined,

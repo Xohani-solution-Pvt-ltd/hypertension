@@ -1,15 +1,15 @@
 import React from "react";
 import Link from "next/link";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { SOCIAL_URL, WEBSITE_LINK, APP_INFO } from "../environments/index";
 import Image from "next/image";
 import { useState } from "react";
-import { Twitter, Facebook, Instagram, Youtube } from "react-bootstrap-icons";
+import { Twitter, Facebook, Instagram, Youtube, } from 'react-bootstrap-icons'
 import LockPrimaryImg from "../assets/images/lock-primary-100.png";
 
 export default function Footer() {
   const { TITLE, DESCRIPTION } = APP_INFO;
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
   const { GITHUB_URL, INSTA_URL, FB_URL, TWITTER_URL, DISCORD_SERVER } =
     SOCIAL_URL;
   const handleSubmit = async (e) => {
@@ -17,38 +17,41 @@ export default function Footer() {
 
     try {
       const response = await fetch(`https://hypertension.com/?email=${email}`, {
-        method: "POST",
+        method: 'POST',
       });
 
       if (response.ok) {
-        console.log("Form submitted successfully");
+        console.log('Form submitted successfully');
+
       } else {
-        console.error("Form submission failed");
+        console.error('Form submission failed');
+
       }
     } catch (error) {
-      console.error("An error occurred", error);
+      console.error('An error occurred', error);
     }
   };
 
   const handleSubscribe = async () => {
     try {
-      const response = await fetch("YOUR_API_ENDPOINT", {
-        method: "POST",
+      const response = await fetch('YOUR_API_ENDPOINT', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email }),
       });
 
       if (response.ok) {
-        console.log("Subscription successful!");
+        console.log('Subscription successful!');
       } else {
-        console.error("Subscription failed.");
+        console.error('Subscription failed.');
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error('Error:', error);
     }
   };
+
 
   return (
     <footer className="d-flex align-items-end w-full bg-white-500 container-lg">
@@ -60,25 +63,10 @@ export default function Footer() {
             </h2>
             <div className="container-fluid">
               <div className="social-icon gap-5 md:gap-5">
-                <a href="https://twitter.com" className="twitter me-3">
-                  <i className="fab fa-twitter">
-                    <Twitter />
-                  </i>
-                </a>
-                <a href="https://facebook.com" className="facebook me-3">
-                  <i className="fab fa-facebook">
-                    <Facebook />
-                  </i>
-                </a>
-                <a href="https://instagram.com" className="instagram me-3">
-                  <i className="fab fa-instagram"></i>
-                  <Instagram />
-                </a>
-                <a href="https://youtube.com" className="youtube me-3">
-                  <i className="fab fa-youtube">
-                    <Youtube />
-                  </i>
-                </a>
+                <a href="https://twitter.com" className="twitter"><i className="fab fa-twitter"><Twitter /></i></a>
+                <a href="https://facebook.com" className="facebook"><i className="fab fa-facebook"><Facebook /></i></a>
+                <a href="https://instagram.com" className="instagram"><i className="fab fa-instagram"></i><Instagram /></a>
+                <a href="https://youtube.com" className="youtube"><i className="fab fa-youtube"><Youtube /></i></a>
               </div>
             </div>
           </Col>
@@ -113,13 +101,13 @@ export default function Footer() {
             <div>
               <div className="flex items-center">
                 <div className="max-w-[40px] sm:max-w-[70px]">
-                  {/* <Image
+                  <Image
                     src={LockPrimaryImg}
                     className="cursor-pointer"
                     width={70}
                     height={70}
                     alt="lock image"
-                  /> */}
+                  />
                   <div className="font-primary text-secondary-300 hover:underline">
                     <span className="text-xs text-secondary-300">
                       {/* form fillup  */}
@@ -148,13 +136,8 @@ export default function Footer() {
           <div className=" border border-primary container-lg">
             <Container fluid className="d-flex justify-content-center ">
               <span className="text-align-center">
-                <h3>
-                  {" "}
-                  © 2023 <a href={WEBSITE_LINK}>{TITLE}</a>. All Rights
-                  Reserved.
-                </h3>
-              </span>
-            </Container>
+                <h3> © 2023 <a href={WEBSITE_LINK}>{TITLE}</a>. All Rights Reserved.
+                </h3></span></Container>
           </div>
         </Row>
       </Container>

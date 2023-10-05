@@ -24,7 +24,7 @@
     "**/*.ts",
     "**/*.tsx",
     "**/**/*.ts"
-  ],
+, "pages/api/comorbidities/[id]/index.js"  ],
   "exclude": [
     "node_modules"
   ]

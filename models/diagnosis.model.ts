@@ -1,7 +1,7 @@
 import { models, model, Schema, SchemaTypes } from 'mongoose';
 
 const DiagnosisSchema: Schema = new Schema({
-    userid: { type: SchemaTypes.ObjectId, ref: "User" , index: true},
+    userid: { type: SchemaTypes.ObjectId, ref: "User" , index: true ,unique: true },
     systolic: {
       type: Number,
       required: true

@@ -46,16 +46,16 @@ export default function Header() {
           </h4>
           <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={handleToggle} />
           <Navbar.Collapse id="basic-navbar-nav" className={toggle ? 'show' : 'd-flex justify-content-end'}>
-            <Nav className="ml-auto">
+            <Nav className="ml-auto nav-link text-black display-4">
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/about">About</Nav.Link>
               <Nav.Link href="/contact">Contact</Nav.Link>
-              {(isAuthenticated) ? <>
-                <Nav.Link href="/users" className="nav-link">
+              {/* {(isAuthenticated) ? <>
+                <Nav.Link href="/dashboard" className="nav-link">
                   Dashboard
-                </Nav.Link>
-                <Nav.Link onClick={() => { LogoutUser(); }} className="nav-link" href="/" > Logout
-                </Nav.Link>
+                </Nav.Link> 
+                 <Nav.Link onClick={() => { LogoutUser(); }} className="nav-link" href="/" > Logout
+                </Nav.Link> 
               </>
                 : <>
                   <Nav.Link href="/login" className="nav-link">
@@ -65,7 +65,24 @@ export default function Header() {
                       Signup
                     </Nav.Link></>
                 </>
-              }
+              } */}
+              {(isAuthenticated) ? <>
+                <li className="nav-item dropdown">
+                  <NavLink className="nav-link text-black display-4" href="/dashboard" aria-expanded="false">
+                    Dashboard
+                  </NavLink>
+                </li></> : <>
+                <li className="nav-item dropdown">
+                  <NavLink className="nav-link text-black display-4" href="/login" aria-expanded="false">
+                    Login
+                  </NavLink>
+                </li>
+                <li className="nav-item dropdown">
+                  <NavLink className="nav-link text-black display-4" href="/signup" aria-expanded="false">
+                    Signup
+                  </NavLink>
+                </li>
+              </>}
             </Nav>
           </Navbar.Collapse>
         </Navbar>
