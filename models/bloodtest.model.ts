@@ -29,11 +29,11 @@ const BloodTestSchema: Schema = new Schema({
         type: String,
         required: true
     },
-    lcdCholesterol: {
+    ldlCholesterol: {
         type: Number,
         required: true
     },
-    lcdInterpretation: {
+    ldlInterpretation: {
         type: String,
         required: true
     },

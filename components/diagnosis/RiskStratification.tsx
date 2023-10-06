@@ -10,115 +10,149 @@
 // export default RiskStratification
 
 
-import { useEffect, useState } from "react";
 
-function YourComponent() {
-  const [diagnosisData, setDiagnosisData] = useState([]);
-  const [comorbiditiesData, setComorbiditiesData] = useState([]);
-  const [symptomsData, setSymptomsData] = useState([]);
-  const [bloodData, setBloodData] = useState([]);
-  
-  const fetchDiagnosisData = async () => {
-    try {
-      const response = await fetch("/api/diagnosis");
-      const data = await response.json();
-      setDiagnosisData(data.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  
-  const fetchComorbiditesData = async () => {
-    try {
-      const response = await fetch("/api/comorbidities");
-      const data = await response.json();
-      setComorbiditiesData(data.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  
-  const fetchSymptomsData = async () => {
-    try {
-      const response = await fetch("/api/symptom");
-      const data = await response.json();
-      setSymptomsData(data.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  
-  const fetchBloodData = async () => {
-    try {
-      const response = await fetch("/api/blood");
-      const data = await response.json();
-      setBloodData(data.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  
-  
-  useEffect(() => {
-    fetchDiagnosisData();
-    fetchComorbiditesData();
-    fetchSymptomsData();
-    fetchBloodData();
-  }, []);
+// pages/[id].js
+import axios from 'axios';
+import { useRouter } from 'next/router';
+
+const UniqueIdComponent = ({ data }) => {
+  const router = useRouter();
+  const { id } = router.query;
 
   return (
-    <>
     <div>
-      <h1>Diagnosis Data</h1>
-      <ul>
-        {diagnosisData.map((diagnosis) => (
-          <li key={diagnosis._id}>
-            {/* Display diagnosis data as needed */}
-            {diagnosis.systolic}, {diagnosis.diastolic}, {diagnosis.pulseRate}
-          </li>
-        ))}
-         
-      </ul>
+      <p>Unique ID: {id}</p>
+      {/* Display fetched data here... */}
     </div>
-        <div>
-        <h1>Comorbidities Data</h1>
-        <ul>
-          {comorbiditiesData.map((comorbidities) => (
-            <li key={comorbidities._id}>
-              {/* Display diagnosis data as needed */}
-              {comorbidities.cva}, {comorbidities.previousHeartAttacks}, {comorbidities.heartFailure}, {comorbidities.diabetes}, {comorbidities.pregnancy}, {comorbidities.lungDisease}
-            </li>
-          ))}
-          {Array.isArray(comorbiditiesData) &&
-                comorbiditiesData.map((item, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>{index + 1}</td>
-                      
-                      <td>{item.systolic}</td>
-                      <td>{item.diastolic}</td>
-                      <td>{item.pulseRate}</td>
-                    </tr>
-                  );
-                })}
-        </ul>
-      </div>
-      <div>
-        <h1>Symptoms Data</h1>
-        <ul>
-          {symptomsData.map((symptoms) => (
-            <li key={symptoms._id}>
-              {/* Display diagnosis data as needed */}
-              {symptoms.previousHeartAttacks}, {symptoms.breathlessness}, {symptoms.minorNYHA}, {symptoms.majorNYHA}, {symptoms.legSwelling}
-            </li>
-          ))}
-        </ul>
-      </div>
-      </>
   );
+};
+
+export async function getServerSideProps({ params }) {
+  const { id } = params;
+
+  // Fetch data using 'id'
+  // Example using Axios:
+  const response = await axios.get(`https://localhost:3000/api/auth/signup/${id}`);
+        
+  return {
+    props: {
+      data: response.data,
+    },
+  };
 }
 
-export default YourComponent;
+export default UniqueIdComponent;
+
+
+// import { useEffect, useState } from "react";
+
+// function YourComponent() {
+//   const [diagnosisData, setDiagnosisData] = useState([]);
+//   const [comorbiditiesData, setComorbiditiesData] = useState([]);
+//   const [symptomsData, setSymptomsData] = useState([]);
+//   const [bloodData, setBloodData] = useState([]);
+  
+//   const fetchDiagnosisData = async () => {
+//     try {
+//       const response = await fetch("/api/diagnosis");
+//       const data = await response.json();
+//       setDiagnosisData(data.data);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+  
+//   const fetchComorbiditesData = async () => {
+//     try {
+//       const response = await fetch("/api/comorbidities");
+//       const data = await response.json();
+//       setComorbiditiesData(data.data);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+  
+//   const fetchSymptomsData = async () => {
+//     try {
+//       const response = await fetch("/api/symptom");
+//       const data = await response.json();
+//       setSymptomsData(data.data);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+  
+//   const fetchBloodData = async () => {
+//     try {
+//       const response = await fetch("/api/blood");
+//       const data = await response.json();
+//       setBloodData(data.data);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+  
+  
+//   useEffect(() => {
+//     fetchDiagnosisData();
+//     fetchComorbiditesData();
+//     fetchSymptomsData();
+//     fetchBloodData();
+//   }, []);
+
+//   return (
+//     <>
+//     <div>
+//       <h1>Diagnosis Data</h1>
+//       <ul>
+//         {diagnosisData.map((diagnosis) => (
+//           <li key={diagnosis._id}>
+//             {/* Display diagnosis data as needed */}
+//             {diagnosis.systolic}, {diagnosis.diastolic}, {diagnosis.pulseRate}
+//           </li>
+//         ))}
+         
+//       </ul>
+//     </div>
+//         <div>
+//         <h1>Comorbidities Data</h1>
+//         <ul>
+//           {comorbiditiesData.map((comorbidities) => (
+//             <li key={comorbidities._id}>
+//               {/* Display diagnosis data as needed */}
+//               {comorbidities.cva}, {comorbidities.previousHeartAttacks}, {comorbidities.heartFailure}, {comorbidities.diabetes}, {comorbidities.pregnancy}, {comorbidities.lungDisease}
+//             </li>
+//           ))}
+//           {Array.isArray(comorbiditiesData) &&
+//                 comorbiditiesData.map((item, index) => {
+//                   return (
+//                     <tr key={index}>
+//                       <td>{index + 1}</td>
+                      
+//                       <td>{item.systolic}</td>
+//                       <td>{item.diastolic}</td>
+//                       <td>{item.pulseRate}</td>
+//                     </tr>
+//                   );
+//                 })}
+//         </ul>
+//       </div>
+//       <div>
+//         <h1>Symptoms Data</h1>
+//         <ul>
+//           {symptomsData.map((symptoms) => (
+//             <li key={symptoms._id}>
+//               {/* Display diagnosis data as needed */}
+//               {symptoms.previousHeartAttacks}, {symptoms.breathlessness}, {symptoms.minorNYHA}, {symptoms.majorNYHA}, {symptoms.legSwelling}
+//             </li>
+//           ))}
+//         </ul>
+//       </div>
+//       </>
+//   );
+// }
+
+// export default YourComponent;
 
 
 

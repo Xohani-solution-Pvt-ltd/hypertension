@@ -11,6 +11,7 @@ import { getCookie } from 'cookies-next';
 import notify from "../../helpers/notify";
 import { BloodTestInterface ,intialBloodTestValue } from '../../interfaces/bloodtest';
 
+
 const validationSchema = Yup.object({
   hbA1cLevel: Yup.number()
     .required("HbA1c Level is required")
@@ -18,24 +19,30 @@ const validationSchema = Yup.object({
     .max(60, "HbA1c Level should not exceed 60"),
   hBA1CInterpretation: Yup.string()
     .required("Interpretation is required"),
-    // .min(39, "Interpretation must be at least 39")
-    // .max(46, "Interpretation must not exceed 46"),
   totalCholesterol: Yup.number()
     .required("Total Cholesterol is required")
     .min(180, "Total Cholesterol must be at least 180")
     .max(240, "Total Cholesterol must not exceed 240"),
+  lipidInterpretation :Yup.string()
+    .required("lipidInterpretation is required"),
   hdlCholesterol: Yup.number()
     .required("HDL Cholesterol is required")
     .min(60, "HDL Cholesterol must be at least 60")
     .max(80, "HDL Cholesterol must not exceed 80"),
-  lcdCholesterol: Yup.number()
+  hdlInterpretation :Yup.string()
+  .required("hdlInterpretation is required"),
+  ldlCholesterol: Yup.number()
     .required("LDL Cholesterol is required")
     .min(80, "LDL Cholesterol must be at least 80")
     .max(100, "LDL Cholesterol must not exceed 100"),
+  ldlInterpretation: Yup.string()
+    .required("ldlInterpretation is required"),
   triglycerides: Yup.number()
     .required("Triglycerides is required")
     .min(150, "Triglycerides must be at least 150")
     .max(499, "Triglycerides must not exceed 499"),
+  triglyceridesInterpretation :Yup.string()
+    .required("triglyceridesInterpretation is required"),
   albumin: Yup.number()
     .required("Albumin is required")
     .min(10, "Albumin must be at least 10")
@@ -44,14 +51,10 @@ const validationSchema = Yup.object({
     .required("Creatinine is required")
     .min(10, "Creatinine must be at least 10")
     .max(300, "Creatinine must not exceed 300"),
-  acrResult: Yup.number()
-    .required("ACR Result is required")
-    .min(30, "ACR Result must be at least 30")
-    .max(500, "ACR Result must not exceed 500"),
-  eGFRResult: Yup.number()
-    .required("eGFR Result is required")
-    .min(20, "eGFR Result must be at least 20")
-    .max(150, "eGFR Result must not exceed 150"),
+  acrResult: Yup.boolean()
+    .required("ACR Result is required"),
+  eGFRResult: Yup.boolean()
+    .required("eGFR Result is required"),
   sodium: Yup.number()
     .required("Sodium is required")
     .min(110, "Sodium must be at least 110")
@@ -65,38 +68,42 @@ const validationSchema = Yup.object({
     .min(2, "Uric Acid must be at least 2")
     .max(10, "Uric Acid must not exceed 10"),
   kidneyInterpretation: Yup.string()
-    .required("Interpretation is required")
-    .min(20, "Interpretation must be at least 20")
-    .max(200, "Interpretation must not exceed 200"),
+    .required("kidneyInterpretation is required"),
+    // .min(20, "Interpretation must be at least 20")
+    // .max(200, "Interpretation must not exceed 200"),
   tshLevel: Yup.number()
-    // .required("TSH Level is required")
+    .required("TSH Level is required")
     .min(0, "TSH Level must be at least 0")
     .max(8, "TSH Level must not exceed 8"),
   tshInterpretation: Yup.string()
-    // .required("tshInterpretation is required")
-    .min(0, "tshInterpretation must be at least 0")
-    .max(8, "tshInterpretation must not exceed 8"),
-  ejection: Yup.number()
-    // .required("ejection is required")
+    .required("tshInterpretation is required"),
+    // .min(0, "tshInterpretation must be at least 0")
+    // .max(8, "tshInterpretation must not exceed 8"),
+  renalArteryDoppler : Yup.string()
+    .required("renalArteryDoppler is required"),
+  ejectionFraction: Yup.number()
+    .required("ejection is required")
     .min(20, "Ejection must be at least 20")
     .max(80, "Ejection must not exceed 80"),
-  cadinterpretation: Yup.string()
-    // .required("cadinterpretation is required")
-    .min(20, "interpretation must be at least 20")
-    .max(80, "interpretation must not exceed 80"),
+  coronaryArteryDisease : Yup.string()
+    .required("coronaryArteryDisease is required"),
+  hfrEF: Yup.number()
+    .required("hfrEF is required"),
+  hfpeEF: Yup.number()
+    .required("hfpeEF is required"),
 });
 
 
 const BloodTest = ({submit}) => {
   const router = useRouter();
   const [processing, setProcessing] = useState(false);
-  const [diagnosisId, setDiagnosisId] = useState(undefined);
+  const [bloodTestId, setBloodTestId] = useState(undefined);
   const [atLeastOneCheckboxChecked, setAtLeastOneCheckboxChecked] = useState(false);
 
   const handleSubmit = async (values: BloodTestInterface) => {
     if (
-      !values.hbA1cLevel && !values.hBA1CInterpretation &&!values.totalCholesterol&& !values.lipidInterpretation && !values.hdlCholesterol &&!values.lcdInterpretation &&  !values.triglycerides && !values.triglyceridesInterpretation &&  !values.albumin &&!values.creatinine &&  !values.acrResult && !values.eGFRResult && !values.sodium &&  !values.potassium &&!values.uricAcid &&  !values.kidneyInterpretation && !values.tshLevel &&  !values.tshInterpretation &&!values.renalArteryDoppler &&  !values.coronaryArteryDisease && !values.ejectionFraction && !values.hfrEF &&  !values.hfpeEF
-  
+      !values.hbA1cLevel && !values.hBA1CInterpretation
+      &&!values.totalCholesterol&& !values.lipidInterpretation && !values.hdlCholesterol && !values.hdlInterpretation &&!values.ldlCholesterol &&!values.ldlInterpretation &&  !values.triglycerides && !values.triglyceridesInterpretation &&  !values.albumin &&!values.creatinine  && !values.sodium && !values.acrResult && !values.eGFRResult &&  !values.potassium &&!values.uricAcid &&  !values.kidneyInterpretation && !values.tshLevel &&  !values.tshInterpretation &&!values.renalArteryDoppler &&  !values.coronaryArteryDisease && !values.ejectionFraction && !values.hfrEF &&  !values.hfpeEF 
     ) {
       notify.error("Please select at least one .");
       return; // Do not submit the form
@@ -115,22 +122,22 @@ const BloodTest = ({submit}) => {
     }
   };
   useEffect(() => {
-    const id = getCookie('diagnosisId')
-    setDiagnosisId(id)
+    const id = getCookie('bloodTestId')
+    setBloodTestId(id)
   }, [1]);
 
   return (
     <>
       <Row className="media-container-row m-4">
         <h4 className="card-title align-left py-2 mbr-bold mbr-fonts-style mbr-text align-center display-7">Blood Test</h4>
-        <Formik initialValues={intialBloodTestValue} validationSchema={validationSchema} onSubmit={handleSubmit} enableReinitialize={true}>
+        <Formik initialValues={intialBloodTestValue}  validationSchema={validationSchema} onSubmit={handleSubmit} enableReinitialize={true}>
           {({ setFieldValue }) => {
             useEffect(() => {
               const fetchBloodDetailData = async () => {
-                const [data, err] = await getBloodTestAPI(diagnosisId);
+                const [data, err] = await getBloodTestAPI(bloodTestId);
                 if (data) {
-                  const { hbA1cLevel, hBA1CInterpretation,totalCholesterol,lipidInterpretation,hdlCholesterol,hdlInterpretation,lcdCholesterol,lcdInterpretation,triglycerides,triglyceridesInterpretation,albumin,creatinine,acrResult,eGFRResult,sodium,
-                  potassium,uricAcid,kidneyInterpretation,tshLevel,tshInterpretation,renalArteryDoppler,coronaryArteryDisease,ejectionFraction,hfrEF,hfpeEF}=data
+                  const { hbA1cLevel,hBA1CInterpretation,totalCholesterol,lipidInterpretation,hdlCholesterol,hdlInterpretation,ldlCholesterol,ldlInterpretation,triglycerides,triglyceridesInterpretation,albumin,creatinine,acrResult,eGFRResult,sodium,
+                  potassium,uricAcid,kidneyInterpretation,tshLevel,tshInterpretation,renalArteryDoppler,coronaryArteryDisease,ejectionFraction,hfrEF,hfpeEF }=data
                   
                   setFieldValue('hbA1cLevel', hbA1cLevel);
                   setFieldValue('hBA1CInterpretation', hBA1CInterpretation);
@@ -138,8 +145,8 @@ const BloodTest = ({submit}) => {
                   setFieldValue('lipidInterpretation', lipidInterpretation);
                   setFieldValue('hdlCholesterol', hdlCholesterol);
                   setFieldValue('hdlInterpretation', hdlInterpretation);
-                  setFieldValue('lcdCholesterol', lcdCholesterol);
-                  setFieldValue('lcdInterpretation', lcdInterpretation);
+                  setFieldValue('ldlCholesterol', ldlCholesterol);
+                  setFieldValue('ldlInterpretation', ldlInterpretation);
                   setFieldValue('triglycerides', triglycerides);
                   setFieldValue('triglyceridesInterpretation', triglyceridesInterpretation);
                   setFieldValue('albumin', albumin);
@@ -165,10 +172,10 @@ const BloodTest = ({submit}) => {
                   }, 1000);
                 }
               }
-              if (diagnosisId) {
+              if (bloodTestId) {
                 fetchBloodDetailData();
               }
-            }, [diagnosisId]);
+            }, [bloodTestId]);
 
             return (
               <Form>
@@ -214,16 +221,16 @@ const BloodTest = ({submit}) => {
                       <ErrorMessage name="hdlInterpretation" component="div" className="text-danger" />
                   </Col>
                   <Col md={6} className="align-left p-2">
-                      <Field type="number" id="lcdCholesterol" name="lcdCholesterol" className="form-control" placeholder="LCD Cholesterol" onChange={(e) => { setFieldValue('lcdCholesterol', e.target.value);
+                      <Field type="number" id="ldlCholesterol" name="ldlCholesterol" className="form-control" placeholder="LDL Cholesterol" onChange={(e) => { setFieldValue('ldlCholesterol', e.target.value);
                           setAtLeastOneCheckboxChecked(e.target.value);
                         }}/>
-                      <ErrorMessage name="lcdCholesterol" component="div" className="text-danger" />
+                      <ErrorMessage name="ldlCholesterol" component="div" className="text-danger" />
                   </Col>
                   <Col md={6} className="align-left p-2">
-                      <Field type="string" id="lcdInterpretation" name="lcdInterpretation" className="form-control" placeholder="LCD Interpretation" onChange={(e) => { setFieldValue('lcdInterpretation', e.target.value);
+                      <Field type="string" id="ldlInterpretation" name="ldlInterpretation" className="form-control" placeholder="LDL Interpretation" onChange={(e) => { setFieldValue('ldlInterpretation', e.target.value);
                           setAtLeastOneCheckboxChecked(e.target.value);
                         }}/>
-                      <ErrorMessage name="lcdInterpretation" component="div" className="text-danger" />
+                      <ErrorMessage name="ldlInterpretation" component="div" className="text-danger" />
                   </Col>
                   <Col md={6} className="align-left p-2">
                       <Field type="number" id="triglycerides" name="triglycerides" className="form-control" placeholder="Triglycerides" onChange={(e) => { setFieldValue('triglycerides', e.target.value);
@@ -298,10 +305,10 @@ const BloodTest = ({submit}) => {
                 <Row className="media-container-row">
                   <h4 className="mbr-fonts-style mbr-text display-4">TSH</h4>
                   <Col md={6} className="align-left p-2">
-                      <Field type="number" id="tshLevel" name="tshLevel" className="form-control" placeholder="TSH Level" onChange={(e) => { setFieldValue('tshLevel', e.target.value);
+                      <Field type="number" id="tshLevel" name="tshLevel" className="form-control" placeholder="Tsh Level" onChange={(e) => { setFieldValue('tshLevel', e.target.value);
                           setAtLeastOneCheckboxChecked(e.target.value);
                         }}/>
-                      <ErrorMessage name="albumin" component="div" className="text-danger" />
+                      <ErrorMessage name="tshLevel" component="div" className="text-danger" />
                   </Col>
                   <Col md={6} className="align-left p-2">
                       <Field type="string" id="tshInterpretation" name="tshInterpretation" className="form-control" placeholder="TSH Interpretation" onChange={(e) => { setFieldValue('tshInterpretation', e.target.value);
@@ -344,15 +351,6 @@ const BloodTest = ({submit}) => {
                           setAtLeastOneCheckboxChecked(e.target.value);
                         }}/>
                       <ErrorMessage name="hfpeEF" component="div" className="text-danger" />
-                  </Col>
-                  <Col md={3} className="align-left p-2">
-                        <label>
-                          <Field type="checkbox" id="legSwelling" name="legSwelling" className="me-4" onChange={(e) => { setFieldValue('legSwelling', e.target.value);
-                          setAtLeastOneCheckboxChecked(e.target.value);
-                        }}/>
-                          Leg swelling
-                        </label>
-                        <ErrorMessage name="legSwelling" component="div" className="text-danger" />
                   </Col>
                 </Row>
                 <div className="text-end mt-4">

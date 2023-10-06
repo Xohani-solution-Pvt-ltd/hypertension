@@ -1,18 +1,13 @@
 export interface BloodTestInterface{
     hbA1cLevel: Number,
-    normalHbA1c: Number,
     hBA1CInterpretation: String,
     totalCholesterol: Number,
-    lipidNormal: Number,
     lipidInterpretation: String,
     hdlCholesterol: Number,
-    hdlNormal: Number,
     hdlInterpretation: String,
-    lcdCholesterol: Number,
-    lcdNormal: Number,
-    lcdInterpretation: String,
+    ldlCholesterol: Number,
+    ldlInterpretation: String,
     triglycerides: Number,
-    triglyceridesNormal: Number,
     triglyceridesInterpretation: String,
     albumin: Number,
     creatinine: Number,
@@ -23,7 +18,6 @@ export interface BloodTestInterface{
     uricAcid: Number,
     kidneyInterpretation: String,
     tshLevel: Number,
-    tshRange: Number,
     tshInterpretation: String,
     renalArteryDoppler: String,
     coronaryArteryDisease: String,
@@ -34,19 +28,14 @@ export interface BloodTestInterface{
 
 export const intialBloodTestValue : BloodTestInterface={
     hbA1cLevel: undefined,
-    normalHbA1c: undefined,
     hBA1CInterpretation: undefined,
     totalCholesterol: undefined,
-    lipidNormal: undefined,
     lipidInterpretation: undefined,
     hdlCholesterol: undefined,
-    hdlNormal: undefined,
     hdlInterpretation: undefined,
-    lcdCholesterol: undefined,
-    lcdNormal: undefined,
-    lcdInterpretation: undefined,
+    ldlCholesterol: undefined,
+    ldlInterpretation: undefined,
     triglycerides: undefined,
-    triglyceridesNormal: undefined,
     triglyceridesInterpretation: undefined,
     albumin: undefined,
     creatinine: undefined,
@@ -57,7 +46,6 @@ export const intialBloodTestValue : BloodTestInterface={
     uricAcid: undefined,
     kidneyInterpretation: undefined,
     tshLevel: undefined,
-    tshRange: undefined,
     tshInterpretation: undefined,
     renalArteryDoppler: undefined,
     coronaryArteryDisease: undefined,
@@ -65,3 +53,7 @@ export const intialBloodTestValue : BloodTestInterface={
     hfrEF: undefined,
     hfpeEF: undefined,
 }
+
+
+
+
