@@ -1,11 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Badge } from 'react-bootstrap';
 import { SOCIAL_URL, WEBSITE_LINK, APP_INFO } from "../environments/index";
 import Image from "next/image";
 import { useState } from "react";
-import { Twitter, Facebook, Instagram, Youtube, } from 'react-bootstrap-icons'
+import { Twitter, Facebook, Instagram, Youtube, Clock, Key, Pin, Map, PinMap, PinMapFill, PinAngle, PinAngleFill, Pinterest, PinFill, } from 'react-bootstrap-icons'
 import LockPrimaryImg from "../assets/images/lock-primary-100.png";
+import { Badge3d } from "react-bootstrap-icons";
 
 export default function Footer() {
   const { TITLE, DESCRIPTION } = APP_INFO;
@@ -58,22 +59,39 @@ export default function Footer() {
       <Container fluid>
         <Row className="gap-15 px-6 py-8 md:gap-4">
           <Col md={3}>
-            <h2 className="mb-3 text-sm font-semibold text-primary-300 uppercase">
-              Company
-            </h2>
-            <div className="container-fluid">
-              <div className="social-icon gap-5 md:gap-5">
-                <a href="https://twitter.com" className="twitter"><i className="fab fa-twitter"><Twitter /></i></a>
-                <a href="https://facebook.com" className="facebook"><i className="fab fa-facebook"><Facebook /></i></a>
-                <a href="https://instagram.com" className="instagram"><i className="fab fa-instagram"></i><Instagram /></a>
-                <a href="https://youtube.com" className="youtube"><i className="fab fa-youtube"><Youtube /></i></a>
-              </div>
-            </div>
+            <Container>
+              <h5 className="mb-3 text-sm font-semibold text-primary-300 uppercase">
+                <Image
+                  src={LockPrimaryImg}
+                  className="cursor-pointer"
+                  width={40}
+                  height={40}
+                  alt="lock image"
+                />
+                Hypertension
+                <div className="d-flex">
+                  <div className="social-icon ">
+                    <a href="https://twitter.com" className="twitter me-3"><i className="fab fa-twitter "><Twitter /></i></a>
+                    {/* <a href="https://facebook.com" className="facebook me-2"><i className="fab fa-facebook"><Facebook /></i></a> */}
+                    <a href="https://instagram.com" className="instagram me-3"><i className="fab fa-instagram"></i><Instagram /></a>
+                    <a href="https://youtube.com" className="youtube me-3"><i className="fab fa-youtube"><Youtube /></i></a>
+                  </div>
+                </div></h5>
+            </Container>
           </Col>
           <Col md={3}>
             <h2 className="mb-3 text-sm font-semibold text-danger-emphasis uppercase">
-              Help center
+              About
             </h2>
+            <div className="item-wrap">
+              <h6><i className="fab fa-key"><Key /> PO BOX Collins Street West</i></h6>
+            </div>
+            <div className="item-wrap">
+              <h6><i className="fab fa-clock"><Clock /> +2342 5446 67</i></h6>
+            </div>
+            <div className="item-wrap">
+              <h6><i className="fab fa-pinfill">Mon - Sun: 8AM - 8PM</i></h6>
+            </div>
           </Col>
           <Col md={3}>
             <h2 className="mb-3 text-sm font-semibold text-danger-emphasis uppercase">
@@ -101,13 +119,16 @@ export default function Footer() {
             <div>
               <div className="flex items-center">
                 <div className="max-w-[40px] sm:max-w-[70px]">
-                  <Image
+                  <h3 className="mb-3 text-sm font-semibold text-danger-emphasis uppercase">
+                    NEWS LATTER
+                  </h3>
+                  {/* <Image
                     src={LockPrimaryImg}
                     className="cursor-pointer"
-                    width={70}
-                    height={70}
+                    width={40}
+                    height={40}
                     alt="lock image"
-                  />
+                  /> */}
                   <div className="font-primary text-secondary-300 hover:underline">
                     <span className="text-xs text-secondary-300">
                       {/* form fillup  */}
@@ -133,11 +154,13 @@ export default function Footer() {
               </div>
             </div>
           </Col>
-          <div className=" border border-primary container-lg">
-            <Container fluid className="d-flex justify-content-center ">
-              <span className="text-align-center">
+          <div className="footer-pad bg-primary">
+            <Container className="d-flex justify-content-center">
+              <span className="text-align-center mt-4">
                 <h3> © 2023 <a href={WEBSITE_LINK}>{TITLE}</a>. All Rights Reserved.
-                </h3></span></Container>
+                </h3>
+              </span>
+            </Container>
           </div>
         </Row>
       </Container>

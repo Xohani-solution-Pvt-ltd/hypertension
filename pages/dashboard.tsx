@@ -31,7 +31,6 @@ const Dashboard = () => {
   const [diagnosisId, setDiagnosisId] = useState(undefined);
   const [activeTab, setActiveTab] = useState("diagnosis"); // Initialize with the "diagnosis" tab
   const { TITLE } = APP_INFO;
-  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
@@ -72,24 +71,11 @@ const Dashboard = () => {
     }
   };
 
-  useEffect(() => {
-    // Simulate page loading for 2 seconds
-    const timeout = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-
-    // Cleanup the timeout on component unmount
-    return () => clearTimeout(timeout);
-  }, []);
-
 
   return (
     <Layout title={`Login | ${TITLE}`}>
       <section className="features1 cid-rGtBGu0BpJ" id="features5-11">
         <Container className="d-flex justify-content-center" fluid>
-          {loading ? (
-            <BeatLoader color="#039dfc" size={20} />
-          ) : (
             <Row className="justify-content-center pt-5">
               <Tabs
                 activeKey={activeTab}
@@ -122,8 +108,6 @@ const Dashboard = () => {
               </Tabs>
               {/* <Button onClick={goToNextTab}>Next</Button> */}
             </Row>
-          )
-          }
         </Container>
       </section>
     </Layout>

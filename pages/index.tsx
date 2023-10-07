@@ -246,7 +246,7 @@ const IndexPage = () => {
                 </Col>
               </Row>
             </Container>
-            <section className="pt-5 bg-white">
+            {/* <section className="pt-5 bg-white">
               <Container>
                 <Row className="gap-6 md:gap-2">
                   <Col md={3} className="bg-primary">
@@ -355,8 +355,8 @@ const IndexPage = () => {
                   </Col>
                 </Row>
               </Container>
-            </section>
-            <section className="pt-5 bg-white">
+            </section> */}
+            {/* <section className="pt-5 bg-white">
               <Container>
                 <Row className="align-items-center">
                   <Col md={12} lg={6} className="content align-left py-4">
@@ -369,8 +369,8 @@ const IndexPage = () => {
                   </Col>
                 </Row>
               </Container>
-            </section>
-            <section className="d-flex justify-content-center pt-5 bg-white px-5 py-5">
+            </section> */}
+            {/* <section className="d-flex justify-content-center pt-5 bg-white px-5 py-5">
               <Container fluid>
                 <Row className="gap-10 md:gap-6">
                   <h4>pet activity</h4>
@@ -397,8 +397,8 @@ const IndexPage = () => {
                   </Col>
                 </Row>
               </Container>
-            </section>
-            <section className="pt-5 bg-white">
+            </section> */}
+            {/* <section className="pt-5 bg-white">
               <Container>
                 <Row>
                   <Col md={7} className="pb-5">
@@ -503,8 +503,8 @@ const IndexPage = () => {
                   </Col>
                 </Row>
               </Container>
-            </section>
-            <section className="pt-5 bg-white px-5">
+            </section> */}
+            {/* <section className="pt-5 bg-white px-5">
               <Container className="bg-white">
                 <Row>
                   <Col md={4}>
@@ -594,8 +594,8 @@ const IndexPage = () => {
                   </Col>
                 </Row>
               </Container>
-            </section>
-            <section className="pt-5 bg-white">
+            </section> */}
+            {/* <section className="pt-5 bg-white">
               <Container fluid>
                 <Row >
                   <h1 className="d-flex justify-content-center">Our Pricing</h1>
@@ -623,7 +623,6 @@ const IndexPage = () => {
                   </Col>
                   <Col md={6} className="pt-5">
                     <div className="menu-group">
-                      {/* Basic Offer */}
                       <div className="align-wrap align-left">
                         <div className="inline-wrap">
                           <div className="icon-wrap">
@@ -633,7 +632,6 @@ const IndexPage = () => {
                         </div>
                       </div>
                       <div className="row menu-row">
-                        {/* Menu Items */}
                         <div className="col-md-12 menu-item">
                           <div className="menu-box">
                             <p className="box-text mbr-black mbr-bold mbr-fonts-style display-7 d-inline-block">
@@ -643,13 +641,11 @@ const IndexPage = () => {
                           </div>
                           <h3 className="item-title mbr-fonts-style display-7">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ullamcorper eget lectus porta euismod a libero.</h3>
                         </div>
-                        {/* More menu items */}
                       </div>
                     </div>
                   </Col>
                   <Col md={6} className="pt-5">
                     <div className="menu-group">
-                      {/* Basic Offer */}
                       <div className="align-wrap align-left">
                         <div className="inline-wrap">
                           <div className="icon-wrap">
@@ -659,7 +655,6 @@ const IndexPage = () => {
                         </div>
                       </div>
                       <div className="row menu-row">
-                        {/* Menu Items */}
                         <div className="col-md-12 menu-item">
                           <div className="menu-box">
                             <p className="box-text mbr-black mbr-bold mbr-fonts-style display-7 d-inline-block">
@@ -669,13 +664,11 @@ const IndexPage = () => {
                           </div>
                           <h3 className="item-title mbr-fonts-style display-7">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ullamcorper eget lectus porta euismod a libero.</h3>
                         </div>
-                        {/* More menu items */}
                       </div>
                     </div>
                   </Col>
                   <Col md={6} className="pt-5">
                     <div className="menu-group">
-                      {/* Basic Offer */}
                       <div className="align-wrap align-left">
                         <div className="inline-wrap">
                           <div className="icon-wrap">
@@ -685,7 +678,6 @@ const IndexPage = () => {
                         </div>
                       </div>
                       <div className="row menu-row">
-                        {/* Menu Items */}
                         <div className="col-md-12 menu-item">
                           <div className="menu-box">
                             <p className="box-text mbr-black mbr-bold mbr-fonts-style display-7 d-inline-block">
@@ -695,13 +687,13 @@ const IndexPage = () => {
                           </div>
                           <h3 className="item-title mbr-fonts-style display-7">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ullamcorper eget lectus porta euismod a libero.</h3>
                         </div>
-                        {/* More menu items */}
+                        
                       </div>
                     </div>
                   </Col>
                   <Col md={6} className="pt-5">
                     <div className="menu-group">
-                      {/* Basic Offer */}
+                    
                       <div className="align-wrap align-left">
                         <div className="inline-wrap">
                           <div className="icon-wrap">
@@ -711,7 +703,7 @@ const IndexPage = () => {
                         </div>
                       </div>
                       <div className="row menu-row">
-                        {/* Menu Items */}
+                     
                         <div className="col-md-12 menu-item">
                           <div className="menu-box">
                             <p className="box-text mbr-black mbr-bold mbr-fonts-style display-7 d-inline-block">ALL DOGS<br /></p>
@@ -720,13 +712,13 @@ const IndexPage = () => {
                           </div>
                           <h3 className="item-title mbr-fonts-style display-7">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ullamcorper eget lectus porta euismod a libero.</h3>
                         </div>
-                        {/* More menu items */}
+                       
                       </div>
                     </div>
                   </Col>
                   <Col md={6} className="pt-5">
                     <div className="menu-group">
-                      {/* Basic Offer */}
+                   
                       <div className="align-wrap align-left">
                         <div className="inline-wrap">
                           <div className="icon-wrap">
@@ -736,7 +728,7 @@ const IndexPage = () => {
                         </div>
                       </div>
                       <div className="row menu-row">
-                        {/* Menu Items */}
+                       
                         <div className="col-md-12 menu-item">
                           <div className="menu-box">
                             <p className="box-text mbr-black mbr-bold mbr-fonts-style display-7 d-inline-block">
@@ -746,13 +738,13 @@ const IndexPage = () => {
                           </div>
                           <h3 className="item-title mbr-fonts-style display-7">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ullamcorper eget lectus porta euismod a libero.</h3>
                         </div>
-                        {/* More menu items */}
+                       
                       </div>
                     </div>
                   </Col>
                   <Col md={6} className="pt-5">
                     <div className="menu-group">
-                      {/* Basic Offer */}
+                     
                       <div className="align-wrap align-left">
                         <div className="inline-wrap">
                           <div className="icon-wrap">
@@ -762,7 +754,7 @@ const IndexPage = () => {
                         </div>
                       </div>
                       <div className="row menu-row">
-                        {/* Menu Items */}
+                     
                         <div className="col-md-12 menu-item">
                           <div className="menu-box">
                             <p className="box-text mbr-black mbr-bold mbr-fonts-style display-7 d-inline-block">
@@ -772,7 +764,7 @@ const IndexPage = () => {
                           </div>
                           <h3 className="item-title mbr-fonts-style display-7">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ullamcorper eget lectus porta euismod a libero.</h3>
                         </div>
-                        {/* More menu items */}
+                     
                       </div>
                     </div>
                   </Col>
@@ -801,8 +793,8 @@ const IndexPage = () => {
                   </Col>
                 </Row>
               </Container>
-            </section>
-            <section className="pt-5 bg-white">
+            </section> */}
+            {/* <section className="pt-5 bg-white">
               <Container className="bg-danger" fluid>
                 <Row>
                   <Col md={3} lg={4} className="pt-5">
@@ -816,8 +808,8 @@ const IndexPage = () => {
                   </Col>
                 </Row>
               </Container>
-            </section>
-            <section className="pt-5 bg-white">
+            </section> */}
+            {/* <section className="pt-5 bg-white">
               <Container>
                 <Row className="align-items-center">
                   <Col md={12} lg={5} className="content align-left py-4">
@@ -847,8 +839,8 @@ const IndexPage = () => {
                   </Col>
                 </Row>
               </Container>
-            </section>
-            <section className="pt-5 bg-white">
+            </section> */}
+            {/* <section className="pt-5 bg-white">
               <Container>
                 <Row className="gap-15 md:gap-4">
                   <Col md={12}>
@@ -870,8 +862,8 @@ const IndexPage = () => {
                   </Col>
                 </Row>
               </Container>
-            </section>
-            <section className=" pt-5 bg-white">
+            </section> */}
+            {/* <section className=" pt-5 bg-white">
               <Container className="pt-5">
                 <Row>
                   <Col md={6}>
@@ -897,8 +889,8 @@ const IndexPage = () => {
                   </Col>
                 </Row>
               </Container>
-            </section>
-            <section className=" pt-5 bg-white">
+            </section> */}
+            {/* <section className=" pt-5 bg-white">
               <Container>
                 <Row>
                   <Col md={6} lg={5}>
@@ -933,8 +925,8 @@ const IndexPage = () => {
                   </Col>
                 </Row>
               </Container>
-            </section>
-            <section className="bg-white h-100 pt-5">
+            </section> */}
+            {/* <section className="bg-white h-100 pt-5">
               <Container className=" d-flex justify-content-center">
                 <Row>
                   <Col>
@@ -996,8 +988,8 @@ const IndexPage = () => {
                   </Col>
                 </Row>
               </Container>
-            </section>
-            <section className="bg-white h-100 pt-5">
+            </section> */}
+            {/* <section className="bg-white h-100 pt-5">
               <Container fluid>
                 <Row>
                   <Col md={8}>
@@ -1082,25 +1074,9 @@ const IndexPage = () => {
                   </Col>
                 </Row>
               </Container>
-            </section>
-            <section className="pt-5 bg-white">
-              <Container fluid>
-                <Row>
-                  <Col md={12}>
-                    <Col md={4} lg={5}>
-                    </Col>
-                    <Col md={4} lg={5}>
-                    </Col>
-                    <Col md={4} lg={5}>
-                    </Col>
-                  </Col>
-                </Row>
-              </Container>
-            </section>
-            <section className="pt-5 bg-white">
-              <Container className="d-flex justify-content-center" fluid>
-              </Container>
-            </section>
+            </section> */}
+            {/* <section className="bg-white h-100 pt-5">
+            </section> */}
           </section>
         )
         }

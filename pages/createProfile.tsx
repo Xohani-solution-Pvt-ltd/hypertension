@@ -15,7 +15,6 @@ import { BeatLoader } from "react-spinners";
 
 const Login = () => {
   const { TITLE } = APP_INFO;
-  const [loading, setLoading] = useState(true);
   const { CreateProfile } = useContext(AuthContext);
   const [process, setProcess] = useState<boolean>(false);
   const [selectedGender, setSelectedGender] = useState<string>("");
@@ -81,25 +80,13 @@ const Login = () => {
     }
   };
 
-  useEffect(() => {
-    // Simulate page loading for 2 seconds
-    const timeout = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-
-    // Cleanup the timeout on component unmount
-    return () => clearTimeout(timeout);
-  }, []);
 
 
   return (
     <Layout title={`UserProfileCreation | ${TITLE}`}>
       <section className="d-flex justify-content-center">
-        {loading ? (
-          <BeatLoader color="#039dfc" size={20} />
-        ) : (
           <Container fluid>
-            <Row className="d-flex justify-content-center pt-5">
+            <Row className="d-flex userform justify-content-center pt-5">
               <Col md={6}>
                 <h1 className="text-bold px-5">User Profile Creation</h1>
                 <Form className="mt-8 space-y-6" onSubmit={Submit}>
@@ -226,8 +213,6 @@ const Login = () => {
               </Col>
             </Row>
           </Container>
-        )
-        }
       </section>
     </Layout>
   );

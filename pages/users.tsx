@@ -1,23 +1,23 @@
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, createContext } from "react";
 import Link from "next/link";
-import { LockSVG, ProcessCircle } from "../assets/SVG/image";
 import notify from "../helpers/notify";
 import React from "react";
 import { getUsers } from "../services/call";
 import { User, Response } from "../interfaces/index";
 import Layout from "../components/Layout";
 import { Table } from 'react-bootstrap';
+import Axios from 'axios';
+const API = 'http://localhost:3000/api/users'
 
 const UserList = () => {
-  // State to store the fetched data and loading status
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch data function
+
   const fetchUsers = async () => {
     try {
-      const [data, err] = await getUsers({});
+      const [data, err] = await getUsers({ API });
       if (data?.success === true) {
         setUsers(data?.data);
         notify.success("users fetch successfully");
@@ -34,11 +34,11 @@ const UserList = () => {
     }
   };
 
-  // Fetch data once when the app mounts
   useEffect(() => {
     fetchUsers();
   }, []);
   console.log('users', users);
+
 
   return (
     <Layout title="User List">
@@ -75,8 +75,6 @@ const UserList = () => {
             </tbody>
           </Table>
         </div>
-        {/* <Link href="/signup">Sign Up</Link>
-      <Link href="/forgotPassword">Forgot Password?</Link> */}
       </div>
     </Layout>
   );
