@@ -1,15 +1,15 @@
 import React, { useContext, useState } from "react";
-import { Container, Nav, NavLink, Navbar } from 'react-bootstrap';
-import Link from 'next/link';
-import Image from 'next/image';
-import DownloadseconadryImg from '../assets/images/Downloadseconadry.png'
+import { Container, Nav, NavLink, Navbar } from "react-bootstrap";
+import Link from "next/link";
+import Image from "next/image";
+import DownloadseconadryImg from "../assets/images/Downloadseconadry.png";
 
 import { MenuBarSVG } from "../assets/SVG/image";
 import NextImgLogo from "../assets/images/lock-dark-64.png";
 
 import { APP_INFO } from "../environments/index";
 import { AuthContext } from "../context/authentication";
-import useRouter from 'next/router';
+import useRouter from "next/router";
 
 import notify from "../helpers/notify";
 
@@ -19,14 +19,12 @@ export default function Header() {
   const { isAuthenticated, LogoutUser, router } = useContext(AuthContext);
   const handleToggle = () => {
     setToggle(!toggle);
-    router.push('/home');
+    router.push("/home");
   };
 
   const handleLogout = () => {
-    router.push('/home');
+    router.push("/home");
   };
-
-
 
   return (
     <section className="menu cid-rGtBGu0BpJ" id="menu1-1a">
@@ -44,8 +42,14 @@ export default function Header() {
           <h4 className=" text-2xl font-semibold text-danger-emphasis">
             HYPERTENSION
           </h4>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={handleToggle} />
-          <Navbar.Collapse id="basic-navbar-nav" className={toggle ? 'show' : 'd-flex justify-content-end'}>
+          <Navbar.Toggle
+            aria-controls="basic-navbar-nav"
+            onClick={handleToggle}
+          />
+          <Navbar.Collapse
+            id="basic-navbar-nav"
+            className={toggle ? "show" : "d-flex justify-content-end"}
+          >
             <Nav className="ml-auto nav-link text-black display-4">
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/about">About</Nav.Link>
@@ -66,23 +70,40 @@ export default function Header() {
                     </Nav.Link></>
                 </>
               }
-              {/* {(isAuthenticated) ? <>
-                <li className="nav-item dropdown">
-                  <NavLink className="nav-link text-black display-4" href="/dashboard" aria-expanded="false">
-                    Dashboard
-                  </NavLink>
-                </li></> : <>
-                <li className="nav-item dropdown">
-                  <NavLink className="nav-link text-black display-4" href="/login" aria-expanded="false">
-                    Login
-                  </NavLink>
-                </li>
-                <li className="nav-item dropdown">
-                  <NavLink className="nav-link text-black display-4" href="/signup" aria-expanded="false">
-                    Signup
-                  </NavLink>
-                </li>
-              </>} */}
+              {isAuthenticated ? (
+                <>
+                  <li className="nav-item dropdown">
+                    <NavLink
+                      className="nav-link text-black display-4"
+                      href="/dashboard"
+                      aria-expanded="false"
+                    >
+                      Dashboard
+                    </NavLink>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className="nav-item dropdown">
+                    <NavLink
+                      className="nav-link text-black display-4"
+                      href="/login"
+                      aria-expanded="false"
+                    >
+                      Login
+                    </NavLink>
+                  </li>
+                  <li className="nav-item dropdown">
+                    <NavLink
+                      className="nav-link text-black display-4"
+                      href="/signup"
+                      aria-expanded="false"
+                    >
+                      Signup
+                    </NavLink>
+                  </li>
+                </>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Navbar>
@@ -144,7 +165,8 @@ export default function Header() {
     </section>
   );
 }
-{/* <Container>
+{
+  /* <Container>
 <Navbar className=" fixed-top flex items-center justify-between px-4">
   <Navbar.Brand href="/">
     <Image
@@ -185,4 +207,5 @@ export default function Header() {
     </Nav>
   </Navbar.Collapse>
 </Navbar>
-</Container> */}
+</Container> */
+}

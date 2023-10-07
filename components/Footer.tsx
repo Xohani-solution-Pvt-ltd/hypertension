@@ -63,21 +63,21 @@ export default function Footer() {
             </h2>
             <div className="container-fluid">
               <div className="social-icon gap-5 md:gap-5">
-                <a href="https://twitter.com" className="twitter"><i className="fab fa-twitter"><Twitter /></i></a>
-                <a href="https://facebook.com" className="facebook"><i className="fab fa-facebook"><Facebook /></i></a>
-                <a href="https://instagram.com" className="instagram"><i className="fab fa-instagram"></i><Instagram /></a>
-                <a href="https://youtube.com" className="youtube"><i className="fab fa-youtube"><Youtube /></i></a>
+                <a href="https://twitter.com" className="twitter"><i className="fab fa-twitter me-3"><Twitter /></i></a>
+                <a href="https://facebook.com" className="facebook"><i className="fab fa-facebook me-3"><Facebook /></i></a>
+                <a href="https://instagram.com" className="instagram"><i className="fab fa-instagram "></i><Instagram /></a>
+                <a href="https://youtube.com" className="youtube"><i className="fab fa-youtube me-3"><Youtube /></i></a>
               </div>
             </div>
           </Col>
           <Col md={3}>
             <h2 className="mb-3 text-sm font-semibold text-danger-emphasis uppercase">
-              Help center
+              Help Center
             </h2>
           </Col>
           <Col md={3}>
             <h2 className="mb-3 text-sm font-semibold text-danger-emphasis uppercase">
-              our links
+              Our Links
             </h2>
             <ul className="text-secondary-300">
               <li className="mb-2">
@@ -101,13 +101,13 @@ export default function Footer() {
             <div>
               <div className="flex items-center">
                 <div className="max-w-[40px] sm:max-w-[70px]">
-                  <Image
+                  {/* <Image
                     src={LockPrimaryImg}
                     className="cursor-pointer"
                     width={70}
                     height={70}
                     alt="lock image"
-                  />
+                  /> */}
                   <div className="font-primary text-secondary-300 hover:underline">
                     <span className="text-xs text-secondary-300">
                       {/* form fillup  */}
