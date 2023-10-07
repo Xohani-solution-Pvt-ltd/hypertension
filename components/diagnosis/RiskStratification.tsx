@@ -32,11 +32,11 @@ export async function getServerSideProps({ params }) {
 
   // Fetch data using 'id'
   // Example using Axios:
-  const response = await axios.get(`https://localhost:3000/api/auth/signup/${id}`);
+  // const response = await axios.get(`https://localhost:3000/api/auth/signup/${id}`);
         
   return {
     props: {
-      data: response.data,
+      // data: response.data,
     },
   };
 }
