@@ -1,15 +1,12 @@
-import React, { useEffect, useRef, useState, useMemo } from 'react';
-import Image from 'next/image';
+import React, { useEffect,  useState, useMemo } from 'react';
 import { useRouter } from 'next/router';
-import AccusureImg from "../../assets/images/accusure.jpeg";
-import Link from 'next/link';
-import { Container, Row, Col, Button, Nav, Tab, Card } from 'react-bootstrap';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { submitComorbiditiesAPI, getComorbiditiesDetailsAPI } from '../../services/call';
 import { getCookie } from 'cookies-next';
 import notify from "../../helpers/notify";
 import { ComorbiditiesInterface, initialComorbiditiesValues } from '../../interfaces/comorbidities';
+import { Col, Row } from 'react-bootstrap';
 
 const validationSchema = Yup.object({
   cva: Yup.boolean(),
@@ -52,7 +49,7 @@ const Comorbidities = ({submit}) => {
     }
   };
   useEffect(() => {
-    const id = getCookie('diagnosisId')
+    const id = getCookie('comorbidiId')
     setComorbiditiesId(id)
   }, [1]);
 
@@ -87,7 +84,7 @@ const Comorbidities = ({submit}) => {
                       }
                     }
                     if (comorbiditiesId) {
-                      setFieldValue('comorbiditiesid', comorbiditiesId);
+                      setFieldValue('comorbiditiesId', comorbiditiesId);
                       fetchDiagnosisDetailData();
                     }
                   }, [comorbiditiesId]);

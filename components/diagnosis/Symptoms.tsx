@@ -14,8 +14,7 @@ import { SymptomsInterface, initialSymptomsValue } from '../../interfaces/sympto
 
 const validationSchema = Yup.object({
   userid : Yup.string(),
-  diagnosisid : Yup.string(),
-  coronaryArteryDisease: Yup.boolean(),
+  previousHeartAttacks: Yup.boolean(),
   breathlessness: Yup.boolean(),
   minorNYHA: Yup.boolean(),
   majorNYHA: Yup.boolean(),
@@ -30,7 +29,7 @@ const Symptoms = ({submit}) => {
 
   const handleSubmit = async (values: SymptomsInterface) => {
     if (
-      !values.coronaryArteryDisease &&
+      !values.previousHeartAttacks &&
       !values.breathlessness &&
       !values.minorNYHA &&
       !values.majorNYHA &&
@@ -71,8 +70,8 @@ const Symptoms = ({submit}) => {
                     const fetchDiagnosisDetailData = async () => {
                       const [data, err] = await getSymptomsMonitoringAPI(diagnosisId);
                       if (data) {
-                        const { coronaryArteryDisease, breathlessness, minorNYHA ,majorNYHA, legSwelling} = data.data
-                        setFieldValue('coronaryArteryDisease', coronaryArteryDisease);
+                        const { previousHeartAttacks, breathlessness, minorNYHA ,majorNYHA, legSwelling} = data.data
+                        setFieldValue('previousHeartAttacks', previousHeartAttacks);
                         setFieldValue('breathlessness', breathlessness);
                         setFieldValue('minorNYHA', minorNYHA);
                         setFieldValue('majorNYHA', majorNYHA);
@@ -95,12 +94,12 @@ const Symptoms = ({submit}) => {
                     <Form>
                       <div className="p-2">
                         <label>
-                          <Field type="checkbox" id="coronaryArteryDisease" name="coronaryArteryDisease" className="me-4" onChange={(e) => { setFieldValue('coronaryArteryDisease', e.target.checked);
+                          <Field type="checkbox" id="previousHeartAttacks" name="previousHeartAttacks" className="me-4" onChange={(e) => { setFieldValue('previousHeartAttacks', e.target.checked);
                           setAtLeastOneCheckboxChecked(e.target.checked);
                            }}/>
                           History of chest pain on walking / exertion ?
                         </label>
-                        <ErrorMessage name="coronaryArteryDisease" component="div" className="text-danger" />
+                        <ErrorMessage name="previousHeartAttacks" component="div" className="text-danger" />
                       </div>
                       <div className="p-2">
                         <label>
@@ -139,7 +138,7 @@ const Symptoms = ({submit}) => {
                         <ErrorMessage name="legSwelling" component="div" className="text-danger" />
                       </div>
 
-                      <div className="p-2">
+                      {/* <div className="p-2">
                         <label>
                           <Field type="checkbox" id="lungDisease" name="lungDisease" className="me-4" onChange={(e) => { setFieldValue('lungDisease', e.target.checked);
                           setAtLeastOneCheckboxChecked(e.target.checked);
@@ -147,7 +146,7 @@ const Symptoms = ({submit}) => {
                           Prior history Asthma, COPD, Taking inhalers?
                         </label>
                         <ErrorMessage name="pregnancy" component="div" className="text-danger" />
-                      </div>
+                      </div> */}
                       <div className="text-end mt-4">
                         <button type="submit" className="btn btn-primary display-4" onClick={() => submit("bloodTest")} disabled={!atLeastOneCheckboxChecked}>Submit</button>
                       </div>

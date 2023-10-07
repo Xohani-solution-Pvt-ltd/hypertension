@@ -151,7 +151,7 @@ export const submitComorbiditiesAPI = async (body) => {
   let err = null;
   let data = null;
   try {
-    data = await jwtPost("/symptom", body);
+    data = await jwtPost("/comorbidities", body);
   } catch (e) {
     if (e?.response?.status === 400) {
       err = e?.json;
@@ -164,7 +164,7 @@ export const getComorbiditiesDetailsAPI = async (id) => {
   let err = null;
   let data = null;
   try {
-    data = await jwtGet(`/symptom/${id}`);
+    data = await jwtGet(`/comorbidities/${id}`);
   } catch (e) {
     if (e.response?.status === 401) {
       err = e?.json;

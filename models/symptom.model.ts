@@ -2,36 +2,11 @@ import { models, model, Schema, SchemaTypes } from 'mongoose';
 
 const SymptomSchema: Schema = new Schema({
   userid: { type: SchemaTypes.ObjectId, ref: "User" , index: true,unique: true },
-  // diagnosisid: { type: SchemaTypes.ObjectId, ref: "Diagnosis" , index: true},
-  cva: {
-    type: Boolean,
-    default: false
-  },
   previousHeartAttacks: {
     type: Boolean,
     default: false
   },
-  heartFailure: {
-    type: Boolean,
-    default: false
-  },
-  diabetes: {
-    type: Boolean,
-    default: false
-  },
-  pregnancy: {
-    type: Boolean,
-    default: false
-  },
-  lungDisease: {
-    type: Boolean,
-    default: false
-  },
-  coronaryArteryDisease: {
-    type: Boolean,
-    default: false
-  },
-  breathlessness: {
+    breathlessness: {
     type: Boolean,
     default: false
   },

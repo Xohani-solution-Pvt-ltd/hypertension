@@ -40,7 +40,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   }else if (req.method === "GET") {
     try {
-      const symptoms = await SymptomModel.findOne({ diagnosisid :req.query.id });
+      const symptoms = await SymptomModel.findOne({ symptomsId :req.query.id });
       res.status(200).json({
         success: true,
         message: "successfully",
