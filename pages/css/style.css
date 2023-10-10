@@ -6,7 +6,7 @@
   }
 
   .artboard-img{
-    margin-left: 200px;
+    margin-left: 220px;
   }
 
   .tfiy-icons{
@@ -26,4 +26,12 @@
 
   .all-icon{
     margin-top: 40px;
+  }
+
+  .footer{
+    background-color: #ed6436;
+  }
+
+  .font-color{
+    color:#ed6436;
   }

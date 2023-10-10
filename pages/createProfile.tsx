@@ -19,9 +19,12 @@ const Login = () => {
   const { CreateProfile } = useContext(AuthContext);
   const [process, setProcess] = useState<boolean>(false);
   const [selectedGender, setSelectedGender] = useState<string>("");
-  const [selectedAlcoholConsumption, setSelectedAlcoholConsumption] = useState<string>("");
-  const [selectedSmokingStatus, setSelectedSmokingStatus] = useState<string>("");
-  const [selectedPhysicalActivity, setSelectedPhysicalActivity] = useState<string>("");
+  const [selectedAlcoholConsumption, setSelectedAlcoholConsumption] =
+    useState<string>("");
+  const [selectedSmokingStatus, setSelectedSmokingStatus] =
+    useState<string>("");
+  const [selectedPhysicalActivity, setSelectedPhysicalActivity] =
+    useState<string>("");
 
   const dateOfBirth_ref = useRef<HTMLInputElement>(null);
   const address_ref = useRef<HTMLInputElement>(null);
@@ -41,12 +44,10 @@ const Login = () => {
         address_ref!.current.value &&
         weight_ref!.current.value &&
         height_ref!.current.value &&
-
         selectedGender &&
         selectedAlcoholConsumption &&
         selectedSmokingStatus &&
         selectedPhysicalActivity
-
       )
     ) {
       console.log("Fill All values");
@@ -62,7 +63,7 @@ const Login = () => {
       gender: selectedGender,
       alcoholConsumption: selectedAlcoholConsumption,
       smokingStatus: selectedSmokingStatus,
-      physicalActivity: selectedPhysicalActivity
+      physicalActivity: selectedPhysicalActivity,
     };
     const err = await CreateProfile(body);
 
@@ -90,7 +91,6 @@ const Login = () => {
     // Cleanup the timeout on component unmount
     return () => clearTimeout(timeout);
   }, []);
-
 
   return (
     <Layout title={`UserProfileCreation | ${TITLE}`}>
@@ -127,7 +127,6 @@ const Login = () => {
                       placeholder="enter address"
                       aria-labelledby="address"
                       required={true}
-
                     />
                   </Form.Group>
                   <Form.Group controlId="weight" className="mb-4">
@@ -158,7 +157,11 @@ const Login = () => {
                   </Form.Group>
                   <Form.Group controlId="gender" className="mb-4">
                     <Form.Label>Gender</Form.Label>
-                    <Dropdown onSelect={(selectedValue) => setSelectedGender(selectedValue)}>
+                    <Dropdown
+                      onSelect={(selectedValue) =>
+                        setSelectedGender(selectedValue)
+                      }
+                    >
                       <Dropdown.Toggle variant="primary">
                         {selectedGender || "Select Gender"}
                       </Dropdown.Toggle>
@@ -174,13 +177,21 @@ const Login = () => {
 
                   <Form.Group controlId="alcoholConsumption" className="mb-4">
                     <Form.Label>Alcohol Consumption</Form.Label>
-                    <Dropdown onSelect={(selectedValue) => setSelectedAlcoholConsumption(selectedValue)}>
+                    <Dropdown
+                      onSelect={(selectedValue) =>
+                        setSelectedAlcoholConsumption(selectedValue)
+                      }
+                    >
                       <Dropdown.Toggle variant="primary">
-                        {selectedAlcoholConsumption || "Select AlcoholConsumption"}
+                        {selectedAlcoholConsumption ||
+                          "Select AlcoholConsumption"}
                       </Dropdown.Toggle>
                       <Dropdown.Menu>
                         {alcoholConsumptionOptions.map((alcoholConsumption) => (
-                          <Dropdown.Item key={alcoholConsumption} eventKey={alcoholConsumption}>
+                          <Dropdown.Item
+                            key={alcoholConsumption}
+                            eventKey={alcoholConsumption}
+                          >
                             {alcoholConsumption}
                           </Dropdown.Item>
                         ))}
@@ -189,13 +200,20 @@ const Login = () => {
                   </Form.Group>
                   <Form.Group controlId="smokingStatus" className="mb-4">
                     <Form.Label>Smoking Status</Form.Label>
-                    <Dropdown onSelect={(selectedValue) => setSelectedSmokingStatus(selectedValue)}>
+                    <Dropdown
+                      onSelect={(selectedValue) =>
+                        setSelectedSmokingStatus(selectedValue)
+                      }
+                    >
                       <Dropdown.Toggle variant="primary">
                         {selectedSmokingStatus || "Select SmokingStatus"}
                       </Dropdown.Toggle>
                       <Dropdown.Menu>
                         {smokingStatusOptions.map((smokingStatus) => (
-                          <Dropdown.Item key={smokingStatus} eventKey={smokingStatus}>
+                          <Dropdown.Item
+                            key={smokingStatus}
+                            eventKey={smokingStatus}
+                          >
                             {smokingStatus}
                           </Dropdown.Item>
                         ))}
@@ -203,14 +221,21 @@ const Login = () => {
                     </Dropdown>
                   </Form.Group>
                   <Form.Group controlId="physicalActivity" className="mb-4">
-                    <Form.Label >Physical Activity</Form.Label>
-                    <Dropdown onSelect={(selectedValue) => setSelectedPhysicalActivity(selectedValue)}>
+                    <Form.Label>Physical Activity</Form.Label>
+                    <Dropdown
+                      onSelect={(selectedValue) =>
+                        setSelectedPhysicalActivity(selectedValue)
+                      }
+                    >
                       <Dropdown.Toggle variant="primary">
                         {selectedPhysicalActivity || "Select physicalActivity"}
                       </Dropdown.Toggle>
                       <Dropdown.Menu>
                         {physicalActivityOptions.map((physicalActivity) => (
-                          <Dropdown.Item key={physicalActivity} eventKey={physicalActivity}>
+                          <Dropdown.Item
+                            key={physicalActivity}
+                            eventKey={physicalActivity}
+                          >
                             {physicalActivity}
                           </Dropdown.Item>
                         ))}
@@ -226,8 +251,7 @@ const Login = () => {
               </Col>
             </Row>
           </Container>
-        )
-        }
+        )}
       </section>
     </Layout>
   );
