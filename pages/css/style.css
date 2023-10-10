@@ -1,0 +1,37 @@
+.custom-font {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    color: #ed6436;
+  }
+
+  .artboard-img{
+    margin-left: 220px;
+  }
+
+  .tfiy-icons{
+    font-size: 1.2rem;
+    color: #ffffff !important;
+    background: #ed6436;
+    padding: 10px;
+    margin-right: 0.6rem;
+    border: 2px solid #ed6436;
+    height: 40px;
+    width: 40px;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s;
+    border-radius: 100%;
+  }
+
+  .all-icon{
+    margin-top: 40px;
+  }
+
+  .footer{
+    background-color: #ed6436;
+  }
+
+  .font-color{
+    color:#ed6436;
+  }
