@@ -54,11 +54,11 @@ const BloodTestSchema: Schema = new Schema({
         required: true
     },
     acrResult: {
-        type: Boolean,
-        default: false
+        type: String,
+        enum: ['Yes', 'No']
     },
     eGFRResult: {
-        type: Boolean,
+        type: Number,
         default: false
     },
     sodium: {
@@ -95,15 +95,15 @@ const BloodTestSchema: Schema = new Schema({
     },
     ejectionFraction: {
         type: Number,
-        required: true
+        // required: true
     },
     hfrEF: {
         type: Number,
-        required: true
+        // required: true
     },
     hfpeEF: {
         type: Number,
-        required: true
+        // required: true
     },
     createdAt: { type: Date, default: new Date() },
 });

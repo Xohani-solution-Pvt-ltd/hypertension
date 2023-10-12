@@ -7,7 +7,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   connectMongo()
 if (req.method === "GET") {
     try {
-      const diagnosisData= await DiagnosisModel.findById(req.query.id);
+      const diagnosisData= await DiagnosisModel.findOne({ diagnosisId :req.query.id});
       res.status(200).json({
         success: true,
         message: "successfully",

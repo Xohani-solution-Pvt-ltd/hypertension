@@ -31,7 +31,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   }else if (req.method === "GET") {
     try {
-      const BloodTest = await BloodTestModel.findById(req.query.id);
+      const BloodTest = await BloodTestModel.findOne({ bloodTestId :req.query.id});
       res.status(200).json({
         success: true,
         message: "successfully",

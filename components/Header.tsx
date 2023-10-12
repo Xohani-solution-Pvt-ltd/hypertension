@@ -46,39 +46,26 @@ export default function Header() {
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/about">About</Nav.Link>
               <Nav.Link href="/contact">Contact</Nav.Link>
-              {isAuthenticated ? (
-                <>
-                  <li className="nav-item dropdown">
-                    <NavLink
-                      className="nav-link text-black display-4"
-                      href="/dashboard"
-                      aria-expanded="false"
-                    >
-                      Dashboardggg
-                    </NavLink>
-                  </li>
-                </>
-              ) : (
-                <>
-                  <li className="nav-item dropdown">
-                    <NavLink
-                      className="nav-link text-black display-4"
-                      href="/login"
-                      aria-expanded="false"
-                    >
-                      Login
-                    </NavLink>
-                  </li>
-                  <li className="nav-item dropdown">
-                    <NavLink
-                      className="nav-link text-black display-4"
-                      href="/signup"
-                      aria-expanded="false"
-                    >
+
+              {(isAuthenticated) ? <>
+                <Nav.Link href="/dashboard" className="nav-link">
+                  Dashboard
+                </Nav.Link> 
+                 <Nav.Link onClick={() => { LogoutUser(); }} className="nav-link" href="/" > Logout
+                </Nav.Link> 
+              </>
+                : <>
+                  <Nav.Link href="/login" className="nav-link">
+                    Login
+                  </Nav.Link><>
+                    <Nav.Link href="/signup" className="nav-link">
+
+
                       Signup
                     </NavLink>
                   </li>
                 </>
+
               )}
             </Nav>
           </Navbar.Collapse>
