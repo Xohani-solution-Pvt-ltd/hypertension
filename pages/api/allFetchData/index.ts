@@ -13,11 +13,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === "GET") {
       const id = req.query.id;
       const [
+        userData,
         diagnosisData,
         comorbiditiesData,
         symptomsData,
         bloodTestData,
       ] = await Promise.all([
+        UserModel.findOne({userId : id}),
         DiagnosisModel.findOne({diagnosisId : id}),
         ComorbiditiesModel.findOne({comorbiditiesId:id}),
         SymptomModel.findOne({ symptomsId: id }),
@@ -26,8 +28,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       res.status(200).json({
         success: true,
-        message: "Data fetched successfully",
+        message: "AllData fetched successfully",
         data: {
+          userData,
           diagnosisData,
           comorbiditiesData,
           symptomsData,
@@ -43,7 +46,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Failed to retrieve Diagnosis",
+      message: "Failed to retrieve allData",
     });
   }
 };

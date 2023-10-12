@@ -25,8 +25,7 @@ const AuthState = (props) => {
     _id: "",
     fullName: "",
     mobile: "",
-    email: "",
-    // age: "",
+    email: ""
   });
 
   useEffect(() => {
@@ -48,7 +47,7 @@ const AuthState = (props) => {
       setUserInfo(data?.data);
       setToken(data?.token);
       notify.success("Succesfully Login");
-      router.push("/createProfile");
+      router.push("/dashboard");
       return null;
     } else if (err) {
       console.log(err?.message);
@@ -109,8 +108,7 @@ const AuthState = (props) => {
       _id: "",
       fullName: "",
       mobile: "",
-      email: "",
-      // age: "",
+      email: ""
     });
     removeToken();
   };

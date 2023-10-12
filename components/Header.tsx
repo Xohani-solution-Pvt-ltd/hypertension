@@ -50,7 +50,7 @@ export default function Header() {
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/about">About</Nav.Link>
               <Nav.Link href="/contact">Contact</Nav.Link>
-              {/* {(isAuthenticated) ? <>
+              {(isAuthenticated) ? <>
                 <Nav.Link href="/dashboard" className="nav-link">
                   Dashboard
                 </Nav.Link> 
@@ -65,8 +65,8 @@ export default function Header() {
                       Signup
                     </Nav.Link></>
                 </>
-              } */}
-              {(isAuthenticated) ? <>
+              }
+              {/* {(isAuthenticated) ? <>
                 <li className="nav-item dropdown">
                   <NavLink className="nav-link text-black display-4" href="/dashboard" aria-expanded="false">
                     Dashboard
@@ -82,7 +82,7 @@ export default function Header() {
                     Signup
                   </NavLink>
                 </li>
-              </>}
+              </>} */}
             </Nav>
           </Navbar.Collapse>
         </Navbar>
