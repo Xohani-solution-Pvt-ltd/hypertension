@@ -11,17 +11,17 @@ export default function Header() {
   const { isAuthenticated, LogoutUser, router } = useContext(AuthContext);
   const handleToggle = () => {
     setToggle(!toggle);
-    router.push("/home");
+    router.push("/login");
   };
 
   const handleLogout = () => {
-    router.push("/home");
+    router.push("/login");
   };
 
   return (
     <section className="menu cid-rGtBGu0BpJ" id="menu1-1a">
-      <Container>
-        <Navbar className=" fixed-top flex items-center justify-between px-4">
+      <Container className="navbar-expand " fluid>
+        <Navbar className="fixed-top flex items-center justify-between px-4 navbar">
           <Navbar.Brand href="/">
             <Image
               className="pr-2"
@@ -42,42 +42,35 @@ export default function Header() {
             id="basic-navbar-nav"
             className={toggle ? "show" : "d-flex justify-content-end"}
           >
-            <Nav className="ml-auto nav-link text-black display-4">
+            <Nav className="ml-auto">
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/about">About</Nav.Link>
               <Nav.Link href="/contact">Contact</Nav.Link>
               {isAuthenticated ? (
                 <>
-                  <li className="nav-item dropdown">
-                    <NavLink
-                      className="nav-link text-black display-4"
-                      href="/dashboard"
-                      aria-expanded="false"
-                    >
-                      Dashboard
-                    </NavLink>
-                  </li>
+                  <Nav.Link href="/users" className="nav-link">
+                    Dashboard
+                  </Nav.Link>
+                  <Nav.Link
+                    onClick={() => {
+                      LogoutUser();
+                    }}
+                    className="nav-link"
+                    href="/"
+                  >
+                    {" "}
+                    Logout
+                  </Nav.Link>
                 </>
               ) : (
                 <>
-                  <li className="nav-item dropdown">
-                    <NavLink
-                      className="nav-link text-black display-4"
-                      href="/login"
-                      aria-expanded="false"
-                    >
-                      Login
-                    </NavLink>
-                  </li>
-                  <li className="nav-item dropdown">
-                    <NavLink
-                      className="nav-link text-black display-4"
-                      href="/signup"
-                      aria-expanded="false"
-                    >
-                      Signup
-                    </NavLink>
-                  </li>
+                  <Nav.Link href="/login" className="nav-link">
+                    Login
+                  </Nav.Link>
+                  <Nav.Link href="/login" className="nav-link" />
+                  <Nav.Link href="/signup" className="nav-link">
+                    Signup
+                  </Nav.Link>
                 </>
               )}
             </Nav>
