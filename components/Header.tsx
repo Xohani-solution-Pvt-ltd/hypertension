@@ -46,6 +46,7 @@ export default function Header() {
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/about">About</Nav.Link>
               <Nav.Link href="/contact">Contact</Nav.Link>
+
               {(isAuthenticated) ? <>
                 <Nav.Link href="/dashboard" className="nav-link">
                   Dashboard
@@ -58,43 +59,12 @@ export default function Header() {
                     Login
                   </Nav.Link><>
                     <Nav.Link href="/signup" className="nav-link">
-                      Signup
-                    </Nav.Link></>
-                </>
-              }
-              {isAuthenticated ? (
-                <>
-                  <li className="nav-item dropdown">
-                    <NavLink
-                      className="nav-link text-black display-4"
-                      href="/dashboard"
-                      aria-expanded="false"
-                    >
-                      Dashboard
-                    </NavLink>
-                  </li>
-                </>
-              ) : (
-                <>
-                  <li className="nav-item dropdown">
-                    <NavLink
-                      className="nav-link text-black display-4"
-                      href="/login"
-                      aria-expanded="false"
-                    >
-                      Login
-                    </NavLink>
-                  </li>
-                  <li className="nav-item dropdown">
-                    <NavLink
-                      className="nav-link text-black display-4"
-                      href="/signup"
-                      aria-expanded="false"
-                    >
+
                       Signup
                     </NavLink>
                   </li>
                 </>
+
               )}
             </Nav>
           </Navbar.Collapse>
