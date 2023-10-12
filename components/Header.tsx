@@ -60,6 +60,7 @@ export default function Header() {
                   </Nav.Link><>
                     <Nav.Link href="/signup" className="nav-link">
 
+
                       Signup
                     </NavLink>
                   </li>
