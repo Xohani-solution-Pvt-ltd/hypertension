@@ -66,7 +66,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     } catch (error) {
       res.status(500).json({ error: "Failed to delete the symptom" });
     }
-  }else{
+    }
+  else
+  {
     res.status(405).json({
       success: false,
       message: "Invalid method",
