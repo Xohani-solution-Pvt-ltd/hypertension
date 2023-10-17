@@ -51,6 +51,14 @@
     margin-top: 0px;
   }
 
+  .high-risk{
+    color: red;
+  }
+
+  .low-risk{
+    color: green;
+  }
+
   @media screen and (max-width: 999px) {
     .body-content {margin-top: 30px;}
     .foot-res{text-align: center; margin-top: 30px;}
