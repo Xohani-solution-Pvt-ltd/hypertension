@@ -72,7 +72,7 @@ export default function Header() {
                     Signup
                   </Nav.Link>
                 </>
-
+                
               )}
             </Nav>
           </Navbar.Collapse>
