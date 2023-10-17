@@ -6,10 +6,6 @@
 
 // const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 //   connectMongo()
-
- 
-
-
 //   if (req.method === "POST") {
 //     const { previousHeartAttacks,breathlessness,minorNYHA,majorNYHA,legSwelling} = req.body;
 //     try {
@@ -36,7 +32,7 @@
 //       const savedComorbidities = await newComorbidities.save();
 //       if(savedComorbidities)
 //       {
-//         setCookie('comorbiditiesId', savedComorbidities._id, { req, res, maxAge: 60 * 60 * 24 });
+//         setCookie('comorbiditiesId', savedComorbidities._id, { req, res,    maxAge: 60 * 60 * 24 });
 //       }
 //       res.status(201).json({
 //         success: true,
@@ -62,10 +58,10 @@
 //             success: false,
 //             message: "Failed to retrieve symptoms" });
 //          }
-//     }else{
+//        }
+//         else{
 //       res.status(405).json({ error: "Method not allowed" });
 //     }
 //   }
-
 // export default handler;
 

@@ -1,4 +1,3 @@
-
 import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { LockSVG, ProcessCircle } from "../assets/SVG/image";
@@ -10,11 +9,9 @@ import Layout from "../components/Layout";
 import { Table } from 'react-bootstrap';
 
 const UserList = () => {
-  // State to store the fetched data and loading status
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch data function
   const fetchUsers = async () => {
     try {
       const [data, err] = await getUsers({});
@@ -34,7 +31,6 @@ const UserList = () => {
     }
   };
 
-  // Fetch data once when the app mounts
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -75,8 +71,6 @@ const UserList = () => {
             </tbody>
           </Table>
         </div>
-        {/* <Link href="/signup">Sign Up</Link>
-      <Link href="/forgotPassword">Forgot Password?</Link> */}
       </div>
     </Layout>
   );

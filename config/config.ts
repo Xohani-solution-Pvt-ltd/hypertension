@@ -1,4 +1,4 @@
 export const config={
-    emailUser:'pavandhangar152@gmail.com',
-    emailPassword:'7828232292'
+    emailUser:'digpaldhangar7@gmail.com',
+    emailPassword:'6266728877'
 }
