@@ -66,11 +66,18 @@ export default function Footer() {
                   alt="lock image"
                 />
                 Hypertension
-                <div className="container-fluid">
+                <div className="d-flex">
+                  <div className="social-icon ">
+                    <a href="https://twitter.com" className="twitter me-3"><i className="fab fa-twitter "><Twitter /></i></a>
+                    <a href="https://instagram.com" className="instagram me-3"><i className="fab fa-instagram"></i><Instagram /></a>
+                    <a href="https://youtube.com" className="youtube me-3"><i className="fab fa-youtube"><Youtube /></i></a>
+                  </div>
+                </div>
+                {/* <div className="container-fluid">
                   <div className="all-icon">
                     <a
                       href="https://twitter.com"
-                      className="twitter tfiy-icons"
+                      className="twitter tfiy-icons me-3"
                     >
                       <i className="fab fa-twitter ">
                         <Twitter />
@@ -78,21 +85,21 @@ export default function Footer() {
                     </a>
                     <a
                       href="https://instagram.com"
-                      className="instagram tfiy-icons"
+                      className="instagram tfiy-icons me-3"
                     >
                       <i className="fab fa-instagram"></i>
                       <Instagram />
                     </a>
                     <a
                       href="https://youtube.com"
-                      className="youtube tfiy-icons"
+                      className="youtube tfiy-icons me-3"
                     >
                       <i className="fab fa-youtube">
                         <Youtube />
                       </i>
                     </a>
                   </div>
-                </div>
+                </div> */}
               </h5>
             </Container>
           </Col>

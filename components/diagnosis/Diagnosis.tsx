@@ -42,7 +42,7 @@ const Diagnosis = ({ submit }) => {
   const handleSubmit = async (values: DiagnosisInterface) => {
     if (!values.diastolic && !values.pulseRate && !values.systolic) {
       notify.error("Please select at least one.");
-      return; // Do not submit the form
+      return;
     }
     const [data, err] = await submitDiagnosisAPI(values);
     if (data) {
@@ -196,12 +196,7 @@ const Diagnosis = ({ submit }) => {
               </Formik>
             </Col>
             <Col md={3} className="align-left">
-              <Image
-                src={AccusureImg}
-                alt="My Image"
-                width={200}
-                height={150}
-              />
+              <Image src={AccusureImg} alt="My Image" width={200} height={150} />
             </Col>
           </Row>
         </Col>
@@ -225,7 +220,6 @@ export default Diagnosis;
 //       }
 //       values.eGFRResult = eGFR;
 //     } else if(
-//       !values.hbA1cLevel && !values.hBA1CInterpretation
 //       &&!values.totalCholesterol&& !values.lipidInterpretation && !values.hdlCholesterol && !values.hdlInterpretation &&!values.ldlCholesterol &&!values.ldlInterpretation &&  !values.triglycerides && !values.triglyceridesInterpretation &&  !values.albumin &&!values.creatinine  && !values.sodium && !values.acrResult && !values.eGFRResult &&  !values.potassium &&!values.uricAcid &&  !values.kidneyInterpretation && !values.tshLevel &&  !values.tshInterpretation &&!values.renalArteryDoppler &&  !values.coronaryArteryDisease && !values.ejectionFraction && !values.hfrEF &&  !values.hfpeEF
 //     ){
 //     notify.error("Please select at least one .");
