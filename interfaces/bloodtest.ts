@@ -15,7 +15,6 @@ export interface BloodTestInterface{
     gender : String,
     weight : Number,
     acrResult: String,
-    eGFRResult: Number,
     sodium: Number,
     potassium: Number,
     uricAcid: Number,
@@ -25,8 +24,7 @@ export interface BloodTestInterface{
     renalArteryDoppler: String,
     coronaryArteryDisease: String,
     ejectionFraction: Number,
-    hfrEF: Number,
-    hfpeEF: Number,
+    ejectInterpretation : String
 }
 
 export const intialBloodTestValue : BloodTestInterface={
@@ -46,7 +44,6 @@ export const intialBloodTestValue : BloodTestInterface={
     gender : undefined,
     weight : undefined,
     acrResult: undefined,
-    eGFRResult: undefined,
     sodium: undefined,
     potassium: undefined,
     uricAcid: undefined,
@@ -56,8 +53,7 @@ export const intialBloodTestValue : BloodTestInterface={
     renalArteryDoppler: undefined,
     coronaryArteryDisease: undefined,
     ejectionFraction: undefined,
-    hfrEF: undefined,
-    hfpeEF: undefined,
+    ejectInterpretation :undefined
 }
 
 

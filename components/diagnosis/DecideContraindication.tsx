@@ -1,31 +1,55 @@
-import React, { useState } from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import { Container, Row, Col, Form } from 'react-bootstrap';
 
 
 const DecideContraindication = () => {
-    return (
-        <Container>
-      <Row className="flex flex-row">
-        <Col className="mt-5" xs={6}>Decide Contraindication</Col>
-        <Col xs={3}>
-          <Form.Control
-            type="text"
-            className="w-full p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-secondary-300 text-sm font-medium leading-none text-secondary-300"
-            name="high"
-            required
-          />
-        </Col>
-        <Col xs={3}>
-          <Form.Control
-            type="text"
-            className="w-full p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-secondary-300 text-sm font-medium leading-none text-secondary-300"
-            name="low"
-            required
-          />
-        </Col>
-      </Row>
-    </Container>
-    );
+  const [contraindication, setContraindication] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/allFetchData');
+        const data = response.data;
+
+        if (data && data.data && data.data.bloodTestData && data.data.diagnosisData) {
+          const bloodTestData = data.data.bloodTestData;
+          const diagnosisTestData = data.data.diagnosisData;
+
+          const Cr = bloodTestData.creatinine;
+          const K = bloodTestData.potassium;
+          const PulseRate = diagnosisTestData.pulseRate;
+          const UricAcid = bloodTestData.uricAcid;
+
+          if (Cr > 2.5 || K > 5.5) {
+            setContraindication(
+              <div>
+                <p>No Ace (A1)</p>
+                <p>No ARB (A2)</p>
+                <p>No MRA (D3)</p>
+              </div>
+            );
+          } else if (PulseRate < 60) {
+            setContraindication(<p>No B# (B)</p>);
+          } else if (UricAcid > 9) {
+            setContraindication(<p>No Thiazide (D1)</p>);
+          } else {
+            setContraindication(<p>No contraindications</p>);
+          }
+        } else {
+          setContraindication(<p>Data not available</p>);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setContraindication(<p>Error fetching data</p>);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return <div>{contraindication}</div>;
 };
+
 
 export default DecideContraindication;

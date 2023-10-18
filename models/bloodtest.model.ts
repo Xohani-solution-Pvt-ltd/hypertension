@@ -95,15 +95,11 @@ const BloodTestSchema: Schema = new Schema({
     },
     ejectionFraction: {
         type: Number,
-        // required: true
+        required: true
     },
-    hfrEF: {
-        type: Number,
-        // required: true
-    },
-    hfpeEF: {
-        type: Number,
-        // required: true
+    ejectInterpretation: {
+        type: String,
+        required: true
     },
     createdAt: { type: Date, default: new Date() },
 });

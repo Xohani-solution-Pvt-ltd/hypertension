@@ -10,7 +10,7 @@ import { DiagnosisInterface, initialDiagnosisValues } from '../../interfaces/dia
 import { submitDiagnosisAPI, getDiagnosisDetailsAPI } from '../../services/call';
 import { getCookie } from 'cookies-next';
 import notify from "../../helpers/notify";
- 
+
 
 const validationSchema = Yup.object({
   systolic: Yup.number()
@@ -28,38 +28,44 @@ const validationSchema = Yup.object({
 });
 
 const Diagnosis = ({submit}) => {
-  
-
   const router = useRouter();
   const [processing, setProcessing] = useState(false);
   const [diagnosisId, setDiagnosisId] = useState(undefined);
   const [atLeastOneCheckboxChecked, setAtLeastOneCheckboxChecked] = useState(false);
 
+  const handleInputChange = (e) => {
+    const systolic = e.target.form.systolic.value;
+    const diastolic = e.target.form.diastolic.value;
+    const pulseRate = e.target.form.pulseRate.value;
+
+    setAtLeastOneCheckboxChecked(!!systolic && !!diastolic && !!pulseRate);
+  };
 
   const handleSubmit = async (values: DiagnosisInterface) => {
     if (
-      !values.diastolic &&
-      !values.pulseRate &&
-      !values.systolic 
-    ) {
-      notify.error("Please select at least one.");
-      return; // Do not submit the form
-    }
-    const [data, err] = await submitDiagnosisAPI(values);
-    if (data) {
-      notify.success("Succesfully Diagnosis");
-    }
-    if (err) {
-      setTimeout(() => {
+      values.diastolic &&
+      values.pulseRate &&
+      values.systolic 
+     ){
+       const [data, err] = await submitDiagnosisAPI(values);
+     if(data){
+       notify.success("Succesfully Diagnosis");
+      }
+    if(err){
+        setTimeout(() => {
         setProcessing(false);
         notify.error(err?.message);
       }, 1000);
-    }
-  };
-  useEffect(() => {
-    const id = getCookie('diagnosisId')
-    setDiagnosisId(id)
-  }, [1]);
+     }
+    useEffect(() =>{
+      const id = getCookie('diagnosisId')
+      setDiagnosisId(id)
+         }, []);
+    } else{
+  notify.error("Please fill in all the required fields.");
+     }
+  }
+
 
   return (
     <>
@@ -97,27 +103,27 @@ const Diagnosis = ({submit}) => {
                       <div className="p-1">
                         <Field type="number" id="systolic" name="systolic" className="form-control" placeholder="SYS" onChange={(e) => {
                         setFieldValue('systolic', e.target.value);
-                        setAtLeastOneCheckboxChecked(e.target.value);
+                                        handleInputChange(e);
                         }}/>
                         <ErrorMessage name="systolic" component="div" className="text-danger" />
                       </div>
                       <div className="p-1">
                         <Field type="number" id="diastolic" name="diastolic" className="form-control" placeholder="DIA" onChange={(e) => {
                         setFieldValue('diastolic', e.target.value);
-                        setAtLeastOneCheckboxChecked(e.target.value);
+                                        handleInputChange(e);
                         }}/>
                         <ErrorMessage name="diastolic" component="div" className="text-danger" />
                       </div>
                       <div className="p-1">
                         <Field type="number" id="pulseRate" name="pulseRate" className="form-control" placeholder="PUL" onChange={(e) => {
                         setFieldValue('pulseRate', e.target.value);
-                        setAtLeastOneCheckboxChecked(e.target.value);
+                                        handleInputChange(e);
                         }}/>
                         <ErrorMessage name="pulseRate" component="div" className="text-danger" />
                       </div>
                       <div className="text-end mt-4">
                         <button type="submit" className="btn btn-primary display-4" onClick={() => submit("comorbidities")}
-                        disabled={!atLeastOneCheckboxChecked}>Submit</button>
+                        disabled={!atLeastOneCheckboxChecked} >Submit</button>
                       </div>
                     </Form>
                   )
@@ -139,224 +145,6 @@ export default Diagnosis;
 
 
 
-
-
-// const handleSubmit = async (values: BloodTestInterface) => {
-
-//   if (!values.creatinine && !values.age && !values.weight && !values.gender) {
-//     let eGFR = 0;
-//     if (typeof values.age === 'number' && typeof values.weight === 'number' && typeof values.creatinine === 'number') {
-//       if (values.gender === 'Male') {
-//         eGFR = ((140 - values.age) * values.weight) / (72 * values.creatinine);
-//       } else if (values.gender === 'Female') {
-//         eGFR = ((140 - values.age) * values.weight) / (72 * values.creatinine) * 0.85;
-//       }
-//       values.eGFRResult = eGFR;
-//     } else if(
-//       !values.hbA1cLevel && !values.hBA1CInterpretation
-//       &&!values.totalCholesterol&& !values.lipidInterpretation && !values.hdlCholesterol && !values.hdlInterpretation &&!values.ldlCholesterol &&!values.ldlInterpretation &&  !values.triglycerides && !values.triglyceridesInterpretation &&  !values.albumin &&!values.creatinine  && !values.sodium && !values.acrResult && !values.eGFRResult &&  !values.potassium &&!values.uricAcid &&  !values.kidneyInterpretation && !values.tshLevel &&  !values.tshInterpretation &&!values.renalArteryDoppler &&  !values.coronaryArteryDisease && !values.ejectionFraction && !values.hfrEF &&  !values.hfpeEF
-//     ){
-//     notify.error("Please select at least one .");
-//     return; // Do not submit the form
-//   }
-//   }
-//   const [data, err] = await submitBloodTestAPI(values);
-//   if (data) {
-//     notify.success("Succesfully BloodTest");
-//     // router.push('/dashboard')
-//   }
-//   if (err) {
-//     setTimeout(() => {
-//       setProcessing(false);
-//       notify.error(err?.message);
-//     }, 1000);
-//   }
-// };
-// useEffect(() => {
-//   const id = getCookie('bloodTestId')
-//   setBloodTestId(id)
-// }, [1]);
-
-
-
-
-
-// import axios from "axios";
-// import React, { useEffect, useState } from "react";
-
-// const RiskStratification = () => {
-//   // State variables for results and criteria
-//   const [results, setResults] = useState('');
-//   const [criteria, setCriteria] = useState({
-//     'cva': false,
-//     'coronaryArteryDisease': false,
-//     'previousHeartAttacks': false,
-//     'breathlessness': false,
-//     'cad': false,
-//     'heartFailure': false,
-//     'hfrEF': false,
-//     'hfpeEF': false,
-//     eGFR: 0,
-//   });
-
-//   // Function to fetch data from the API
-//   const fetchCriteriaData = async () => {
-//     try {
-//       const response = await axios.get('http://localhost:3000/api/allFetchData');
-//       const data = await response.data; // Assuming the API response is in JSON format
-//       console.log("data", data);
-//       console.log("datacomor",data && data)
-//       if (
-//         data &&
-//         data.comorbiditiesData &&
-//         data.bloodTestData &&
-//         data.symptomsData
-//       ) {
-//         setCriteria({
-//           'cva': data.comorbiditiesData.cva,
-//           'coronaryArteryDisease': data.bloodTestData.coronaryArteryDisease === 'Present',
-//           'previousHeartAttacks': data.symptomsData.previousHeartAttacks,
-//           'breathlessness': data.symptomsData.breathlessness,
-//           'cad': data.comorbiditiesData.coronaryArteryDisease === true,
-//           'heartFailure': data.comorbiditiesData.heartFailure === true,
-//           'hfrEF': data.bloodTestData.hfrEF > 35,
-//           'hfpeEF': data.bloodTestData.hfpeEF > 35,
-//           eGFR: data.bloodTestData.eGFR,
-//         });
-//       } else {
-//         console.error('Required data properties are undefined');
-//       }
-//     } catch (error) {
-//       console.error('Error fetching data:', error);
-//     }
-//   };
-//   // useEffect to fetch data when the component mounts
-//   useEffect(() => {
-//     fetchCriteriaData();
-//   }, []);
-
-//   // Function to check the risk based on criteria
-//   const checkRisk = () => {
-//     let riskLevel = 'Low Risk';
-
-//     if (criteria['cva']) {
-//       riskLevel = 'High Risk (Probable CVA)';
-//     } else if (
-//       criteria['coronaryArteryDisease'] ||
-//       criteria['previousHeartAttacks'] ||
-//       criteria['breathlessness'] ||
-//       criteria['cad']
-//     ) {
-//       riskLevel = 'High Risk (Probable CAD)';
-//     } else if (
-//       criteria['heartFailure'] ||
-//       criteria['breathlessness'] ||
-//       criteria['hfrEF'] ||
-//       criteria['hfpeEF']
-//     ) {
-//       riskLevel = 'High Risk (Probable Heart failure)';
-//     } else if (criteria.eGFR < 60) {
-//       riskLevel = 'High Risk (CKD)';
-//     }
-
-//     setResults(riskLevel);
-//   };
-
-//   return (
-//     <div>
-//       <h1>High Risk Checker</h1>
-//       {/* Implement input fields for criteria here */}
-//       <button onClick={checkRisk}>Check Risk</button>
-//       <p>{results}</p>
-//     </div>
-//   );
-// };
-
-// export default RiskStratification;
-
-
-
-
-
-
-// import axios from "axios";
-// import React, { useEffect, useState } from "react";
-
-// const RiskStratification = () => {
-//   const [results, setResults] = useState('');
-//   const [criteria, setCriteria] = useState({
-//     'cva': false,
-//     'coronaryArteryDisease': false,
-//     'previousHeartAttacks': false,
-//     'breathlessness': false,
-//     'cad': false,
-//     'heartFailure': false,
-//     'hfrEF': false,
-//     'hfpeEF': false,
-//     eGFR: 0,
-//   });
-//   const fetchCriteriaData = async () => {
-//     try {
-//       const response = await fetch('http://localhost:3000/api/allFetchData');
-//       const data = await response.json(); // Await the JSON parsing
-//       console.log("data", data);
-//       setCriteria({
-//         'cva': data.comorbiditiesData.cva,
-//         'coronaryArteryDisease': data.bloodTestData.coronaryArteryDisease === 'Present',
-//         'previousHeartAttacks': data.symptomsData.previousHeartAttacks,
-//         'breathlessness': data.symptomsData.breathlessness,
-//         'cad': data.comorbiditiesData.coronaryArteryDisease === true,
-//         'heartFailure': data.comorbiditiesData.heartFailure === true,
-//         'hfrEF': data.bloodTestData.hfrEF > 35,
-//         'hfpeEF': data.bloodTestData.hfpeEF > 35,
-//         eGFR: data.bloodTestData.eGFR,
-//       });
-//     } catch (error) {
-//       console.error('Error fetching data:', error);
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchCriteriaData();
-//   }, []); 
-
-//   const checkRisk = () => {
-//     let riskLevel = 'Low Risk';
-
-//     if (criteria['cva']) {
-//       riskLevel = 'High Risk (Probable CVA)';
-//     } else if (
-//       criteria['coronaryArteryDisease'] ||
-//       criteria['previousHeartAttacks'] ||
-//       criteria['breathlessness'] ||
-//       criteria['cad']
-//     ) {
-//       riskLevel = 'High Risk (Probable CAD)';
-//     } else if (
-//       criteria['heartFailure'] ||
-//       criteria['breathlessness'] ||
-//       criteria['hfrEF'] ||
-//       criteria['hfpeEF']
-//     ) {
-//       riskLevel = 'High Risk (Probable Heart failure)';
-//     } else if (criteria.eGFR < 60) {
-//       riskLevel = 'High Risk (CKD)';
-//     }
-
-//     setResults(riskLevel);
-//   };
-
-//   return (
-//     <div>
-//       <h1>High Risk Checker</h1>
-//       {/* Implement input fields for criteria here */}
-//       <button onClick={checkRisk}>Check Risk</button>
-//       <p>{results}</p>
-//     </div>
-//   );
-// };
-
-// export default RiskStratification;
 
 
 

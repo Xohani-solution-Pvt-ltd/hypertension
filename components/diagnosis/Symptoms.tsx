@@ -21,28 +21,16 @@ const validationSchema = Yup.object({
   legSwelling: Yup.boolean(),
 });
 
-const Symptoms = ({submit}) => {
+const Symptoms = ({submit,preview}) => {
   const router = useRouter();
   const [processing, setProcessing] = useState(false);
   const [diagnosisId, setDiagnosisId] = useState(undefined);
-  const [atLeastOneCheckboxChecked, setAtLeastOneCheckboxChecked] = useState(false);
 
   const handleSubmit = async (values: SymptomsInterface) => {
-    if (
-      !values.previousHeartAttacks &&
-      !values.breathlessness &&
-      !values.minorNYHA &&
-      !values.majorNYHA &&
-      !values.legSwelling
-    ) {
-      notify.error("Please select at least one checkbox.");
-      return; // Do not submit the form
-    }
   
     const [data, err] = await submitSymptomsMonitoringAPI(values);
     if (data) {
       notify.success("Succesfully Symptoms");
-      // router.push('/dashboard')
     }
     if (err) {
       setTimeout(() => {
@@ -95,7 +83,6 @@ const Symptoms = ({submit}) => {
                       <div className="p-2">
                         <label>
                           <Field type="checkbox" id="previousHeartAttacks" name="previousHeartAttacks" className="me-4" onChange={(e) => { setFieldValue('previousHeartAttacks', e.target.checked);
-                          setAtLeastOneCheckboxChecked(e.target.checked);
                            }}/>
                           History of chest pain on walking / exertion ?
                         </label>
@@ -104,7 +91,6 @@ const Symptoms = ({submit}) => {
                       <div className="p-2">
                         <label>
                           <Field type="checkbox" id="breathlessness" name="breathlessness" className="me-4" onChange={(e) => { setFieldValue('breathlessness', e.target.checked);
-                          setAtLeastOneCheckboxChecked(e.target.checked);
                           }}/>
                           Breathlessness
                         </label>
@@ -113,7 +99,6 @@ const Symptoms = ({submit}) => {
                       <div className="p-2">
                         <label>
                           <Field type="checkbox" id="minorNYHA" name="minorNYHA" className="me-4" onChange={(e) => { setFieldValue('minorNYHA', e.target.checked);
-                          setAtLeastOneCheckboxChecked(e.target.checked);
                            }}/>
                           Minor NYHA
                         </label>
@@ -122,7 +107,6 @@ const Symptoms = ({submit}) => {
                       <div className="p-2">
                         <label>
                           <Field type="checkbox" id="majorNYHA" name="majorNYHA" className="me-4" onChange={(e) => { setFieldValue('majorNYHA', e.target.checked);
-                           setAtLeastOneCheckboxChecked(e.target.checked);
                            }}/>
                           Major NYHA
                         </label>
@@ -131,7 +115,6 @@ const Symptoms = ({submit}) => {
                       <div className="p-2">
                         <label>
                           <Field type="checkbox" id="legSwelling" name="legSwelling" className="me-4" onChange={(e) => { setFieldValue('legSwelling', e.target.checked);
-                          setAtLeastOneCheckboxChecked(e.target.checked);
                           }}/>
                           Leg swelling
                         </label>
@@ -147,8 +130,14 @@ const Symptoms = ({submit}) => {
                         </label>
                         <ErrorMessage name="pregnancy" component="div" className="text-danger" />
                       </div> */}
+                      <div className="text-left mt-4">
+                        <button type="button" className="btn btn-primary display-4" onClick={() => preview("comorbidities")} 
+                               >Preview</button>
+                      </div>
                       <div className="text-end mt-4">
-                        <button type="submit" className="btn btn-primary display-4" onClick={() => submit("bloodTest")} disabled={!atLeastOneCheckboxChecked}>Submit</button>
+                      <label>If No Any symptoms Click On Submit Button</label>
+                      
+                        <button type="submit" className="btn btn-primary display-4" onClick={() => submit("bloodTest")} >Submit</button>
                       </div>
                     </Form>
                   )
