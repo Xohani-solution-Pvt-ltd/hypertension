@@ -1,3 +1,4 @@
+
 import React, { useEffect,  useState, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
@@ -17,29 +18,16 @@ const validationSchema = Yup.object({
   lungDisease : Yup.boolean(),
 });
 
-const Comorbidities = ({submit}) => {
+const Comorbidities = ({submit,preview}) => {
   const router = useRouter();
   const [processing, setProcessing] = useState(false);
   const [comorbiditiesId, setComorbiditiesId] = useState(undefined);
-  const [atLeastOneCheckboxChecked, setAtLeastOneCheckboxChecked] = useState(false);
 
   const handleSubmit = async (values: ComorbiditiesInterface) => {
-    if (
-      !values.cva &&
-      !values.coronaryArteryDisease &&
-      !values.heartFailure &&
-      !values.diabetes &&
-      !values.pregnancy &&
-      !values.lungDisease
-    ) {
-      notify.error("Please select at least one checkbox.");
-      return; // Do not submit the form
-    }
-  
+ 
     const [data, err] = await submitComorbiditiesAPI(values);
     if (data) {
       notify.success("Succesfully Comorbidities");
-      // router.push('/dashboard')
     }
     if (err) {
       setTimeout(() => {
@@ -49,9 +37,9 @@ const Comorbidities = ({submit}) => {
     }
   };
   useEffect(() => {
-    const id = getCookie('comorbidiId')
+    const id = getCookie('comorbiditiesId')
     setComorbiditiesId(id)
-  }, [1]);
+  }, []);
 
   return (
     <>
@@ -94,7 +82,6 @@ const Comorbidities = ({submit}) => {
                       <div className="p-2">
                         <label>
                           <Field type="checkbox" id="cva" name="cva" className="me-4" onChange={(e) => { setFieldValue('cva', e.target.checked);
-                                   setAtLeastOneCheckboxChecked(e.target.checked);
                                    }}/>
                           Prior history of sudden onset weakness or sudden onset blurring of vision?
                         </label>
@@ -103,7 +90,6 @@ const Comorbidities = ({submit}) => {
                       <div className="p-2">
                         <label>
                           <Field type="checkbox" id="coronaryArteryDisease" name="coronaryArteryDisease" className="me-4" onChange={(e) => { setFieldValue('coronaryArteryDisease', e.target.checked);
-                                   setAtLeastOneCheckboxChecked(e.target.checked);
                                    }}/>
                           Coronary artery disease / Previous heart attacks
                         </label>
@@ -112,7 +98,6 @@ const Comorbidities = ({submit}) => {
                       <div className="p-2">
                         <label>
                           <Field type="checkbox" id="heartFailure" name="heartFailure" className="me-4" onChange={(e) => { setFieldValue('heartFailure', e.target.checked);
-                                   setAtLeastOneCheckboxChecked(e.target.checked);
                                    }}/>
                           Heart failure
                         </label>
@@ -121,7 +106,6 @@ const Comorbidities = ({submit}) => {
                       <div className="p-2">
                         <label>
                           <Field type="checkbox" id="diabetes" name="diabetes" className="me-4" onChange={(e) => { setFieldValue('diabetes', e.target.checked);
-                                   setAtLeastOneCheckboxChecked(e.target.checked);
                                    }}/>
                           Are you diabetic?
                         </label>
@@ -130,7 +114,6 @@ const Comorbidities = ({submit}) => {
                       <div className="p-2">
                         <label>
                           <Field type="checkbox" id="pregnancy" name="pregnancy" className="me-4" onChange={(e) => { setFieldValue('pregnancy', e.target.checked);
-                                   setAtLeastOneCheckboxChecked(e.target.checked);
                                    }}/>
                           Are you currently pregnant?
                         </label>
@@ -139,14 +122,15 @@ const Comorbidities = ({submit}) => {
                       <div className="p-2">
                         <label>
                           <Field type="checkbox" id="lungDisease" name="lungDisease" className="me-4" onChange={(e) => { setFieldValue('lungDisease', e.target.checked);
-                                   setAtLeastOneCheckboxChecked(e.target.checked);
                                    }}/>
                           Prior history Asthma, COPD, Taking inhalers?
                         </label>
                         <ErrorMessage name="pregnancy" component="div" className="text-danger" />
                       </div>
-                      <div className="text-end mt-4">
-                        <button type="submit" className="btn btn-primary display-4" onClick={() => submit("symptoms")} disabled={!atLeastOneCheckboxChecked}
+                      <div className="mt-4">
+                      <button type="button" className="text-start btn btn-primary display-4" onClick={() => preview("diagnosis")} 
+                               >Preview</button>
+                        <button type="submit" className=" text-end btn btn-primary display-4" onClick={() => submit("symptoms")} 
                                >Submit</button>
                       </div>
                     </Form>
