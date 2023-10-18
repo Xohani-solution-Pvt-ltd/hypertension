@@ -35,34 +35,20 @@ const Dashboard = () => {
   useEffect(() => {
     const id = getCookie('diagnosisId');
     setDiagnosisId(id);
-  }, [1]);
+  }, []);
 
   const handleTabChange = (tabKey) => {
     setActiveTab(tabKey);
   };
 
   const handleButtonClick = (submit) => {
-    setActiveTab(submit);
+    // Call the onSubmitLogic function with the necessary data
+    setActiveTab(submit)
+  };
+  const handlePreButtonClick = (preview) => {
+    setActiveTab(preview)
   };
 
-  const goToNextTab = () => {
-    const tabOrder = [
-      "diagnosis",
-      "comorbidities",
-      "symptoms",
-      "bloodTest",
-      "stratification",
-      "contraindications",
-      "treatment",
-    ];
-
-    const currentIndex = tabOrder.indexOf(activeTab);
-
-    if (currentIndex !== -1 && currentIndex < tabOrder.length - 1) {
-      const nextTabKey = tabOrder[currentIndex + 1];
-      handleTabChange(nextTabKey);
-    }
-  };
 
 
   return (
@@ -78,16 +64,16 @@ const Dashboard = () => {
                 justify
               >
                 <Tab eventKey="diagnosis" title="Diagnosis">
-                  <Diagnosis submit={handleButtonClick} />
+                  <Diagnosis submit={handleButtonClick}  />
                 </Tab>
                 <Tab eventKey="comorbidities" title="Comorbidities" disabled={!diagnosisId}>
-                  <Comorbidities submit={handleButtonClick} />
+                  <Comorbidities submit={handleButtonClick} preview={handlePreButtonClick} />
                 </Tab>
                 <Tab eventKey="symptoms" title="Symptoms Monitoring" disabled={!diagnosisId}>
-                  <Symptoms submit={handleButtonClick} />
+                  <Symptoms submit={handleButtonClick} preview={handlePreButtonClick}  />
                 </Tab>
                 <Tab eventKey="bloodTest" title="Blood Test" disabled={!diagnosisId}>
-                  <BloodTest submit={handleButtonClick} />
+                  <BloodTest submit={handleButtonClick} preview={handlePreButtonClick} />
                 </Tab>
                 <Tab eventKey="stratification" title="Risk Stratification" disabled={!diagnosisId}>
                   <RiskStratification />

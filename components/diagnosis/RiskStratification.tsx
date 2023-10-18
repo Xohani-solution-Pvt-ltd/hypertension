@@ -5,28 +5,34 @@ import { useRouter } from "next/router";
 const RiskStratification = () => {
   const [data, setData] = useState([]);
 
-  const [results, setResults] = useState("");
+  const [results, setResults] = useState('Low Risk');
   const [criteria, setCriteria] = useState({
-    cva: false,
-    coronaryArteryDisease: false,
-    previousHeartAttacks: false,
-    breathlessness: false,
-    cad: false,
-    heartFailure: false,
-    hfrEF: false,
-    hfpeEF: false,
-    eGFR: 0,
+    'cva': false,
+    'coronaryArteryDisease': false,
+    'previousHeartAttacks': false,
+    'breathlessness': false,
+    'cad': false,
+    'heartFailure': false,
+    'hfrEF': false,
+    'hfpeEF': false,
+    'eGFR' : undefined
   });
+  
   const [fetchedData, setFetchedData] = useState(null);
   // Function to fetch data from the API
+  // const fetchCriteriaData = async () => {
+    // try {
+    //   const response = await axios.get(
+    //     "http://localhost:3000/api/allFetchData"
+    //   ); // Update the API endpoint
+      
+  // console.log("egfr",criteria)
+  // console.log("setCriteria",criteria.eGFR)
   const fetchCriteriaData = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:3000/api/allFetchData"
-      ); // Update the API endpoint
+      const response = await axios.get('http://localhost:3000/api/allFetchData');
       const data = response.data;
 
-      // Extract data and update state variables
       if (
         data &&
         data.data &&
@@ -39,20 +45,37 @@ const RiskStratification = () => {
         const userData = data.data.userData;
         const comorbiditiesData = data.data.comorbiditiesData;
         const bloodTestData = data.data.bloodTestData;
+        // console.log("dataofuser",bloodTestData.creatinine)
         const symptomsData = data.data.symptomsData;
-        // console.log("fetchdata",symptomsData)
-        setCriteria({
-          cva: comorbiditiesData.cva === true,
-          coronaryArteryDisease:
-          bloodTestData.coronaryArteryDisease === "Present",
-          previousHeartAttacks: symptomsData.previousHeartAttacks === true,
-          breathlessness: symptomsData.breathlessness === true,
-          cad: comorbiditiesData.coronaryArteryDisease === true,
-          heartFailure: comorbiditiesData.heartFailure === true,
-          hfrEF: bloodTestData.hfrEF > 35,
-          hfpeEF: bloodTestData.hfpeEF > 35,
-          eGFR: bloodTestData.eGFRResult,
-        });
+
+        if (userData.age &&
+            userData.weight &&
+            bloodTestData.creatinine
+        ) {
+          let eGFR = 0;
+          
+          if (userData.gender === 'Male') {
+            // console.log("dataofuser",userData.gender)
+            eGFR = ((140 - userData.age) * userData.weight) / (72 * bloodTestData.creatinine);
+            
+            // console.log("dataofuser",eGFR)
+          } else if (userData.gender === 'Female') {
+            eGFR = ((140 - userData.age) * userData.weight) / (72 * bloodTestData.creatinine) * 0.85;
+          }
+          setCriteria((prevCriteria) => ({ ...prevCriteria, 'eGFR': eGFR }));
+        }
+        
+        setCriteria((prevCriteria) => ({
+          ...prevCriteria,
+          'cva': comorbiditiesData.cva===true,
+          'coronaryArteryDisease': bloodTestData.coronaryArteryDisease === 'Present',
+          'previousHeartAttacks': symptomsData.previousHeartAttacks===true,
+          'breathlessness': symptomsData.breathlessness===true,
+          'cad': comorbiditiesData.coronaryArteryDisease === true,
+          'heartFailure': comorbiditiesData.heartFailure === true,
+          'hfrEF': bloodTestData.hfrEF > 35,
+          'hfpeEF': bloodTestData.hfpeEF > 35 
+        }));
       } else {
         console.error("Required data properties are undefined");
       }
@@ -61,7 +84,6 @@ const RiskStratification = () => {
     }
   };
 
-  // useEffect to fetch data when the component mounts
   useEffect(() => {
     fetchCriteriaData();
     checkRisk();
@@ -86,7 +108,6 @@ const RiskStratification = () => {
     fetchData();
   }, []);
 
-  // Function to check the risk based on criteria
   const checkRisk = () => {
     let riskLevel = "Low Risk";
 
@@ -107,9 +128,7 @@ const RiskStratification = () => {
     ) {
       riskLevel = "High Risk (Probable Heart failure)";
     } else if (criteria.eGFR < 60) {
-      riskLevel = "High Risk (CKD)";
-    } else {
-      riskLevel = "Low Risk";
+      riskLevel = 'High Risk (CKD)';
     }
 
     setResults(riskLevel);
@@ -208,6 +227,5 @@ return (
     )}
   </div>
 );
-};
 
 export default RiskStratification;
