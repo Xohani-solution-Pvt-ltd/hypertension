@@ -463,12 +463,13 @@ const BloodTest = ({ submit, preview }) => {
                     />
                   </Col>
                   <Col md={3} className="align-left p-2">
+                    <label htmlFor="creatinine">Creatinine</label>
                     <Field
                       type="number"
                       id="creatinine"
                       name="creatinine"
                       className="form-control"
-                      placeholder="Creatinine"
+                      placeholder="Enter Creatinine (e.g., 10 - 300)"
                       onChange={(e) => {
                         setFieldValue("creatinine", e.target.value);
                       }}
@@ -480,12 +481,13 @@ const BloodTest = ({ submit, preview }) => {
                     />
                   </Col>
                   <Col md={3} className="align-left p-2">
+                    <label htmlFor="sodium">Sodium</label>
                     <Field
                       type="number"
                       id="sodium"
                       name="sodium"
                       className="form-control"
-                      placeholder="Sodium"
+                      placeholder="Enter Sodium (e.g., 110 - 170)"
                       onChange={(e) => {
                         setFieldValue("sodium", e.target.value);
                       }}
@@ -497,12 +499,13 @@ const BloodTest = ({ submit, preview }) => {
                     />
                   </Col>
                   <Col md={3} className="align-left p-2">
+                    <label htmlFor="potassium">Potassium</label>
                     <Field
                       type="number"
                       id="potassium"
                       name="potassium"
                       className="form-control"
-                      placeholder="Potassium"
+                      placeholder="Enter Potassium (e.g., 2 - 8)"
                       onChange={(e) => {
                         setFieldValue("potassium", e.target.value);
                       }}
@@ -514,12 +517,13 @@ const BloodTest = ({ submit, preview }) => {
                     />
                   </Col>
                   <Col md={6} className="align-left p-2">
+                    <label htmlFor="uricAcid">Uric Acid</label>
                     <Field
                       type="number"
                       id="uricAcid"
                       name="uricAcid"
                       className="form-control"
-                      placeholder="Uric Acid"
+                      placeholder="Enter Uric Acid (e.g., 2 - 10)"
                       onChange={(e) => {
                         setFieldValue("uricAcid", e.target.value);
                       }}
@@ -531,6 +535,9 @@ const BloodTest = ({ submit, preview }) => {
                     />
                   </Col>
                   <Col md={6} className="align-left p-2">
+                    <label htmlFor="kidneyInterpretation">
+                      Kidney Interpretation
+                    </label>
                     <Field
                       as="select"
                       id="kidneyInterpretation"
@@ -551,6 +558,7 @@ const BloodTest = ({ submit, preview }) => {
                     />
                   </Col>
                   <Col md={6} className="align-left p-2">
+                    <label htmlFor="acrResult">ACR Result</label>
                     <Field
                       type="string"
                       id="acrResult"
@@ -568,6 +576,7 @@ const BloodTest = ({ submit, preview }) => {
                     />
                   </Col>
                   <Col md={6} className="align-left p-2">
+                    <label htmlFor="eGFRResult">eGFR Result</label>
                     <Field
                       type="number"
                       id="eGFRResult"
@@ -590,12 +599,13 @@ const BloodTest = ({ submit, preview }) => {
                     TSH
                   </h4>
                   <Col md={6} className="align-left p-2">
+                    <label htmlFor="tshLevel">TSH Level</label>
                     <Field
                       type="number"
                       id="tshLevel"
                       name="tshLevel"
                       className="form-control"
-                      placeholder="Tsh Level"
+                      placeholder="Enter Tsh Level (e.g., 0 - 8)"
                       onChange={(e) => {
                         setFieldValue("tshLevel", e.target.value);
                       }}
@@ -607,6 +617,9 @@ const BloodTest = ({ submit, preview }) => {
                     />
                   </Col>
                   <Col md={6} className="align-left p-2">
+                    <label htmlFor="tshInterpretation">
+                      TSH Interpretation
+                    </label>
                     <Field
                       as="select"
                       id="tshInterpretation"
@@ -654,6 +667,9 @@ const BloodTest = ({ submit, preview }) => {
                     2D Echocardiography
                   </h4>
                   <Col md={3} className="align-left p-2">
+                    <label htmlFor="coronaryArteryDisease">
+                      Coronary Artery Disease
+                    </label>
                     <Field
                       type="string"
                       id="coronaryArteryDisease"
@@ -673,6 +689,7 @@ const BloodTest = ({ submit, preview }) => {
                     />
                   </Col>
                   <Col md={3} className="align-left p-2">
+                    <label htmlFor="ejectionFraction">Ejection Fraction</label>
                     <Field
                       type="number"
                       id="ejectionFraction"
