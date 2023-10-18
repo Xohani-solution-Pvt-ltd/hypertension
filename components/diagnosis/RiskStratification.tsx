@@ -17,17 +17,8 @@ const RiskStratification = () => {
     'hfpeEF': false,
     'eGFR' : undefined
   });
-  
   const [fetchedData, setFetchedData] = useState(null);
-  // Function to fetch data from the API
-  // const fetchCriteriaData = async () => {
-    // try {
-    //   const response = await axios.get(
-    //     "http://localhost:3000/api/allFetchData"
-    //   ); // Update the API endpoint
-      
-  // console.log("egfr",criteria)
-  // console.log("setCriteria",criteria.eGFR)
+
   const fetchCriteriaData = async () => {
     try {
       const response = await axios.get('http://localhost:3000/api/allFetchData');
@@ -55,10 +46,7 @@ const RiskStratification = () => {
           let eGFR = 0;
           
           if (userData.gender === 'Male') {
-            // console.log("dataofuser",userData.gender)
             eGFR = ((140 - userData.age) * userData.weight) / (72 * bloodTestData.creatinine);
-            
-            // console.log("dataofuser",eGFR)
           } else if (userData.gender === 'Female') {
             eGFR = ((140 - userData.age) * userData.weight) / (72 * bloodTestData.creatinine) * 0.85;
           }
@@ -134,69 +122,6 @@ const RiskStratification = () => {
     setResults(riskLevel);
   };
 
-  //   return (
-  //     <div>
-  //       <h1>High Risk Checker</h1>
-  //       {/* Implement input fields for criteria here */}
-  //       <button onClick={checkRisk}>Check Risk</button>
-  //       <p>{results}</p>
-  //     </div>
-  //   );
-  // };
-
-  // export default RiskStratification;
-
-//   return (
-//     <>
-//     <div>
-//       <h1>Risk Checker</h1>
-//       <table>
-//         {/* <thead>
-//           <tr>
-//             <th>Criteria</th>
-//             <th>Value</th>
-//           </tr>
-//         </thead> */}
-//         <tbody>
-//           {fetchedData && (
-//             <>
-//               <tr>
-//                 <td>CVA</td>
-//                 <td>{criteria.cva ? "Yes" : "No"}</td>
-//               </tr>
-//               <tr>
-//                 <td>Coronary Artery Disease</td>
-//                 <td>
-//                   {criteria.coronaryArteryDisease ? "Present" : "Not Present"}
-//                 </td>
-//               </tr>
-//               {/* Add more rows for other criteria */}
-//               <tr>
-//                 <td>eGFR</td>
-//                 <td>{criteria.eGFR}</td>
-//               </tr>
-//             </>
-//           )}
-//         </tbody>
-//       </table>
-
-//       <p className={results === "Low Risk" ? "low-risk" : "high-risk"}>
-//         Risk Level: {results}
-//       </p>
-//     </div>
-//     <div>
-//     {data ? (
-//         <pre>{JSON.stringify(data, null, 3)}</pre>
-//       ) : (
-//       <p>Loading...</p>
-//      )}
-
-//     </div> </>
-//   );
-// };
-
-// export default RiskStratification;
-
 return (
   <div>
     <h1>Risk Checker</h1>
@@ -210,7 +135,6 @@ return (
           <td>Coronary Artery Disease</td>
           <td>{criteria.coronaryArteryDisease ? "Present" : "Not Present"}</td>
         </tr>
-        {/* Add more rows for other criteria here */}
         <tr>
           <td>eGFR</td>
           <td>{criteria.eGFR}</td>
@@ -227,5 +151,5 @@ return (
     )}
   </div>
 );
-
+}
 export default RiskStratification;
