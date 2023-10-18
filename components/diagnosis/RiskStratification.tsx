@@ -151,5 +151,5 @@ return (
     )}
   </div>
 );
-}
+};
 export default RiskStratification;
