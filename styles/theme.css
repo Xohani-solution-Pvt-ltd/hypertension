@@ -2514,3 +2514,24 @@ pre {
 .svg-indicator-indication {
   stroke: #07c;
 }
+
+/* ----- soical icon ----- */
+.social-icon {
+  padding: 0.5s 1.5rem;
+  font-size: 2.2rem;
+}
+/* .footer-pad {
+  height: 100px;
+  width: 100%;
+} */
+/* .content {
+  border-color: 2px solid black;
+  height: 200px;
+  width: 250px;
+}
+.userform {
+  border-color: 2px solid black;
+  height: 1040px;
+  width: autofill;
+  background-color: white;
+} */

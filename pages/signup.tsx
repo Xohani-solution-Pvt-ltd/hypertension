@@ -12,11 +12,10 @@ import { APP_INFO } from "../environments/index";
 import { AuthContext } from "../context/authentication";
 import notify from "../helpers/notify";
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
-import { BeatLoader } from "react-spinners";
 
 const Login = () => {
   const { TITLE } = APP_INFO;
-  const [loading, setLoading] = useState(true);
+  const [textValue, setTextValue] = useState('');
   const { CreateAccount } = useContext(AuthContext);
 
   const [mobile_check, setUsername_check] = useState<boolean>(false);
@@ -89,51 +88,47 @@ const Login = () => {
       }, 1000);
     }
   };
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
 
-    return () => clearTimeout(timeout);
-  }, []);
+   const handleInputChange = (e) => {
+    setTextValue(e.target.value);
+    };
+
+  const handleOptionSelect = () => {
+    console.log('Option selected!');
+  };
+
+
   return (
     <Layout title={`signup | ${TITLE}`}>
-      <Container className="d-flex justify-content-center" fluid>
-        {loading ? (
-          <BeatLoader color="#039dfc" size={20} />
-        ) : (
-          <Row className="d-flex justify-content-center py-10 mb-20 pt-5" id="features5-11">
-            <Col md={8} lg={6}>
+      <Container fluid>
+          <Row className="mb-20 pt-5 pb-5" id="features5-11">
               <div className="text-center">
                 <h2 className="text-xl md:text-3xl font-bold text-secondary-300 font-primary">
                   Create your account-{" "}
                   <span className="text-primary-100">{TITLE}</span>
                 </h2>
               </div>
-              <div className="px-5 py-4 bg-gray-100 rounded-lg d-flex align-items-center justify-content-between mt-7">
-                <div className="d-flex align-items-center">
+              <div className="text-center px-5 bg-gray-100 justify-content-between mt-7">
+                  <p className="px-5 md:text-sm text-xs text-secondary-300">
                   <ColoredLock />
-                  <p className="md:text-sm text-xs text-secondary-300 pl-3">
-                    We take privacy issues seriously. You can be sure that your personal data is securely protected.
+                    We take privacy issues seriously. You can be sure that your personal data is securely protected. <CrossSVG />
                   </p>
                 </div>
-                <Button variant="link" className="block focus:outline-none focus:ring-2 focus:ring-gray-700">
-                  <CrossSVG />
-                </Button>
-              </div>
               <Form className="mt-8 space-y-6" onSubmit={Submit}>
                 <div className="mt-16 lg:flex justify-between border-b border-gray-200 pb-16">
                   <div className="w-80">
                     <div className="flex items-center">
-                      <h1 className="text-xl font-medium pr-2 leading-5 text-secondary-300 font-primary">
+                      <h1 className=" text-center text-xl font-medium pr-2 leading-5 text-secondary-300 font-primary">
                         Personal Information
                       </h1>
                     </div>
-                    <p className="mt-4 text-xs md:text-sm leading-5 text-secondary-300">
+                    <p className="text-center mt-4 text-xs md:text-sm leading-5 text-secondary-300">
                       Unlock Your Identity: Share Your Personal Information for a
                       Better Experience.
                     </p>
                   </div>
+                  <Row>
+                  <Col md={6}>
                   <Form.Group controlId="fullName" className="mb-4">
                     <Form.Label>Full Name</Form.Label>
                     <Form.Control
@@ -147,6 +142,8 @@ const Login = () => {
                       required={true}
                     />
                   </Form.Group>
+                  </Col>
+                  <Col md={6}>
                   <Form.Group controlId="emailAddress" className="mb-4">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control
@@ -157,6 +154,8 @@ const Login = () => {
                       required
                     />
                   </Form.Group>
+                   </Col>
+                   <Col md={4}>
                   <Form.Group controlId="mobile" className="mb-4">
                     <Form.Label>Mobile</Form.Label>
                     <Form.Control
@@ -169,6 +168,8 @@ const Login = () => {
                       required
                     />
                   </Form.Group>
+                  </Col>
+                  <Col md={4}>
                   <Form.Group controlId="age" className="mb-4">
                     <Form.Label>Age</Form.Label>
                     <Form.Control
@@ -182,6 +183,8 @@ const Login = () => {
                       required={true}
                     />
                   </Form.Group>
+                  </Col>
+                  <Col md={4}>
                   <Form.Group controlId="gender" className="mb-4">
                     <Form.Label>Gender</Form.Label>
                     <Form.Control
@@ -193,8 +196,14 @@ const Login = () => {
                       placeholder="gender"
                       aria-labelledby="gender"
                       required={true}
-                    />
+                      value={textValue}
+                      onChange={handleInputChange}
+                      onSelectOption={handleOptionSelect}
+                    >
+                    </Form.Control>
                   </Form.Group>
+                   </Col>
+                   <Col md={4}>
                   <Form.Group controlId="address" className="mb-4">
                     <Form.Label>Address</Form.Label>
                     <Form.Control
@@ -208,6 +217,8 @@ const Login = () => {
                       required
                     />
                   </Form.Group>
+                  </Col>
+                  <Col md={4}>
                   <Form.Group controlId="height" className="mb-4">
                     <Form.Label>Height</Form.Label>
                     <Form.Control
@@ -221,6 +232,8 @@ const Login = () => {
                       required={true}
                     />
                   </Form.Group>
+                   </Col>
+                   <Col md={4}>
                   <Form.Group controlId="weight" className="mb-4">
                     <Form.Label>Weight</Form.Label>
                     <Form.Control
@@ -234,6 +247,8 @@ const Login = () => {
                       required={true}
                     />
                   </Form.Group>
+                   </Col>
+                   <Col md={4}>
                   <Form.Group controlId="alcoholConsumption" className="mb-4">
                     <Form.Label>AlcoholConsumption</Form.Label>
                     <Form.Control
@@ -247,6 +262,8 @@ const Login = () => {
                       required
                     />
                   </Form.Group>
+                  </Col>
+                  <Col md={4}>
                   <Form.Group controlId="smokingStatus" className="mb-4">
                     <Form.Label>SmokingStatus</Form.Label>
                     <Form.Control
@@ -260,6 +277,8 @@ const Login = () => {
                       required
                     />
                   </Form.Group>
+                    </Col>
+                    <Col md={4}>
                   <Form.Group controlId="physicalActivity" className="mb-4">
                     <Form.Label>PhysicalActivity</Form.Label>
                     <Form.Control
@@ -273,6 +292,8 @@ const Login = () => {
                       required={true}
                     />
                   </Form.Group>
+                  </Col>
+                  <Col md={6}>
                   <Form.Group controlId="password" className="mb-4">
                     <Form.Label>Password</Form.Label>
                     <Form.Control
@@ -285,7 +306,8 @@ const Login = () => {
                       required
                     />
                   </Form.Group>
-                  {/* ... */}
+                   </Col>
+                   <Col md={6}>
                   <Form.Group controlId="confirmPassword" className="mb-4">
                     <Form.Label>Confirm Password</Form.Label>
                     <Form.Control
@@ -303,23 +325,23 @@ const Login = () => {
                       required
                     />
                   </Form.Group>
+                   </Col>
+                   </Row>
                 </div>
-                <div className="mt-16 flex flex-col-reverse md:flex-row justify-between border-b border-gray-200 pb-16 mb-4 font-primary">
-                  <div>
+                  <div className="position-absolute end-0">
                     <Link href="/login">
-                      <span className="font-medium pr-2 leading-5 text-secondary-300">
+                      <span className="font-medium pr-2 leading-5 text-secondary-300 display-4">
                         Have an Account?{" "}
                       </span>
                       <button
                         type="button"
-                        className="absolute left-0 inset-y-0 flex items-center pl-3 font-primary"
+                        className="btn btn-primary display-4"
                       >
                         SignIn
                       </button>
                     </Link>
                   </div>
-                </div>
-                <div className="mt-2 font-primary">
+                <div className="float-right">
                   <Button variant="primary"
                     type="submit"
                     disabled={
@@ -341,10 +363,7 @@ const Login = () => {
                   </Button>
                 </div>
               </Form>
-            </Col>
           </Row>
-        )
-        }
       </Container>
     </Layout>
   );

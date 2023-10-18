@@ -55,22 +55,29 @@ export default function Footer() {
     <footer className="d-flex align-items-end w-full bg-white-500 container-lg">
       <Container fluid>
         <Row className="gap-15 px-6 py-8 md:gap-4">
-          <Col md={3}>
+          <Col md={3} className="foot-res">
             <Container>
               <h5 className="mb-3 text-sm font-semibold text-primary-300 uppercase">
                 <Image
                   src={LockPrimaryImg}
                   className="cursor-pointer"
-                  width={40}
-                  height={40}
+                  width={30}
+                  height={30}
                   alt="lock image"
                 />
                 Hypertension
-                <div className="container-fluid">
+                <div className="d-flex">
+                  <div className="social-icon ">
+                    <a href="https://twitter.com" className="twitter me-3"><i className="fab fa-twitter "><Twitter /></i></a>
+                    <a href="https://instagram.com" className="instagram me-3"><i className="fab fa-instagram"></i><Instagram /></a>
+                    <a href="https://youtube.com" className="youtube me-3"><i className="fab fa-youtube"><Youtube /></i></a>
+                  </div>
+                </div>
+                {/* <div className="container-fluid">
                   <div className="all-icon">
                     <a
                       href="https://twitter.com"
-                      className="twitter tfiy-icons"
+                      className="twitter tfiy-icons me-3"
                     >
                       <i className="fab fa-twitter ">
                         <Twitter />
@@ -78,25 +85,25 @@ export default function Footer() {
                     </a>
                     <a
                       href="https://instagram.com"
-                      className="instagram tfiy-icons"
+                      className="instagram tfiy-icons me-3"
                     >
                       <i className="fab fa-instagram"></i>
                       <Instagram />
                     </a>
                     <a
                       href="https://youtube.com"
-                      className="youtube tfiy-icons"
+                      className="youtube tfiy-icons me-3"
                     >
                       <i className="fab fa-youtube">
                         <Youtube />
                       </i>
                     </a>
                   </div>
-                </div>
+                </div> */}
               </h5>
             </Container>
           </Col>
-          <Col md={3}>
+          <Col md={3} className="foot-res">
             <h2 className="mb-3 text-sm font-semibold font-color">About</h2>
             <div className="item-wrap">
               <h6>
@@ -118,7 +125,7 @@ export default function Footer() {
               </h6>
             </div>
           </Col>
-          <Col md={3}>
+          <Col md={3} className="foot-res">
             <h2 className="mb-3 text-sm font-semibold font-color">Our Links</h2>
             <ul className="text-secondary-300">
               <li className="mb-2">
@@ -138,7 +145,7 @@ export default function Footer() {
               </li>
             </ul>
           </Col>
-          <Col md={3} className="flex justify-center items-center">
+          <Col md={3} className="flex justify-center items-center foot-res">
             <div>
               <div className="flex items-center">
                 <div className="max-w-[40px] sm:max-w-[70px]">
@@ -172,10 +179,13 @@ export default function Footer() {
           <div className="footer">
             <Container className="d-flex justify-content-center w-100" fluid>
               <span
-                className="text-align-center mt-5"
-                style={{ paddingBottom: "25px", color: "white" }}
+                className="text-align-center mt-3"
+                style={{ paddingBottom: "13px", color: "white" }}
               >
-                <h3> © 2023 Hypertension All Rights Reserved.</h3>
+                <h3 style={{ fontSize: "20px" }}>
+                  {" "}
+                  © 2023 Hypertension All Rights Reserved.
+                </h3>
               </span>
             </Container>
           </div>

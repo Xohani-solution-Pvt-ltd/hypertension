@@ -17,7 +17,6 @@ const validationSchema = Yup.object({
 
 const Login = () => {
   const { TITLE } = APP_INFO;
-  const [loading, setLoading] = useState(true);
   const { LoginToAccount } = useContext(AuthContext);
   const [process, setProcess] = useState<Boolean>(false);
   const handleSubmit = async (values: LoginFormInterface) => {
@@ -30,22 +29,10 @@ const Login = () => {
     console.log('Submitted values:', values);
   };
 
-  useEffect(() => {
-    // Simulate page loading for 2 seconds
-    const timeout = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-
-    // Cleanup the timeout on component unmount
-    return () => clearTimeout(timeout);
-  }, []);
 
   return (
     <Layout title={`Login | ${TITLE}`}>
       <section className="d-flex justify-content-center pt-5">
-        {loading ? (
-          <BeatLoader color="#039dfc" size={20} />
-        ) : (
           <Container style={{ height: '75vh' }}>
             <Row className="justify-content-center">
               <h4 className="card-title align-left py-2 mbr-bold mbr-fonts-style mbr-text align-center display-7">Log in to your {TITLE}</h4>
@@ -74,8 +61,6 @@ const Login = () => {
               </Col>
             </Row>
           </Container>
-        )
-        }
       </section>
     </Layout>
   );

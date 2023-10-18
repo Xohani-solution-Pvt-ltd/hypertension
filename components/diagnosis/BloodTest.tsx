@@ -172,7 +172,7 @@ const BloodTest = ({submit}) => {
             return (
               <Form>
                 <Row className="media-container-row">
-                  <h4 className="mbr-fonts-style mbr-text display-4">HBA1C</h4>
+                  <h4 className="mbr-fonts-style mbr-text display-4 mbr-bold">HBA1C</h4>
                   <Col md={6} className="align-left p-2">
                       <Field type="number" id="hbA1cLevel" name="hbA1cLevel" className="form-control" placeholder="HbA1c Level" onChange={(e) => { setFieldValue('hbA1cLevel', e.target.value);
                           setAtLeastOneCheckboxChecked(e.target.value);
@@ -187,7 +187,7 @@ const BloodTest = ({submit}) => {
                   </Col>
                 </Row>
                 <Row className="media-container-row">
-                  <h4 className="mbr-fonts-style mbr-text display-4">Lipid</h4>
+                  <h4 className="mbr-fonts-style mbr-text display-4 mbr-bold">Lipid</h4>
                   <Col md={6} className="align-left p-2">
                       <Field type="number" id="totalCholesterol" name="totalCholesterol" className="form-control" placeholder="Total Cholesterol" onChange={(e) => { setFieldValue('totalCholesterol', e.target.value);
                           setAtLeastOneCheckboxChecked(e.target.value);
@@ -238,7 +238,7 @@ const BloodTest = ({submit}) => {
                   </Col>
                 </Row>
                 <Row className="media-container-row">
-                  <h4 className="mbr-fonts-style mbr-text display-4">Kidney function test</h4>
+                  <h4 className="mbr-fonts-style mbr-text display-4 mbr-bold">Kidney Function Test</h4>
                   <Col md={3} className="align-left p-2">
                       <Field type="number" id="albumin" name="albumin" className="form-control" placeholder="Albumin" onChange={(e) => { setFieldValue('albumin', e.target.value);
                           setAtLeastOneCheckboxChecked(e.target.value);
@@ -289,7 +289,7 @@ const BloodTest = ({submit}) => {
                   </Col>
                 </Row>
                 <Row className="media-container-row">
-                  <h4 className="mbr-fonts-style mbr-text display-4">TSH</h4>
+                  <h4 className="mbr-fonts-style mbr-text display-4 mbr-bold">TSH</h4>
                   <Col md={6} className="align-left p-2">
                       <Field type="number" id="tshLevel" name="tshLevel" className="form-control" placeholder="Tsh Level" onChange={(e) => { setFieldValue('tshLevel', e.target.value);
                           setAtLeastOneCheckboxChecked(e.target.value);
@@ -304,7 +304,7 @@ const BloodTest = ({submit}) => {
                   </Col>
                 </Row>
                 <Row className="media-container-row">
-                  <h4 className="mbr-fonts-style mbr-text display-4">Renal artery doppler</h4>
+                  <h4 className="mbr-fonts-style mbr-text display-4 mbr-bold">Renal Artery Doppler</h4>
                   <Col md={12} className="align-left p-2">
                       <Field type="string" id="renalArteryDoppler" name="renalArteryDoppler" className="form-control" placeholder="RenalArteryDoppler" onChange={(e) => { setFieldValue('renalArteryDoppler', e.target.value);
                           setAtLeastOneCheckboxChecked(e.target.value);
@@ -313,7 +313,7 @@ const BloodTest = ({submit}) => {
                   </Col>
                 </Row>
                 <Row className="media-container-row">
-                  <h4 className="mbr-fonts-style mbr-text display-4">2D echocardiography</h4>
+                  <h4 className="mbr-fonts-style mbr-text display-4 mbr-bold">2D Echocardiography</h4>
                   <Col md={3} className="align-left p-2">
                       <Field type="string" id="coronaryArteryDisease" name="coronaryArteryDisease" className="form-control" placeholder="CoronaryArteryDisease" onChange={(e) => { setFieldValue('coronaryArteryDisease', e.target.value);
                           setAtLeastOneCheckboxChecked(e.target.value);
