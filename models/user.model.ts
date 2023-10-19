@@ -13,7 +13,7 @@ const UserSchema: Schema = new Schema({
     },
     address: { type: String },
     height: { type: Number },
-    weight: { type: Number },
+    weight: { type: Number,required: true },
     alcoholConsumption: {
         type: String,
         enum: ['None', 'Moderate', 'Heavy']

@@ -3,7 +3,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-const RiskStratification = () => {
+const RiskStratification = ({preview}) => {
   const [results, setResults] = useState('prescriptions');
   const [criteria, setCriteria] = useState({
     'cva': false,
@@ -117,6 +117,13 @@ const RiskStratification = () => {
       {/* Implement input fields for criteria here */}
       <button onClick={checkRisk}>Check Risk</button>
       <p>{results}</p>
+
+
+      <div className="text-end mt-4">
+    <button type="button" className="btn btn-primary display-4" onClick={() => preview("contraindications")}
+     >Preview</button>
+      </div>
+   
     </div>
   );
 };

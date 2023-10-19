@@ -21,12 +21,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   } else if (req.method === "POST") {
     connectMongo();
-    
-    const { fullName, email, password, mobile,age,gender,address} = req.body;
+
+    const { fullName, email, password, mobile,age,gender,address,height,weight,alcoholConsumption,smokingStatus,physicalActivity} = req.body;
     try {
       const HashPassword = await bcrypt.hash(password, 5);
       const user = await UserModel.create({
-        fullName,email,mobile,age,gender,address,
+        fullName,email,mobile,age,gender,address,height,weight,alcoholConsumption,smokingStatus,physicalActivity,
         password: HashPassword
       });
 

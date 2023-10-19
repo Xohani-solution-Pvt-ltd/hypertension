@@ -2,10 +2,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-const RiskStratification = () => {
-  const [data, setData] = useState([]);
+const RiskStratification = ({submit,preview}) => {
 
-  const [results, setResults] = useState('Low Risk');
+  const [riskOne, setRiskOne] = useState("Low Risk");
+  const [riskTwo, setRiskTwo] = useState("Low Risk");
+  const [riskThree, setRiskThree] = useState("Low Risk");
+  const [riskFour, setRiskFour] = useState("Low Risk");
+
   const [criteria, setCriteria] = useState({
     'cva': false,
     'coronaryArteryDisease': false,
@@ -13,11 +16,11 @@ const RiskStratification = () => {
     'breathlessness': false,
     'cad': false,
     'heartFailure': false,
+    'ejectInterpretation': false,
     'hfrEF': false,
     'hfpeEF': false,
     'eGFR' : undefined
   });
-  const [fetchedData, setFetchedData] = useState(null);
 
   const fetchCriteriaData = async () => {
     try {
@@ -32,37 +35,22 @@ const RiskStratification = () => {
         data.data.bloodTestData &&
         data.data.symptomsData
       ) {
-        setFetchedData(data);
         const userData = data.data.userData;
         const comorbiditiesData = data.data.comorbiditiesData;
         const bloodTestData = data.data.bloodTestData;
-        // console.log("dataofuser",bloodTestData.creatinine)
         const symptomsData = data.data.symptomsData;
 
-        if (userData.age &&
-            userData.weight &&
-            bloodTestData.creatinine
-        ) {
-          let eGFR = 0;
-          
-          if (userData.gender === 'Male') {
-            eGFR = ((140 - userData.age) * userData.weight) / (72 * bloodTestData.creatinine);
-          } else if (userData.gender === 'Female') {
-            eGFR = ((140 - userData.age) * userData.weight) / (72 * bloodTestData.creatinine) * 0.85;
-          }
-          setCriteria((prevCriteria) => ({ ...prevCriteria, 'eGFR': eGFR }));
-        }
-        
         setCriteria((prevCriteria) => ({
           ...prevCriteria,
           'cva': comorbiditiesData.cva===true,
-          'coronaryArteryDisease': bloodTestData.coronaryArteryDisease === 'Present',
+          'coronaryArteryDisease': comorbiditiesData.coronaryArteryDisease === true,
           'previousHeartAttacks': symptomsData.previousHeartAttacks===true,
           'breathlessness': symptomsData.breathlessness===true,
-          'cad': comorbiditiesData.coronaryArteryDisease === true,
+          'cad': bloodTestData.ejectionInterpretation === "CAD",
           'heartFailure': comorbiditiesData.heartFailure === true,
-          'hfrEF': bloodTestData.hfrEF > 35,
-          'hfpeEF': bloodTestData.hfpeEF > 35 
+          'hfrEF': bloodTestData.ejectionInterpretation === "HfrEF",
+          'hfpeEF':bloodTestData.ejectionInterpretation === "HfpeEF",
+          'eGFR': bloodTestData.eGFRResult,
         }));
       } else {
         console.error("Required data properties are undefined");
@@ -74,82 +62,91 @@ const RiskStratification = () => {
 
   useEffect(() => {
     fetchCriteriaData();
-    checkRisk();
+    checkRisk1();
+    checkRisk2();
+    checkRisk3();
+    checkRisk4();
   }, []);
 
   useEffect(() => {
-    checkRisk();
+    checkRisk1();
   }, [criteria]);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch('http://localhost:3000/api/allFetchData');
-        console.log("data",response)
-        const jsonData = await response.json();
-       setData(jsonData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    }
- 
-    fetchData();
-  }, []);
-
-  const checkRisk = () => {
-    let riskLevel = "Low Risk";
+  const checkRisk1 = () => {
+     
+    let RiskOneLevel = 'Low Risk'
 
     if (criteria["cva"]) {
-      riskLevel = "High Risk (Probable CVA)";
-    } else if (
-      criteria["coronaryArteryDisease"] ||
-      criteria["previousHeartAttacks"] ||
-      criteria["breathlessness"] ||
-      criteria["cad"]
-    ) {
-      riskLevel = "High Risk (Probable CAD)";
-    } else if (
-      criteria["heartFailure"] ||
-      criteria["breathlessness"] ||
-      criteria["hfrEF"] ||
-      criteria["hfpeEF"]
-    ) {
-      riskLevel = "High Risk (Probable Heart failure)";
-    } else if (criteria.eGFR < 60) {
-      riskLevel = 'High Risk (CKD)';
+      RiskOneLevel=("High Risk (Probable CVA)");
     }
+    setRiskOne(RiskOneLevel)
+  };
 
-    setResults(riskLevel);
+  useEffect(() => {
+    checkRisk2();
+  }, [criteria]);
+
+  const checkRisk2 = () => {
+    let RiskTwoLevel = 'Low Risk'
+      if(
+          criteria["coronaryArteryDisease"] ||
+          criteria["previousHeartAttacks"] ||
+          criteria["breathlessness"] ||
+          criteria["cad"]
+        ) {
+          RiskTwoLevel=("High Risk (Probable CAD)");
+        }   
+        setRiskTwo(RiskTwoLevel)
+  };
+
+  useEffect(() => {
+    checkRisk3();
+  }, [criteria]);
+
+  const checkRisk3 = () => {
+    let RiskTHreeLevel = 'Low Risk'
+     if (
+          criteria["heartFailure"] ||
+          criteria["breathlessness"] ||
+          criteria["hfrEF"] ||
+          criteria["hfpeEF"]
+        ) {
+          RiskTHreeLevel=("High Risk (Probable Heart failure)");   
+        }
+        setRiskThree(RiskTHreeLevel)
+  };
+
+  useEffect(() => {
+    checkRisk4();
+  }, [criteria]);
+
+  const checkRisk4 = () => {
+    let RiskFourLevel = 'Low Risk'
+    if (criteria["eGFR"] < 60) {
+      RiskFourLevel=('High Risk (CKD)');
+        }   
+        setRiskFour(RiskFourLevel)
   };
 
 return (
   <div>
     <h1>Risk Checker</h1>
-    <table>
-      <tbody>
-        <tr>
-          <td>CVA</td>
-          <td>{criteria.cva ? "Yes" : "No"}</td>
-        </tr>
-        <tr>
-          <td>Coronary Artery Disease</td>
-          <td>{criteria.coronaryArteryDisease ? "Present" : "Not Present"}</td>
-        </tr>
-        <tr>
-          <td>eGFR</td>
-          <td>{criteria.eGFR}</td>
-        </tr>
-      </tbody>
-    </table>
-    <p className={results === "Low Risk" ? "low-risk" : "high-risk"}>
-      Risk Level: {results}
-    </p>
-    {data ? (
-      <pre>{JSON.stringify(data, null, 3)}</pre>
-    ) : (
-      <p>Loading...</p>
-    )}
+      <p>Risk One: {riskOne}</p>
+      <p>Risk Two: {riskTwo}</p>
+      <p>Risk Three: {riskThree}</p>
+      <p>Risk Four: {riskFour}</p>
+
+   <div className="text-end mt-4">
+    <button type="button" className="btn btn-primary display-4" onClick={() => preview("bloodTest")}
+     >Preview</button>
+      </div>
+    <div className="text-end mt-4">
+    <button type="submit" className="btn btn-primary display-4" onClick={() => submit("contraindications")}
+     >Submit</button>
+      </div>
+
   </div>
+  
 );
 }
 export default RiskStratification;

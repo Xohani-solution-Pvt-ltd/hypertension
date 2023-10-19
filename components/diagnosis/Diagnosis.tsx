@@ -70,8 +70,6 @@ const Diagnosis = ({submit}) => {
   notify.error("Please fill in all the required fields.");
      }
   }
-
-
   return (
     <>
       <Row className="media-container-row">
@@ -111,31 +109,6 @@ const Diagnosis = ({submit}) => {
                       fetchDiagnosisDetailData();
                     }
                   }, [diagnosisId]);
-
-                  // const saveUserData = (data) => {
-                  //   localStorage.setItem('userDiagnosisData', JSON.stringify(data));
-                  // }
-
-                  // const getUserData = () => {
-                  //   const userData = localStorage.getItem('userDiagnosisData');
-                  //   if (userData) {
-                  //     return JSON.parse(userData);
-                  //   }
-                  //   return null;
-                  // }
-
-                  // useEffect(() => {
-                  //   // When the component mounts or when the user logs in
-                  //   const userData = getUserData();
-                  //   if (userData) {
-                  //     // Populate the form fields with user data
-                  //     setFieldValue('systolic', userData.systolic);
-                  //     setFieldValue('diastolic', userData.diastolic);
-                  //     setFieldValue('pulseRate', userData.pulseRate);
-                  //     // ... populate other form fields
-                  //   }
-                  // }, []);
-
                   return (
                     <Form>
                       <div className="p-1">
@@ -180,10 +153,3 @@ const Diagnosis = ({submit}) => {
 };
 
 export default Diagnosis;
-
-
-
-
-
-
-

@@ -10,6 +10,7 @@ const BloodTestSchema: Schema = new Schema({
 
     hBA1CInterpretation: {
         type: String,
+        enum: ['Normal', 'Abnormal'],
         required: true
     },
     totalCholesterol: {
@@ -18,6 +19,7 @@ const BloodTestSchema: Schema = new Schema({
     },
     lipidInterpretation: {
         type: String,
+        enum: ['Normal', 'Abnormal'],
         required: true
     },
     hdlCholesterol: {
@@ -27,6 +29,7 @@ const BloodTestSchema: Schema = new Schema({
 
     hdlInterpretation: {
         type: String,
+        enum: ['Normal', 'Abnormal'],
         required: true
     },
     ldlCholesterol: {
@@ -35,6 +38,7 @@ const BloodTestSchema: Schema = new Schema({
     },
     ldlInterpretation: {
         type: String,
+        enum: ['Normal', 'Abnormal'],
         required: true
     },
     triglycerides: {
@@ -43,6 +47,7 @@ const BloodTestSchema: Schema = new Schema({
     },
     triglyceridesInterpretation: {
         type: String,
+        enum: ['Normal', 'Abnormal'],
         required: true
     },
     albumin: {
@@ -75,6 +80,7 @@ const BloodTestSchema: Schema = new Schema({
     },
     kidneyInterpretation: {
         type: String,
+        enum: ['Normal', 'Abnormal'],
         required: true
     },
     tshLevel: {
@@ -83,21 +89,22 @@ const BloodTestSchema: Schema = new Schema({
     },
     tshInterpretation: {
         type: String,
+        enum: ['High', 'Normal', 'Low'],
         required: true
     },
     renalArteryDoppler: {
         type: String,
-        enum: ['None', 'Normal', 'Abnormal']
+        enum: ['Normal', 'Abnormal']
     },
     coronaryArteryDisease: {
         type: String,
-        enum: ['None', 'Present', 'Absent']
+        enum: ['Present', 'Absent']
     },
     ejectionFraction: {
         type: Number,
         required: true
     },
-    ejectInterpretation: {
+    ejectionInterpretation: {
         type: String,
         required: true
     },

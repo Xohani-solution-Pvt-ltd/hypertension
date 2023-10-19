@@ -23,8 +23,7 @@ export interface BloodTestInterface{
     tshInterpretation: String,
     renalArteryDoppler: String,
     coronaryArteryDisease: String,
-    ejectionFraction: Number,
-    ejectInterpretation : String
+    ejectionFraction: Number
 }
 
 export const intialBloodTestValue : BloodTestInterface={
@@ -52,8 +51,7 @@ export const intialBloodTestValue : BloodTestInterface={
     tshInterpretation: undefined,
     renalArteryDoppler: undefined,
     coronaryArteryDisease: undefined,
-    ejectionFraction: undefined,
-    ejectInterpretation :undefined
+    ejectionFraction: undefined
 }
 
 

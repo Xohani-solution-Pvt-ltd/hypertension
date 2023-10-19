@@ -120,16 +120,6 @@ const Symptoms = ({submit,preview}) => {
                         </label>
                         <ErrorMessage name="legSwelling" component="div" className="text-danger" />
                       </div>
-
-                      {/* <div className="p-2">
-                        <label>
-                          <Field type="checkbox" id="lungDisease" name="lungDisease" className="me-4" onChange={(e) => { setFieldValue('lungDisease', e.target.checked);
-                          setAtLeastOneCheckboxChecked(e.target.checked);
-                          }}/>
-                          Prior history Asthma, COPD, Taking inhalers?
-                        </label>
-                        <ErrorMessage name="pregnancy" component="div" className="text-danger" />
-                      </div> */}
                       <div className="text-left mt-4">
                         <button type="button" className="btn btn-primary display-4" onClick={() => preview("comorbidities")} 
                                >Preview</button>
