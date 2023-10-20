@@ -627,10 +627,26 @@ const BloodTest = ({ submit, preview }) => {
                     2D Echocardiography
                   </h4>
                   <Col md={3} className="align-left p-2">
-
-                      <Field type="string" id="coronaryArteryDisease" name="coronaryArteryDisease" className="form-control" placeholder="CoronaryArteryDisease" onChange={(e) => { setFieldValue('coronaryArteryDisease', e.target.value);
-                        }}/>
-                      <ErrorMessage name="coronaryArteryDisease" component="div" className="text-danger" />
+                    <label htmlFor="coronaryArteryDisease">
+                      Coronary Artery Disease
+                    </label>
+                    <Field
+                      type="string"
+                      id="coronaryArteryDisease"
+                      name="coronaryArteryDisease"
+                      className="form-control"
+                      placeholder="CoronaryArteryDisease"
+                      onChange={(e) => {
+                        setFieldValue("coronaryArteryDisease", e.target.value);
+                        const newValue = e.target.value;
+                        //  calculateEjectInterpretation(newValue,ejectionFraction);
+                      }}
+                    />
+                    <ErrorMessage
+                      name="coronaryArteryDisease"
+                      component="div"
+                      className="text-danger"
+                    />
                   </Col>
                   <Col md={3} className="align-left p-2">
                     <label htmlFor="ejectionFraction">Ejection Fraction</label>
