@@ -13,8 +13,8 @@
 
   .tfiy-icons{
     font-size: 1.2rem;
-    color: #ffffff !important;
-    background: #ed6436;
+    color: #ed6436 !important;
+    background: white;
     padding: 10px;
     margin-right: 0.6rem;
     border: 2px solid #ed6436;
@@ -24,10 +24,6 @@
     align-items: center;
     transition: all 0.3s;
     border-radius: 100%;
-  }
-
-  .all-icon{
-    margin-top: 40px;
   }
 
   .footer{

@@ -9,6 +9,7 @@ const BloodTestSchema: Schema = new Schema({
     },
 
     hBA1CInterpretation: {
+            
         type: String,
         enum: ['Normal', 'Abnormal'],
         required: true

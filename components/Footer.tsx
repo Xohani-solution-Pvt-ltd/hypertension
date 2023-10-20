@@ -67,10 +67,30 @@ export default function Footer() {
                 />
                 Hypertension
                 <div className="d-flex">
-                  <div className="social-icon ">
-                    <a href="https://twitter.com" className="twitter me-3"><i className="fab fa-twitter "><Twitter /></i></a>
-                    <a href="https://instagram.com" className="instagram me-3"><i className="fab fa-instagram"></i><Instagram /></a>
-                    <a href="https://youtube.com" className="youtube me-3"><i className="fab fa-youtube"><Youtube /></i></a>
+                  <div className="social-icon">
+                    <a
+                      href="https://twitter.com"
+                      className="twitter me-3 tfiy-icons "
+                    >
+                      <i className="fab fa-twitter ">
+                        <Twitter />
+                      </i>
+                    </a>
+                    <a
+                      href="https://instagram.com"
+                      className="instagram me-3 tfiy-icons"
+                    >
+                      <i className="fab fa-instagram"></i>
+                      <Instagram />
+                    </a>
+                    <a
+                      href="https://youtube.com"
+                      className="youtube me-3 tfiy-icons"
+                    >
+                      <i className="fab fa-youtube">
+                        <Youtube />
+                      </i>
+                    </a>
                   </div>
                 </div>
                 {/* <div className="container-fluid">
