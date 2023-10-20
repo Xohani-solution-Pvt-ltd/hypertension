@@ -673,7 +673,7 @@ const BloodTest = ({ submit, preview }) => {
 
                       <Field type="string" id="coronaryArteryDisease" name="coronaryArteryDisease" className="form-control" placeholder="CoronaryArteryDisease" onChange={(e) => { setFieldValue('coronaryArteryDisease', e.target.value);
                        const newValue = e.target.value;
-                       calculateEjectInterpretation(newValue,ejectionFraction);
+                      //  calculateEjectInterpretation(newValue,ejectionFraction);
                         }}/>
                       <ErrorMessage name="coronaryArteryDisease" component="div" className="text-danger" />
                   </Col>
@@ -689,7 +689,7 @@ const BloodTest = ({ submit, preview }) => {
                         const newValue = e.target.value;
 
                         setFieldValue('ejectionFraction', e.target.value);
-                        calculateEjectInterpretation(newValue,coronaryArteryDisease);
+                        // calculateEjectInterpretation(newValue,coronaryArteryDisease);
                         }}/>
                       <ErrorMessage name="ejectionFraction" component="div" className="text-danger" />
                   </Col>
