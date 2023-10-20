@@ -9,9 +9,10 @@ const BloodTestSchema: Schema = new Schema({
     },
 
     hBA1CInterpretation: {
+            
         type: String,
-        required: true,
-        enum: ['Normal', 'Abnormal']
+        enum: ['Normal', 'Abnormal'],
+        required: true
     },
     totalCholesterol: {
         type: Number,
@@ -19,8 +20,8 @@ const BloodTestSchema: Schema = new Schema({
     },
     lipidInterpretation: {
         type: String,
-        required: true,
-        enum: ['Normal', 'Abnormal']
+        enum: ['Normal', 'Abnormal'],
+        required: true
     },
     hdlCholesterol: {
         type: Number,
@@ -29,8 +30,8 @@ const BloodTestSchema: Schema = new Schema({
 
     hdlInterpretation: {
         type: String,
-        required: true,
-        enum: ['Normal', 'Abnormal']
+        enum: ['Normal', 'Abnormal'],
+        required: true
     },
     ldlCholesterol: {
         type: Number,
@@ -38,8 +39,8 @@ const BloodTestSchema: Schema = new Schema({
     },
     ldlInterpretation: {
         type: String,
-        required: true,
-        enum: ['Normal', 'Abnormal']
+        enum: ['Normal', 'Abnormal'],
+        required: true
     },
     triglycerides: {
         type: Number,
@@ -47,8 +48,8 @@ const BloodTestSchema: Schema = new Schema({
     },
     triglyceridesInterpretation: {
         type: String,
-        required: true,
-        enum: ['Normal', 'Abnormal']
+        enum: ['Normal', 'Abnormal'],
+        required: true
     },
     albumin: {
         type: Number,
@@ -80,8 +81,8 @@ const BloodTestSchema: Schema = new Schema({
     },
     kidneyInterpretation: {
         type: String,
-        required: true,
-        enum: ['Normal', 'Abnormal']
+        enum: ['Normal', 'Abnormal'],
+        required: true
     },
     tshLevel: {
         type: Number,
@@ -89,22 +90,22 @@ const BloodTestSchema: Schema = new Schema({
     },
     tshInterpretation: {
         type: String,
-        required: true,
-        enum: ['Normal', 'Abnormal']
+        enum: ['High', 'Normal', 'Low'],
+        required: true
     },
     renalArteryDoppler: {
         type: String,
-        enum: ['None', 'Normal', 'Abnormal']
+        enum: ['Normal', 'Abnormal']
     },
     coronaryArteryDisease: {
         type: String,
-        enum: ['None', 'Present', 'Absent']
+        enum: ['Present', 'Absent']
     },
     ejectionFraction: {
         type: Number,
         required: true
     },
-    ejectInterpretation: {
+    ejectionInterpretation: {
         type: String,
         required: true
     },

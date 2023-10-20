@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Container, Row, Col, Form } from 'react-bootstrap';
 
 
-const DecideContraindication = () => {
+const DecideContraindication = ({submit,preview}) => {
   const [contraindication, setContraindication] = useState(null);
 
   useEffect(() => {
@@ -48,7 +48,19 @@ const DecideContraindication = () => {
     fetchData();
   }, []);
 
-  return <div>{contraindication}</div>;
+  return (<div>{contraindication}
+  
+  <div className="text-end mt-4">
+    <button type="button" className="btn btn-primary display-4" onClick={() => preview("comorbidities")}
+     >Preview</button>
+      </div>
+    <div className="text-end mt-4">
+    <button type="submit" className="btn btn-primary display-4" onClick={() => submit("comorbidities")}
+     >Submit</button>
+      </div>
+  
+  
+  </div>)
 };
 
 

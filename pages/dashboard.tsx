@@ -13,8 +13,7 @@ import Symptoms from "../components/diagnosis/Symptoms";
 import BloodTest from "../components/diagnosis/BloodTest";
 import RiskStratification from "../components/diagnosis/RiskStratification";
 import TreatmentModality from "../components/diagnosis/TreatmentModality";
-import DecideContraindication from "../components/diagnosis/DecideContraindication";
-import NoContraindication from "../components/diagnosis/NoContraindication";
+import Contraindication from "../components/diagnosis/Contraindication";
 import { LoginFormInterface, initialLoginValues } from "../interfaces/login";
 import * as Yup from 'yup';
 import { getCookie } from 'cookies-next';
@@ -76,13 +75,13 @@ const Dashboard = () => {
                   <BloodTest submit={handleButtonClick} preview={handlePreButtonClick} />
                 </Tab>
                 <Tab eventKey="stratification" title="Risk Stratification" disabled={!diagnosisId}>
-                  <RiskStratification />
+                  <RiskStratification  submit={handleButtonClick} preview={handlePreButtonClick}/>
                 </Tab>
                 <Tab eventKey="contraindications" title="Contraindications" disabled={!diagnosisId}>
-                  <DecideContraindication />
+                  <Contraindication submit={handleButtonClick} preview={handlePreButtonClick}/>
                 </Tab>
                 <Tab eventKey="treatment" title="Treatment" disabled={!diagnosisId}>
-                  <TreatmentModality />
+                  <TreatmentModality preview={handlePreButtonClick}/>
                 </Tab>
               </Tabs>
             </Row>
