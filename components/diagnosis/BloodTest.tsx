@@ -104,16 +104,17 @@ const BloodTest = ({ submit, preview }) => {
   //   }
   // };
 
-  
-  const calculateEjectInterpretation = async (coronaryArteryDisease,ejectionFraction) => {
-     
+  const calculateEjectInterpretation = async (
+    coronaryArteryDisease,
+    ejectionFraction
+  ) => {
     if (coronaryArteryDisease === "Present") {
       if (ejectionFraction < 40) {
         setEjectInterpretation("HfrEF – EF <40%");
       } else {
         setEjectInterpretation("CAD - EF >40% + CAD present");
       }
-    } else if(coronaryArteryDisease === "Absent") {
+    } else if (coronaryArteryDisease === "Absent") {
       if (ejectionFraction < 40) {
         setEjectInterpretation("HfrEF – EF <40%");
       } else if (ejectionFraction >= 40 && ejectionFraction <= 60) {
@@ -122,8 +123,8 @@ const BloodTest = ({ submit, preview }) => {
         setEjectInterpretation("Normal – EF >60% + CAD absent");
       }
     }
-  }
-  
+  };
+
   const handleSubmit = async (values: BloodTestInterface) => {
     const [data, err] = await submitBloodTestAPI(values);
     if (data) {
@@ -670,12 +671,26 @@ const BloodTest = ({ submit, preview }) => {
                     2D Echocardiography
                   </h4>
                   <Col md={3} className="align-left p-2">
-
-                      <Field type="string" id="coronaryArteryDisease" name="coronaryArteryDisease" className="form-control" placeholder="CoronaryArteryDisease" onChange={(e) => { setFieldValue('coronaryArteryDisease', e.target.value);
-                       const newValue = e.target.value;
-                      //  calculateEjectInterpretation(newValue,ejectionFraction);
-                        }}/>
-                      <ErrorMessage name="coronaryArteryDisease" component="div" className="text-danger" />
+                    <label htmlFor="coronaryArteryDisease">
+                      Coronary Artery Disease
+                    </label>
+                    <Field
+                      type="string"
+                      id="coronaryArteryDisease"
+                      name="coronaryArteryDisease"
+                      className="form-control"
+                      placeholder="CoronaryArteryDisease"
+                      onChange={(e) => {
+                        setFieldValue("coronaryArteryDisease", e.target.value);
+                        const newValue = e.target.value;
+                        //  calculateEjectInterpretation(newValue,ejectionFraction);
+                      }}
+                    />
+                    <ErrorMessage
+                      name="coronaryArteryDisease"
+                      component="div"
+                      className="text-danger"
+                    />
                   </Col>
                   <Col md={3} className="align-left p-2">
                     <label htmlFor="ejectionFraction">Ejection Fraction</label>
@@ -688,10 +703,15 @@ const BloodTest = ({ submit, preview }) => {
                       onChange={(e) => {
                         const newValue = e.target.value;
 
-                        setFieldValue('ejectionFraction', e.target.value);
+                        setFieldValue("ejectionFraction", e.target.value);
                         // calculateEjectInterpretation(newValue,coronaryArteryDisease);
-                        }}/>
-                      <ErrorMessage name="ejectionFraction" component="div" className="text-danger" />
+                      }}
+                    />
+                    <ErrorMessage
+                      name="ejectionFraction"
+                      component="div"
+                      className="text-danger"
+                    />
                   </Col>
                   <h1>{ejectInterpretation}</h1>
                 </Row>
