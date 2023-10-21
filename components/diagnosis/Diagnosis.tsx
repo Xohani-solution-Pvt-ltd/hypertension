@@ -133,6 +133,7 @@ const Diagnosis = ({submit}) => {
                         <ErrorMessage name="pulseRate" component="div" className="text-danger" />
                       </div>
                       <div className="text-end mt-4">
+                      <label>If No Any Diagnosis Click On Submit Button</label>
                         <button type="submit" className="btn btn-primary display-4" onClick={() => submit("comorbidities")}
                         disabled={!atLeastOneCheckboxChecked} >Submit</button>
                       </div>

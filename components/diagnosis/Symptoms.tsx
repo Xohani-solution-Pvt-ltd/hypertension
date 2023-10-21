@@ -121,13 +121,12 @@ const Symptoms = ({submit,preview}) => {
                         <ErrorMessage name="legSwelling" component="div" className="text-danger" />
                       </div>
                       <div className="text-left mt-4">
-                        <button type="button" className="btn btn-primary display-4" onClick={() => preview("comorbidities")} 
-                               >Preview</button>
-                      </div>
-                      <div className="text-end mt-4">
                       <label>If No Any symptoms Click On Submit Button</label>
-                      
-                        <button type="submit" className="btn btn-primary display-4" onClick={() => submit("bloodTest")} >Submit</button>
+                      </div>
+                      <div className=" mt-4">
+                      <button type="button" className="text-start btn btn-primary display-4" onClick={() => preview("comorbidities")} 
+                               >Preview</button>
+                        <button type="submit" className="text-end btn btn-primary display-4" onClick={() => submit("bloodTest")} >Submit</button>
                       </div>
                     </Form>
                   )

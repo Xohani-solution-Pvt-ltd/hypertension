@@ -51,13 +51,13 @@ const IndexPage = () => {
                   </div>
                   <div className="align-left mbr-section-btn ">
                     <Button
-                      className="btn btn-md btn-primary display-4 "
+                      className="btn btn-md btn-primary "
                       href="https://hypertension.co"
                     >
                       VIEW MORE
                     </Button>
                     <Button
-                      className="btn btn-md btn-primary display-4"
+                      className="btn btn-md btn-primary"
                       href="https://hypertension.co"
                     >
                       BOOK NOW

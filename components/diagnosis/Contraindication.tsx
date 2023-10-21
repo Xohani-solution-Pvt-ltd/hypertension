@@ -91,17 +91,17 @@ const Contraindication = ({submit,preview}) => {
     setContraindication3(RiskThreeLevel)
   };
 
-  return (<div>
+  return (
+  <div>
     {contraindication1}<br></br>
     {contraindication2}<br></br>
     {contraindication3}
-  
-  <div className="text-end mt-4">
-    <button type="button" className="btn btn-primary display-4" onClick={() => preview("stratification")}
-     >Preview</button>
+  <div className="mt-4">
       </div>
-    <div className="text-end mt-4">
-    <button type="submit" className="btn btn-primary display-4" onClick={() => submit("treatment")}
+    <div className="mt-4">
+    <button type="button" className="text-start btn btn-primary display-4" onClick={() => preview("stratification")}
+     >Preview</button>
+    <button type="submit" className="float-end btn btn-primary display-4" onClick={() => submit("treatment")}
      >Submit</button>
       </div>
   </div>)

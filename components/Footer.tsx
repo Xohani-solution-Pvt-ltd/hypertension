@@ -197,12 +197,12 @@ export default function Footer() {
             </div>
           </Col>
           <div className="footer">
-            <Container className="d-flex justify-content-center w-100" fluid>
+            <Container className="d-flex justify-content-center" fluid>
               <span
                 className="text-align-center mt-3"
-                style={{ paddingBottom: "13px", color: "white" }}
+                style={{ paddingBottom: "10px", color: "white" }}
               >
-                <h3 style={{ fontSize: "20px" }}>
+                <h3 style={{ fontSize: "22px" }}>
                   {" "}
                   © 2023 Hypertension All Rights Reserved.
                 </h3>

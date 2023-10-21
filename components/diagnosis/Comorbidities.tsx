@@ -127,6 +127,7 @@ const Comorbidities = ({submit,preview}) => {
                         </label>
                         <ErrorMessage name="pregnancy" component="div" className="text-danger" />
                       </div>
+                      <label className='mt-4'>If No Any Comorbidities Click On Submit Button</label>
                       <div className="mt-4">
                       <button type="button" className="text-start btn btn-primary display-4" onClick={() => preview("diagnosis")} 
                                >Preview</button>

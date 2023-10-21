@@ -53,7 +53,7 @@ body {
 }
 
 .btn {
-  padding: 1rem 3rem;
+  padding: 0.1s 1rem 3rem;
   border-radius: 3px;
 }
 
@@ -2535,4 +2535,15 @@ pre {
   height: 1040px;
   width: autofill;
   background-color: white;
+} */
+.align_check{
+  padding-left:15rem;
+}
+/* .check_btn{
+  max-width:3rem;
+  max-height:2rem;
+
+} */
+/* .label_bloodtext{
+  padding:;
 } */

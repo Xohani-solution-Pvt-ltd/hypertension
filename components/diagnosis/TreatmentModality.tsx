@@ -1,7 +1,6 @@
-
-
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Container, Table } from "react-bootstrap";
 
 const RiskStratification = ({preview}) => {
   const [results, setResults] = useState('prescriptions');
@@ -62,10 +61,6 @@ const RiskStratification = ({preview}) => {
         const symptomsData = data.data.symptomsData;
      console.log("data",symptomsData)
 
-
-
-
-
         setCriteria({
           'cva': comorbiditiesData.cva===false,
           'coronaryArteryDisease':comorbiditiesData.coronaryArteryDisease===false,
@@ -112,18 +107,120 @@ const RiskStratification = ({preview}) => {
   };
 
   return (
-    <div>
+    <div className="text-center pt-5">
       <h1>High Risk Checker</h1>
-      {/* Implement input fields for criteria here */}
       <button onClick={checkRisk}>Check Risk</button>
       <p>{results}</p>
-
-
+      <Container className="m-5" fluid>
+      <Table striped bordered hover style={{width:'90%',maxHeight:'auto'}}>
+      <thead>
+        <tr>
+          <th>Class</th>
+          <th>Name</th>
+          <th>intial Dose
+             (first visit)</th>
+          <th colSpan={1}></th>
+          <th>1st uptitration
+            (follow up)</th>
+          <th colSpan={1}></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>Dose</td>
+          <td>Frequency</td>
+          <td>Dose</td>
+          <td>Frequency</td>
+        </tr>
+        <tr>
+          <td>A1</td>
+          <td>Ramipril</td>
+          <td>5 mg</td>
+          <td>Once a day</td>
+          <td>5 mg</td>
+          <td>Twice a day</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+      </Table>
+      </Container>
       <div className="text-end mt-4">
     <button type="button" className="btn btn-primary display-4" onClick={() => preview("contraindications")}
      >Preview</button>
       </div>
-   
     </div>
   );
 };

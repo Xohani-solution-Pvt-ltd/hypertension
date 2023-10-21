@@ -81,13 +81,13 @@ const validationSchema = Yup.object({
   ejectionFraction: Yup.number()
     .min(20, "Ejection must be at least 20")
     .max(80, "Ejection must not exceed 80"),
-  coronaryArteryDisease : Yup.string()
+  coronaryArteryDisease: Yup.string()
 });
 
 const BloodTest = ({ submit, preview }) => {
   const router = useRouter();
   const [processing, setProcessing] = useState(false);
-  const [bloodTestId, setBloodTestId] = useState(undefined); 
+  const [bloodTestId, setBloodTestId] = useState(undefined);
   const handleSubmit = async (values: BloodTestInterface) => {
     const [data, err] = await submitBloodTestAPI(values);
     if (data) {
@@ -110,7 +110,7 @@ const BloodTest = ({ submit, preview }) => {
       <Row className="media-container-row m-4">
         <h4 className="card-title align-left py-2 mbr-bold mbr-fonts-style mbr-text align-center display-7">Blood Test</h4>
         <Formik initialValues={intialBloodTestValue} validationSchema={validationSchema} onSubmit={handleSubmit} enableReinitialize={true}>
-          {({ setFieldValue}) => {
+          {({ setFieldValue }) => {
             useEffect(() => {
               const fetchBloodDetailData = async () => {
                 const [data, err] = await getBloodTestAPI(bloodTestId);
@@ -232,7 +232,7 @@ const BloodTest = ({ submit, preview }) => {
                   <h4 className="mbr-fonts-style mbr-text display-4 mbr-bold">
                     Lipid
                   </h4>
-                  <Col md={6} className="align-left p-2">
+                  <Col xs={12} lg={4} sm={6} className="align-left p-2">
                     <label htmlFor="totalCholesterol">Total Cholesterol</label>
                     <Field
                       type="number"
@@ -250,7 +250,7 @@ const BloodTest = ({ submit, preview }) => {
                       className="text-danger"
                     />
                   </Col>
-                  <Col md={6} className="align-left p-2">
+                  <Col xs={12} lg={4} sm={6} className="align-left p-2">
                     <label htmlFor="lipidInterpretation">
                       Lipid Interpretation
                     </label>
@@ -273,7 +273,7 @@ const BloodTest = ({ submit, preview }) => {
                       className="text-danger"
                     />
                   </Col>
-                  <Col md={6} className="align-left p-2">
+                  <Col xs={12} lg={4} sm={6} className="align-left p-2">
                     <label htmlFor="hdlCholesterol">HDL Cholesterol</label>
                     <Field
                       type="number"
@@ -291,7 +291,7 @@ const BloodTest = ({ submit, preview }) => {
                       className="text-danger"
                     />
                   </Col>
-                  <Col md={6} className="align-left p-2">
+                  <Col xs={12} lg={4} sm={6} className="align-left p-2">
                     <label htmlFor="hdlInterpretation">
                       HDL Interpretation
                     </label>
@@ -314,7 +314,7 @@ const BloodTest = ({ submit, preview }) => {
                       className="text-danger"
                     />
                   </Col>
-                  <Col md={6} className="align-left p-2">
+                  <Col xs={12} lg={4} sm={6} className="align-left p-2">
                     <label htmlFor="ldlCholesterol">LDL Cholesterol</label>
                     <Field
                       type="number"
@@ -332,7 +332,7 @@ const BloodTest = ({ submit, preview }) => {
                       className="text-danger"
                     />
                   </Col>
-                  <Col md={6} className="align-left p-2">
+                  <Col xs={12} lg={4} sm={6} className="align-left p-2">
                     <label htmlFor="ldlInterpretation">
                       LDL Interpretation
                     </label>
@@ -355,7 +355,7 @@ const BloodTest = ({ submit, preview }) => {
                       className="text-danger"
                     />
                   </Col>
-                  <Col md={6} className="align-left p-2">
+                  <Col xs={12} lg={4} sm={6} className="align-left p-2">
                     <label htmlFor="triglycerides">Triglycerides</label>
                     <Field
                       type="number"
@@ -373,7 +373,7 @@ const BloodTest = ({ submit, preview }) => {
                       className="text-danger"
                     />
                   </Col>
-                  <Col md={6} className="align-left p-2">
+                  <Col xs={12} lg={4} sm={6} className="align-left p-2">
                     <label htmlFor="triglyceridesInterpretation">
                       Triglycerides Interpretation
                     </label>
@@ -660,23 +660,23 @@ const BloodTest = ({ submit, preview }) => {
                         const newValue = e.target.value;
 
                         setFieldValue('ejectionFraction', e.target.value);
-                        }}/>
-                      <ErrorMessage name="ejectionFraction" component="div" className="text-danger" />
+                      }} />
+                    <ErrorMessage name="ejectionFraction" component="div" className="text-danger" />
                   </Col>
                 </Row>
-                <div className="text-end mt-4">
+                <div className="me-3">
                   <button
                     type="button"
-                    className="btn btn-primary display-4"
+                    className="text-start btn btn-primary display-4"
                     onClick={() => preview("symptoms")}
                   >
                     Preview
                   </button>
-                </div>
-                <div className="text-end mt-4">
+                  <label className="mx-">If No Any bloodTest Click On Submit Button
+                  </label>
                   <button
                     type="submit"
-                    className="btn btn-primary display-4"
+                    className="float-end btn btn-primary display-4"
                     onClick={() => submit("stratification")}
                   >
                     Submit
