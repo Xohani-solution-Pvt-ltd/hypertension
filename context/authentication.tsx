@@ -12,7 +12,9 @@ import {
   createUserAPI,
   loginUserAPI,
   createProfileAPI,
+  profileAPIData,
 } from "../services/call";
+import { getCookie } from "cookies-next";
 
 const AuthContext = createContext(null);
 
@@ -28,6 +30,14 @@ const AuthState = (props) => {
     email: ""
   });
 
+  const [profileId,setProfileId]=useState(undefined);
+
+
+  useEffect(() => {
+    const id = getCookie("profileId");
+    setProfileId(id);
+  }, []);
+  
   useEffect(() => {
     if (isAuthenticated === false) {
       LogoutUser();
@@ -47,7 +57,7 @@ const AuthState = (props) => {
       setUserInfo(data?.data);
       setToken(data?.token);
       notify.success("Succesfully Login");
-      router.push("/dashboard");
+      profileId? router.push("/dashboard"): router.push("/createProfile");
       return null;
     } else if (err) {
       console.log(err?.message);
@@ -84,6 +94,7 @@ const AuthState = (props) => {
       return err;
     }
   };
+
 
   const VerifyUser = async () => {
     if (!getToken()) {

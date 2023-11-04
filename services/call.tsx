@@ -1,5 +1,5 @@
 import { api } from "./api";
-const { jwtGet, jwtPost, post, get} = api;
+const { jwtGet, jwtPost, post, get,put,jwtPut} = api;
 
 const getUserDetailsAPI = async () => {
   let err = null;
@@ -59,13 +59,26 @@ const createProfileAPI = async (body) => {
   let err = null;
   let data = null;
   try {
-    data = await post("/createProfile", body);
+    data = await jwtPost("/createProfile", body);
   } catch (e) {
     if (e?.response?.status === 400) {
       err = e?.json;
     }
   }
   return [data, err];
+};
+
+export const profileAPIData = async (id)=>{
+let err =null;
+let data =null;
+try {
+  data = await jwtGet(`/createProfile/${id}`);
+} catch (e) {
+  if(e?.response?.status===400){
+    err = e?.json;
+  }
+}
+return [data, err];
 };
 
 const forgotPassword = async (body) => {
@@ -81,32 +94,6 @@ const forgotPassword = async (body) => {
   return [data, err];
 };
 
-// const createAdminAPI = async (body) => {
-//   let err = null;
-//   let data = null;
-//   try {
-//     data = await post("/auth/admin", body);
-//   } catch (e) {
-//     if (e?.response?.status === 400) {
-//       err = e?.json;
-//     }
-//   }
-//   return [data, err];
-// };
-
-// const createUsers = async (body) => {
-//   let err = null;
-//   let data = null;
-//   try {
-//     data = await post("/auth/users", body);
-//     console.log("bodydata=",data)
-//   } catch (e) {
-//     if (e?.response?.status === 400) {
-//       err = e?.json;
-//     }
-//   }
-//   return [data, err];
-// };
 
 const getUsers = async (body) => {
   let err = null;
@@ -128,6 +115,19 @@ const submitDiagnosisAPI = async (body) => {
     data = await jwtPost("/diagnosis", body);
   } catch (e) {
     if (e?.response?.status === 400) {
+      err = e?.json;
+    }
+  }
+  return [data, err];
+};
+
+const updateDiagnosisAPI = async (id,body) => {
+  let err = null;
+  let data = null;
+  try {
+    data = await put(`/diagnosis/${id}`,body);
+  } catch (e) {
+    if (e.response?.status === 401) {
       err = e?.json;
     }
   }
@@ -172,6 +172,20 @@ export const getComorbiditiesDetailsAPI = async (id) => {
   }
   return [data, err];
 };
+
+export const updateComorbiditiesAPI =async (id , body )=>{
+  let err = null;
+  let data = null;
+  try {
+    data = await put(`/comorbidities/${id}`, body);
+  } catch (e) {
+    if(e.response?.status === 401){
+      err = e?.json;
+    }
+  }
+  return [data, err];
+}
+
 export const submitSymptomsMonitoringAPI = async (body) => {
   let err = null;
   let data = null;
@@ -189,7 +203,7 @@ export const getSymptomsMonitoringAPI = async (id) => {
   let err = null;
   let data = null;
   try {
-    data = await jwtGet(`/symptom/monitoring/${id}`);
+    data = await jwtGet(`/symptom/${id}`);
   } catch (e) {
     if (e.response?.status === 401) {
       err = e?.json;
@@ -197,6 +211,19 @@ export const getSymptomsMonitoringAPI = async (id) => {
   }
   return [data, err];
 };
+
+export const updateSymptomsAPI =async(id,body)=>{
+  let err= null;
+  let data = null;
+  try {
+    data = await put(`/symptom/${id}`,body);
+  } catch (e) {
+    if(e.response?.status===401){
+      err =e?.json;
+    }
+  }
+  return [ data ,err];
+}
 
 export const getBloodTestAPI = async (id)=>{
   let err = null;
@@ -210,8 +237,7 @@ export const getBloodTestAPI = async (id)=>{
   }
   return [data,err];
 }
-
-export const submitBloodTestAPI = async (body)=>{
+ const submitBloodTestAPI = async (body)=>{
   let err =null;
   let data =null;
   try {
@@ -224,6 +250,18 @@ export const submitBloodTestAPI = async (body)=>{
   return [data, err];
 };
 
+export const updateBloodTestAPI =async(id,body)=>{
+  let err= null;
+  let data = null;
+  try {
+    data = await put(`/blood/${id}`,body);
+  } catch (e) {
+    if(e.response?.status===401){
+      err =e?.json;
+    }
+  }
+  return [ data ,err];
+}
 
 
-export { getUserDetailsAPI, createUserAPI,createProfileAPI, loginUserAPI ,changeUserPassword,forgotPassword, getUsers, submitDiagnosisAPI,};
+export { getUserDetailsAPI, createUserAPI,createProfileAPI, loginUserAPI ,changeUserPassword,forgotPassword, getUsers, submitDiagnosisAPI,updateDiagnosisAPI ,submitBloodTestAPI};
