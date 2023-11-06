@@ -13,11 +13,10 @@ import Symptoms from "../components/diagnosis/Symptoms";
 import BloodTest from "../components/diagnosis/BloodTest";
 import RiskStratification from "../components/diagnosis/RiskStratification";
 import TreatmentModality from "../components/diagnosis/TreatmentModality";
-import Contraindication from "../components/diagnosis/Contraindication";
-import { LoginFormInterface, initialLoginValues } from "../interfaces/login";
 import * as Yup from 'yup';
 import { getCookie } from 'cookies-next';
 import Link from "next/link";
+import DecideContraindication from "../components/diagnosis/DecideContraindication";
 
 const validationSchema = Yup.object({
   email: Yup.string().email('Invalid email address').required('Email is Required'),
@@ -41,7 +40,6 @@ const Dashboard = () => {
   };
 
   const handleButtonClick = (submit) => {
-    // Call the onSubmitLogic function with the necessary data
     setActiveTab(submit)
   };
   const handlePreButtonClick = (preview) => {
@@ -54,6 +52,7 @@ const Dashboard = () => {
     <Layout title={`Login | ${TITLE}`}>
       <section className="features1 cid-rGtBGu0BpJ" id="features5-11">
         <Container className="d-flex justify-content-center" fluid>
+        {/* <Container className="d-flex justify-content-center" > */}
             <Row className="justify-content-center pt-5">
               <Tabs
                 activeKey={activeTab}
@@ -77,8 +76,8 @@ const Dashboard = () => {
                 <Tab eventKey="stratification" title="Risk Stratification" disabled={!diagnosisId}>
                   <RiskStratification  submit={handleButtonClick} preview={handlePreButtonClick}/>
                 </Tab>
-                <Tab eventKey="contraindications" title="Contraindications" disabled={!diagnosisId}>
-                  <Contraindication submit={handleButtonClick} preview={handlePreButtonClick}/>
+                <Tab eventKey="decideContraindication" title="Decide Contraindication" disabled={!diagnosisId}>
+                  <DecideContraindication submit={handleButtonClick} preview={handlePreButtonClick}/>
                 </Tab>
                 <Tab eventKey="treatment" title="Treatment" disabled={!diagnosisId}>
                   <TreatmentModality preview={handlePreButtonClick}/>

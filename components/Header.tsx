@@ -23,11 +23,6 @@ export default function Header() {
     router.push('/home');
   };
 
-  const handleLogout = () => {
-    router.push('/home');
-  };
-
-
 
   return (
     <section className="menu cid-rGtBGu0BpJ" id="menu1-1a">
@@ -60,6 +55,7 @@ export default function Header() {
               <Nav.Link href="/" className="mouse-hover">Home</Nav.Link>
               <Nav.Link href="/about" className="mouse-hover">About</Nav.Link>
               <Nav.Link href="/contact" className="mouse-hover">Contact</Nav.Link>
+              <Nav.Link href="/">Home</Nav.Link>
               {(isAuthenticated) ? <>
                 <Nav.Link href="/users" className="nav-link mouse-hover">
                   Dashboard

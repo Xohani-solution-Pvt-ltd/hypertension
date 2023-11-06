@@ -1,19 +1,14 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-import AccusureImg from "../../assets/images/accusure.jpeg";
-import Link from 'next/link';
 import { Container, Row, Col, Button, Nav, Tab, Card } from 'react-bootstrap';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { DiagnosisInterface, initialDiagnosisValues } from '../../interfaces/diagnosis';
-import { submitSymptomsMonitoringAPI, getSymptomsMonitoringAPI } from '../../services/call';
+import { submitSymptomsMonitoringAPI, getSymptomsMonitoringAPI, updateSymptomsAPI } from '../../services/call';
 import { getCookie } from 'cookies-next';
 import notify from "../../helpers/notify";
 import { SymptomsInterface, initialSymptomsValue } from '../../interfaces/symptoms';
 
 const validationSchema = Yup.object({
-  userid : Yup.string(),
+  userid: Yup.string(),
   previousHeartAttacks: Yup.boolean(),
   breathlessness: Yup.boolean(),
   minorNYHA: Yup.boolean(),
@@ -21,28 +16,91 @@ const validationSchema = Yup.object({
   legSwelling: Yup.boolean(),
 });
 
-const Symptoms = ({submit,preview}) => {
-  const router = useRouter();
-  const [processing, setProcessing] = useState(false);
-  const [diagnosisId, setDiagnosisId] = useState(undefined);
+const Symptoms = ({ submit, preview }) => {
+  const [symptomsId, setSymptomsId] = useState(undefined);
+  const [symptomsData, setSymptomsData] = useState(initialSymptomsValue);
+  const [previousHeartAttacksData, setPreviousHeartAttacksData] = useState(false);
+  const [breathlessnessData, setBreathlessnessData] = useState(false);
+  const [legSwellingData, setLegSwellingData] = useState(false);
+  const [minorNYHAData, setMinorNYHA] = useState(false);
+  const [majorNYHAData, setMajorNYHA] = useState(false);
+  const [editing, setEditing] = useState(false);
 
-  const handleSubmit = async (values: SymptomsInterface) => {
-  
-    const [data, err] = await submitSymptomsMonitoringAPI(values);
+  const handleSubmit = async () => {
+
+    const InputData: SymptomsInterface =
+      {
+        previousHeartAttacks: previousHeartAttacksData,
+        breathlessness: breathlessnessData,
+        legSwelling: legSwellingData,
+        minorNYHA: minorNYHAData,
+        majorNYHA: majorNYHAData
+      };
+    if (previousHeartAttacksData || breathlessnessData || legSwellingData || minorNYHAData || majorNYHAData) {
+
+      if (editing) {
+        if (symptomsId) {
+          const [data, err] = await updateSymptomsAPI(symptomsId, InputData)
+          if (data) {
+            notify.success("Successfully updated Symptoms");
+          }
+        } else {
+          notify.error("Symptoms ID is missing. Cannot update.");
+        }
+      } else {
+        const [data, err] = await submitSymptomsMonitoringAPI(InputData);
+        if (data) {
+          setEditing(true);
+          setSymptomsId(data.id);
+          notify.success("successfully Added Symptoms")
+        } else {
+          notify.error("Not Added Symptoms")
+        }
+      }
+    } else {
+      const [data, err] = await submitSymptomsMonitoringAPI(InputData);
+        if (data) {
+          setEditing(true);
+          setSymptomsId(data.id);
+          notify.success("successfully Added Symptoms")
+        } else {
+          notify.error("Not Added Symptoms")
+        }
+    }
+  }
+
+  const fetchSymptomsDataDetails = async (id) => {
+    const [data, err] = await getSymptomsMonitoringAPI(id);
+    console.log("data=", data)
+
     if (data) {
-      notify.success("Succesfully Symptoms");
+      setSymptomsData(data.data);
     }
     if (err) {
-      setTimeout(() => {
-        setProcessing(false);
-        notify.error(err?.message);
-      }, 1000);
+      notify.error(err?.message);
     }
-  };
+  }
+
   useEffect(() => {
-    const id = getCookie('diagnosisId')
-    setDiagnosisId(id)
-  }, [1]);
+    const id = getCookie('symptomsId')
+    console.log("data of symptoms", id)
+    setSymptomsId(id)
+    if (id) {
+      setEditing(true);
+      fetchSymptomsDataDetails(id);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (symptomsData != undefined) {
+      console.log("dataof symptoms", symptomsData)
+      setPreviousHeartAttacksData(symptomsData.previousHeartAttacks);
+      setBreathlessnessData(symptomsData.breathlessness);
+      setLegSwellingData(symptomsData.legSwelling);
+      setMajorNYHA(symptomsData.majorNYHA);
+      setMinorNYHA(symptomsData.minorNYHA);
+    }
+  }, [symptomsData]);
 
   return (
     <>
@@ -52,82 +110,66 @@ const Symptoms = ({submit,preview}) => {
           <Row className="media-container-row">
             <Col md={1} className="align-left"></Col>
             <Col md={6} className="align-left">
-              <Formik initialValues={initialSymptomsValue} validationSchema={validationSchema} onSubmit={handleSubmit} enableReinitialize={true}>
+              <Formik initialValues={symptomsData} validationSchema={validationSchema} onSubmit={handleSubmit} enableReinitialize={true}>
                 {({ setFieldValue }) => {
-                  useEffect(() => {
-                    const fetchDiagnosisDetailData = async () => {
-                      const [data, err] = await getSymptomsMonitoringAPI(diagnosisId);
-                      if (data) {
-                        const { previousHeartAttacks, breathlessness, minorNYHA ,majorNYHA, legSwelling} = data.data
-                        setFieldValue('previousHeartAttacks', previousHeartAttacks);
-                        setFieldValue('breathlessness', breathlessness);
-                        setFieldValue('minorNYHA', minorNYHA);
-                        setFieldValue('majorNYHA', majorNYHA);
-                        setFieldValue('legSwelling', legSwelling);
-                      }
-                      if (err) {
-                        setTimeout(() => {
-                          setProcessing(false);
-                          notify.error(err?.message);
-                        }, 1000);
-                      }
-                    }
-                    if (diagnosisId) {
-                      setFieldValue('diagnosisid', diagnosisId);
-                      fetchDiagnosisDetailData();
-                    }
-                  }, [diagnosisId]);
-
                   return (
                     <Form>
                       <div className="p-2">
                         <label>
-                          <Field type="checkbox" id="previousHeartAttacks" name="previousHeartAttacks" className="me-4" onChange={(e) => { setFieldValue('previousHeartAttacks', e.target.checked);
-                           }}/>
+                          <Field type="checkbox" id="previousHeartAttacks" name="previousHeartAttacks" className="me-4" onChange={(e) => {
+                            setFieldValue('previousHeartAttacks', e.target.checked);
+                            setPreviousHeartAttacksData(e.target.checked);
+                          }} />
                           History of chest pain on walking / exertion ?
                         </label>
                         <ErrorMessage name="previousHeartAttacks" component="div" className="text-danger" />
                       </div>
                       <div className="p-2">
                         <label>
-                          <Field type="checkbox" id="breathlessness" name="breathlessness" className="me-4" onChange={(e) => { setFieldValue('breathlessness', e.target.checked);
-                          }}/>
+                          <Field type="checkbox" id="breathlessness" name="breathlessness" className="me-4" onChange={(e) => {
+                            setFieldValue('breathlessness', e.target.checked);
+                            setBreathlessnessData(e.target.checked);
+                          }} />
                           Breathlessness
                         </label>
                         <ErrorMessage name="breathlessness" component="div" className="text-danger" />
                       </div>
                       <div className="p-2">
                         <label>
-                          <Field type="checkbox" id="minorNYHA" name="minorNYHA" className="me-4" onChange={(e) => { setFieldValue('minorNYHA', e.target.checked);
-                           }}/>
+                          <Field type="checkbox" id="minorNYHA" name="minorNYHA" className="me-4" onChange={(e) => {
+                            setFieldValue('minorNYHA', e.target.checked);
+                            setMinorNYHA(e.target.checked);
+                          }} />
                           Minor NYHA
                         </label>
                         <ErrorMessage name="minorNYHA" component="div" className="text-danger" />
                       </div>
                       <div className="p-2">
                         <label>
-                          <Field type="checkbox" id="majorNYHA" name="majorNYHA" className="me-4" onChange={(e) => { setFieldValue('majorNYHA', e.target.checked);
-                           }}/>
+                          <Field type="checkbox" id="majorNYHA" name="majorNYHA" className="me-4" onChange={(e) => {
+                            setFieldValue('majorNYHA', e.target.checked);
+                            setMajorNYHA(e.target.checked);
+                          }} />
                           Major NYHA
                         </label>
                         <ErrorMessage name="majorNYHA" component="div" className="text-danger" />
                       </div>
                       <div className="p-2">
                         <label>
-                          <Field type="checkbox" id="legSwelling" name="legSwelling" className="me-4" onChange={(e) => { setFieldValue('legSwelling', e.target.checked);
-                          }}/>
+                          <Field type="checkbox" id="legSwelling" name="legSwelling" className="me-4" onChange={(e) => {
+                            setFieldValue('legSwelling', e.target.checked);
+                            setLegSwellingData(e.target.checked);
+                          }} />
                           Leg swelling
                         </label>
                         <ErrorMessage name="legSwelling" component="div" className="text-danger" />
                       </div>
                       <div className="text-left mt-4">
-                        <button type="button" className="btn btn-primary display-4" onClick={() => preview("comorbidities")} 
-                               >Preview</button>
+                        <button type="button" className="btn btn-primary display-4" onClick={() => preview("comorbidities")}
+                        >Back</button>
                       </div>
                       <div className="text-end mt-4">
-                      <label>If No Any symptoms Click On Submit Button</label>
-                      
-                        <button type="submit" className="btn btn-primary display-4" onClick={() => submit("bloodTest")} >Submit</button>
+                        <button type="submit" className="btn btn-primary display-4" onClick={() => submit("bloodTest")} >{editing ? "Edit" : "Next"}</button>
                       </div>
                     </Form>
                   )
@@ -145,3 +187,17 @@ const Symptoms = ({submit,preview}) => {
   );
 };
 export default Symptoms;
+
+
+
+
+
+
+
+
+
+
+
+
+
+

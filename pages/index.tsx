@@ -6,15 +6,12 @@ import { AuthContext } from "../context/authentication";
 import { APP_INFO } from "../environments/index";
 import Image from "next/image";
 import artboardImg from "../assets/images/Artboard.svg";
+
 const IndexPage = () => {
   const { isAuthenticated, userInfo } = useContext(AuthContext);
-  const [step, setStep] = useState(1);
   const { TITLE } = APP_INFO;
   const router = useRouter();
-  const navigateToStep = (step: number) => {
-    setStep(step);
-  };
-  useEffect(() => {}, [1]);
+
 
   return (
     <Layout title={`Dashboard | ${TITLE}`}>
