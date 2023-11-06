@@ -5,6 +5,7 @@ import UserModel from "../../../models/user.model";
 import BloodTestModel from "../../../models/bloodtest.model";
 import ComorbiditiesModel from "../../../models/comorbidities.model";
 import SymptomModel from "../../../models/symptom.model";
+import ProfileModel from "../../../models/createProfile.model";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
@@ -19,7 +20,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         symptomsData,
         bloodTestData,
       ] = await Promise.all([
-        UserModel.findOne({userId : id}),
+        ProfileModel.findOne({userId : id}),
         DiagnosisModel.findOne({diagnosisId : id}),
         ComorbiditiesModel.findOne({comorbiditiesId:id}),
         SymptomModel.findOne({ symptomsId: id }),

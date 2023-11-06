@@ -22,11 +22,6 @@ export default function Header() {
     router.push('/home');
   };
 
-  const handleLogout = () => {
-    router.push('/home');
-  };
-
-
 
   return (
     <section className="menu cid-rGtBGu0BpJ" id="menu1-1a">
@@ -48,8 +43,6 @@ export default function Header() {
           <Navbar.Collapse id="basic-navbar-nav" className={toggle ? 'show' : 'd-flex justify-content-end'}>
             <Nav className="ml-auto">
               <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/about">About</Nav.Link>
-              <Nav.Link href="/contact">Contact</Nav.Link>
               {(isAuthenticated) ? <>
                 <Nav.Link href="/users" className="nav-link">
                   Dashboard
@@ -61,7 +54,6 @@ export default function Header() {
                   <Nav.Link href="/login" className="nav-link">
                     Login
                   </Nav.Link>
-                  <Nav.Link href="/login" className="nav-link" />
                   <>
                     <Nav.Link href="/signup" className="nav-link">
                       Signup
