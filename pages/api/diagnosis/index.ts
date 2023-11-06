@@ -43,22 +43,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         message: error.message,
       });
     }
-  }
-   else if (req.method === "GET") {
-    try {
-      const diagnosisData = await DiagnosisModel.find({});
-      res.status(200).json({
-        success: true,
-        message: "your data saved successfully",
-        data: diagnosisData
-      });
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: "Failed to retrieve Diagnosis"
-      });
-    }
-  } 
+
+   }
+   
+
   else {
     res.status(405).json({
       success: false,

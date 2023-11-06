@@ -52,119 +52,123 @@ export default function Footer() {
   };
 
   return (
-    <section className="bg-darkness">
-      <footer className="d-flex align-items-end w-full  container-lg">
-        <Container fluid>
-          <Row className="gap-15 px-6 py-8 md:gap-4">
-            <Col md={3} className="foot-res">
-              <Container>
-                <h4 className="mb-3 text-sm font-semibold text-secondary-300 uppercase">
-                  <Image
-                    src={LockPrimaryImg}
-                    className="cursor-pointer"
-                    width={30}
-                    height={30}
-                    alt="lock image"
-                  />
-                  Hypertension
-                </h4>
-                <div className="social-icon">
-                  <a
-                    href="https://twitter.com"
-                    className="twitter me-3 tfiy-icons "
-                  >
-                    <i className="fab fa-twitter ">
-                      <Twitter />
-                    </i>
-                  </a>
-                  <a
-                    href="https://instagram.com"
-                    className="instagram me-3 tfiy-icons"
-                  >
-                    <i className="fab fa-instagram"></i>
-                    <Instagram />
-                  </a>
-                  <a
-                    href="https://youtube.com"
-                    className="youtube me-3 tfiy-icons"
-                  >
-                    <i className="fab fa-youtube">
-                      <Youtube />
-                    </i>
-                  </a>
+    <section className="bg-darkness">  
+    <footer className="d-flex align-items-end w-full bg-light container-lg">
+      <Container fluid>
+        <Row className="gap-15 px-6 py-8 md:gap-4">
+          <Col md={3} className="foot-res">
+            <Container>
+              <h5 className="mb-3 text-sm font-semibold text-primary-300 uppercase">
+                <Image
+                  src={LockPrimaryImg}
+                  className="cursor-pointer"
+                  width={30}
+                  height={30}
+                  alt="lock image"
+                />
+                Hypertension
+                <div className="d-flex">
+                  <div className="social-icon">
+                    <a
+                      href="https://twitter.com"
+                      className="twitter me-3 tfiy-icons "
+                    >
+                      <i className="fab fa-twitter ">
+                        <Twitter />
+                      </i>
+                    </a>
+                    <a
+                      href="https://instagram.com"
+                      className="instagram me-3 tfiy-icons"
+                    >
+                      <i className="fab fa-instagram"></i>
+                      <Instagram />
+                    </a>
+                    <a
+                      href="https://youtube.com"
+                      className="youtube me-3 tfiy-icons"
+                    >
+                      <i className="fab fa-youtube">
+                        <Youtube />
+                      </i>
+                    </a>
+                  </div>
                 </div>
+              </h5>
+            </Container>
+          </Col>
+          <Col md={3} className="foot-res">
+            <h2 className="mb-3 text-sm font-semibold font-color">About</h2>
+            <div className="item-wrap">
+              <h6>
+                <i className="fab fa-key">
+                  <Key /> PO BOX Collins Street West
+                </i>
+              </h6>
+            </div>
+            <div className="item-wrap">
+              <h6>
+                <i className="fab fa-clock">
+                  <Clock /> +2342 5446 67
+                </i>
+              </h6>
+            </div>
+            <div className="item-wrap">
+              <h6>
+                <i className="fab fa-pinfill">Mon - Sun: 8AM - 8PM</i>
+              </h6>
+            </div>
+          </Col>
+          <Col md={3} className="foot-res">
+            <h2 className="mb-3 text-sm font-semibold font-color">Our Links</h2>
+            <ul
+              className="text-secondary-300"
+              style={{ listStyleType: "none" }}
+            >
+              <li className="mb-2">
+                <Link href="/about" className="link-color mouse-hover">
+                  About
+                </Link>
+              </li>
+              <li className="mb-2">
+                <Link href="#" className="link-color mouse-hover">
+                  Careers
+                </Link>
+              </li>
+              <li className="mb-2">
+                <Link href="#" className="link-color mouse-hover">
+                  Blog
+                </Link>
+              </li>
+            </ul>
+          </Col>
+          <Col md={3} className="flex justify-center items-center foot-res">
+            <div>
+              <div className="flex items-center">
+                <div className="max-w-[40px] sm:max-w-[70px]">
+                  <h2 className="mb-3 text-sm font-semibold font-color">
+                    Newsletter
+                  </h2>
+                  <div className="font-primary text-secondary-300 hover:underline">
+                    <span className="text-xs text-secondary-300">
+                      <div className="container">
+                        <Form>
+                          <Form.Group controlId="formEmail">
+                            <Form.Label>Email address</Form.Label>
+                            <Form.Control
+                              type="email"
+                              placeholder="Enter email"
+                              value={email}
+                              onChange={(e) => setEmail(e.target.value)}
+                            />
+                          </Form.Group>
+                          <Button variant="primary" onClick={handleSubscribe}>
+                            Subscribe
+                          </Button>
+                        </Form>
+                      </div>
+                    </span>
 
-              </Container>
-            </Col>
-            <Col md={3} className="foot-res">
-              <h2 className="mb-3 text-sm font-semibold font-color">About</h2>
-              {/* <div className="item-wrap">
-                <h6>
-                  <i className="fab fa-key">
-                    <Key /> PO BOX Collins Street West
-                  </i>
-                </h6>
-              </div>
-              <div className="item-wrap">
-                <h6>
-                  <i className="fab fa-clock">
-                    <Clock /> +2342 5446 67
-                  </i>
-                </h6>
-              </div>
-              <div className="item-wrap">
-                <h6>
-                  <i className="fab fa-pinfill">Mon - Sun: 8AM - 8PM</i>
-                </h6>
-              </div> */}
-            </Col>
-            <Col md={3} className="foot-res">
-              <h2 className="mb-3 text-sm font-semibold font-color">Our Links</h2>
-              {/* <ul className="text-secondary-300">
-                <li className="mb-2">
-                  <Link href="/about" style={{ color: "black" }}>
-                    About
-                  </Link>
-                </li>
-                <li className="mb-2">
-                  <Link href="#" style={{ color: "black" }}>
-                    Careers
-                  </Link>
-                </li>
-                <li className="mb-2">
-                  <Link href="#" style={{ color: "black" }}>
-                    Blog
-                  </Link>
-                </li>
-              </ul> */}
-            </Col>
-            <Col md={3} className="flex justify-center items-center foot-res">
-              <div>
-                <div className="flex items-center">
-                  <div className="max-w-[40px] sm:max-w-[70px]">
-                    <h2 className="mb-3 text-sm font-semibold font-color">
-                      Newsletter
-                    </h2>
-                    {/* <div className="font-primary text-secondary-300 hover:underline">
-                      <span className="text-xs text-secondary-300">
-                        <div className="container">
-                          <Form>
-                            <Form.Group controlId="formEmail">
-                              <Form.Label>Email address</Form.Label>
-                              <Form.Control
-                                type="email"
-                                placeholder="Enter email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                              />
-                            </Form.Group>
-                            <Button variant="primary" onClick={handleSubscribe}>
-                              Subscribe
-                            </Button>
-                          </Form>
-                        </div>
-                      </span>
-                    </div> */}
                   </div>
                 </div>
               </div>

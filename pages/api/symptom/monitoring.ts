@@ -33,7 +33,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const savedSymptoms = await newSymptoms.save();
       if(savedSymptoms)
       {
-        setCookie('symptomsId', savedSymptoms._id, { req, res });
+        setCookie('symptomsId', savedSymptoms._id, { req, res, maxAge: 60 * 60 * 24 });
       }
       res.status(201).json({
         success: true,
@@ -46,19 +46,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         message: error.message,
       });
     }
-    }else if(req.method === "GET"){
-      try {
-        const symptoms = await SymptomModel.findOne({diagnosisid : req.query.id });
-        res.status(200).json({
-          success: true,
-          message: "successfully",
-          data: symptoms
-        });
-      }catch(error){
-          res.status(500).json({ 
-            success: false,
-            message: "Failed to retrieve symptoms" });
-         }
     }else{
       res.status(405).json({ error: "Method not allowed" });
     }

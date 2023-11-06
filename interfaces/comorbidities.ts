@@ -12,5 +12,5 @@ export const initialComorbiditiesValues: ComorbiditiesInterface = {
   heartFailure: undefined,
   diabetes: undefined,
   pregnancy: undefined,
-  lungDisease : undefined,
+  lungDisease : undefined
 };

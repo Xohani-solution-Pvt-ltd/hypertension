@@ -2,12 +2,14 @@ import { models, model, Schema, SchemaTypes } from 'mongoose';
 
 const BloodTestSchema: Schema = new Schema({
     userid: { type: SchemaTypes.ObjectId, ref: "User", index: true,unique: true},
-    // diagnosisid: { type: SchemaTypes.ObjectId, ref: "Diagnosis" , index: true},
     hbA1cLevel: {
         type: Number,
         required: true
     },
-
+    normalHbA1cLevel:{
+        type : Number,
+        required : true
+    },
     hBA1CInterpretation: {
             
         type: String,
@@ -18,6 +20,10 @@ const BloodTestSchema: Schema = new Schema({
         type: Number,
         required: true
     },
+    normalTotalCholesterol:{
+        type : Number,
+        required : true
+    },
     lipidInterpretation: {
         type: String,
         enum: ['Normal', 'Abnormal'],
@@ -27,7 +33,10 @@ const BloodTestSchema: Schema = new Schema({
         type: Number,
         required: true
     },
-
+    normalHdlCholesterol:{
+        type : Number,
+        required : true
+    },
     hdlInterpretation: {
         type: String,
         enum: ['Normal', 'Abnormal'],
@@ -37,6 +46,10 @@ const BloodTestSchema: Schema = new Schema({
         type: Number,
         required: true
     },
+    normalLdlCholesterol:{
+        type : Number,
+        required : true
+    },
     ldlInterpretation: {
         type: String,
         enum: ['Normal', 'Abnormal'],
@@ -45,6 +58,10 @@ const BloodTestSchema: Schema = new Schema({
     triglycerides: {
         type: Number,
         required: true
+    },
+    normalTriglycerides:{
+        type : Number,
+        required : true
     },
     triglyceridesInterpretation: {
         type: String,
@@ -65,7 +82,7 @@ const BloodTestSchema: Schema = new Schema({
     },
     eGFRResult: {
         type: Number,
-        default: false
+        // default: false
     },
     sodium: {
         type: Number,
@@ -88,6 +105,10 @@ const BloodTestSchema: Schema = new Schema({
         type: Number,
         required: true
     },
+    normalTshLevel:{
+        type : Number,
+        required : true
+    },
     tshInterpretation: {
         type: String,
         enum: ['High', 'Normal', 'Low'],
@@ -107,7 +128,6 @@ const BloodTestSchema: Schema = new Schema({
     },
     ejectionInterpretation: {
         type: String,
-        required: true
     },
     createdAt: { type: Date, default: new Date() },
 });

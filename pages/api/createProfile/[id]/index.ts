@@ -7,10 +7,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   connectMongo()
 
   if(req.method === "GET"){
-    // Retrieve a user by ID
     const { id } = req.query;
     try {
-      const user = await ProfileModel.findById(req.query.id);
+      const user = await ProfileModel.findOne({profileId :req.query._id});
       if (!user) {
         res.status(404).json({
           success: false,

@@ -81,8 +81,6 @@ const Login = () => {
     }
   };
 
-
-
   return (
     <Layout title={`UserProfileCreation | ${TITLE}`}>
       <section className="d-flex justify-content-center">

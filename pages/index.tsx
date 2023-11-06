@@ -9,13 +9,8 @@ import artboardImg from "../assets/images/Artboard.svg";
 
 const IndexPage = () => {
   const { isAuthenticated, userInfo } = useContext(AuthContext);
-  const [step, setStep] = useState(1);
   const { TITLE } = APP_INFO;
   const router = useRouter();
-  const navigateToStep = (step: number) => {
-    setStep(step);
-  };
-  useEffect(() => {}, []);
 
   return (
     <Layout title={`Dashboard | ${TITLE}`}>
@@ -25,7 +20,7 @@ const IndexPage = () => {
         ) : (
           <section className="bg-white">
             <Container className="py-4">
-              <Row className="align-items-center body-content">
+              <Row className="align-items-center body-content justify-content-xs-start justify-content-sm-between">
                 <Col md={12} lg={5} className="content align-left py-4">
                   <h1 className="align-left pb-3 custom-font">
                     Hypertension Training School

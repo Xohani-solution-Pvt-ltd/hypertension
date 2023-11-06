@@ -13,11 +13,10 @@ import Symptoms from "../components/diagnosis/Symptoms";
 import BloodTest from "../components/diagnosis/BloodTest";
 import RiskStratification from "../components/diagnosis/RiskStratification";
 import TreatmentModality from "../components/diagnosis/TreatmentModality";
-import Contraindication from "../components/diagnosis/Contraindication";
-import { LoginFormInterface, initialLoginValues } from "../interfaces/login";
 import * as Yup from 'yup';
 import { getCookie } from 'cookies-next';
 import Link from "next/link";
+import DecideContraindication from "../components/diagnosis/DecideContraindication";
 
 
 
@@ -57,44 +56,40 @@ const Dashboard = () => {
     <Layout title={`Login | ${TITLE}`}>
       <section className="features1 cid-rGtBGu0BpJ" id="features5-11">
         <Container className="d-flex justify-content-center" fluid>
-          <Row className="justify-content-center pt-5">
-            <Tabs
-              activeKey={activeTab}
-              onSelect={handleTabChange}
-              id="justify-tab-example"
-              className="mb-3"
-              justify
-            >
-              <Tab eventKey="diagnosis" title="Diagnosis">
-                <Diagnosis submit={handleButtonClick} />
-              </Tab>
 
-              <Tab eventKey="comorbidities" title="Comorbidities" disabled={!diagnosisId}>
-                <Comorbidities submit={handleButtonClick} preview={handlePreButtonClick} />
-              </Tab>
-              
-              <Tab eventKey="symptoms" title="Symptoms Monitoring" disabled={!diagnosisId}>
-                <Symptoms submit={handleButtonClick} preview={handlePreButtonClick} />
-              </Tab>
+        {/* <Container className="d-flex justify-content-center" > */}
+            <Row className="justify-content-center pt-5">
+              <Tabs
+                activeKey={activeTab}
+                onSelect={handleTabChange}
+                id="justify-tab-example"
+                className="mb-3"
+                justify
+              >
+                <Tab eventKey="diagnosis" title="Diagnosis">
+                  <Diagnosis submit={handleButtonClick}  />
+                </Tab>
+                <Tab eventKey="comorbidities" title="Comorbidities" disabled={!diagnosisId}>
+                  <Comorbidities submit={handleButtonClick} preview={handlePreButtonClick} />
+                </Tab>
+                <Tab eventKey="symptoms" title="Symptoms Monitoring" disabled={!diagnosisId}>
+                  <Symptoms submit={handleButtonClick} preview={handlePreButtonClick}  />
+                </Tab>
+                <Tab eventKey="bloodTest" title="Blood Test" disabled={!diagnosisId}>
+                  <BloodTest submit={handleButtonClick} preview={handlePreButtonClick} />
+                </Tab>
+                <Tab eventKey="stratification" title="Risk Stratification" disabled={!diagnosisId}>
+                  <RiskStratification  submit={handleButtonClick} preview={handlePreButtonClick}/>
+                </Tab>
+                <Tab eventKey="decideContraindication" title="Decide Contraindication" disabled={!diagnosisId}>
+                  <DecideContraindication submit={handleButtonClick} preview={handlePreButtonClick}/>
+                </Tab>
+                <Tab eventKey="treatment" title="Treatment" disabled={!diagnosisId}>
+                  <TreatmentModality preview={handlePreButtonClick}/>
+                </Tab>
+              </Tabs>
+            </Row>
 
-              <Tab eventKey="bloodTest" title="Blood Test" disabled={!diagnosisId}>
-                <BloodTest submit={handleButtonClick} preview={handlePreButtonClick} />
-              </Tab>
-
-              <Tab eventKey="stratification" title="Risk Stratification" disabled={!diagnosisId}>
-                <RiskStratification submit={handleButtonClick} preview={handlePreButtonClick} />
-              </Tab>
-
-              <Tab eventKey="contraindications" title="Contraindications" disabled={!diagnosisId}>
-                <Contraindication submit={handleButtonClick} preview={handlePreButtonClick} />
-              </Tab>
-
-              <Tab eventKey="treatment" title="Treatment" disabled={!diagnosisId}>
-                <TreatmentModality preview={handlePreButtonClick} />
-              </Tab>
-
-            </Tabs>
-          </Row>
         </Container>
       </section>
     </Layout>

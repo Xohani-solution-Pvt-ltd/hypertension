@@ -8,16 +8,18 @@ const SymptomSchema: Schema = new Schema({
   },
     breathlessness: {
     type: Boolean,
-    default: false
+    default: false,
+    
+    minorNYHA: {
+      type: Boolean,
+      default: false
+    },
+    majorNYHA: {
+      type: Boolean,
+      default: false
+    },
   },
-  minorNYHA: {
-    type: Boolean,
-    default: false
-  },
-  majorNYHA: {
-    type: Boolean,
-    default: false
-  },
+ 
   legSwelling: {
     type: Boolean,
     default: false

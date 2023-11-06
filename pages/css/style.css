@@ -3,6 +3,7 @@
     font-size: 22px;
     font-weight: bold;
     color: #ed6436;
+
   }
 
   /* .artboard-img{
@@ -28,10 +29,15 @@
 
   .footer{
     background-color: #ed6436;
+    /* background-color: #aa7b16; */
+
+
+
   }
 
   .font-color{
-    color:#ed6436;
+    /* color:#ed6436; */
+    color:#b8a121;
   }
 
   .navbar {
@@ -40,7 +46,11 @@
     left: 0;
     right: 0;
     z-index: 1000; 
-    background-color: #fff; 
+    /* background-color: #fff;  */
+    /* background-color: #f7ebdf;  */
+    background-color: #f8e6d5; 
+
+
   }
 
   .body-content {
@@ -55,7 +65,20 @@
     color: green;
   }
 
+.link-color{
+  color: black;
+}
+
+  .mouse-hover:hover{
+    color: #ed6436;
+  }
+
+  .placeholder{
+    opacity: 0.5;
+  }
   @media screen and (max-width: 999px) {
     .body-content {margin-top: 30px;}
     .foot-res{text-align: center; margin-top: 30px;}
   }
+
+  
