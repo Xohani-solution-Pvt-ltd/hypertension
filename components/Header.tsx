@@ -29,7 +29,7 @@ export default function Header({}) {
     <section>
       <Container fluid>
         <Navbar className=" fixed-top flex items-center justify-between bg-light px-4">
-          <Navbar.Brand href="/">
+          {/* <Navbar.Brand href="/">
             <Image
               className="pr-2"
               src={DownloadseconadryImg}
@@ -37,7 +37,7 @@ export default function Header({}) {
               width={35}
               alt={`Logo | ${TITLE}`}
             />
-          </Navbar.Brand> */}
+          </Navbar.Brand>  */}
           <Navbar.Brand href="/">
             <Image
               className="pr-2"
