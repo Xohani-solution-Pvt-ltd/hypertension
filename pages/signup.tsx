@@ -177,7 +177,7 @@ const Login = () => {
                 </Col>
 
               </Row>
-            </div>
+            
             <div className="position-absolute end-0">
 
               <Link href="/login">
