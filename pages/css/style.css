@@ -65,7 +65,20 @@
     color: green;
   }
 
+.link-color{
+  color: black;
+}
+
+  .mouse-hover:hover{
+    color: #ed6436;
+  }
+
+  .placeholder{
+    opacity: 0.5;
+  }
   @media screen and (max-width: 999px) {
     .body-content {margin-top: 30px;}
     .foot-res{text-align: center; margin-top: 30px;}
   }
+
+  

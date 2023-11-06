@@ -21,7 +21,7 @@ const IndexPage = () => {
         ) : (
           <section className="bg-white">
             <Container className="py-4">
-              <Row className="align-items-center body-content">
+              <Row className="align-items-center body-content justify-content-xs-start justify-content-sm-between">
                 <Col md={12} lg={5} className="content align-left py-4">
                   <h1 className="align-left pb-3 custom-font">
                     Hypertension Training School
