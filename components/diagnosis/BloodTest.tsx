@@ -21,6 +21,7 @@ import {
   intialBloodTestValue,
 } from "../../interfaces/bloodtest";
 import axios from "axios";
+// import BloodTestImg from '../../assets/images/BloodTest.png';
 
 const validationSchema = Yup.object({
   hbA1cLevel: Yup.number()
@@ -230,6 +231,7 @@ console.log("bloodTestData=",bloodTestData)
     }
    },[bloodTestData]);
 
+
   return (
     <>
       <Row className="media-container-row m-4">
@@ -239,6 +241,8 @@ console.log("bloodTestData=",bloodTestData)
 
             return (
               <Form>
+                <Row>
+                  <Col md={7}>
                 <Row className="media-container-row">
                   <h4 className="mbr-fonts-style mbr-text display-4 mbr-bold">
                     HBA1C
@@ -311,7 +315,7 @@ console.log("bloodTestData=",bloodTestData)
                     />
                   </Col>
                 </Row>
-                <Row className="media-container-row">
+                <Row>
                   <h4 className="mbr-fonts-style mbr-text display-4 mbr-bold">
                     Lipid
                   </h4>
@@ -354,6 +358,7 @@ console.log("bloodTestData=",bloodTestData)
                     />
                   </Col>
                   <Col md={4} className="align-left p-2">
+
                     <label htmlFor="lipidInterpretation">
                       Lipid Interpretation
                     </label>
@@ -449,7 +454,9 @@ console.log("bloodTestData=",bloodTestData)
                       className="text-danger"
                     />
                   </Col>
+
                   <Col md={4} className="align-left p-2">
+
                     <label htmlFor="ldlCholesterol">LDL Cholesterol</label>
                     <Field
                       type="number"
@@ -468,6 +475,7 @@ console.log("bloodTestData=",bloodTestData)
                       className="text-danger"
                     />
                   </Col>
+
                   <Col md={4} className="align-left p-2">
                     <label htmlFor="normalLdlCholesterol">Normal LDL Cholesterol level</label>
                     <Field
@@ -488,6 +496,7 @@ console.log("bloodTestData=",bloodTestData)
                     />
                   </Col>
                   <Col md={4} className="align-left p-2">
+
                     <label htmlFor="ldlInterpretation">
                       LDL Interpretation
                     </label>
@@ -516,7 +525,9 @@ console.log("bloodTestData=",bloodTestData)
                       className="text-danger"
                     />
                   </Col>
+
                   <Col md={4} className="align-left p-2">
+
                     <label htmlFor="triglycerides">Triglycerides</label>
                     <Field
                       type="number"
@@ -555,6 +566,7 @@ console.log("bloodTestData=",bloodTestData)
                     />
                   </Col>
                   <Col md={4} className="align-left p-2">
+
                     <label htmlFor="triglyceridesInterpretation">
                       Triglycerides Interpretation
                     </label>
@@ -876,29 +888,43 @@ console.log("bloodTestData=",bloodTestData)
                       placeholder="EjectionFraction"
                       onChange={(e) => {
                         setFieldValue('ejectionFraction', e.target.value);
+
                         setEjectionFractionData(e.target.value);
+
                       }} />
                     <ErrorMessage name="ejectionFraction" component="div" className="text-danger" />
                   </Col>
                 </Row>
-                <div className="text-end mt-4">
+                <div className="me-3">
                   <button
                     type="button"
-                    className="btn btn-primary display-4"
+                    className="text-start btn btn-primary display-4"
                     onClick={() => preview("symptoms")}
                   >
                     Back
                   </button>
-                </div>
-                <div className="text-end mt-4">
+                  <label className="mx-">If No Any bloodTest Click On Submit Button
+                  </label>
                   <button
                     type="submit"
-                    className="btn btn-primary display-4"
+                    className="float-end btn btn-primary display-4"
                     onClick={() => submit("stratification")}
                   >
                     {editing? "Edit" : "Create"}
                   </button>
                 </div>
+                </Col>
+                <Col md={5}>
+                {/* <div className="pt-5">
+                <Image
+                    src={BloodTestImg}
+                    height={450}
+                    width={450}
+                    alt="Hypertension"
+                />
+                </div> */}
+                </Col>
+                </Row>
               </Form>
             );
           }}

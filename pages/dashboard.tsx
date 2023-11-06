@@ -18,10 +18,13 @@ import { getCookie } from 'cookies-next';
 import Link from "next/link";
 import DecideContraindication from "../components/diagnosis/DecideContraindication";
 
+
+
 const validationSchema = Yup.object({
   email: Yup.string().email('Invalid email address').required('Email is Required'),
   password: Yup.string().required('Password is Required'),
 });
+
 
 const Dashboard = () => {
   const { isAuthenticated, userInfo, LoginToAccount } = useContext(AuthContext);
@@ -34,6 +37,7 @@ const Dashboard = () => {
     const id = getCookie('diagnosisId');
     setDiagnosisId(id);
   }, []);
+
 
   const handleTabChange = (tabKey) => {
     setActiveTab(tabKey);
@@ -52,6 +56,7 @@ const Dashboard = () => {
     <Layout title={`Login | ${TITLE}`}>
       <section className="features1 cid-rGtBGu0BpJ" id="features5-11">
         <Container className="d-flex justify-content-center" fluid>
+
         {/* <Container className="d-flex justify-content-center" > */}
             <Row className="justify-content-center pt-5">
               <Tabs
@@ -84,6 +89,7 @@ const Dashboard = () => {
                 </Tab>
               </Tabs>
             </Row>
+
         </Container>
       </section>
     </Layout>

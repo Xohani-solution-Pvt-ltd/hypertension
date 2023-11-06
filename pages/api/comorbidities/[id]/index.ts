@@ -15,13 +15,16 @@ if (req.method === "GET") {
         message: "fetch data successfully",
         data: comorbiditiesData
       });
-    }catch (error){
+    }
+    catch (error){
         res.status(500).json({ 
           success: false,
           message: "Failed to retrieve data" });
        } 
-    }else if (req.method === "PUT") {
+    }
+    else if (req.method === "PUT") {
       const { id } = req.query; 
+
           const {cva,coronaryArteryDisease,heartFailure,diabetes,pregnancy,lungDisease} = req.body;
         try {
     
@@ -55,6 +58,7 @@ if (req.method === "GET") {
           });
         }
       }else if (req.method === "DELETE"){
+
         try {
           const { id } = req.query;
           const deletedComorbidities = await ComorbiditiesModel.findByIdAndDelete(id);
@@ -69,8 +73,9 @@ if (req.method === "GET") {
         } catch (error) {
           res.status(500).json({ error: "Failed to delete the Comorbdiities" });
         }
-      }else {
-    res.status(405).json({
+      }
+      else {
+      res.status(405).json({
       success: false,
       message: "Invalid method",
     });

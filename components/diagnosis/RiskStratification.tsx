@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+
+import Image from "next/image";
+import { Card, Col, Container, Row } from "react-bootstrap";
+import styled from "styled-components";
+import RiskcheckerImg from '../../assets/images/Riskchecker.jpg';
 import axios from "axios";
 
 const RiskStratification = ({ submit, preview }) => {
@@ -48,10 +53,13 @@ const RiskStratification = ({ submit, preview }) => {
           'hfpeEF': bloodTestData.ejectionInterpretation === "HfpeEF",
           'eGFR': bloodTestData.eGFRResult,
         }));
-      } else {
+
+      }
+      else {
         console.error("Required data properties are undefined");
       }
-    } catch (error) {
+    }
+    catch (error) {
       console.error("Error fetching data:", error);
     }
   };
@@ -64,6 +72,7 @@ const RiskStratification = ({ submit, preview }) => {
   useEffect(() => {
     checkRisk();
   }, [criteria]);
+
 
   const checkRisk = () => {
     let RiskLevel = 'Low Risk';
@@ -85,6 +94,7 @@ const RiskStratification = ({ submit, preview }) => {
         RiskLevel += " (Probable CVA)";
       }
 
+
       if (
         criteria["coronaryArteryDisease"] ||
         criteria["previousHeartAttacks"] ||
@@ -93,6 +103,7 @@ const RiskStratification = ({ submit, preview }) => {
       ) {
         RiskLevel += " (Probable CAD)";
       }
+
 
       if (
         criteria["heartFailure"] ||
@@ -103,32 +114,60 @@ const RiskStratification = ({ submit, preview }) => {
         RiskLevel += " (Probable Heart failure)";
       }
 
+
       if (criteria["eGFR"] < 60) {
         RiskLevel += " (Probable CKD)";
       }
     }
 
-    setRisk(RiskLevel);
+
+  const checkRisk4 = () => {
+    let RiskFourLevel = 'Low Risk'
+    if (criteria["eGFR"] < 60) {
+      RiskFourLevel = ('High Risk (CKD)');
+    }
+    setRiskFour(RiskFourLevel)
   };
 
+  useEffect(() => {
+    setIsClient(true)
+  }, []);
+
+  
   return (
-    <div>
-      <h3>Risk Checker</h3>
-      <div>
-        <p>{risk}</p>
+    <section className="bg-white">
+      <h1 className="align_check">{isClient ? 'Risk Checker' : 'Prerendered'}</h1>
+      <Container className="d-flex justify-content-center " fluid>
+        <Row>
+          <Card className=" border pt-5 bg-white" style={{ width: '50rem', height: '20rem' }}>
+            <Row style={{ height: '140px' }} className="mx-5">
+              <Col md={7}>
+                <p>Risk One:--_________________________________________{riskOne}</p>
+                <p>Risk Two:-__________________________________________{riskTwo}</p>
+                <p>Risk Three:-_______________________________________{riskThree}</p>
+                <p>Risk Four:-________________________________________ {riskFour}</p>
+              </Col>
+              <Col className="mb-5" md={5}>
+                <Image
+                  src={RiskcheckerImg}
+                  height={300}
+                  width={300}
+                  alt="Hypertension"
+                />
+              </Col>
+            </Row>
+            <div className=" mt-4 pt-5">
+              <button type="button" className=" text-start btn btn-primary " onClick={() => preview("bloodTest")}
+              >Preview</button>
+              <button type="submit" className=" float-end btn btn-primary" onClick={() => submit("contraindications")}
+              >Submit</button>
+            </div>
+          </Card>
+        </Row>
+      </Container>
+    </section>
 
-      </div>
-      <div className="text-end mt-4">
-        <button type="button" className="btn btn-primary display-4" onClick={() => preview("bloodTest")}
-        >Back</button>
-      </div>
-      <div className="text-end mt-4">
-        <button type="submit" className="btn btn-primary display-4" onClick={() => submit("contraindications")}
-        >Next</button>
-      </div>
-
-    </div>
-
+    
   );
 };
 export default RiskStratification;

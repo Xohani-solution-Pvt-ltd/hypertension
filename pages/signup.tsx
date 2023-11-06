@@ -2,16 +2,14 @@
 import { useState, useRef, useContext, useEffect } from "react";
 import Link from "next/link";
 import Layout, { StaticLayout } from "../components/Layout";
-import {
-  LockSVG,
-  ColoredLock,
-  CrossSVG,
-  ProcessCircle,
-} from "../assets/SVG/image";
+import {LockSVG,ColoredLock,CrossSVG,ProcessCircle} from "../assets/SVG/image";
 import { APP_INFO } from "../environments/index";
 import { AuthContext } from "../context/authentication";
 import notify from "../helpers/notify";
-import { Container, Row, Col, Button, Form } from "react-bootstrap";
+
+import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+import Card from 'react-bootstrap/Card';
+
 
 const Login = () => {
   const { TITLE } = APP_INFO;
@@ -62,6 +60,7 @@ const Login = () => {
       mobile: mobile_ref!.current.value,
       password: pass?.password
     };
+
     const err = await CreateAccount(body);
     if (err) {
         setProcess(false);
@@ -78,35 +77,26 @@ const Login = () => {
 
   return (
     <Layout title={`signup | ${TITLE}`}>
-      <Container fluid>
-        <Row className="mb-20 pt-5 pb-5" id="features5-11">
-          <div className="text-center">
-            <h2 className="text-xl md:text-3xl font-bold text-secondary-300 font-primary">
-              Create your account-{" "}
-              <span className="text-primary-100">{TITLE}</span>
-            </h2>
-          </div>
-          <div className="text-center px-5 bg-gray-100 justify-content-between mt-7">
-            <p className="px-5 md:text-sm text-xs text-secondary-300">
-              <ColoredLock />
-              We take privacy issues seriously. You can be sure that your
-              personal data is securely protected. <CrossSVG />
-            </p>
-          </div>
-          <Form className="mt-8 space-y-6" onSubmit={Submit}>
-            <div className="mt-16 lg:flex justify-between border-b border-gray-200 pb-16">
-              <div className="w-80">
-                <div className="flex items-center">
-                  <h1 className=" text-center text-xl font-medium pr-2 leading-5 text-secondary-300 font-primary">
-                    Personal Information
-                  </h1>
-                </div>
-                <p className="text-center mt-4 text-xs md:text-sm leading-5 text-secondary-300">
-                  Unlock Your Identity: Share Your Personal Information for a
-                  Better Experience.
-                </p>
-              </div>
-              <Row>
+
+      <Container className="pt-5" fluid>
+        <Row className="d-flex justify-content-center pt-5 pb-5">
+          <Card className="bg-light" style={{ width: '40rem',border: 'groove',maxHeight:'46rem'}}>
+            <Card.Body>
+              <Card.Title>
+                <h4 className="text-center text-primary">Create your account:-{TITLE}</h4>
+              </Card.Title>
+              <Card.Text>
+                <ColoredLock />
+                We take privacy issues seriously. You can be sure that your personal data is securely protected. <CrossSVG />
+              </Card.Text>
+              <h4 className=" text-center text-primary">
+                Personal Information
+              </h4>
+              <p className="px-5"> Unlock Your Identity: Share Your Personal Information for a Better Experience.
+              </p>
+              <Form className="mt-8 space-y-6" onSubmit={Submit}>
+                <Row>
+
                 <Col md={6}>
                   <Form.Group controlId="fullName" className="mb-4">
                     <Form.Label>Full Name</Form.Label>
@@ -134,6 +124,7 @@ const Login = () => {
                     />
                   </Form.Group>
                 </Col>
+
                 <Col md={4}>
                   <Form.Group controlId="mobile" className="mb-4">
                     <Form.Label>Mobile</Form.Label>
@@ -148,8 +139,10 @@ const Login = () => {
                     />
                   </Form.Group>
 
+
                   </Col>
                   <Col md={6}>
+
                   <Form.Group controlId="password" className="mb-4">
                     <Form.Label>Password</Form.Label>
                     <Form.Control
@@ -182,40 +175,45 @@ const Login = () => {
                     />
                   </Form.Group>
                 </Col>
+
               </Row>
             </div>
             <div className="position-absolute end-0">
+
               <Link href="/login">
                 <span className="font-medium pr-2 leading-5 text-secondary-300 display-4">
                   Have an Account?{" "}
                 </span>
-                <button type="button" className="btn btn-primary display-4">
+
+                <button
+                  type="button"
+                  className="btn btn-primary display-4"
+                >
                   SignIn
                 </button>
               </Link>
-            </div>
-            <div className="float-right">
-              <Button
-                variant="primary"
+               </div>
+              <div className="float-right">
+              <Button variant="primary"
                 type="submit"
                 disabled={
-                  (pass.password === pass.confirmPassword ? false : true) ||
+                  (pass.password === pass.confirmPassword
+                    ? false
+                    : true) ||
                   mobile_check ||
                   process
                 }
-                className={`${
-                  pass.password === pass.confirmPassword
-                    ? "hover:bg-primary-300"
-                    : ""
-                } group relative w-64 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
-              >
-                <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                  {process === false ? <LockSVG /> : <ProcessCircle />}
-                </span>
-                <span>Create Account</span>
+                className={`${pass.password === pass.confirmPassword
+                  ? "hover:bg-primary-300"
+                  : ""
+                  } group relative w-64 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
+              >Create Account
               </Button>
-            </div>
-          </Form>
+              </div>
+              </Form>
+            </Card.Body>
+          </Card>
+
         </Row>
       </Container>
     </Layout>
@@ -223,6 +221,7 @@ const Login = () => {
 };
 
 export default Login;
+
 
 
 
@@ -608,4 +607,5 @@ export default Login;
 
 
 // export default Login;
+
 

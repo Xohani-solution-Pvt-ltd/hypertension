@@ -24,6 +24,7 @@ async function handleResponse(p_response) {
   }
 }
 
+
 const get = (p_route, p_useHost = true, noCache = false) => {
   const newHeaders = headers;
 
@@ -35,6 +36,7 @@ const get = (p_route, p_useHost = true, noCache = false) => {
     headers: newHeaders,
   }).then((p_response) => handleResponse(p_response));
 };
+
 
 const post = (p_route, p_body, p_useHost = true) => {
   return fetch(p_useHost ? `${API_HOST}` + p_route : p_route, {

@@ -6,10 +6,12 @@ const UserSchema: Schema = new Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     mobile: { type: String, required: true, unique: true },
+
     isActive: {
         type: Boolean,
         default: true
       },
+
     createdAt: { type: Date, default: new Date() },
 });
 

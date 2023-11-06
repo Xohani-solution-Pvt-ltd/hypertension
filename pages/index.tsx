@@ -12,7 +12,6 @@ const IndexPage = () => {
   const { TITLE } = APP_INFO;
   const router = useRouter();
 
-
   return (
     <Layout title={`Dashboard | ${TITLE}`}>
       <main className="justify-center mt-8 font-primary">
@@ -48,13 +47,13 @@ const IndexPage = () => {
                   </div>
                   <div className="align-left mbr-section-btn ">
                     <Button
-                      className="btn btn-md btn-primary display-4 "
+                      className="btn btn-md btn-primary "
                       href="https://hypertension.co"
                     >
                       VIEW MORE
                     </Button>
                     <Button
-                      className="btn btn-md btn-primary display-4"
+                      className="btn btn-md btn-primary"
                       href="https://hypertension.co"
                     >
                       BOOK NOW

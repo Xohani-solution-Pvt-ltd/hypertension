@@ -52,6 +52,7 @@ export default function Footer() {
   };
 
   return (
+    <section className="bg-darkness">  
     <footer className="d-flex align-items-end w-full bg-light container-lg">
       <Container fluid>
         <Row className="gap-15 px-6 py-8 md:gap-4">
@@ -167,26 +168,27 @@ export default function Footer() {
                         </Form>
                       </div>
                     </span>
+
                   </div>
                 </div>
               </div>
-            </div>
-          </Col>
-          <div className="footer">
-            <Container className="d-flex justify-content-center w-100" fluid>
-              <span
-                className="text-align-center mt-3"
-                style={{ paddingBottom: "13px", color: "white" }}
-              >
-                <h3 style={{ fontSize: "20px" }}>
-                  {" "}
-                  © 2023 Hypertension All Rights Reserved.
-                </h3>
-              </span>
-            </Container>
-          </div>
-        </Row>
-      </Container>
-    </footer>
+            </Col>
+          </Row>
+        </Container>
+      </footer>
+      <div className="footer">
+        <Container className="d-flex justify-content-center" fluid>
+          <span
+            className="text-align-center mt-3"
+            style={{ paddingBottom: "10px", color: "white" }}
+          >
+            <h3 style={{ fontSize: "22px" }}>
+              {" "}
+              © 2023 Hypertension All Rights Reserved.
+            </h3>
+          </span>
+        </Container>
+      </div>
+    </section>
   );
 }

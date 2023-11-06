@@ -52,14 +52,19 @@ const AuthState = (props) => {
   const LoginToAccount = async (body) => {
     const [data, err] = await loginUserAPI(body);
     if (data?.success === true) {
-      console.log("Succesfully Login");
+      console.log("Succesfully Login user");
       setIsAuthenticated(true);
       setUserInfo(data?.data);
       setToken(data?.token);
+
       notify.success("Succesfully Login");
       profileId? router.push("/dashboard"): router.push("/createProfile");
+
       return null;
-    } else if (err) {
+    }
+    
+     else if (err)
+      {
       console.log(err?.message);
       notify.error(err?.message);
       return err;
@@ -69,9 +74,9 @@ const AuthState = (props) => {
   const CreateAccount = async (body) => {
     const [data, err] = await createUserAPI(body);
     if (data?.success === true) {
-      console.log("Account Created Succesfully!");
+      console.log("Account Created Succesfully user!");
       router.push("/login");
-      notify.success("Account Created Succesfully!");
+      notify.success("Account Created Succesfully user!");
       return null;
     } else if (err) {
       console.log(err?.message);
@@ -122,6 +127,7 @@ const AuthState = (props) => {
       email: ""
     });
     removeToken();
+    console.log("log out user successfully");
   };
   return (
     <AuthContext.Provider
