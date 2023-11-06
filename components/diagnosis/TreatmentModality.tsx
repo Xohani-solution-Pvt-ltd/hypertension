@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Container, Table } from "react-bootstrap";
 import Image from "next/image";
-import TreatmentImg from '../../assets/images/Treatment.jpg';
+// import TreatmentImg from '../../assets/images/Treatment.jpg';
 
 const RiskStratification = ({ preview }) => {
   const [results1, setResults1] = useState('prescriptions');
@@ -214,18 +214,16 @@ const RiskStratification = ({ preview }) => {
   }, []);
 
   return (
- 
+
+    <section>
+
     <div className="text-center pt-5">
       <h1>High Risk Checker</h1>
       <button onClick={checkRisk1}>Check Risk</button>
       <p>{results1}</p>
-      <Container className="" fluid>
-        <Image
-          src={TreatmentImg}
-          height={500}
-          width={1200}
-          alt="Hypertension"
-        />
+
+      <Container fluid>
+       
         <Table striped bordered hover style={{ width: '90%', maxHeight: 'auto', borderColor: 'black' }}>
           <thead>
             <tr>
@@ -258,31 +256,27 @@ const RiskStratification = ({ preview }) => {
             </tr>
           </tbody>
         </Table>
+
+   <h1>Treatment</h1>
+  <p>{results1}</p>
+ <p>{results2}</p>
+  <p>{results3}</p>
+  <p>{results4}</p>
+  <p>{results5}</p>
+  <p>{results6}</p>
+  <p>{results7}</p>
+  <p>{results8}</p>
+  <p>{results9}</p>
+        <div className="float-end py-5">
+        <button type="button" className="btn btn-primary display-4" onClick={() => preview("contraindications")}>Back</button>
+        </div>
       </Container>
-      <div className="text-end mt-4">
-        <button type="button" className="btn btn-primary display-4" onClick={() => preview("contraindications")}
-        >Preview</button>
-
-        <div>
-          <h1>Treatment</h1>
-          <p>{results1}</p>
-          <p>{results2}</p>
-          <p>{results3}</p>
-          <p>{results4}</p>
-          <p>{results5}</p>
-          <p>{results6}</p>
-          <p>{results7}</p>
-          <p>{results8}</p>
-          <p>{results9}</p>
-
-          <div className="text-end mt-4">
-            <button type="button" className="btn btn-primary display-4" onClick={() => preview("contraindications")}>Back</button>
-
-          </div>
-        </div>
-        </div>
-        </div>
+      </div>
+      </section>
         );
     };
 
  export default RiskStratification;
+
+
+

@@ -85,7 +85,7 @@ const DecideContraindication = ({ submit, preview }) => {
       {contraindication2}
       <br />
       {contraindication3}
-      <div className="text-end mt-4">
+      <div className="mt-4">
         <button
           type="button"
           className="btn btn-primary display-4"
@@ -93,11 +93,9 @@ const DecideContraindication = ({ submit, preview }) => {
         >
           Back
         </button>
-      </div>
-      <div className="text-end mt-4">
         <button
           type="submit"
-          className="btn btn-primary display-4"
+          className="float-end btn btn-primary display-4"
           onClick={() => submit('treatment')}
         >
           Next

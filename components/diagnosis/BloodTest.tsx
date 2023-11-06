@@ -21,7 +21,6 @@ import {
   intialBloodTestValue,
 } from "../../interfaces/bloodtest";
 import axios from "axios";
-// import BloodTestImg from '../../assets/images/BloodTest.png';
 
 const validationSchema = Yup.object({
   hbA1cLevel: Yup.number()
@@ -242,7 +241,7 @@ console.log("bloodTestData=",bloodTestData)
             return (
               <Form>
                 <Row>
-                  <Col md={7}>
+                  <Col>
                 <Row className="media-container-row">
                   <h4 className="mbr-fonts-style mbr-text display-4 mbr-bold">
                     HBA1C
@@ -913,16 +912,6 @@ console.log("bloodTestData=",bloodTestData)
                     {editing? "Edit" : "Create"}
                   </button>
                 </div>
-                </Col>
-                <Col md={5}>
-                {/* <div className="pt-5">
-                <Image
-                    src={BloodTestImg}
-                    height={450}
-                    width={450}
-                    alt="Hypertension"
-                />
-                </div> */}
                 </Col>
                 </Row>
               </Form>

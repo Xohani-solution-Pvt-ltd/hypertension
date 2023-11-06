@@ -116,19 +116,14 @@ const RiskStratification = ({ submit, preview }) => {
       <h3>Risk Checker</h3>
       <div>
         <p>{risk}</p>
-
       </div>
-      <div className="text-end mt-4">
+      <div className="mt-4">
         <button type="button" className="btn btn-primary display-4" onClick={() => preview("bloodTest")}
         >Back</button>
-      </div>
-      <div className="text-end mt-4">
-        <button type="submit" className="btn btn-primary display-4" onClick={() => submit("contraindications")}
+        <button type="submit" className=" float-end btn btn-primary display-4" onClick={() => submit("contraindications")}
         >Next</button>
       </div>
-
     </div>
-
   );
 };
 export default RiskStratification;

@@ -113,8 +113,8 @@ const Symptoms = ({ submit, preview }) => {
     <>
       <Row className="media-container-row">
         <h4 className="card-title align-left py-2 mbr-bold mbr-fonts-style mbr-text align-center display-7">Symptoms Monitoring</h4>
-        <Col md={12} className="p-3 align-left">
-            <Col md={6} className="align-left">
+
+            <Col md={8}>
               <Formik initialValues={symptomsData} validationSchema={validationSchema} onSubmit={handleSubmit} enableReinitialize={true}>
                 {({ setFieldValue }) => {
                   return (
@@ -174,17 +174,15 @@ const Symptoms = ({ submit, preview }) => {
                       <div className="text-left mt-4">
                       <label>If No Any symptoms Click On Submit Button</label>
                       </div>
-                        <Button type="button" className="btn btn-primary display-4" onClick={() => preview("comorbidities")}
-                        >Back</Button>
-                      <div className="text-end mt-4">
-                        <button type="submit" className="btn btn-primary display-4" onClick={() => submit("bloodTest")} >{editing ? "Edit" : "Next"}</button>
-                      </div>
+
                     </Form>
                     </>
                   )}}
               </Formik>
-          </Col>
-            <Col md={3} className="align-left">
+
+           </Col>
+            <Col md={4}>
+
             <Image
               src={SymptomsImg}
               height={300}
@@ -192,7 +190,13 @@ const Symptoms = ({ submit, preview }) => {
              alt="Hypertension"
               />
             </Col>
-            </Col>
+
+            <div className='text-start'>
+            <Button type="button" className="btn btn-primary display-4" onClick={() => preview("comorbidities")}
+              >Back</Button>
+            <button type="submit" className="float-end btn btn-primary display-4" onClick={() => submit("bloodTest")} >{editing ? "Edit" : "Next"}</button>
+            </div>
+
        </Row>
     </>
   );
