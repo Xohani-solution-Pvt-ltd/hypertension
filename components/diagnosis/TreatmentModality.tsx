@@ -1,3 +1,4 @@
+
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Container, Table } from "react-bootstrap";
@@ -213,19 +214,16 @@ const RiskStratification = ({ preview }) => {
   }, []);
 
   return (
+
     <section>
+
     <div className="text-center pt-5">
       <h1>High Risk Checker</h1>
       <button onClick={checkRisk1}>Check Risk</button>
       <p>{results1}</p>
+
       <Container fluid>
-        {/* <div>
-        <Image
-          src={TreatmentImg}
-          height={500}
-          width={1200}
-          alt="Hypertension" />
-        </div> */}
+       
         <Table striped bordered hover style={{ width: '90%', maxHeight: 'auto', borderColor: 'black' }}>
           <thead>
             <tr>
@@ -258,6 +256,7 @@ const RiskStratification = ({ preview }) => {
             </tr>
           </tbody>
         </Table>
+
    <h1>Treatment</h1>
   <p>{results1}</p>
  <p>{results2}</p>
