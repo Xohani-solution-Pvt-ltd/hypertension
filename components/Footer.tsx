@@ -52,7 +52,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="d-flex align-items-end w-full bg-white-500 container-lg">
+    <footer className="d-flex align-items-end w-full bg-light container-lg">
       <Container fluid>
         <Row className="gap-15 px-6 py-8 md:gap-4">
           <Col md={3} className="foot-res">
@@ -93,33 +93,6 @@ export default function Footer() {
                     </a>
                   </div>
                 </div>
-                {/* <div className="container-fluid">
-                  <div className="all-icon">
-                    <a
-                      href="https://twitter.com"
-                      className="twitter tfiy-icons me-3"
-                    >
-                      <i className="fab fa-twitter ">
-                        <Twitter />
-                      </i>
-                    </a>
-                    <a
-                      href="https://instagram.com"
-                      className="instagram tfiy-icons me-3"
-                    >
-                      <i className="fab fa-instagram"></i>
-                      <Instagram />
-                    </a>
-                    <a
-                      href="https://youtube.com"
-                      className="youtube tfiy-icons me-3"
-                    >
-                      <i className="fab fa-youtube">
-                        <Youtube />
-                      </i>
-                    </a>
-                  </div>
-                </div> */}
               </h5>
             </Container>
           </Col>
@@ -147,19 +120,22 @@ export default function Footer() {
           </Col>
           <Col md={3} className="foot-res">
             <h2 className="mb-3 text-sm font-semibold font-color">Our Links</h2>
-            <ul className="text-secondary-300">
+            <ul
+              className="text-secondary-300"
+              style={{ listStyleType: "none" }}
+            >
               <li className="mb-2">
-                <Link href="/about" style={{ color: "black" }}>
+                <Link href="/about" className="link-color mouse-hover">
                   About
                 </Link>
               </li>
               <li className="mb-2">
-                <Link href="#" style={{ color: "black" }}>
+                <Link href="#" className="link-color mouse-hover">
                   Careers
                 </Link>
               </li>
               <li className="mb-2">
-                <Link href="#" style={{ color: "black" }}>
+                <Link href="#" className="link-color mouse-hover">
                   Blog
                 </Link>
               </li>

@@ -81,13 +81,13 @@ const validationSchema = Yup.object({
   ejectionFraction: Yup.number()
     .min(20, "Ejection must be at least 20")
     .max(80, "Ejection must not exceed 80"),
-  coronaryArteryDisease : Yup.string()
+  coronaryArteryDisease: Yup.string(),
 });
 
 const BloodTest = ({ submit, preview }) => {
   const router = useRouter();
   const [processing, setProcessing] = useState(false);
-  const [bloodTestId, setBloodTestId] = useState(undefined); 
+  const [bloodTestId, setBloodTestId] = useState(undefined);
   const handleSubmit = async (values: BloodTestInterface) => {
     const [data, err] = await submitBloodTestAPI(values);
     if (data) {
@@ -108,9 +108,16 @@ const BloodTest = ({ submit, preview }) => {
   return (
     <>
       <Row className="media-container-row m-4">
-        <h4 className="card-title align-left py-2 mbr-bold mbr-fonts-style mbr-text align-center display-7">Blood Test</h4>
-        <Formik initialValues={intialBloodTestValue} validationSchema={validationSchema} onSubmit={handleSubmit} enableReinitialize={true}>
-          {({ setFieldValue}) => {
+        <h4 className="card-title align-left py-2 mbr-bold mbr-fonts-style mbr-text align-center display-7">
+          Blood Test
+        </h4>
+        <Formik
+          initialValues={intialBloodTestValue}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+          enableReinitialize={true}
+        >
+          {({ setFieldValue }) => {
             useEffect(() => {
               const fetchBloodDetailData = async () => {
                 const [data, err] = await getBloodTestAPI(bloodTestId);
@@ -217,7 +224,12 @@ const BloodTest = ({ submit, preview }) => {
                         setFieldValue("hBA1CInterpretation", e.target.value);
                       }}
                     >
-                      <option value="">HBA1C Interpretation ▼</option>
+                      <option
+                        value=""
+                        style={{ display: "none", color: "rgba(0, 0, 0, 0.5)" }}
+                      >
+                        HBA1C Interpretation ▼
+                      </option>
                       <option value="Normal">Normal</option>
                       <option value="Abnormal">Abnormal</option>
                     </Field>
@@ -263,7 +275,12 @@ const BloodTest = ({ submit, preview }) => {
                         setFieldValue("lipidInterpretation", e.target.value);
                       }}
                     >
-                      <option value="">Lipid Interpretation ▼</option>
+                      <option
+                        value=""
+                        style={{ display: "none", color: "rgba(0, 0, 0, 0.5)" }}
+                      >
+                        Lipid Interpretation ▼
+                      </option>
                       <option value="Normal">Normal</option>
                       <option value="Abnormal">Abnormal</option>
                     </Field>
@@ -304,7 +321,12 @@ const BloodTest = ({ submit, preview }) => {
                         setFieldValue("hdlInterpretation", e.target.value);
                       }}
                     >
-                      <option value="">HDL Interpretation ▼</option>
+                      <option
+                        value=""
+                        style={{ display: "none", color: "rgba(0, 0, 0, 0.5)" }}
+                      >
+                        HDL Interpretation ▼
+                      </option>
                       <option value="Normal">Normal</option>
                       <option value="Abnormal">Abnormal</option>
                     </Field>
@@ -345,7 +367,12 @@ const BloodTest = ({ submit, preview }) => {
                         setFieldValue("ldlInterpretation", e.target.value);
                       }}
                     >
-                      <option value="">LDL Interpretation ▼</option>
+                      <option
+                        value=""
+                        style={{ display: "none", color: "rgba(0, 0, 0, 0.5)" }}
+                      >
+                        LDL Interpretation ▼
+                      </option>
                       <option value="Normal">Normal</option>
                       <option value="Abnormal">Abnormal</option>
                     </Field>
@@ -389,7 +416,12 @@ const BloodTest = ({ submit, preview }) => {
                         );
                       }}
                     >
-                      <option value="">Triglycerides Interpretation ▼</option>
+                      <option
+                        value=""
+                        style={{ display: "none", color: "rgba(0, 0, 0, 0.5)" }}
+                      >
+                        Triglycerides Interpretation ▼
+                      </option>
                       <option value="Normal">Normal</option>
                       <option value="Abnormal">Abnormal</option>
                     </Field>
@@ -507,7 +539,12 @@ const BloodTest = ({ submit, preview }) => {
                         setFieldValue("kidneyInterpretation", e.target.value);
                       }}
                     >
-                      <option value="">Kidney Interpretation ▼</option>
+                      <option
+                        value=""
+                        style={{ display: "none", color: "rgba(0, 0, 0, 0.5)" }}
+                      >
+                        Kidney Interpretation ▼
+                      </option>
                       <option value="Normal">Normal</option>
                       <option value="Abnormal">Abnormal</option>
                     </Field>
@@ -589,7 +626,12 @@ const BloodTest = ({ submit, preview }) => {
                         setFieldValue("tshInterpretation", e.target.value);
                       }}
                     >
-                      <option value="">TSH Interpretation ▼</option>
+                      <option
+                        value=""
+                        style={{ display: "none", color: "rgba(0, 0, 0, 0.5)" }}
+                      >
+                        TSH Interpretation ▼
+                      </option>
                       <option value="Normal">Normal</option>
                       <option value="Abnormal">Abnormal</option>
                     </Field>
@@ -631,7 +673,7 @@ const BloodTest = ({ submit, preview }) => {
                       Coronary Artery Disease
                     </label>
                     <Field
-                      type="string"
+                      as="select"
                       id="coronaryArteryDisease"
                       name="coronaryArteryDisease"
                       className="form-control"
@@ -641,7 +683,17 @@ const BloodTest = ({ submit, preview }) => {
                         const newValue = e.target.value;
                         //  calculateEjectInterpretation(newValue,ejectionFraction);
                       }}
-                    />
+                      // style={{ color: 'rgba(0, 0, 0, 0.5)' }}
+                    >
+                      <option
+                        value=""
+                        style={{ display: "none", color: "rgba(0, 0, 0, 0.5)" }}
+                      >
+                        Coronary Artery Disease ▼
+                      </option>
+                      <option value="Present">Present</option>
+                      <option value="Absent">Absent</option>
+                    </Field>
                     <ErrorMessage
                       name="coronaryArteryDisease"
                       component="div"
@@ -659,9 +711,14 @@ const BloodTest = ({ submit, preview }) => {
                       onChange={(e) => {
                         const newValue = e.target.value;
 
-                        setFieldValue('ejectionFraction', e.target.value);
-                        }}/>
-                      <ErrorMessage name="ejectionFraction" component="div" className="text-danger" />
+                        setFieldValue("ejectionFraction", e.target.value);
+                      }}
+                    />
+                    <ErrorMessage
+                      name="ejectionFraction"
+                      component="div"
+                      className="text-danger"
+                    />
                   </Col>
                 </Row>
                 <div className="text-end mt-4">
@@ -692,4 +749,3 @@ const BloodTest = ({ submit, preview }) => {
 };
 
 export default BloodTest;
-
