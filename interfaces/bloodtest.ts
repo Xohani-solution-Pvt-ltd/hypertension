@@ -1,4 +1,4 @@
-export interface BloodTestInterface{
+export interface BloodTestInterface {
     hbA1cLevel: Number,
     hBA1CInterpretation: String,
     totalCholesterol: Number,
@@ -11,9 +11,9 @@ export interface BloodTestInterface{
     triglyceridesInterpretation: String,
     albumin: Number,
     creatinine: Number,
-    age : String,
-    gender : String,
-    weight : Number,
+    age: String,
+    gender: String,
+    weight: Number,
     acrResult: String,
     sodium: Number,
     potassium: Number,
@@ -26,7 +26,7 @@ export interface BloodTestInterface{
     ejectionFraction: Number
 }
 
-export const intialBloodTestValue : BloodTestInterface={
+export const intialBloodTestValue: BloodTestInterface = {
     hbA1cLevel: undefined,
     hBA1CInterpretation: undefined,
     totalCholesterol: undefined,
@@ -39,9 +39,9 @@ export const intialBloodTestValue : BloodTestInterface={
     triglyceridesInterpretation: undefined,
     albumin: undefined,
     creatinine: undefined,
-    age : undefined,
-    gender : undefined,
-    weight : undefined,
+    age: undefined,
+    gender: undefined,
+    weight: undefined,
     acrResult: undefined,
     sodium: undefined,
     potassium: undefined,

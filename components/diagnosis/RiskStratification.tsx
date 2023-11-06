@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import styled from "styled-components";
+import RiskcheckerImg from '../../assets/images/Riskchecker.jpg';
+
 
 const RiskStratification = ({ submit, preview }) => {
 
@@ -56,10 +58,13 @@ const RiskStratification = ({ submit, preview }) => {
           'hfpeEF': bloodTestData.ejectionInterpretation === "HfpeEF",
           'eGFR': bloodTestData.eGFRResult,
         }));
-      } else {
+
+      }
+      else {
         console.error("Required data properties are undefined");
       }
-    } catch (error) {
+    }
+    catch (error) {
       console.error("Error fetching data:", error);
     }
   };
@@ -77,14 +82,13 @@ const RiskStratification = ({ submit, preview }) => {
   }, [criteria]);
 
   const checkRisk1 = () => {
-
     let RiskOneLevel = 'Low Risk'
-
     if (criteria["cva"]) {
       RiskOneLevel = ("High Risk (Probable CVA)");
     }
     setRiskOne(RiskOneLevel)
   };
+
 
   useEffect(() => {
     checkRisk2();
@@ -136,37 +140,38 @@ const RiskStratification = ({ submit, preview }) => {
     setIsClient(true)
   }, []);
 
+  
   return (
-    <section>
+    <section className="bg-white">
       <h1 className="align_check">{isClient ? 'Risk Checker' : 'Prerendered'}</h1>
-    <Container className="d-flex justify-content-center " fluid>
-      <Row>
-        <Card className=" border pt-5 bg-white" style={{ width: '50rem', height: '20rem' }}>
-          <Row style={{ height: '140px', overflowX: 'hidden', overflowY: 'scroll' }} className="scrollable-container">
-            <Col md={6}>
-              <Row>
-                <p>|<bdo />welcome</p>
-                <p>|<bdo />patient</p>
-                <p>|<bdo />symptoms</p>
-                <p>|<bdo />Disease</p>
-              </Row>
-            </Col>
-            <Col md={6}>
-              <p><u>Risk One: {riskOne}</u></p>
-              <p><u>Risk Two: {riskTwo}</u></p>
-              <p><u>Risk Three: {riskThree}</u></p>
-              <p><u>Risk Four: {riskFour}</u></p>
-            </Col>
-          </Row>
-          <div className=" mt-4 pt-5">
-            <button type="button" className=" text-start btn btn-primary " onClick={() => preview("bloodTest")}
-            >Preview</button>
-            <button type="submit" className=" float-end btn btn-primary" onClick={() => submit("contraindications")}
-            >Submit</button>
-          </div>
-        </Card>
-      </Row>
-    </Container>
+      <Container className="d-flex justify-content-center " fluid>
+        <Row>
+          <Card className=" border pt-5 bg-white" style={{ width: '50rem', height: '20rem' }}>
+            <Row style={{ height: '140px' }} className="mx-5">
+              <Col md={7}>
+                <p>Risk One:--_________________________________________{riskOne}</p>
+                <p>Risk Two:-__________________________________________{riskTwo}</p>
+                <p>Risk Three:-_______________________________________{riskThree}</p>
+                <p>Risk Four:-________________________________________ {riskFour}</p>
+              </Col>
+              <Col className="mb-5" md={5}>
+                <Image
+                  src={RiskcheckerImg}
+                  height={300}
+                  width={300}
+                  alt="Hypertension"
+                />
+              </Col>
+            </Row>
+            <div className=" mt-4 pt-5">
+              <button type="button" className=" text-start btn btn-primary " onClick={() => preview("bloodTest")}
+              >Preview</button>
+              <button type="submit" className=" float-end btn btn-primary" onClick={() => submit("contraindications")}
+              >Submit</button>
+            </div>
+          </Card>
+        </Row>
+      </Container>
     </section>
   );
 };

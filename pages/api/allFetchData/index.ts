@@ -9,7 +9,6 @@ import SymptomModel from "../../../models/symptom.model";
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     await connectMongo();
-
     if (req.method === "GET") {
       const id = req.query.id;
       const [

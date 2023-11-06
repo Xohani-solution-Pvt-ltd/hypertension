@@ -13,12 +13,14 @@ if (req.method === "GET") {
         message: "successfully",
         data: diagnosisData
       });
-    }catch (error){
+    }
+    catch (error){
         res.status(500).json({ 
           success: false,
           message: "Failed to retrieve Diagnosis" });
        } 
-    }else if (req.method === "PUT") {
+    }
+    else if (req.method === "PUT") {
       const { id } = req.query; 
       const { userid, systolic, diastolic, pulseRate } = req.body;
       try {
@@ -37,13 +39,15 @@ if (req.method === "GET") {
           message: 'Diagnosis updated successfully',
           data: updatedDiagnosis,
         });
-      } catch (error) {
+      }
+       catch (error) {
         res.status(400).json({
           success: false,
           message: error.message,
         });
       }
-    }else if (req.method === "DELETE"){
+    }
+    else if (req.method === "DELETE"){
         try {
           const { id } = req.query;
           const deletedDiagnosis = await DiagnosisModel.findByIdAndDelete(id);
@@ -58,7 +62,8 @@ if (req.method === "GET") {
         } catch (error) {
           res.status(500).json({ error: "Failed to delete the Diagnosis" });
         }
-      }else {
+      }
+      else {
     res.status(405).json({
       success: false,
       message: "Invalid method",

@@ -11,6 +11,7 @@ const UserSchema: Schema = new Schema({
         enum: ['Male', 'Female', 'Other'],
         required: true
     },
+
     address: { type: String },
     height: { type: Number },
     weight: { type: Number,required: true },
@@ -18,19 +19,23 @@ const UserSchema: Schema = new Schema({
         type: String,
         enum: ['None', 'Moderate', 'Heavy']
     },
+
     smokingStatus: {
         type: String,
         enum: ['Non-Smoker', 'Ex-Smoker', 'Current-Smoker']
     },
+
     physicalActivity: {
         type: String,
         enum: ['Sedentary', 'Moderate', 'Active']
     },
+    
     token: { type: String, default: '' },
     isActive: {
         type: Boolean,
         default: true
       },
+
     createdAt: { type: Date, default: new Date() },
 });
 

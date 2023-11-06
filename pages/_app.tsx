@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthState>
       <div>
-        <Component {...pageProps} />
+      <Component {...pageProps} />
       </div>
       <ToastContainer />
     </AuthState>

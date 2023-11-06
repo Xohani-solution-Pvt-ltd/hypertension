@@ -19,6 +19,7 @@ import {
   intialBloodTestValue,
 } from "../../interfaces/bloodtest";
 import axios from "axios";
+// import BloodTestImg from '../../assets/images/BloodTest.png';
 
 const validationSchema = Yup.object({
   hbA1cLevel: Yup.number()
@@ -100,10 +101,12 @@ const BloodTest = ({ submit, preview }) => {
       }, 1000);
     }
   };
+
   useEffect(() => {
     const id = getCookie("bloodTestId");
     setBloodTestId(id);
   }, [1]);
+
 
   return (
     <>
@@ -182,6 +185,8 @@ const BloodTest = ({ submit, preview }) => {
 
             return (
               <Form>
+                <Row>
+                  <Col md={7}>
                 <Row className="media-container-row">
                   <h4 className="mbr-fonts-style mbr-text display-4 mbr-bold">
                     HBA1C
@@ -228,7 +233,7 @@ const BloodTest = ({ submit, preview }) => {
                     />
                   </Col>
                 </Row>
-                <Row className="media-container-row">
+                <Row>
                   <h4 className="mbr-fonts-style mbr-text display-4 mbr-bold">
                     Lipid
                   </h4>
@@ -682,6 +687,18 @@ const BloodTest = ({ submit, preview }) => {
                     Submit
                   </button>
                 </div>
+                </Col>
+                <Col md={5}>
+                {/* <div className="pt-5">
+                <Image
+                    src={BloodTestImg}
+                    height={450}
+                    width={450}
+                    alt="Hypertension"
+                />
+                </div> */}
+                </Col>
+                </Row>
               </Form>
             );
           }}

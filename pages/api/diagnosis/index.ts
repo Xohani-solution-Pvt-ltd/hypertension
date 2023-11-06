@@ -43,12 +43,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         message: error.message,
       });
     }
-  } else if (req.method === "GET") {
+  }
+   else if (req.method === "GET") {
     try {
       const diagnosisData = await DiagnosisModel.find({});
       res.status(200).json({
         success: true,
-        message: "successfully",
+        message: "your data saved successfully",
         data: diagnosisData
       });
     } catch (error) {
@@ -57,7 +58,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         message: "Failed to retrieve Diagnosis"
       });
     }
-  } else {
+  } 
+  else {
     res.status(405).json({
       success: false,
       message: "Invalid method",

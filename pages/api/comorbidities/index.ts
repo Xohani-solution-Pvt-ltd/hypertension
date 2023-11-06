@@ -42,13 +42,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         message: "Comorbidities created successfully",
         data: savedComorbidities,
       });
-    } catch (error) {
+    }
+     catch (error) {
       res.status(400).json({
         success: false,
         message: error.message,
       });
     }
-  }else if (req.method === "GET") {
+  }
+  else if (req.method === "GET") {
     try {
       const ComorbiditiesData= await ComorbiditiesModel.find({});
       res.status(200).json({
@@ -56,12 +58,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         message: "successfully",
         data: ComorbiditiesData
       });
-    }catch (error){
+    }
+    catch (error){
         res.status(500).json({ 
           success: false,
           message: "Failed to retrieve Comorbidities" });
        } 
-    }else {
+    }
+    else {
     res.status(405).json({
       success: false,
       message: "Invalid method",

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import AccusureImg from "../../assets/images/accusure.jpeg";
 import Link from 'next/link';
 import { Container, Row, Col, Button, Nav, Tab, Card } from 'react-bootstrap';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
@@ -11,6 +10,7 @@ import { submitSymptomsMonitoringAPI, getSymptomsMonitoringAPI } from '../../ser
 import { getCookie } from 'cookies-next';
 import notify from "../../helpers/notify";
 import { SymptomsInterface, initialSymptomsValue } from '../../interfaces/symptoms';
+import SymptomsImg from '../../assets/images/Symptoms.png';
 
 const validationSchema = Yup.object({
   userid : Yup.string(),
@@ -50,7 +50,6 @@ const Symptoms = ({submit,preview}) => {
         <h4 className="card-title align-left py-2 mbr-bold mbr-fonts-style mbr-text align-center display-7">Symptoms Monitoring</h4>
         <Col md={12} className="p-3 align-left">
           <Row className="media-container-row">
-            <Col md={1} className="align-left"></Col>
             <Col md={6} className="align-left">
               <Formik initialValues={initialSymptomsValue} validationSchema={validationSchema} onSubmit={handleSubmit} enableReinitialize={true}>
                 {({ setFieldValue }) => {
@@ -134,7 +133,12 @@ const Symptoms = ({submit,preview}) => {
               </Formik>
             </Col>
             <Col md={3} className="align-left">
-
+            <Image
+              src={SymptomsImg}
+              height={300}
+              width={300}
+             alt="Hypertension"
+              />
             </Col>
           </Row>
         </Col>

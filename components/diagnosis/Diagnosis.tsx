@@ -6,14 +6,8 @@ import Link from "next/link";
 import { Container, Row, Col, Button, Nav, Tab, Card } from "react-bootstrap";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import {
-  DiagnosisInterface,
-  initialDiagnosisValues,
-} from "../../interfaces/diagnosis";
-import {
-  submitDiagnosisAPI,
-  getDiagnosisDetailsAPI,
-} from "../../services/call";
+import { DiagnosisInterface, initialDiagnosisValues, } from "../../interfaces/diagnosis";
+import { submitDiagnosisAPI, getDiagnosisDetailsAPI, } from "../../services/call";
 import { getCookie } from "cookies-next";
 import notify from "../../helpers/notify";
 
@@ -32,7 +26,7 @@ const validationSchema = Yup.object({
     .max(120, "Pulse rate should not exceed 120"),
 });
 
-const Diagnosis = ({submit}) => {
+const Diagnosis = ({ submit, previous }) => {
   const router = useRouter();
   const [processing, setProcessing] = useState(false);
   const [diagnosisId, setDiagnosisId] = useState(undefined);
@@ -42,7 +36,6 @@ const Diagnosis = ({submit}) => {
     const systolic = e.target.form.systolic.value;
     const diastolic = e.target.form.diastolic.value;
     const pulseRate = e.target.form.pulseRate.value;
-
     setAtLeastOneCheckboxChecked(!!systolic && !!diastolic && !!pulseRate);
   };
 
@@ -50,26 +43,28 @@ const Diagnosis = ({submit}) => {
     if (
       values.diastolic &&
       values.pulseRate &&
-      values.systolic 
-     ){
-       const [data, err] = await submitDiagnosisAPI(values);
-     if(data){
-       notify.success("Succesfully Diagnosis");
+      values.systolic
+    ) {
+      const [data, err] = await submitDiagnosisAPI(values);
+      if (data) {
+        notify.success("Succesfully Diagnosis");
       }
-    if(err){
+      if (err) {
         setTimeout(() => {
-        setProcessing(false);
-        notify.error(err?.message);
-      }, 1000);
-     }
-    useEffect(() =>{
-      const id = getCookie('diagnosisId')
-      setDiagnosisId(id)
-         }, []);
-    } else{
-  notify.error("Please fill in all the required fields.");
-     }
+          setProcessing(false);
+          notify.error(err?.message);
+        }, 1000);
+      }
+      useEffect(() => {
+        const id = getCookie('diagnosisId')
+        setDiagnosisId(id)
+      }, []);
+    } else {
+      notify.error("Please fill in all the required fields.");
+    }
   }
+
+  
   return (
     <>
       <Row className="media-container-row">
@@ -78,7 +73,6 @@ const Diagnosis = ({submit}) => {
         </h4>
         <Col md={12} className="p-3 align-left">
           <Row className="media-container-row">
-            <Col md={1} className="align-left"></Col>
             <Col md={6} className="align-left">
               <Formik
                 initialValues={initialDiagnosisValues}
@@ -113,29 +107,29 @@ const Diagnosis = ({submit}) => {
                     <Form>
                       <div className="p-1">
                         <Field type="number" id="systolic" name="systolic" className="form-control" placeholder="SYS" onChange={(e) => {
-                        setFieldValue('systolic', e.target.value);
-                                        handleInputChange(e);
-                        }}/>
+                          setFieldValue('systolic', e.target.value);
+                          handleInputChange(e);
+                        }} />
                         <ErrorMessage name="systolic" component="div" className="text-danger" />
                       </div>
                       <div className="p-1">
                         <Field type="number" id="diastolic" name="diastolic" className="form-control" placeholder="DIA" onChange={(e) => {
-                        setFieldValue('diastolic', e.target.value);
-                                        handleInputChange(e);
-                        }}/>
+                          setFieldValue('diastolic', e.target.value);
+                          handleInputChange(e);
+                        }} />
                         <ErrorMessage name="diastolic" component="div" className="text-danger" />
                       </div>
                       <div className="p-1">
                         <Field type="number" id="pulseRate" name="pulseRate" className="form-control" placeholder="PUL" onChange={(e) => {
-                        setFieldValue('pulseRate', e.target.value);
-                                        handleInputChange(e);
-                        }}/>
+                          setFieldValue('pulseRate', e.target.value);
+                          handleInputChange(e);
+                        }} />
                         <ErrorMessage name="pulseRate" component="div" className="text-danger" />
                       </div>
                       <div className="text-end mt-4">
-                      <label>If No Any Diagnosis Click On Submit Button</label>
+                        <label>If No Any Diagnosis Click On Submit Button</label>
                         <button type="submit" className="btn btn-primary display-4" onClick={() => submit("comorbidities")}
-                        disabled={!atLeastOneCheckboxChecked} >Submit</button>
+                          disabled={!atLeastOneCheckboxChecked} >Submit</button>
                       </div>
                     </Form>
                   );
@@ -147,7 +141,6 @@ const Diagnosis = ({submit}) => {
             </Col>
           </Row>
         </Col>
-        <Col md={2} className="p-3 align-left"></Col>
       </Row>
     </>
   );
