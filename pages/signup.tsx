@@ -96,7 +96,6 @@ const Login = () => {
               </p>
               <Form className="mt-8 space-y-6" onSubmit={Submit}>
                 <Row>
-
                 <Col md={6}>
                   <Form.Group controlId="fullName" className="mb-4">
                     <Form.Label>Full Name</Form.Label>

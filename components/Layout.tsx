@@ -48,7 +48,7 @@ const StaticLayout = ({
       </Head>
       <Header />
       {children}
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };
