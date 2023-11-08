@@ -96,7 +96,6 @@ const RiskStratification = ({ preview }) => {
 
   const checkRisk1 = () => {
     let riskLevel = '';
-
     if (criteria['cva'] &&
       criteria['coronaryArteryDisease'] &&
       criteria['heartFailure'] &&
@@ -126,22 +125,18 @@ const RiskStratification = ({ preview }) => {
 
   const checkRisk3 = () => {
     let riskLevel = '';
-
     if (criteria['eGFR'] < 60 && criteria['ejectHfprefInterpretation'] || criteria['ejectCadInterpretation']) {
       riskLevel = 'group 3 = treatment C + D2 , B + D2';
     }
-
     setResults3(riskLevel);
   };
 
   const checkRisk4 = () => {
     let riskLevel = '';
-
     if (criteria['eGFR'] > 60 && criteria['ejectHfrefInterpretation']
     ) {
       riskLevel = ' group 4 = treatment A3 + B , D3 + D2 ';
     }
-
     setResults4(riskLevel);
   };
 
@@ -214,16 +209,13 @@ const RiskStratification = ({ preview }) => {
   }, []);
 
   return (
-
-    <section>
-
-    <div className="text-center pt-5">
-      <h1>High Risk Checker</h1>
+    <>
+      <Container fluid>
+       <div className="text-center pt-5">
+      <h1>Treatment check</h1>
       <button onClick={checkRisk1}>Check Risk</button>
       <p>{results1}</p>
-
-      <Container fluid>
-       
+      </div>
         <Table striped bordered hover style={{ width: '90%', maxHeight: 'auto', borderColor: 'black' }}>
           <thead>
             <tr>
@@ -247,32 +239,20 @@ const RiskStratification = ({ preview }) => {
               <td>Frequency</td>
             </tr>
             <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td>{}</td>
+              <td>{}</td>
+              <td>{results3}</td>
+              <td>{}</td>
+              <td>{results3}</td>
+              <td>{}</td>
             </tr>
           </tbody>
         </Table>
-
-   <h1>Treatment</h1>
-  <p>{results1}</p>
- <p>{results2}</p>
-  <p>{results3}</p>
-  <p>{results4}</p>
-  <p>{results5}</p>
-  <p>{results6}</p>
-  <p>{results7}</p>
-  <p>{results8}</p>
-  <p>{results9}</p>
         <div className="float-end py-5">
         <button type="button" className="btn btn-primary display-4" onClick={() => preview("contraindications")}>Back</button>
         </div>
       </Container>
-      </div>
-      </section>
+      </>
         );
     };
 
