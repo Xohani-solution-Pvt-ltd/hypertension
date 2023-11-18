@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 
 import { useRouter } from "next/router";
-
+import Diagnosis from "../components/diagnosis/Diagnosis";
 import { getToken, removeToken, setToken } from "../helpers/index";
 import { User } from "../interfaces/index";
 
@@ -19,10 +19,9 @@ import { getCookie } from "cookies-next";
 const AuthContext = createContext(null);
 
 const AuthState = (props) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<Boolean>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<Boolean>(false);
   const router = useRouter();
   const [loading, setLoading] = useState<Boolean>(true);
-
   const [userInfo, setUserInfo] = useState<User>({
     _id: "",
     fullName: "",
@@ -30,14 +29,6 @@ const AuthState = (props) => {
     email: ""
   });
 
-  const [profileId,setProfileId]=useState(undefined);
-
-
-  useEffect(() => {
-    const id = getCookie("profileId");
-    setProfileId(id);
-  }, []);
-  
   useEffect(() => {
     if (isAuthenticated === false) {
       LogoutUser();
@@ -57,7 +48,16 @@ const AuthState = (props) => {
       setUserInfo(data?.data);
       setToken(data?.token);
       notify.success("Succesfully Login");
-      profileId? router.push("/dashboard"): router.push("/createProfile");
+      if(data){
+        const id = data?.data._id;
+        const [idData, errs] = await profileAPIData(id);
+        if(idData != null){
+        router.push("/dashboard");
+        } else {
+          router.push("/createProfile");
+        }
+      }
+      
       return null;
     } else if (err) {
       console.log(err?.message);
@@ -65,6 +65,7 @@ const AuthState = (props) => {
       return err;
     }
   };
+
 
   const CreateAccount = async (body) => {
     const [data, err] = await createUserAPI(body);

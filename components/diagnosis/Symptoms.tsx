@@ -192,12 +192,3 @@ export default Symptoms;
 
 
 
-
-
-
-
-
-
-
-
-

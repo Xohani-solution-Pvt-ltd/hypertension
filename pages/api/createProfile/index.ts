@@ -38,10 +38,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 isActive
             });
             const savedProfile = await newProfileData.save();
-            if (savedProfile) {
-                // setCookie('profileId', savedProfile._id, { req, res, maxAge: 24 * 60 * 60 * 1000});
-                setCookie('profileId', savedProfile._id, { req, res});
-            }
+            
             res.status(201).json({
                 success: true,
                 message: "Profile created successfully",
