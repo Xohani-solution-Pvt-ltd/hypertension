@@ -59,10 +59,10 @@ export default function Footer() {
   return (  
 
   <section>
-    <footer className="d-flex align-items-end bg-light">
-    <Container fluid>
-        <Row className="gap-15 md:gap-4">
-          <Col md={3}>
+    <footer className="d-flex align-items-end bg-gray">
+    <Container fluid className="pt-5 pb-3">
+        <Row className="gap-15 md:gap-4 foot-res">
+          <Col md={3} className="">
               <h5 className="mb-3 text-sm font-semibold text-primary-300 uppercase">
                 <Image
                   src={LockPrimaryImg}
@@ -73,7 +73,7 @@ export default function Footer() {
                 />
                 Hypertension
                 <div className="d-flex">
-                  <div className="social-icon">
+                  <div className="social-icon foot-res">
                     <a
                       href="https://twitter.com"
                       className="twitter me-3 tfiy-icons "
@@ -101,7 +101,7 @@ export default function Footer() {
                 </div>
               </h5>
           </Col>
-          <Col md={3}>
+          <Col md={3} className="foot-res">
             <h2 className="mb-3 text-sm font-semibold font-color">About</h2>
             <div className="item-wrap">
               <h6>
@@ -123,7 +123,7 @@ export default function Footer() {
               </h6>
             </div>
           </Col>
-          <Col md={3}>
+          <Col md={3} className="foot-res">
             <h2 className="mb-3 text-sm font-semibold font-color">Our Links</h2>
             <ul
               className="text-secondary-300"
@@ -148,7 +148,7 @@ export default function Footer() {
           </Col>
           <Col md={3} className="flex justify-center items-center">
               <div className="flex items-center">
-                <div className="max-w-[40px] sm:max-w-[70px]">
+                <div className="max-w-[40px] sm:max-w-[70px] foot-res">
                   <h2 className="mb-3 text-sm font-semibold font-color">
                     Newsletter
                   </h2>
@@ -157,7 +157,7 @@ export default function Footer() {
                       <div className="container">
                         <Form>
                           <Form.Group controlId="formEmail">
-                            <Form.Label>Email address</Form.Label>
+                            <Form.Label>Email Address</Form.Label>
                             <Form.Control
                               type="email"
                               placeholder="Enter email"

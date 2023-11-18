@@ -83,11 +83,11 @@ const Login = () => {
           <Card className="bg-light" style={{ width: '40rem',border: 'groove',maxHeight:'46rem'}}>
             <Card.Body>
               <Card.Title>
-                <h4 className="text-center text-primary">Create your account:-{TITLE}</h4>
+                <h4 className="text-center text-primary">Create Your Account:-{TITLE}</h4>
               </Card.Title>
               <Card.Text>
                 <ColoredLock />
-                We take privacy issues seriously. You can be sure that your personal data is securely protected. <CrossSVG />
+                We take privacy issues seriously. You can be sure that your personal data is securely protected. 
               </Card.Text>
               <h4 className=" text-center text-primary">
                 Personal Information
@@ -124,7 +124,7 @@ const Login = () => {
                   </Form.Group>
                 </Col>
 
-                <Col md={4}>
+                <Col md={6}>
                   <Form.Group controlId="mobile" className="mb-4">
                     <Form.Label>Mobile</Form.Label>
                     <Form.Control
