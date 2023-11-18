@@ -207,12 +207,3 @@ export default Symptoms;
 
 
 
-
-
-
-
-
-
-
-
-

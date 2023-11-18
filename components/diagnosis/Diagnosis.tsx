@@ -1,5 +1,4 @@
-
-import React, { useEffect, useRef, useState, useMemo } from "react";
+import React, { useEffect, useRef, useState, useMemo, useContext } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import AccusureImg from "../../assets/images/accusure.jpeg";
@@ -19,6 +18,7 @@ import {
 import { getCookie } from "cookies-next";
 import notify from "../../helpers/notify";
 import { verifyJWTandCheckUser } from "../../utils/userFromJWT";
+import { AuthContext } from "../../context/authentication";
 
 const validationSchema = Yup.object({
   systolic: Yup.number()
@@ -35,7 +35,11 @@ const validationSchema = Yup.object({
     .max(120, "Pulse rate should not exceed 120"),
 });
 
+
 const Diagnosis = ({ submit }) => {
+
+const { userInfo } = useContext(AuthContext);
+
 
   const [diagnosisId, setDiagnosisId] = useState(undefined);
   const [diagnosisData, setDiagnosisData] = useState(initialDiagnosisValues);
@@ -45,11 +49,12 @@ const Diagnosis = ({ submit }) => {
   const [pulseRateData, setPulseRateData] = useState(null);
   const [checkedData,setCheckedData]=useState(false);
 
+
     const handleInputChange = (e) => {
     const systolic = e.target.form.systolic.value;
     const diastolic = e.target.form.diastolic.value;
-    const pulseRate = e.target.form.pulseRate.value;
 
+    const pulseRate = e.target.form.pulseRate.value ;
 
     setCheckedData(!!systolic && !!diastolic && !!pulseRate);
   };
@@ -88,8 +93,10 @@ const Diagnosis = ({ submit }) => {
 
   const fetchDiagnosisDetailData = async (id) => {
     const [data, err] = await getDiagnosisDetailsAPI(id);
-    if (data) {
+    if (data?.data != null) {
       setDiagnosisData(data.data);
+      setEditing(true);
+      setDiagnosisId(data.data._id);
     }
     if (err) {
       notify.error(err?.message);
@@ -105,13 +112,14 @@ const Diagnosis = ({ submit }) => {
   }, [diagnosisData]);
 
   useEffect(() => {
-    const id = getCookie("diagnosisId");
-    setDiagnosisId(id);
-    if (id) {
-      setEditing(true);
+    // const id=userInfo._id;
+    if (userInfo && userInfo._id) {
+      const id = userInfo._id;
       fetchDiagnosisDetailData(id);
     }
-  }, []);
+  }, [userInfo]);
+
+  
 
   return (
     <>
@@ -169,7 +177,8 @@ const Diagnosis = ({ submit }) => {
                         <label>If No Any Diagnosis Click On Submit Button</label>
                         <button type="submit" className="btn btn-primary display-4" onClick={() => submit("comorbidities")}
 
-                        disabled={editing ? checkedData : !checkedData}
+                        // disabled={editing ? checkedData : !checkedData}
+
                         >
                            {editing ? "Edit" : "Create"}
                         </button>
@@ -196,8 +205,6 @@ export default Diagnosis;
 
 
 
-
-
 // import React, { useEffect, useRef, useState, useMemo } from "react";
 // import Image from "next/image";
 // import { useRouter } from "next/router";
@@ -213,9 +220,11 @@ export default Diagnosis;
 // import {
 //   submitDiagnosisAPI,
 //   getDiagnosisDetailsAPI,
+//   updateDiagnosisAPI,
 // } from "../../services/call";
 // import { getCookie } from "cookies-next";
 // import notify from "../../helpers/notify";
+// import { verifyJWTandCheckUser } from "../../utils/userFromJWT";
 
 // const validationSchema = Yup.object({
 //   systolic: Yup.number()
@@ -232,44 +241,82 @@ export default Diagnosis;
 //     .max(120, "Pulse rate should not exceed 120"),
 // });
 
-// const Diagnosis = ({submit}) => {
-//   const router = useRouter();
-//   const [processing, setProcessing] = useState(false);
+// const Diagnosis = ({ submit }) => {
 //   const [diagnosisId, setDiagnosisId] = useState(undefined);
-//   const [atLeastOneCheckboxChecked, setAtLeastOneCheckboxChecked] = useState(false);
+//   const [diagnosisData, setDiagnosisData] = useState(initialDiagnosisValues);
+//   const [editing, setEditing] = useState(false);
+//   const [systolicData, setSytoliData] = useState(null);
+//   const [diastolicData, setDiastolicData] = useState(null);
+//   const [pulseRateData, setPulseRateData] = useState(null);
+//   const [checkedData,setCheckedData]=useState(false);
 
-//   const handleInputChange = (e) => {
+//     const handleInputChange = (e) => {
 //     const systolic = e.target.form.systolic.value;
 //     const diastolic = e.target.form.diastolic.value;
 //     const pulseRate = e.target.form.pulseRate.value;
 
-//     setAtLeastOneCheckboxChecked(!!systolic && !!diastolic && !!pulseRate);
+//     setCheckedData(!!systolic && !!diastolic && !!pulseRate);
 //   };
 
-//   const handleSubmit = async (values: DiagnosisInterface) => {
-//     if (
-//       values.diastolic &&
-//       values.pulseRate &&
-//       values.systolic 
-//      ){
-//        const [data, err] = await submitDiagnosisAPI(values);
-//      if(data){
-//        notify.success("Succesfully Diagnosis");
+//   const handleSubmit = async () => {
+//     if (systolicData || diastolicData || pulseRateData) {
+
+//       const userData: DiagnosisInterface =
+//       {
+//         systolic: systolicData,
+//         diastolic: diastolicData,
+//         pulseRate: pulseRateData
+//       };
+//       if (editing) {
+//         if (diagnosisId) {
+
+//           const [data, err] = await updateDiagnosisAPI(diagnosisId, userData);
+//           if (data) {
+//             notify.success("Successfully updated diagnosis");
+//           }
+//         } else {
+//           notify.error("Diagnosis ID is missing. Cannot update.");
+//         }
+//       } else {
+//         const [data, err] = await submitDiagnosisAPI(userData);
+//         if (data) {
+//           setEditing(true);
+//           setDiagnosisId(data.id);
+//           notify.success("Successfully Added diagnosis");
+//         }
 //       }
-//     if(err){
-//         setTimeout(() => {
-//         setProcessing(false);
-//         notify.error(err?.message);
-//       }, 1000);
-//      }
-//     useEffect(() =>{
-//       const id = getCookie('diagnosisId')
-//       setDiagnosisId(id)
-//          }, []);
-//     } else{
-//   notify.error("Please fill in all the required fields.");
-//      }
-//   }
+//     } else {
+//       notify.error("Please fill in all the required fields.");
+//     }
+//   };
+
+//   const fetchDiagnosisDetailData = async (id) => {
+//     const [data, err] = await getDiagnosisDetailsAPI(id);
+//     if (data) {
+//       setDiagnosisData(data.data);
+//     }
+//     if (err) {
+//       notify.error(err?.message);
+//     }
+//   };
+
+//   useEffect(() => {
+//     if (diagnosisData != undefined) {
+//       setSytoliData(diagnosisData.systolic);
+//       setDiastolicData(diagnosisData.diastolic);
+//       setPulseRateData(diagnosisData.pulseRate);
+//     }
+//   }, [diagnosisData]);
+
+//   useEffect(() => {
+//     const id = getCookie("diagnosisId");
+//     setDiagnosisId(id);
+//     if (id) {
+//       setEditing(true);
+//       fetchDiagnosisDetailData(id);
+//     }
+//   }, []);
+
 //   return (
 //     <>
 //       <Row className="media-container-row">
@@ -281,60 +328,48 @@ export default Diagnosis;
 //             <Col md={1} className="align-left"></Col>
 //             <Col md={6} className="align-left">
 //               <Formik
-//                 initialValues={initialDiagnosisValues}
+//                 initialValues={diagnosisData}
 //                 validationSchema={validationSchema}
 //                 onSubmit={handleSubmit}
 //                 enableReinitialize={true}
 //               >
 //                 {({ setFieldValue }) => {
-//                   useEffect(() => {
-//                     const fetchDiagnosisDetailData = async () => {
-//                       const [data, err] = await getDiagnosisDetailsAPI(
-//                         diagnosisId
-//                       );
-//                       if (data) {
-//                         const { diastolic, pulseRate, systolic } = data;
-//                         setFieldValue("diastolic", diastolic);
-//                         setFieldValue("pulseRate", pulseRate);
-//                         setFieldValue("systolic", systolic);
-//                       }
-//                       if (err) {
-//                         setTimeout(() => {
-//                           setProcessing(false);
-//                           notify.error(err?.message);
-//                         }, 1000);
-//                       }
-//                     };
-//                     if (diagnosisId) {
-//                       fetchDiagnosisDetailData();
-//                     }
-//                   }, [diagnosisId]);
+
 //                   return (
 //                     <Form>
 //                       <div className="p-1">
 //                         <Field type="number" id="systolic" name="systolic" className="form-control" placeholder="SYS" onChange={(e) => {
-//                         setFieldValue('systolic', e.target.value);
-//                                         handleInputChange(e);
-//                         }}/>
+//                           setFieldValue('systolic', e.target.value);
+//                           setSytoliData(e.target.value);
+//                           handleInputChange(e);
+//                         }}
+//                         />
 //                         <ErrorMessage name="systolic" component="div" className="text-danger" />
 //                       </div>
 //                       <div className="p-1">
 //                         <Field type="number" id="diastolic" name="diastolic" className="form-control" placeholder="DIA" onChange={(e) => {
-//                         setFieldValue('diastolic', e.target.value);
-//                                         handleInputChange(e);
-//                         }}/>
+//                           setFieldValue('diastolic', e.target.value);
+//                           setDiastolicData(e.target.value);
+//                           handleInputChange(e);
+//                         }}
+//                         />
 //                         <ErrorMessage name="diastolic" component="div" className="text-danger" />
 //                       </div>
 //                       <div className="p-1">
 //                         <Field type="number" id="pulseRate" name="pulseRate" className="form-control" placeholder="PUL" onChange={(e) => {
-//                         setFieldValue('pulseRate', e.target.value);
-//                                         handleInputChange(e);
-//                         }}/>
+//                           setFieldValue('pulseRate', e.target.value);
+//                           setPulseRateData(e.target.value);
+//                           handleInputChange(e);
+//                         }}
+//                         />
 //                         <ErrorMessage name="pulseRate" component="div" className="text-danger" />
 //                       </div>
 //                       <div className="text-end mt-4">
 //                         <button type="submit" className="btn btn-primary display-4" onClick={() => submit("comorbidities")}
-//                         disabled={!atLeastOneCheckboxChecked} >Next</button>
+//                         disabled={editing ? checkedData : !checkedData}
+//                         >
+//                            {editing ? "Edit" : "Create"}
+//                         </button>
 //                       </div>
 //                     </Form>
 //                   );
@@ -353,3 +388,4 @@ export default Diagnosis;
 // };
 
 // export default Diagnosis;
+

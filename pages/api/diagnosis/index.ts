@@ -28,10 +28,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         pulseRate,
       });
       const savedDiagnosis = await newDiagnosis.save();
-      if(savedDiagnosis)
-      {
-        setCookie('diagnosisId', savedDiagnosis._id, { req, res, maxAge: 60 * 60 * 24 });
-      }
+      // if(savedDiagnosis)
+      // {
+      //   setCookie('diagnosisId', savedDiagnosis._id, { req, res, maxAge: 60 * 60 * 24 });
+      // }
       res.status(201).json({
         success: true,
         message: "Diagnosis created successfully",
