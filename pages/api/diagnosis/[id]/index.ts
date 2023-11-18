@@ -17,11 +17,13 @@ if (req.method === "GET") {
         message: "successfully",
         data: diagnosisData
       });
-    }catch (error){
+    }
+    catch (error){
         res.status(500).json({ 
           success: false,
           message: "Failed to retrieve Diagnosis" });
        } 
+
     }else 
 if (req.method === "PUT") {
   const { id } = req.query; 
@@ -31,11 +33,13 @@ if (req.method === "PUT") {
       const existingDiagnosis = await DiagnosisModel.findByIdAndUpdate(id);
       if (!existingDiagnosis) {
         res.status(404).json({
+
           success: false,
           message: "Diagnosis not found",
         });
         return;
       }
+
 
       existingDiagnosis.systolic = systolic;
       existingDiagnosis.diastolic = diastolic;
@@ -55,6 +59,7 @@ if (req.method === "PUT") {
       });
     }
   }else if (req.method === "DELETE"){
+
         try {
           const { id } = req.query;
           const deletedDiagnosis = await DiagnosisModel.findByIdAndDelete(id);
@@ -69,7 +74,8 @@ if (req.method === "PUT") {
         } catch (error) {
           res.status(500).json({ error: "Failed to delete the Diagnosis" });
         }
-      }else {
+      }
+      else {
     res.status(405).json({
       success: false,
       message: "Invalid method",

@@ -1,4 +1,4 @@
-export interface BloodTestInterface{
+export interface BloodTestInterface {
     hbA1cLevel: Number,
     normalHbA1cLevel : Number,
     hBA1CInterpretation: String,
@@ -29,7 +29,7 @@ export interface BloodTestInterface{
     ejectionFraction: Number,
 }
 
-export const intialBloodTestValue : BloodTestInterface={
+export const intialBloodTestValue: BloodTestInterface = {
     hbA1cLevel: undefined,
     normalHbA1cLevel : undefined,
     hBA1CInterpretation: undefined,

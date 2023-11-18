@@ -10,6 +10,7 @@ import { AuthContext } from "../context/authentication";
 import Loading from "./Loading";
 
 import { LayoutProps } from "../interfaces/index";
+import { Container } from "react-bootstrap";
 
 const Layout = ({
   children,
@@ -20,6 +21,7 @@ const Layout = ({
 
   return (
     <>
+    <Container>
       <Header />
       {children}
       {/* {loading === true || isAuthenticated === null ? (
@@ -28,6 +30,7 @@ const Layout = ({
         <div className="min-h-[30rem]">{children}</div>
       )} */}
       <Footer />
+      </Container>
     </>
   );
 };
@@ -45,7 +48,7 @@ const StaticLayout = ({
       </Head>
       <Header />
       {children}
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };

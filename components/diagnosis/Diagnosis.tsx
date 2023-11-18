@@ -37,7 +37,9 @@ const validationSchema = Yup.object({
 
 
 const Diagnosis = ({ submit }) => {
+
 const { userInfo } = useContext(AuthContext);
+
 
   const [diagnosisId, setDiagnosisId] = useState(undefined);
   const [diagnosisData, setDiagnosisData] = useState(initialDiagnosisValues);
@@ -51,7 +53,9 @@ const { userInfo } = useContext(AuthContext);
     const handleInputChange = (e) => {
     const systolic = e.target.form.systolic.value;
     const diastolic = e.target.form.diastolic.value;
+
     const pulseRate = e.target.form.pulseRate.value ;
+
     setCheckedData(!!systolic && !!diastolic && !!pulseRate);
   };
 
@@ -125,7 +129,6 @@ const { userInfo } = useContext(AuthContext);
         </h4>
         <Col md={12} className="p-3 align-left">
           <Row className="media-container-row">
-            <Col md={1} className="align-left"></Col>
             <Col md={6} className="align-left">
               <Formik
                 initialValues={diagnosisData}
@@ -140,36 +143,46 @@ const { userInfo } = useContext(AuthContext);
                       <div className="p-1">
                         <Field type="number" id="systolic" name="systolic" className="form-control" placeholder="SYS" onChange={(e) => {
                           setFieldValue('systolic', e.target.value);
+
                           setSytoliData(e.target.value);
                           handleInputChange(e);
                         }}
                         />
+
                         <ErrorMessage name="systolic" component="div" className="text-danger" />
                       </div>
                       <div className="p-1">
                         <Field type="number" id="diastolic" name="diastolic" className="form-control" placeholder="DIA" onChange={(e) => {
                           setFieldValue('diastolic', e.target.value);
+
                           setDiastolicData(e.target.value);
                           handleInputChange(e);
                         }}
                         />
+
                         <ErrorMessage name="diastolic" component="div" className="text-danger" />
                       </div>
                       <div className="p-1">
                         <Field type="number" id="pulseRate" name="pulseRate" className="form-control" placeholder="PUL" onChange={(e) => {
                           setFieldValue('pulseRate', e.target.value);
+
                           setPulseRateData(e.target.value);
                           handleInputChange(e);
                         }}
                         />
+
                         <ErrorMessage name="pulseRate" component="div" className="text-danger" />
                       </div>
                       <div className="text-end mt-4">
+                        <label>If No Any Diagnosis Click On Submit Button</label>
                         <button type="submit" className="btn btn-primary display-4" onClick={() => submit("comorbidities")}
+
                         // disabled={editing ? checkedData : !checkedData}
+
                         >
                            {editing ? "Edit" : "Create"}
                         </button>
+
                       </div>
                     </Form>
                   );
@@ -181,7 +194,6 @@ const { userInfo } = useContext(AuthContext);
             </Col>
           </Row>
         </Col>
-        <Col md={2} className="p-3 align-left"></Col>
       </Row>
     </>
   );

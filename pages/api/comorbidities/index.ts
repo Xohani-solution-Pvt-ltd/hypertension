@@ -42,12 +42,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         message: "Comorbidities created successfully",
         data: savedComorbidities,
       });
-    } catch (error) {
+    }
+     catch (error) {
       res.status(400).json({
         success: false,
         message: error.message,
       });
     }
+
    }
  // else if (req.method === "GET") {
   //   try {
@@ -64,6 +66,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   //      } 
   //   }
   else {
+
     res.status(405).json({
       success: false,
       message: "Invalid method",

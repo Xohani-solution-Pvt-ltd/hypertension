@@ -13,10 +13,11 @@ const success = (msg) => {
   });
 };
 
+
 const error = (msg) => {
   toast.error(msg, {
     position: "bottom-right",
-    autoClose: 1000,
+    autoClose:1000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,

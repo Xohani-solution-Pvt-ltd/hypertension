@@ -10,7 +10,7 @@ import {
 import { APP_INFO } from "../environments/index";
 import { AuthContext } from "../context/authentication";
 import notify from "../helpers/notify";
-import { Container, Row, Col, Button, Form, Dropdown } from "react-bootstrap";
+import { Container, Row, Col, Button, Form, Dropdown, Card } from "react-bootstrap";
 import { BeatLoader } from "react-spinners";
 
 const Login = () => {
@@ -47,8 +47,7 @@ const Login = () => {
         selectedAlcoholConsumption &&
         selectedSmokingStatus &&
         selectedPhysicalActivity
-      )
-    ) {
+      )) {
       console.log("Fill All values");
       notify.error("Fill All values");
       return;
@@ -83,161 +82,316 @@ const Login = () => {
 
   return (
     <Layout title={`UserProfileCreation | ${TITLE}`}>
-      <section className="d-flex justify-content-center">
-          <Container fluid>
-            <Row className="d-flex justify-content-center pt-5">
-              <Col md={6}>
-                <h1 className="text-bold px-5">User Profile Creation</h1>
-                <Form className="mt-8 space-y-6" onSubmit={Submit}>
-                  <Form.Group controlId="dateOfBirth" className="mb-4">
-                    <Form.Label>Date of Birth</Form.Label>
-                    <Form.Control
-                      tabIndex={0}
-                      type="date"
-                      ref={dateOfBirth_ref}
-                      name="dateOfBirth"
-                      className="rounded-none form-control-secondary-300"
-                      placeholder="enter birth"
-                      aria-labelledby="dateOfBirth"
-                      required={true}
-                    />
-                  </Form.Group>
-                  <Form.Group controlId="address" className="mb-4">
-                    <Form.Label>Address</Form.Label>
-                    <Form.Control
-                      tabIndex={0}
-                      type="text"
-                      ref={address_ref}
-                      name="address"
-                      className="rounded-none form-control-secondary-300"
-                      placeholder="enter address"
-                      aria-labelledby="address"
-                      required={true}
-                    />
-                  </Form.Group>
-                  <Form.Group controlId="weight" className="mb-4">
-                    <Form.Label>Weight (in kg)</Form.Label>
-                    <Form.Control
-                      tabIndex={0}
-                      type="number"
-                      ref={weight_ref}
-                      name="weight"
-                      className="rounded-none form-control-secondary-300"
-                      placeholder="enter weight"
-                      aria-labelledby="weight"
-                      required={true}
-                    />
-                  </Form.Group>
-                  <Form.Group controlId="height" className="mb-4">
-                    <Form.Label>Height (in cm)</Form.Label>
-                    <Form.Control
-                      tabIndex={0}
-                      type="number"
-                      ref={height_ref}
-                      name="height"
-                      className="rounded-none form-control-secondary-300"
-                      placeholder="enter height"
-                      aria-labelledby="height"
-                      required={true}
-                    />
-                  </Form.Group>
-                  <Form.Group controlId="gender" className="mb-4">
-                    <Form.Label>Gender</Form.Label>
-                    <Dropdown
-                      onSelect={(selectedValue) =>
-                        setSelectedGender(selectedValue)
-                      }
-                    >
-                      <Dropdown.Toggle variant="primary">
-                        {selectedGender || "Select Gender"}
-                      </Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        {genderOptions.map((gender) => (
-                          <Dropdown.Item key={gender} eventKey={gender}>
-                            {gender}
-                          </Dropdown.Item>
-                        ))}
-                      </Dropdown.Menu>
-                    </Dropdown>
-                  </Form.Group>
-
-                  <Form.Group controlId="alcoholConsumption" className="mb-4">
-                    <Form.Label>Alcohol Consumption</Form.Label>
-                    <Dropdown
-                      onSelect={(selectedValue) =>
-                        setSelectedAlcoholConsumption(selectedValue)
-                      }
-                    >
-                      <Dropdown.Toggle variant="primary">
-                        {selectedAlcoholConsumption ||
-                          "Select AlcoholConsumption"}
-                      </Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        {alcoholConsumptionOptions.map((alcoholConsumption) => (
-                          <Dropdown.Item
-                            key={alcoholConsumption}
-                            eventKey={alcoholConsumption}
-                          >
-                            {alcoholConsumption}
-                          </Dropdown.Item>
-                        ))}
-                      </Dropdown.Menu>
-                    </Dropdown>
-                  </Form.Group>
-                  <Form.Group controlId="smokingStatus" className="mb-4">
-                    <Form.Label>Smoking Status</Form.Label>
-                    <Dropdown
-                      onSelect={(selectedValue) =>
-                        setSelectedSmokingStatus(selectedValue)
-                      }
-                    >
-                      <Dropdown.Toggle variant="primary">
-                        {selectedSmokingStatus || "Select SmokingStatus"}
-                      </Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        {smokingStatusOptions.map((smokingStatus) => (
-                          <Dropdown.Item
-                            key={smokingStatus}
-                            eventKey={smokingStatus}
-                          >
-                            {smokingStatus}
-                          </Dropdown.Item>
-                        ))}
-                      </Dropdown.Menu>
-                    </Dropdown>
-                  </Form.Group>
-                  <Form.Group controlId="physicalActivity" className="mb-4">
-                    <Form.Label>Physical Activity</Form.Label>
-                    <Dropdown
-                      onSelect={(selectedValue) =>
-                        setSelectedPhysicalActivity(selectedValue)
-                      }
-                    >
-                      <Dropdown.Toggle variant="primary">
-                        {selectedPhysicalActivity || "Select physicalActivity"}
-                      </Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        {physicalActivityOptions.map((physicalActivity) => (
-                          <Dropdown.Item
-                            key={physicalActivity}
-                            eventKey={physicalActivity}
-                          >
-                            {physicalActivity}
-                          </Dropdown.Item>
-                        ))}
-                      </Dropdown.Menu>
-                    </Dropdown>
-                  </Form.Group>
-                  <div className="text-end">
-                    <Button variant="primary" type="submit">
-                      Submit
-                    </Button>
-                  </div>
-                </Form>
-              </Col>
-            </Row>
-          </Container>
-      </section>
+      {/* <section className="d-flex justify-content-center pt-5 bg-white">
+        <Container fluid>
+          <Row className="d-flex justify-content-center pt-5 ">
+            <Col md={6}>
+              <h1 className="text-bold px-5">User Profile Creation</h1>
+              <Form className="mt-8 space-y-6" onSubmit={Submit}>
+                <Form.Group controlId="dateOfBirth" className="mb-4">
+                  <Form.Label>Date of Birth</Form.Label>
+                  <Form.Control
+                    tabIndex={0}
+                    type="date"
+                    ref={dateOfBirth_ref}
+                    name="dateOfBirth"
+                    className="rounded-none form-control-secondary-300"
+                    placeholder="enter birth"
+                    aria-labelledby="dateOfBirth"
+                    required={true}
+                  />
+                </Form.Group>
+                <Form.Group controlId="address" className="mb-4">
+                  <Form.Label>Address</Form.Label>
+                  <Form.Control
+                    tabIndex={0}
+                    type="text"
+                    ref={address_ref}
+                    name="address"
+                    className="rounded-none form-control-secondary-300"
+                    placeholder="enter address"
+                    aria-labelledby="address"
+                    required={true}
+                  />
+                </Form.Group>
+                <Form.Group controlId="weight" className="mb-4">
+                  <Form.Label>Weight (in kg)</Form.Label>
+                  <Form.Control
+                    tabIndex={0}
+                    type="number"
+                    ref={weight_ref}
+                    name="weight"
+                    className="rounded-none form-control-secondary-300"
+                    placeholder="enter weight"
+                    aria-labelledby="weight"
+                    required={true}
+                  />
+                </Form.Group>
+                <Form.Group controlId="height" className="mb-4">
+                  <Form.Label>Height (in cm)</Form.Label>
+                  <Form.Control
+                    tabIndex={0}
+                    type="number"
+                    ref={height_ref}
+                    name="height"
+                    className="rounded-none form-control-secondary-300"
+                    placeholder="enter height"
+                    aria-labelledby="height"
+                    required={true}
+                  />
+                </Form.Group>
+                <Form.Group controlId="gender" className="mb-4">
+                  <Form.Label>Gender</Form.Label>
+                  <Dropdown
+                    onSelect={(selectedValue) =>
+                      setSelectedGender(selectedValue)
+                    }
+                  >
+                    <Dropdown.Toggle variant="primary">
+                      {selectedGender || "Select Gender"}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      {genderOptions.map((gender) => (
+                        <Dropdown.Item key={gender} eventKey={gender}>
+                          {gender}
+                        </Dropdown.Item>
+                      ))}
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </Form.Group>
+                <Form.Group controlId="alcoholConsumption" className="mb-4">
+                  <Form.Label>Alcohol Consumption</Form.Label>
+                  <Dropdown
+                    onSelect={(selectedValue) =>
+                      setSelectedAlcoholConsumption(selectedValue)
+                    }
+                  >
+                    <Dropdown.Toggle variant="primary">
+                      {selectedAlcoholConsumption ||
+                        "Select AlcoholConsumption"}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      {alcoholConsumptionOptions.map((alcoholConsumption) => (
+                        <Dropdown.Item
+                          key={alcoholConsumption}
+                          eventKey={alcoholConsumption}
+                        >
+                          {alcoholConsumption}
+                        </Dropdown.Item>
+                      ))}
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </Form.Group>
+                <Form.Group controlId="smokingStatus" className="mb-4">
+                  <Form.Label>Smoking Status</Form.Label>
+                  <Dropdown
+                    onSelect={(selectedValue) =>
+                      setSelectedSmokingStatus(selectedValue)
+                    }
+                  >
+                    <Dropdown.Toggle variant="primary">
+                      {selectedSmokingStatus || "Select SmokingStatus"}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      {smokingStatusOptions.map((smokingStatus) => (
+                        <Dropdown.Item
+                          key={smokingStatus}
+                          eventKey={smokingStatus}
+                        >
+                          {smokingStatus}
+                        </Dropdown.Item>
+                      ))}
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </Form.Group>
+                <Form.Group controlId="physicalActivity" className="mb-4">
+                  <Form.Label>Physical Activity</Form.Label>
+                  <Dropdown
+                    onSelect={(selectedValue) =>
+                      setSelectedPhysicalActivity(selectedValue)
+                    }
+                  >
+                    <Dropdown.Toggle variant="primary">
+                      {selectedPhysicalActivity || "Select physicalActivity"}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      {physicalActivityOptions.map((physicalActivity) => (
+                        <Dropdown.Item
+                          key={physicalActivity}
+                          eventKey={physicalActivity}
+                        >
+                          {physicalActivity}
+                        </Dropdown.Item>
+                      ))}
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </Form.Group>
+                <div className="text-end">
+                  <Button variant="primary" type="submit">
+                    Submit
+                  </Button>
+                </div>
+              </Form>
+            </Col>
+          </Row>
+        </Container>
+      </section> */}
+      <Container className="pt-5 pb-5" fluid>
+        <Row className="d-flex justify-content-center pt-5">
+          <Card className="bg-light" style={{ width: '40rem', border: 'groove', maxHeight: '57rem' }}>
+            <Card.Body>
+              <Card.Title>
+                <h1 className="text-center text-bold">User Profile Creation</h1>
+              </Card.Title>
+              <Form className="mt-8 space-y-6" onSubmit={Submit}>
+                <Form.Group controlId="dateOfBirth" className="mb-4">
+                  <Form.Label>Date of Birth</Form.Label>
+                  <Form.Control
+                    tabIndex={0}
+                    type="date"
+                    ref={dateOfBirth_ref}
+                    name="dateOfBirth"
+                    className="rounded-none form-control-secondary-300"
+                    placeholder="enter birth"
+                    aria-labelledby="dateOfBirth"
+                    required={true}
+                  />
+                </Form.Group>
+                <Form.Group controlId="address" className="mb-4">
+                  <Form.Label>Address</Form.Label>
+                  <Form.Control
+                    tabIndex={0}
+                    type="text"
+                    ref={address_ref}
+                    name="address"
+                    className="rounded-none form-control-secondary-300"
+                    placeholder="enter address"
+                    aria-labelledby="address"
+                    required={true}
+                  />
+                </Form.Group>
+                <Form.Group controlId="weight" className="mb-4">
+                  <Form.Label>Weight (in kg)</Form.Label>
+                  <Form.Control
+                    tabIndex={0}
+                    type="number"
+                    ref={weight_ref}
+                    name="weight"
+                    className="rounded-none form-control-secondary-300"
+                    placeholder="enter weight"
+                    aria-labelledby="weight"
+                    required={true}
+                  />
+                </Form.Group>
+                <Form.Group controlId="height" className="mb-4">
+                  <Form.Label>Height (in cm)</Form.Label>
+                  <Form.Control
+                    tabIndex={0}
+                    type="number"
+                    ref={height_ref}
+                    name="height"
+                    className="rounded-none form-control-secondary-300"
+                    placeholder="enter height"
+                    aria-labelledby="height"
+                    required={true}
+                  />
+                </Form.Group>
+                <Form.Group controlId="gender" className="mb-4">
+                  <Form.Label>Gender</Form.Label>
+                  <Dropdown
+                    onSelect={(selectedValue) =>
+                      setSelectedGender(selectedValue)
+                    }
+                  >
+                    <Dropdown.Toggle variant="primary">
+                      {selectedGender || "Select Gender"}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      {genderOptions.map((gender) => (
+                        <Dropdown.Item key={gender} eventKey={gender}>
+                          {gender}
+                        </Dropdown.Item>
+                      ))}
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </Form.Group>
+                <Form.Group controlId="alcoholConsumption" className="mb-4">
+                  <Form.Label>Alcohol Consumption</Form.Label>
+                  <Dropdown
+                    onSelect={(selectedValue) =>
+                      setSelectedAlcoholConsumption(selectedValue)
+                    }
+                  >
+                    <Dropdown.Toggle variant="primary">
+                      {selectedAlcoholConsumption ||
+                        "Select AlcoholConsumption"}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      {alcoholConsumptionOptions.map((alcoholConsumption) => (
+                        <Dropdown.Item
+                          key={alcoholConsumption}
+                          eventKey={alcoholConsumption}
+                        >
+                          {alcoholConsumption}
+                        </Dropdown.Item>
+                      ))}
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </Form.Group>
+                <Form.Group controlId="smokingStatus" className="mb-4">
+                  <Form.Label>Smoking Status</Form.Label>
+                  <Dropdown
+                    onSelect={(selectedValue) =>
+                      setSelectedSmokingStatus(selectedValue)
+                    }
+                  >
+                    <Dropdown.Toggle variant="primary">
+                      {selectedSmokingStatus || "Select SmokingStatus"}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      {smokingStatusOptions.map((smokingStatus) => (
+                        <Dropdown.Item
+                          key={smokingStatus}
+                          eventKey={smokingStatus}
+                        >
+                          {smokingStatus}
+                        </Dropdown.Item>
+                      ))}
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </Form.Group>
+                <Form.Group controlId="physicalActivity" className="mb-4">
+                  <Form.Label>Physical Activity</Form.Label>
+                  <Dropdown
+                    onSelect={(selectedValue) =>
+                      setSelectedPhysicalActivity(selectedValue)
+                    }
+                  >
+                    <Dropdown.Toggle variant="primary">
+                      {selectedPhysicalActivity || "Select physicalActivity"}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      {physicalActivityOptions.map((physicalActivity) => (
+                        <Dropdown.Item
+                          key={physicalActivity}
+                          eventKey={physicalActivity}
+                        >
+                          {physicalActivity}
+                        </Dropdown.Item>
+                      ))}
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </Form.Group>
+                <div className="text-end">
+                  <Button variant="primary" type="submit">
+                    Submit
+                  </Button>
+                </div>
+              </Form>
+            </Card.Body>
+          </Card>
+        </Row>
+      </Container>
     </Layout>
   );
 };

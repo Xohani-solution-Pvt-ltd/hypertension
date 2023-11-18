@@ -78,14 +78,14 @@ const DecideContraindication = ({ submit, preview }) => {
   }, [criteria]);
 
   return (
-    <div>
-           <h3>Decide Contraindications</h3>
-      {contraindication1}
-      <br />
-      {contraindication2}
-      <br />
-      {contraindication3}
-      <div className="text-end mt-4">
+    <>
+    <div className="text-center pt-5">
+      <h3>Decide Contraindications</h3>
+      <p>{contraindication1}</p>
+      <p>{contraindication2}</p>
+      <p>{contraindication3}</p>
+      </div>
+      <div className="mt-4">
         <button
           type="button"
           className="btn btn-primary display-4"
@@ -93,17 +93,15 @@ const DecideContraindication = ({ submit, preview }) => {
         >
           Back
         </button>
-      </div>
-      <div className="text-end mt-4">
         <button
           type="submit"
-          className="btn btn-primary display-4"
+          className="float-end btn btn-primary display-4"
           onClick={() => submit('treatment')}
         >
           Next
         </button>
       </div>
-    </div>
+    </>
   );
 };
 

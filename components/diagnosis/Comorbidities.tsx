@@ -9,6 +9,8 @@ import { getCookie } from 'cookies-next';
 import notify from "../../helpers/notify";
 import { ComorbiditiesInterface, initialComorbiditiesValues } from '../../interfaces/comorbidities';
 import { Col, Row } from 'react-bootstrap';
+import Image from "next/image";
+import ComorbiditiesImg from '../../assets/images/Comorbidities.jpg';
 
 const validationSchema = Yup.object({
   cva: Yup.boolean(),
@@ -171,6 +173,7 @@ const Comorbidities = ({submit,preview}) => {
                         </label>
                         <ErrorMessage name="pregnancy" component="div" className="text-danger" />
                       </div>
+                      <label className='mt-4'>If No Any Comorbidities Click On Submit Button</label>
                       <div className="mt-4">
                       <button type="button" className="text-start btn btn-primary display-4" onClick={() => preview("diagnosis")} 
                                >Back</button>
@@ -182,7 +185,13 @@ const Comorbidities = ({submit,preview}) => {
                 }}
               </Formik>
             </Col>
-            <Col md={3} className="align-left">
+            <Col md={3} className="">
+            <Image
+              src={ComorbiditiesImg}
+              height={300}
+              width={300}
+             alt="Hypertension"
+              />
             </Col>
           </Row>
         </Col>

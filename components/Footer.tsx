@@ -1,12 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import { Container, Row, Col, Form, Button, Badge } from "react-bootstrap";
-import { SOCIAL_URL, WEBSITE_LINK, APP_INFO } from "../environments/index";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { SOCIAL_URL, APP_INFO } from "../environments/index";
 import Image from "next/image";
 import { useState } from "react";
 import { Twitter, Instagram, Youtube, Clock, Key } from "react-bootstrap-icons";
 import LockPrimaryImg from "../assets/images/lock-primary-100.png";
-import { Badge3d } from "react-bootstrap-icons";
+
 
 export default function Footer() {
   const { TITLE, DESCRIPTION } = APP_INFO;
@@ -23,13 +23,16 @@ export default function Footer() {
 
       if (response.ok) {
         console.log("Form submitted successfully");
-      } else {
+      } 
+      else {
         console.error("Form submission failed");
       }
-    } catch (error) {
+    }
+     catch (error) {
       console.error("An error occurred", error);
     }
   };
+
 
   const handleSubscribe = async () => {
     try {
@@ -41,6 +44,7 @@ export default function Footer() {
         body: JSON.stringify({ email }),
       });
 
+
       if (response.ok) {
         console.log("Subscription successful!");
       } else {
@@ -51,12 +55,14 @@ export default function Footer() {
     }
   };
 
-  return (
-    <footer className="d-flex align-items-end w-full bg-white-500 container-lg">
-      <Container fluid>
-        <Row className="gap-15 px-6 py-8 md:gap-4">
-          <Col md={3} className="foot-res">
-            <Container>
+
+  return (  
+
+  <section>
+    <footer className="d-flex align-items-end bg-light">
+    <Container fluid>
+        <Row className="gap-15 md:gap-4">
+          <Col md={3}>
               <h5 className="mb-3 text-sm font-semibold text-primary-300 uppercase">
                 <Image
                   src={LockPrimaryImg}
@@ -93,37 +99,9 @@ export default function Footer() {
                     </a>
                   </div>
                 </div>
-                {/* <div className="container-fluid">
-                  <div className="all-icon">
-                    <a
-                      href="https://twitter.com"
-                      className="twitter tfiy-icons me-3"
-                    >
-                      <i className="fab fa-twitter ">
-                        <Twitter />
-                      </i>
-                    </a>
-                    <a
-                      href="https://instagram.com"
-                      className="instagram tfiy-icons me-3"
-                    >
-                      <i className="fab fa-instagram"></i>
-                      <Instagram />
-                    </a>
-                    <a
-                      href="https://youtube.com"
-                      className="youtube tfiy-icons me-3"
-                    >
-                      <i className="fab fa-youtube">
-                        <Youtube />
-                      </i>
-                    </a>
-                  </div>
-                </div> */}
               </h5>
-            </Container>
           </Col>
-          <Col md={3} className="foot-res">
+          <Col md={3}>
             <h2 className="mb-3 text-sm font-semibold font-color">About</h2>
             <div className="item-wrap">
               <h6>
@@ -145,28 +123,30 @@ export default function Footer() {
               </h6>
             </div>
           </Col>
-          <Col md={3} className="foot-res">
+          <Col md={3}>
             <h2 className="mb-3 text-sm font-semibold font-color">Our Links</h2>
-            <ul className="text-secondary-300">
+            <ul
+              className="text-secondary-300"
+              style={{ listStyleType: "none" }}
+            >
               <li className="mb-2">
-                <Link href="/about" style={{ color: "black" }}>
+                <Link href="/about" className="link-color mouse-hover">
                   About
                 </Link>
               </li>
               <li className="mb-2">
-                <Link href="#" style={{ color: "black" }}>
+                <Link href="#" className="link-color mouse-hover">
                   Careers
                 </Link>
               </li>
               <li className="mb-2">
-                <Link href="#" style={{ color: "black" }}>
+                <Link href="#" className="link-color mouse-hover">
                   Blog
                 </Link>
               </li>
             </ul>
           </Col>
-          <Col md={3} className="flex justify-center items-center foot-res">
-            <div>
+          <Col md={3} className="flex justify-center items-center">
               <div className="flex items-center">
                 <div className="max-w-[40px] sm:max-w-[70px]">
                   <h2 className="mb-3 text-sm font-semibold font-color">
@@ -194,23 +174,25 @@ export default function Footer() {
                   </div>
                 </div>
               </div>
-            </div>
           </Col>
-          <div className="footer">
-            <Container className="d-flex justify-content-center w-100" fluid>
-              <span
-                className="text-align-center mt-3"
-                style={{ paddingBottom: "13px", color: "white" }}
-              >
-                <h3 style={{ fontSize: "20px" }}>
-                  {" "}
-                  © 2023 Hypertension All Rights Reserved.
-                </h3>
-              </span>
-            </Container>
-          </div>
-        </Row>
-      </Container>
-    </footer>
+          </Row>
+       </Container>
+      </footer>
+      <div className="footer">
+        <Container className="d-flex justify-content-center" fluid>
+        <span className="text-align-center mt-3"
+          style={{ paddingBottom: "10px", color:"white" }}>
+            <h3 style={{ fontSize: "22px" }}>
+            {" "}
+             © 2023 Hypertension All Rights Reserved.
+            </h3>
+          </span>
+        </Container>
+      </div> 
+  </section>
   );
 }
+
+
+
+

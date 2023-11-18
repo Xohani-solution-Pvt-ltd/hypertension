@@ -1,17 +1,20 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Form } from 'react-bootstrap';
+import Image from "next/image";
+import ContraindicationImg from '../../assets/images/Contraindication.png';
 
 const Contraindication = ({ submit, preview }) => {
-  const [contraindication1, setContraindication1] = useState('');
-  const [contraindication2, setContraindication2] = useState('');
-  const [contraindication3, setContraindication3] = useState('');
+
+  const [contraindication1, setContraindication1] = useState("");
+  const [contraindication2, setContraindication2] = useState("");
+  const [contraindication3, setContraindication3] = useState("");
 
   const [criteria, setCriteria] = useState({
-    Cr: undefined,
-    K: undefined,
-    PulseRate: undefined,
-    UricAcid: undefined,
+    'Cr': undefined,
+    'K': undefined,
+    'PulseRate': undefined,
+    'UricAcid': undefined
   });
 
   const fetchCriteriaData = async () => {
@@ -22,7 +25,6 @@ const Contraindication = ({ submit, preview }) => {
       if (data && data.data && data.data.bloodTestData && data.data.diagnosisData) {
         const bloodTestData = data.data.bloodTestData;
         const diagnosisTestData = data.data.diagnosisData;
-
         const Cr = bloodTestData.creatinine;
         const K = bloodTestData.potassium;
         const PulseRate = diagnosisTestData.pulseRate;
@@ -35,6 +37,7 @@ const Contraindication = ({ submit, preview }) => {
           PulseRate,
           UricAcid,
         }));
+
       } else {
         console.error('Required data properties are undefined');
       }
@@ -47,6 +50,7 @@ const Contraindication = ({ submit, preview }) => {
     let RiskOneLevel = '';
     if (criteria['Cr'] > 2.5 || criteria['K'] > 5.5) {
       RiskOneLevel = 'No Ace (A1) , No ARB (A2) , No MRA (D3)';
+
     }
     setContraindication1(RiskOneLevel);
   };
@@ -63,9 +67,11 @@ const Contraindication = ({ submit, preview }) => {
     let RiskThreeLevel = '';
     if (criteria['UricAcid'] > 9) {
       RiskThreeLevel = 'No Thiazide (D1)';
+
     }
     setContraindication3(RiskThreeLevel);
   };
+
 
   useEffect(() => {
     fetchCriteriaData();
@@ -77,6 +83,7 @@ const Contraindication = ({ submit, preview }) => {
     checkRisk3();
   }, [criteria]);
 
+
   return (
     <div>
            <h3>Decide Contraindications</h3>
@@ -85,6 +92,14 @@ const Contraindication = ({ submit, preview }) => {
       {contraindication2}
       <br />
       {contraindication3}
+    <div className='d-flex justify-content-center'>
+        <Image
+          src={ContraindicationImg}
+          height={300}
+          width={300}
+          alt="Hypertension"
+        />
+      </div>
       <div className="text-end mt-4">
         <button
           type="button"
@@ -106,5 +121,6 @@ const Contraindication = ({ submit, preview }) => {
     </div>
   );
 };
+
 
 export default Contraindication;

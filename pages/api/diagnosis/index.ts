@@ -43,8 +43,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         message: error.message,
       });
     }
+
    }
    
+
   else {
     res.status(405).json({
       success: false,

@@ -1,4 +1,8 @@
+
 import React, { useEffect, useRef, useState, useMemo } from 'react';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { Container, Row, Col, Button, Nav, Tab, Card } from 'react-bootstrap';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -6,6 +10,8 @@ import { submitSymptomsMonitoringAPI, getSymptomsMonitoringAPI, updateSymptomsAP
 import { getCookie } from 'cookies-next';
 import notify from "../../helpers/notify";
 import { SymptomsInterface, initialSymptomsValue } from '../../interfaces/symptoms';
+import SymptomsImg from '../../assets/images/Symptoms.png';
+
 
 const validationSchema = Yup.object({
   userid: Yup.string(),
@@ -57,7 +63,8 @@ const Symptoms = ({ submit, preview }) => {
           notify.error("Not Added Symptoms")
         }
       }
-    } else {
+    }
+     else {
       const [data, err] = await submitSymptomsMonitoringAPI(InputData);
         if (data) {
           setEditing(true);
@@ -106,13 +113,12 @@ const Symptoms = ({ submit, preview }) => {
     <>
       <Row className="media-container-row">
         <h4 className="card-title align-left py-2 mbr-bold mbr-fonts-style mbr-text align-center display-7">Symptoms Monitoring</h4>
-        <Col md={12} className="p-3 align-left">
-          <Row className="media-container-row">
-            <Col md={1} className="align-left"></Col>
-            <Col md={6} className="align-left">
+
+            <Col md={8}>
               <Formik initialValues={symptomsData} validationSchema={validationSchema} onSubmit={handleSubmit} enableReinitialize={true}>
                 {({ setFieldValue }) => {
                   return (
+                    <>
                     <Form>
                       <div className="p-2">
                         <label>
@@ -159,35 +165,44 @@ const Symptoms = ({ submit, preview }) => {
                           <Field type="checkbox" id="legSwelling" name="legSwelling" className="me-4" onChange={(e) => {
                             setFieldValue('legSwelling', e.target.checked);
                             setLegSwellingData(e.target.checked);
-                          }} />
+                          }}
+                           />
                           Leg swelling
                         </label>
                         <ErrorMessage name="legSwelling" component="div" className="text-danger" />
                       </div>
                       <div className="text-left mt-4">
-                        <button type="button" className="btn btn-primary display-4" onClick={() => preview("comorbidities")}
-                        >Back</button>
+                      <label>If No Any symptoms Click On Submit Button</label>
                       </div>
-                      <div className="text-end mt-4">
-                        <button type="submit" className="btn btn-primary display-4" onClick={() => submit("bloodTest")} >{editing ? "Edit" : "Next"}</button>
-                      </div>
-                    </Form>
-                  )
-                }}
-              </Formik>
-            </Col>
-            <Col md={3} className="align-left">
 
+                    </Form>
+                    </>
+                  )}}
+              </Formik>
+
+           </Col>
+            <Col md={4}>
+
+            <Image
+              src={SymptomsImg}
+              height={300}
+              width={300}
+             alt="Hypertension"
+              />
             </Col>
-          </Row>
-        </Col>
-        <Col md={2} className="p-3 align-left"></Col>
-      </Row>
+
+            <div className='text-start'>
+            <Button type="button" className="btn btn-primary display-4" onClick={() => preview("comorbidities")}
+              >Back</Button>
+            <button type="submit" className="float-end btn btn-primary display-4" onClick={() => submit("bloodTest")} >{editing ? "Edit" : "Next"}</button>
+            </div>
+
+       </Row>
     </>
   );
-};
-export default Symptoms;
+  }
 
+export default Symptoms;
 
 
 

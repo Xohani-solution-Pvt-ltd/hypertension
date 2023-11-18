@@ -12,7 +12,6 @@ const IndexPage = () => {
   const { TITLE } = APP_INFO;
   const router = useRouter();
 
-
   return (
     <Layout title={`Dashboard | ${TITLE}`}>
       <main className="justify-center mt-8 font-primary">
@@ -20,8 +19,8 @@ const IndexPage = () => {
           <></>
         ) : (
           <section className="bg-white">
-            <Container className="py-4">
-              <Row className="align-items-center body-content">
+            <Container>
+              <Row className="align-items-center body-content justify-content-xs-start justify-content-sm-between">
                 <Col md={12} lg={5} className="content align-left py-4">
                   <h1 className="align-left pb-3 custom-font">
                     Hypertension Training School
@@ -48,13 +47,13 @@ const IndexPage = () => {
                   </div>
                   <div className="align-left mbr-section-btn ">
                     <Button
-                      className="btn btn-md btn-primary display-4 "
+                      className="btn btn-md btn-primary "
                       href="https://hypertension.co"
                     >
                       VIEW MORE
                     </Button>
                     <Button
-                      className="btn btn-md btn-primary display-4"
+                      className="btn btn-md btn-primary"
                       href="https://hypertension.co"
                     >
                       BOOK NOW
