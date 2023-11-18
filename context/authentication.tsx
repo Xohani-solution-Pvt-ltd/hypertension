@@ -102,6 +102,7 @@ const AuthState = (props) => {
       setIsAuthenticated(false);
       return;
     }
+    const app=90;
     const [data, err] = await getUserDetailsAPI();
     if (data?.success === true) {
       setIsAuthenticated(true);
