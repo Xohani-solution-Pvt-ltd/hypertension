@@ -7,7 +7,6 @@ import { useState } from "react";
 import { Twitter, Instagram, Youtube, Clock, Key } from "react-bootstrap-icons";
 import LockPrimaryImg from "../assets/images/lock-primary-100.png";
 
-
 export default function Footer() {
   const { TITLE, DESCRIPTION } = APP_INFO;
   const [email, setEmail] = useState("");
@@ -23,16 +22,13 @@ export default function Footer() {
 
       if (response.ok) {
         console.log("Form submitted successfully");
-      } 
-      else {
+      } else {
         console.error("Form submission failed");
       }
-    }
-     catch (error) {
+    } catch (error) {
       console.error("An error occurred", error);
     }
   };
-
 
   const handleSubscribe = async () => {
     try {
@@ -44,7 +40,6 @@ export default function Footer() {
         body: JSON.stringify({ email }),
       });
 
-
       if (response.ok) {
         console.log("Subscription successful!");
       } else {
@@ -55,14 +50,12 @@ export default function Footer() {
     }
   };
 
-
-  return (  
-
-  <section>
-    <footer className="d-flex align-items-end bg-gray">
-    <Container fluid className="pt-5 pb-3">
-        <Row className="gap-15 md:gap-4 foot-res">
-          <Col md={3} className="">
+  return (
+    <section>
+      <footer className="d-flex align-items-end bg-gray">
+        <Container fluid className="pt-5 pb-3">
+          <Row className="gap-15 md:gap-4 foot-res">
+            <Col md={3} className="">
               <h5 className="mb-3 text-sm font-semibold text-primary-300 uppercase">
                 <Image
                   src={LockPrimaryImg}
@@ -70,7 +63,7 @@ export default function Footer() {
                   width={30}
                   height={30}
                   alt="lock image"
-                />
+                /> 
                 Hypertension
                 <div className="d-flex">
                   <div className="social-icon foot-res">
@@ -100,53 +93,55 @@ export default function Footer() {
                   </div>
                 </div>
               </h5>
-          </Col>
-          <Col md={3} className="foot-res">
-            <h2 className="mb-3 text-sm font-semibold font-color">About</h2>
-            <div className="item-wrap">
-              <h6>
-                <i className="fab fa-key">
-                  <Key /> PO BOX Collins Street West
-                </i>
-              </h6>
-            </div>
-            <div className="item-wrap">
-              <h6>
-                <i className="fab fa-clock">
-                  <Clock /> +2342 5446 67
-                </i>
-              </h6>
-            </div>
-            <div className="item-wrap">
-              <h6>
-                <i className="fab fa-pinfill">Mon - Sun: 8AM - 8PM</i>
-              </h6>
-            </div>
-          </Col>
-          <Col md={3} className="foot-res">
-            <h2 className="mb-3 text-sm font-semibold font-color">Our Links</h2>
-            <ul
-              className="text-secondary-300"
-              style={{ listStyleType: "none" }}
-            >
-              <li className="mb-2">
-                <Link href="/about" className="link-color mouse-hover">
-                  About
-                </Link>
-              </li>
-              <li className="mb-2">
-                <Link href="#" className="link-color mouse-hover">
-                  Careers
-                </Link>
-              </li>
-              <li className="mb-2">
-                <Link href="#" className="link-color mouse-hover">
-                  Blog
-                </Link>
-              </li>
-            </ul>
-          </Col>
-          <Col md={3} className="flex justify-center items-center">
+            </Col>
+            <Col md={3} className="foot-res">
+              <h2 className="mb-3 text-sm font-semibold font-color">About</h2>
+              <div className="item-wrap">
+                <h6>
+                  <i className="fab fa-key">
+                    <Key /> PO BOX Collins Street West
+                  </i>
+                </h6>
+              </div>
+              <div className="item-wrap">
+                <h6>
+                  <i className="fab fa-clock">
+                    <Clock /> +2342 5446 67
+                  </i>
+                </h6>
+              </div>
+              <div className="item-wrap">
+                <h6>
+                  <i className="fab fa-pinfill">Mon - Sun: 8AM - 8PM</i>
+                </h6>
+              </div>
+            </Col>
+            <Col md={3} className="foot-res">
+              <h2 className="mb-3 text-sm font-semibold font-color">
+                Our Links
+              </h2>
+              <ul
+                className="text-secondary-300"
+                style={{ listStyleType: "none" }}
+              >
+                <li className="mb-2">
+                  <Link href="/about" className="link-color mouse-hover">
+                    About
+                  </Link>
+                </li>
+                <li className="mb-2">
+                  <Link href="#" className="link-color mouse-hover">
+                    Careers
+                  </Link>
+                </li>
+                <li className="mb-2">
+                  <Link href="#" className="link-color mouse-hover">
+                    Blog
+                  </Link>
+                </li>
+              </ul>
+            </Col>
+            <Col md={3} className="flex justify-center items-center">
               <div className="flex items-center">
                 <div className="max-w-[40px] sm:max-w-[70px] foot-res">
                   <h2 className="mb-3 text-sm font-semibold font-color">
@@ -174,25 +169,23 @@ export default function Footer() {
                   </div>
                 </div>
               </div>
-          </Col>
+            </Col>
           </Row>
-       </Container>
+        </Container>
       </footer>
       <div className="footer">
         <Container className="d-flex justify-content-center" fluid>
-        <span className="text-align-center mt-3"
-          style={{ paddingBottom: "10px", color:"white" }}>
+          <span
+            className="text-align-center mt-3"
+            style={{ paddingBottom: "10px", color: "white" }}
+          >
             <h3 style={{ fontSize: "22px" }}>
-            {" "}
-             © 2023 Hypertension All Rights Reserved.
+              {" "}
+              © 2023 Hypertension All Rights Reserved.
             </h3>
           </span>
         </Container>
-      </div> 
-  </section>
+      </div>
+    </section>
   );
 }
-
-
-
-

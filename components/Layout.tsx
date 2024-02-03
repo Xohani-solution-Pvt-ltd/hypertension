@@ -21,16 +21,12 @@ const Layout = ({
 
   return (
     <>
-    <Container>
-      <Header />
-      {children}
-      {/* {loading === true || isAuthenticated === null ? (
-        <Loading />
-      ) : (
-        <div className="min-h-[30rem]">{children}</div>
-      )} */}
-      <Footer />
-      </Container>
+      <div>
+        <Header />
+        {children}
+
+        <Footer />
+      </div>
     </>
   );
 };
@@ -52,5 +48,5 @@ const StaticLayout = ({
     </>
   );
 };
-export { StaticLayout }
+export { StaticLayout };
 export default Layout;

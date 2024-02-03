@@ -29,22 +29,7 @@ const IndexPage = () => {
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
                     eu dui non diam eleifend egestas id a ligula.
                   </p>
-                  <div className="align-wrap align-left">
-                    <div className="icons-wrap">
-                      <div className="icon-wrap">
-                        <span className="mbr-iconfont mbrib-apple"></span>
-                        <h3 className="icon-title mbr-bold display-7">EAT</h3>
-                      </div>
-                      <div className="icon-wrap">
-                        <span className="mbr-iconfont mbrib-globe"></span>
-                        <h3 className="icon-title mbr-bold display-7">PLAY</h3>
-                      </div>
-                      <div className="icon-wrap">
-                        <span className="mbr-iconfont mbrib-github"></span>
-                        <h3 className="icon-title mbr-bold display-7">BRUSH</h3>
-                      </div>
-                    </div>
-                  </div>
+
                   <div className="align-left mbr-section-btn ">
                     <Button
                       className="btn btn-md btn-primary "
@@ -60,7 +45,11 @@ const IndexPage = () => {
                     </Button>
                   </div>
                 </Col>
-                <Col md={12} lg={5} className="content align-right py-4 artboard-img">
+                <Col
+                  md={12}
+                  lg={5}
+                  className="content align-right py-4 artboard-img"
+                >
                   <Image
                     src={artboardImg}
                     height={450}
