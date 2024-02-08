@@ -1,16 +1,9 @@
 import React, { useState, useRef, useContext, useEffect } from "react";
-import Link from "next/link";
 import Layout from "../components/Layout";
-import {
-  LockSVG,
-  ColoredLock,
-  CrossSVG,
-  ProcessCircle,
-} from "../assets/SVG/image";
 import { APP_INFO } from "../environments/index";
 import { AuthContext } from "../context/authentication";
 import notify from "../helpers/notify";
-import { Container, Row, Col, Button, Form, Dropdown, Card } from "react-bootstrap";
+import { Container, Row, Button, Form, Dropdown, Card } from "react-bootstrap";
 import { BeatLoader } from "react-spinners";
 
 const Login = () => {
@@ -47,7 +40,8 @@ const Login = () => {
         selectedAlcoholConsumption &&
         selectedSmokingStatus &&
         selectedPhysicalActivity
-      )) {
+      )
+    ) {
       console.log("Fill All values");
       notify.error("Fill All values");
       return;
@@ -238,7 +232,10 @@ const Login = () => {
       </section> */}
       <Container className="pt-5 pb-5" fluid>
         <Row className="d-flex justify-content-center pt-5">
-          <Card className="bg-light" style={{ width: '40rem', border: 'groove', maxHeight: '57rem' }}>
+          <Card
+            className="bg-light"
+            style={{ width: "40rem", border: "groove", maxHeight: "57rem" }}
+          >
             <Card.Body>
               <Card.Title>
                 <h1 className="text-center text-bold">User Profile Creation</h1>

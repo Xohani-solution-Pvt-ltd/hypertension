@@ -63,10 +63,10 @@ export default function Footer() {
                   width={30}
                   height={30}
                   alt="lock image"
-                /> 
+                />
                 Hypertension
-                <div className="d-flex">
-                  <div className="social-icon foot-res">
+                <div className="d-flex foot-res">
+                  <div className="social-icon">
                     <a
                       href="https://twitter.com"
                       className="twitter me-3 tfiy-icons "

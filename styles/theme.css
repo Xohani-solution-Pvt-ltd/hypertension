@@ -2518,13 +2518,22 @@ pre {
 
 /* ----- soical icon ----- */
 .social-icon {
-  /* padding: 0.5s 0.1rem; */
   font-size: 2rem;
   margin-bottom: 15px;
   margin-top: 30px;
 }
 
-/* .align_check{
-  padding-left:15rem;
-} */
+@media  (max-width: 767px) {
+  .foot-res{
+    justify-content: center;
+  }
+  .res-btns {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .home-res{
+    margin-top: 100px;
+  }
+}
 

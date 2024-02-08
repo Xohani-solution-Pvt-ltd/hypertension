@@ -14,7 +14,7 @@ const IndexPage = () => {
 
   return (
     <Layout title={`Dashboard | ${TITLE}`}>
-      <main className="justify-center mt-8 font-primary">
+      <main className="justify-center mt-8 font-primary home-res">
         {isAuthenticated === true ? (
           <></>
         ) : (

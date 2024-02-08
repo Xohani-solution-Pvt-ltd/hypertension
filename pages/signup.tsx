@@ -1,12 +1,7 @@
 import { useState, useRef, useContext, useEffect } from "react";
 import Link from "next/link";
 import Layout, { StaticLayout } from "../components/Layout";
-import {
-  LockSVG,
-  ColoredLock,
-  CrossSVG,
-  ProcessCircle,
-} from "../assets/SVG/image";
+import { ColoredLock } from "../assets/SVG/image";
 import { APP_INFO } from "../environments/index";
 import { AuthContext } from "../context/authentication";
 import notify from "../helpers/notify";
@@ -16,7 +11,6 @@ import Card from "react-bootstrap/Card";
 
 const Login = () => {
   const { TITLE } = APP_INFO;
-  const [textValue, setTextValue] = useState("");
   const { CreateAccount } = useContext(AuthContext);
   const [mobile_check, setUsername_check] = useState<boolean>(false);
   const [process, setProcess] = useState<boolean>(false);
@@ -35,14 +29,6 @@ const Login = () => {
   const name_ref = useRef<HTMLInputElement>(null);
   const email_ref = useRef<HTMLInputElement>(null);
   const mobile_ref = useRef<HTMLInputElement>(null);
-  const age_ref = useRef<HTMLInputElement>(null);
-  const gender_ref = useRef<HTMLSelectElement>(null);
-  const address_ref = useRef<HTMLInputElement>(null);
-  const height_ref = useRef<HTMLInputElement>(null);
-  const weight_ref = useRef<HTMLInputElement>(null);
-  const alcoholConsumption_ref = useRef<HTMLSelectElement>(null);
-  const smokingStatus_ref = useRef<HTMLSelectElement | null>(null);
-  const physicalActivity_ref = useRef<HTMLSelectElement>(null);
 
   const Submit = async (e) => {
     e.preventDefault();
@@ -70,21 +56,18 @@ const Login = () => {
     }
   };
 
-  const handleInputChange = (e) => {
-    setTextValue(e.target.value);
-  };
-
-  const handleOptionSelect = () => {
-    console.log("Option selected!");
-  };
-
   return (
     <Layout title={`signup | ${TITLE}`}>
       <Container className="pt-5" fluid>
         <Row className="d-flex justify-content-center pt-5 pb-5">
           <Card
             className="bg-light"
-            style={{ width: "40rem", border: "groove", maxHeight: "46rem" }}
+            style={{
+              width: "100%",
+              maxWidth: "40rem",
+              border: "groove",
+              maxHeight: "46rem",
+            }}
           >
             <Card.Body>
               <Card.Title>
@@ -93,13 +76,9 @@ const Login = () => {
                 </h4>
               </Card.Title>
               <Card.Text>
-                <div style={{ display: "flex" }}>
-                  <ColoredLock />
-                  <p style={{ marginLeft: "5px" }}>
-                    We take privacy issues seriously. You can be sure that your
-                    personal data is securely protected.
-                  </p>
-                </div>
+                <ColoredLock />
+                We take privacy issues seriously. You can be sure that your
+                personal data is securely protected.
               </Card.Text>
               <h4 className=" text-center text-primary">
                 Personal Information
@@ -188,7 +167,7 @@ const Login = () => {
                   </Col>
                 </Row>
 
-                <div className="position-absolute end-0">
+                <div className="position-absolute end-0 res-btns">
                   <Link href="/login">
                     <span className="font-medium pr-2 leading-5 text-secondary-300 display-4">
                       Have an Account?{" "}
