@@ -45,11 +45,7 @@ const IndexPage = () => {
                     </Button>
                   </div>
                 </Col>
-                <Col
-                  md={12}
-                  lg={5}
-                  className="content align-right py-4 artboard-img"
-                >
+                <Col md={12} lg={5} className="py-4 img-res">
                   <Image
                     src={artboardImg}
                     height={450}

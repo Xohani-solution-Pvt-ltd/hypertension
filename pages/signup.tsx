@@ -167,7 +167,7 @@ const Login = () => {
                   </Col>
                 </Row>
 
-                <div className="position-absolute end-0 res-btns">
+                <div className="position-absolute end-0">
                   <Link href="/login">
                     <span className="font-medium pr-2 leading-5 text-secondary-300 display-4">
                       Have an Account?{" "}

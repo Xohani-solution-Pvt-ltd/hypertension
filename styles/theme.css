@@ -2523,17 +2523,17 @@ pre {
   margin-top: 30px;
 }
 
+
 @media  (max-width: 767px) {
   .foot-res{
     justify-content: center;
   }
-  .res-btns {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-  }
   .home-res{
     margin-top: 100px;
+  }
+  .img-res{
+    justify-content: center;
+    padding-left: 0px;
   }
 }
 
