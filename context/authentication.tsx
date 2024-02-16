@@ -26,7 +26,7 @@ const AuthState = (props) => {
     _id: "",
     fullName: "",
     mobile: "",
-    email: ""
+    email: "",
   });
 
   useEffect(() => {
@@ -50,28 +50,27 @@ const AuthState = (props) => {
 
       notify.success("Succesfully Login");
 
-      if(data){
+      if (data) {
         const id = data?.data._id;
         const [idData, errs] = await profileAPIData(id);
-        if(idData != null){
-        router.push("/dashboard");
+        if (idData != null) {
+          if (idData?.data._id === id) {
+            router.push("/dashboard");
+          } else {
+            router.push("/createProfile");
+          }
         } else {
           router.push("/createProfile");
         }
       }
-      
 
       return null;
-    }
-    
-     else if (err)
-      {
+    } else if (err) {
       console.log(err?.message);
       notify.error(err?.message);
       return err;
     }
   };
-
 
   const CreateAccount = async (body) => {
     const [data, err] = await createUserAPI(body);
@@ -87,7 +86,6 @@ const AuthState = (props) => {
     }
   };
 
-
   const CreateProfile = async (body) => {
     const [data, err] = await createProfileAPI(body);
     if (data?.success === true) {
@@ -102,13 +100,12 @@ const AuthState = (props) => {
     }
   };
 
-
   const VerifyUser = async () => {
     if (!getToken()) {
       setIsAuthenticated(false);
       return;
     }
-    const app=90;
+    const app = 90;
     const [data, err] = await getUserDetailsAPI();
     if (data?.success === true) {
       setIsAuthenticated(true);
@@ -127,7 +124,7 @@ const AuthState = (props) => {
       _id: "",
       fullName: "",
       mobile: "",
-      email: ""
+      email: "",
     });
     removeToken();
     console.log("log out user successfully");
