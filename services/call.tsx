@@ -1,5 +1,5 @@
 import { api } from "./api";
-const { jwtGet, jwtPost, post, get,put,jwtPut} = api;
+const { jwtGet, jwtPost, post, get, put, jwtPut } = api;
 
 const getUserDetailsAPI = async () => {
   let err = null;
@@ -68,19 +68,18 @@ const createProfileAPI = async (body) => {
   return [data, err];
 };
 
-export const profileAPIData = async (id)=>{
-let err =null;
-let data =null;
-try {
-  data = await jwtGet(`/createProfile/${id}`);
-} catch (e) {
-  if(e?.response?.status===400){
-    err = e?.json;
+export const profileAPIData = async (id) => {
+  let err = null;
+  let data = null;
+  try {
+    data = await jwtGet(`/createProfile/${id}`);
+  } catch (e) {
+    if (e?.response?.status === 400) {
+      err = e?.json;
+    }
   }
-}
-return [data, err];
+  return [data, err];
 };
-
 
 const forgotPassword = async (body) => {
   let err = null;
@@ -95,12 +94,11 @@ const forgotPassword = async (body) => {
   return [data, err];
 };
 
-
 const getUsers = async (body) => {
   let err = null;
   let data = null;
   try {
-    data = await get("/users",body);
+    data = await get("/users", body);
   } catch (e) {
     if (e.response?.status === 401) {
       err = e?.json;
@@ -122,11 +120,11 @@ const submitDiagnosisAPI = async (body) => {
   return [data, err];
 };
 
-const updateDiagnosisAPI = async (id,body) => {
+const updateDiagnosisAPI = async (id, body) => {
   let err = null;
   let data = null;
   try {
-    data = await put(`/diagnosis/${id}`,body);
+    data = await put(`/diagnosis/${id}`, body);
   } catch (e) {
     if (e.response?.status === 401) {
       err = e?.json;
@@ -174,18 +172,18 @@ export const getComorbiditiesDetailsAPI = async (id) => {
   return [data, err];
 };
 
-export const updateComorbiditiesAPI =async (id , body )=>{
+export const updateComorbiditiesAPI = async (id, body) => {
   let err = null;
   let data = null;
   try {
     data = await put(`/comorbidities/${id}`, body);
   } catch (e) {
-    if(e.response?.status === 401){
+    if (e.response?.status === 401) {
       err = e?.json;
     }
   }
   return [data, err];
-}
+};
 
 export const submitSymptomsMonitoringAPI = async (body) => {
   let err = null;
@@ -213,56 +211,66 @@ export const getSymptomsMonitoringAPI = async (id) => {
   return [data, err];
 };
 
-export const updateSymptomsAPI =async(id,body)=>{
-  let err= null;
+export const updateSymptomsAPI = async (id, body) => {
+  let err = null;
   let data = null;
   try {
-    data = await put(`/symptom/${id}`,body);
+    data = await put(`/symptom/${id}`, body);
   } catch (e) {
-    if(e.response?.status===401){
-      err =e?.json;
-    }
-  }
-  return [ data ,err];
-}
-
-export const getBloodTestAPI = async (id)=>{
-  let err = null;
-  let data =null;
-  try {
-    data = await jwtGet(`/blood/${id}`);
-  } catch (e) {
-    if(e.response?.status ===401){
-      err =e?.json;
-    }
-  }
-  return [data,err];
-}
- const submitBloodTestAPI = async (body)=>{
-  let err =null;
-  let data =null;
-  try {
-    data= await jwtPost("/blood",body);
-  } catch (e) {
-    if(e?.response?.status===400){
-      err =e?.json;
+    if (e.response?.status === 401) {
+      err = e?.json;
     }
   }
   return [data, err];
 };
 
-export const updateBloodTestAPI =async(id,body)=>{
-  let err= null;
+export const getBloodTestAPI = async (id) => {
+  let err = null;
   let data = null;
   try {
-    data = await put(`/blood/${id}`,body);
+    data = await jwtGet(`/blood/${id}`);
   } catch (e) {
-    if(e.response?.status===401){
-      err =e?.json;
+    if (e.response?.status === 401) {
+      err = e?.json;
     }
   }
-  return [ data ,err];
-}
+  return [data, err];
+};
+const submitBloodTestAPI = async (body) => {
+  let err = null;
+  let data = null;
+  try {
+    data = await jwtPost("/blood", body);
+  } catch (e) {
+    if (e?.response?.status === 400) {
+      err = e?.json;
+    }
+  }
+  return [data, err];
+};
 
+export const updateBloodTestAPI = async (id, body) => {
+  let err = null;
+  let data = null;
+  try {
+    data = await put(`/blood/${id}`, body);
+  } catch (e) {
+    if (e.response?.status === 401) {
+      err = e?.json;
+    }
+  }
+  return [data, err];
+};
 
-export { getUserDetailsAPI, createUserAPI,createProfileAPI, loginUserAPI ,changeUserPassword,forgotPassword, getUsers, submitDiagnosisAPI,updateDiagnosisAPI ,submitBloodTestAPI};
+export {
+  getUserDetailsAPI,
+  createUserAPI,
+  createProfileAPI,
+  loginUserAPI,
+  changeUserPassword,
+  forgotPassword,
+  getUsers,
+  submitDiagnosisAPI,
+  updateDiagnosisAPI,
+  submitBloodTestAPI,
+};

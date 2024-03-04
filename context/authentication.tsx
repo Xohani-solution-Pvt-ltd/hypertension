@@ -1,10 +1,8 @@
 import { createContext, useState, useEffect } from "react";
-
 import { useRouter } from "next/router";
 import Diagnosis from "../components/diagnosis/Diagnosis";
 import { getToken, removeToken, setToken } from "../helpers/index";
 import { User } from "../interfaces/index";
-
 import notify from "../helpers/notify";
 
 import {
@@ -57,7 +55,7 @@ const AuthState = (props) => {
           if (idData?.data._id === id) {
             router.push("/dashboard");
           } else {
-            router.push("/createProfile");
+            router.push("/dashboard");
           }
         } else {
           router.push("/createProfile");

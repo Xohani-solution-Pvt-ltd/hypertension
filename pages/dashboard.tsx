@@ -1,7 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Container, Row, Col, Button, Nav, Tab, Card, Tabs } from 'react-bootstrap';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
-import { HouseExclamationFill, PersonFillUp } from 'react-bootstrap-icons';
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Nav,
+  Tab,
+  Card,
+  Tabs,
+} from "react-bootstrap";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import { HouseExclamationFill, PersonFillUp } from "react-bootstrap-icons";
 import Layout from "../components/Layout";
 import DisplayUser from "../components/DisplayUser";
 import { useRouter } from "next/router";
@@ -13,18 +22,17 @@ import Symptoms from "../components/diagnosis/Symptoms";
 import BloodTest from "../components/diagnosis/BloodTest";
 import RiskStratification from "../components/diagnosis/RiskStratification";
 import TreatmentModality from "../components/diagnosis/TreatmentModality";
-import * as Yup from 'yup';
-import { getCookie } from 'cookies-next';
+import * as Yup from "yup";
+import { getCookie } from "cookies-next";
 import Link from "next/link";
 import DecideContraindication from "../components/diagnosis/DecideContraindication";
 
-
-
 const validationSchema = Yup.object({
-  email: Yup.string().email('Invalid email address').required('Email is Required'),
-  password: Yup.string().required('Password is Required'),
+  email: Yup.string()
+    .email("Invalid email address")
+    .required("Email is Required"),
+  password: Yup.string().required("Password is Required"),
 });
-
 
 const Dashboard = () => {
   const { isAuthenticated, userInfo, LoginToAccount } = useContext(AuthContext);
@@ -34,29 +42,25 @@ const Dashboard = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const id = getCookie('diagnosisId');
+    const id = getCookie("diagnosisId");
     setDiagnosisId(id);
   }, []);
-
 
   const handleTabChange = (tabKey) => {
     setActiveTab(tabKey);
   };
 
   const handleButtonClick = (submit) => {
-    setActiveTab(submit)
+    setActiveTab(submit);
   };
   const handlePreButtonClick = (preview) => {
-    setActiveTab(preview)
+    setActiveTab(preview);
   };
-
-
 
   return (
     <Layout title={`Login | ${TITLE}`}>
       <section className="features1 cid-rGtBGu0BpJ" id="features5-11">
         <Container className="d-flex justify-content-center" fluid>
-
           {/* <Container className="d-flex justify-content-center" > */}
           <Row className="justify-content-center pt-5">
             <Tabs
@@ -69,27 +73,65 @@ const Dashboard = () => {
               <Tab eventKey="diagnosis" title="Diagnosis">
                 <Diagnosis submit={handleButtonClick} />
               </Tab>
-              <Tab eventKey="comorbidities" title="Comorbidities" disabled={!diagnosisId}>
-                <Comorbidities submit={handleButtonClick} preview={handlePreButtonClick} />
+              <Tab
+                eventKey="comorbidities"
+                title="Comorbidities"
+                // disabled={!diagnosisId}
+              >
+                <Comorbidities
+                  submit={handleButtonClick}
+                  preview={handlePreButtonClick}
+                />
               </Tab>
-              <Tab eventKey="symptoms" title="Symptoms Monitoring" disabled={!diagnosisId}>
-                <Symptoms submit={handleButtonClick} preview={handlePreButtonClick} />
+              <Tab
+                eventKey="symptoms"
+                title="Symptoms Monitoring"
+                // disabled={!diagnosisId}
+              >
+                <Symptoms
+                  submit={handleButtonClick}
+                  preview={handlePreButtonClick}
+                />
               </Tab>
-              <Tab eventKey="bloodTest" title="Blood Test" disabled={!diagnosisId}>
-                <BloodTest submit={handleButtonClick} preview={handlePreButtonClick} />
+              <Tab
+                eventKey="bloodTest"
+                title="Blood Test"
+                // disabled={!diagnosisId}
+              >
+                <BloodTest
+                  submit={handleButtonClick}
+                  preview={handlePreButtonClick}
+                />
               </Tab>
-              <Tab eventKey="stratification" title="Risk Stratification" disabled={!diagnosisId}>
-                <RiskStratification submit={handleButtonClick} preview={handlePreButtonClick} />
+              <Tab
+                eventKey="stratification"
+                title="Risk Stratification"
+                // disabled={!diagnosisId}
+              >
+                <RiskStratification
+                  submit={handleButtonClick}
+                  preview={handlePreButtonClick}
+                />
               </Tab>
-              <Tab eventKey="decideContraindication" title="Decide Contraindication" disabled={!diagnosisId}>
-                <DecideContraindication submit={handleButtonClick} preview={handlePreButtonClick} />
+              <Tab
+                eventKey="decideContraindication"
+                title="Decide Contraindication"
+                // disabled={!diagnosisId}
+              >
+                <DecideContraindication
+                  submit={handleButtonClick}
+                  preview={handlePreButtonClick}
+                />
               </Tab>
-              <Tab eventKey="treatment" title="Treatment" disabled={!diagnosisId}>
+              <Tab
+                eventKey="treatment"
+                title="Treatment"
+                // disabled={!diagnosisId}
+              >
                 <TreatmentModality preview={handlePreButtonClick} />
               </Tab>
             </Tabs>
           </Row>
-
         </Container>
       </section>
     </Layout>
@@ -97,5 +139,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
-
