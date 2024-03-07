@@ -120,7 +120,7 @@ const RiskStratification = ({ submit, preview }) => {
       <div className="mt-4">
         <button type="button" className="btn btn-primary display-4" onClick={() => preview("bloodTest")}
         >Back</button>
-        <button type="submit" className=" float-end btn btn-primary display-4" onClick={() => submit("contraindications")}
+        <button type="submit" className=" float-end btn btn-primary display-4" onClick={() => submit("decideContraindication")}
         >Next</button>
       </div>
       </>

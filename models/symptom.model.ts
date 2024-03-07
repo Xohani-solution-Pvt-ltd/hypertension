@@ -9,24 +9,24 @@ const SymptomSchema: Schema = new Schema({
   },
   previousHeartAttacks: {
     type: Boolean,
-    default: false
+    default: false,
   },
   breathlessness: {
     type: Boolean,
-    default: false
+    default: false,
   },
   minorNYHA: {
     type: Boolean,
-    default: false
+    default: false,
   },
   majorNYHA: {
     type: Boolean,
-    default: false
+    default: false,
   },
 
   legSwelling: {
     type: Boolean,
-    default: false
+    default: false,
   },
   createdAt: { type: Date, default: new Date() },
 });

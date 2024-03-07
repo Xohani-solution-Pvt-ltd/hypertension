@@ -49,20 +49,6 @@ const AuthState = (props) => {
 
       notify.success("Succesfully Login");
 
-      // if (data) {
-      //   const id = data?.data._id;
-      //   const [idData, errs] = await profileAPIData(id);
-      //   if (idData != null) {
-      //     if (idData?.data._id === id) {
-      //       router.push("/dashboard");
-      //     } else {
-      //       router.push("/createProfile");
-      //     }
-      //   } else {
-      //     router.push("/createProfile");
-      //   }
-      // }
-
       if (data) {
         const id = data?.data._id;
         const [idData, errs] = await profileAPIData(id);

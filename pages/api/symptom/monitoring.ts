@@ -1,14 +1,20 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { connectMongo } from "../../../utils/mongodb";
- import SymptomModel from "../../../models/symptom.model";
+import SymptomModel from "../../../models/symptom.model";
 import { verifyJWTandCheckUser } from "../../../utils/userFromJWT";
 import { setCookie } from "cookies-next";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  connectMongo()
+  connectMongo();
 
   if (req.method === "POST") {
-    const { previousHeartAttacks,breathlessness,minorNYHA,majorNYHA,legSwelling} = req.body;
+    const {
+      previousHeartAttacks,
+      breathlessness,
+      minorNYHA,
+      majorNYHA,
+      legSwelling,
+    } = req.body;
     try {
       const { token } = req.headers;
       if (!token) {
@@ -23,17 +29,20 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         return;
       }
       const newSymptoms = new SymptomModel({
-        userid : user._id,
+        userid: user._id,
         previousHeartAttacks,
         breathlessness,
         minorNYHA,
         majorNYHA,
-        legSwelling
+        legSwelling,
       });
       const savedSymptoms = await newSymptoms.save();
-      if(savedSymptoms)
-      {
-        setCookie('symptomsId', savedSymptoms._id, { req, res, maxAge: 60 * 60 * 24 });
+      if (savedSymptoms) {
+        setCookie("symptomsId", savedSymptoms._id, {
+          req,
+          res,
+          maxAge: 60 * 60 * 24,
+        });
       }
       res.status(201).json({
         success: true,
@@ -46,10 +55,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         message: error.message,
       });
     }
-    }else{
-      res.status(405).json({ error: "Method not allowed" });
-    }
+  } else {
+    res.status(405).json({ error: "Method not allowed" });
   }
+};
 
 export default handler;
-
