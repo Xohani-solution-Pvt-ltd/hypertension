@@ -1,16 +1,21 @@
-
-
-import React, { useEffect,  useState, useMemo } from 'react';
-import { useRouter } from 'next/router';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import { submitComorbiditiesAPI, getComorbiditiesDetailsAPI, updateComorbiditiesAPI } from '../../services/call';
-import { getCookie } from 'cookies-next';
+import React, { useEffect, useState, useMemo } from "react";
+import { useRouter } from "next/router";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import {
+  submitComorbiditiesAPI,
+  getComorbiditiesDetailsAPI,
+  updateComorbiditiesAPI,
+} from "../../services/call";
+import { getCookie } from "cookies-next";
 import notify from "../../helpers/notify";
-import { ComorbiditiesInterface, initialComorbiditiesValues } from '../../interfaces/comorbidities';
-import { Col, Row } from 'react-bootstrap';
+import {
+  ComorbiditiesInterface,
+  initialComorbiditiesValues,
+} from "../../interfaces/comorbidities";
+import { Col, Row } from "react-bootstrap";
 import Image from "next/image";
-import ComorbiditiesImg from '../../assets/images/Comorbidities.jpg';
+import ComorbiditiesImg from "../../assets/images/Comorbidities.jpg";
 
 const validationSchema = Yup.object({
   cva: Yup.boolean(),
@@ -18,76 +23,87 @@ const validationSchema = Yup.object({
   heartFailure: Yup.boolean(),
   diabetes: Yup.boolean(),
   pregnancy: Yup.boolean(),
-  lungDisease : Yup.boolean(),
+  lungDisease: Yup.boolean(),
 });
 
-const Comorbidities = ({submit,preview}) => {
+const Comorbidities = ({ submit, preview }) => {
   const [comorbiditiesId, setComorbiditiesId] = useState(undefined);
-  const [cvaData,setCvaData]=useState(false);
-  const [cadData,setCadData]=useState(false);
-  const [heartFailureData,setHeartFailureData]=useState(false);
-  const [diabetesData,setDiabetesData]=useState(false);
-  const [pregnancyData,setPregnancyData]=useState(false);
-  const [lungDiseaseData,setLungDiseaseData]=useState(false);
-  const [editing ,setEditing]=useState(false);
-  const [comorbiditiesData,setComorbiditiesData]=useState(initialComorbiditiesValues);
-   
+  const [cvaData, setCvaData] = useState(false);
+  const [cadData, setCadData] = useState(false);
+  const [heartFailureData, setHeartFailureData] = useState(false);
+  const [diabetesData, setDiabetesData] = useState(false);
+  const [pregnancyData, setPregnancyData] = useState(false);
+  const [lungDiseaseData, setLungDiseaseData] = useState(false);
+  const [editing, setEditing] = useState(false);
+  const [comorbiditiesData, setComorbiditiesData] = useState(
+    initialComorbiditiesValues
+  );
+
   const handleSubmit = async () => {
-    const inputData : ComorbiditiesInterface = {
-      cva : cvaData,
-      coronaryArteryDisease : cadData,
-      heartFailure : heartFailureData,
-      diabetes : diabetesData,
-      pregnancy : pregnancyData,
-      lungDisease : lungDiseaseData
-    }
-   if(cvaData || cadData || heartFailureData || diabetesData || pregnancyData || lungDiseaseData){
-    
-    if(editing=== true){
-      if(comorbiditiesId){
-        const [data , err ]= await updateComorbiditiesAPI(comorbiditiesId,inputData); 
-        if (data) {
-          notify.success("Successfully updated Comorbidities");
+    const inputData: ComorbiditiesInterface = {
+      cva: cvaData,
+      coronaryArteryDisease: cadData,
+      heartFailure: heartFailureData,
+      diabetes: diabetesData,
+      pregnancy: pregnancyData,
+      lungDisease: lungDiseaseData,
+    };
+    if (
+      cvaData ||
+      cadData ||
+      heartFailureData ||
+      diabetesData ||
+      pregnancyData ||
+      lungDiseaseData
+    ) {
+      if (editing === true) {
+        if (comorbiditiesId) {
+          const [data, err] = await updateComorbiditiesAPI(
+            comorbiditiesId,
+            inputData
+          );
+          if (data) {
+            notify.success("Successfully updated Comorbidities");
+          }
+        } else {
+          notify.error("Comorbidities ID is missing. Cannot update.");
         }
-      }else {
-        notify.error("Comorbidities ID is missing. Cannot update.");
+      } else {
+        const [data, err] = await submitComorbiditiesAPI(inputData);
+        if (data) {
+          setEditing(true);
+          setComorbiditiesId(data.id);
+          notify.success("Succesfully Comorbidities");
+        }
+        if (err) {
+          notify.error(err?.message);
+        }
       }
-    }else {
+    } else {
       const [data, err] = await submitComorbiditiesAPI(inputData);
-    if (data) {
-         setEditing(true);
-         setComorbiditiesId(data.id);
-         notify.success("Succesfully Comorbidities");
+      if (data) {
+        setEditing(true);
+        setComorbiditiesId(data.id);
+        notify.success("Succesfully Comorbidities");
+      }
+      if (err) {
+        notify.error(err?.message);
+      }
     }
-    if(err){
-      notify.error(err?.message);
-    }
-    }
-   }else {
-    const [data, err] = await submitComorbiditiesAPI(inputData);
-    if (data) {
-         setEditing(true);
-         setComorbiditiesId(data.id);
-         notify.success("Succesfully Comorbidities");
-    }
-    if(err){
-      notify.error(err?.message);
-    }
-  }
   };
 
-  const fetchComorbiditiesData = async (id)=>{
-      const [data , err ]=await getComorbiditiesDetailsAPI(id);
-      if(data){
-       setComorbiditiesData(data.data);
-      }
-      if(err){
-      notify.error(err?.message); 
-      }
-  }
-  
-  useEffect(()=>{
-    if(comorbiditiesData != undefined){
+  const fetchComorbiditiesData = async (id) => {
+    const [data, err] = await getComorbiditiesDetailsAPI(id);
+    if (data) {
+      setComorbiditiesData(data.data);
+    }
+    if (err) {
+      notify.error(err?.message);
+    }
+  };
+
+  useEffect(() => {
+    if (comorbiditiesData != undefined) {
       setCvaData(comorbiditiesData.cva);
       setCadData(comorbiditiesData.coronaryArteryDisease);
       setHeartFailureData(comorbiditiesData.heartFailure);
@@ -95,102 +111,189 @@ const Comorbidities = ({submit,preview}) => {
       setPregnancyData(comorbiditiesData.pregnancy);
       setLungDiseaseData(comorbiditiesData.lungDisease);
     }
-  },[comorbiditiesData]);
-  
+  }, [comorbiditiesData]);
+
   useEffect(() => {
-    const id = getCookie('comorbiditiesId')
-    setComorbiditiesId(id)
-    if(id){
+    const id = getCookie("comorbiditiesId");
+    setComorbiditiesId(id);
+    if (id) {
       setEditing(true);
       fetchComorbiditiesData(id);
     }
-    
   }, []);
 
   return (
     <>
       <Row className="media-container-row">
-        <h4 className="card-title align-left py-2 mbr-bold mbr-fonts-style mbr-text align-center display-7">Comorbidities</h4>
+        <h4 className="card-title align-left py-2 mbr-bold mbr-fonts-style mbr-text align-center display-7">
+          Comorbidities
+        </h4>
         <Col md={12} className="p-3 align-left">
           <Row className="media-container-row">
             <Col md={6} className="align-left">
-              <Formik initialValues={comorbiditiesData} validationSchema={validationSchema} onSubmit={handleSubmit} enableReinitialize={true}>
+              <Formik
+                initialValues={comorbiditiesData}
+                validationSchema={validationSchema}
+                onSubmit={handleSubmit}
+                enableReinitialize={true}
+              >
                 {({ setFieldValue }) => {
-
                   return (
                     <Form>
                       <div className="p-2">
                         <label>
-                          <Field type="checkbox" id="cva" name="cva" className="me-4" onChange={(e) => { setFieldValue('cva', e.target.checked);
-                                     setCvaData(e.target.checked);
-                                   }}/>
-                          Prior history of sudden onset weakness or sudden onset blurring of vision?
+                          <Field
+                            type="checkbox"
+                            id="cva"
+                            name="cva"
+                            className="me-4"
+                            onChange={(e) => {
+                              setFieldValue("cva", e.target.checked);
+                              setCvaData(e.target.checked);
+                            }}
+                          />
+                          Prior history of sudden onset weakness or sudden onset
+                          blurring of vision?
                         </label>
-                        <ErrorMessage name="cva" component="div" className="text-danger" />
+                        <ErrorMessage
+                          name="cva"
+                          component="div"
+                          className="text-danger"
+                        />
                       </div>
                       <div className="p-2">
                         <label>
-                          <Field type="checkbox" id="coronaryArteryDisease" name="coronaryArteryDisease" className="me-4" onChange={(e) => { setFieldValue('coronaryArteryDisease', e.target.checked);
-                          setCadData(e.target.checked);
-                                   }}/>
+                          <Field
+                            type="checkbox"
+                            id="coronaryArteryDisease"
+                            name="coronaryArteryDisease"
+                            className="me-4"
+                            onChange={(e) => {
+                              setFieldValue(
+                                "coronaryArteryDisease",
+                                e.target.checked
+                              );
+                              setCadData(e.target.checked);
+                            }}
+                          />
                           Coronary artery disease / Previous heart attacks
                         </label>
-                        <ErrorMessage name="coronaryArteryDisease" component="div" className="text-danger"/>
+                        <ErrorMessage
+                          name="coronaryArteryDisease"
+                          component="div"
+                          className="text-danger"
+                        />
                       </div>
                       <div className="p-2">
                         <label>
-                          <Field type="checkbox" id="heartFailure" name="heartFailure" className="me-4" onChange={(e) => { setFieldValue('heartFailure', e.target.checked);
-                          setHeartFailureData(e.target.checked);
-                                   }}/>
+                          <Field
+                            type="checkbox"
+                            id="heartFailure"
+                            name="heartFailure"
+                            className="me-4"
+                            onChange={(e) => {
+                              setFieldValue("heartFailure", e.target.checked);
+                              setHeartFailureData(e.target.checked);
+                            }}
+                          />
                           Heart failure
                         </label>
-                        <ErrorMessage name="heartFailure" component="div" className="text-danger" />
+                        <ErrorMessage
+                          name="heartFailure"
+                          component="div"
+                          className="text-danger"
+                        />
                       </div>
                       <div className="p-2">
                         <label>
-                          <Field type="checkbox" id="diabetes" name="diabetes" className="me-4" onChange={(e) => { setFieldValue('diabetes', e.target.checked);
-                          setDiabetesData(e.target.checked);
-                                   }}/>
+                          <Field
+                            type="checkbox"
+                            id="diabetes"
+                            name="diabetes"
+                            className="me-4"
+                            onChange={(e) => {
+                              setFieldValue("diabetes", e.target.checked);
+                              setDiabetesData(e.target.checked);
+                            }}
+                          />
                           Are you diabetic?
                         </label>
-                        <ErrorMessage name="diabetes" component="div" className="text-danger" />
+                        <ErrorMessage
+                          name="diabetes"
+                          component="div"
+                          className="text-danger"
+                        />
                       </div>
                       <div className="p-2">
                         <label>
-                          <Field type="checkbox" id="pregnancy" name="pregnancy" className="me-4" onChange={(e) => { setFieldValue('pregnancy', e.target.checked);
-                          setPregnancyData(e.target.checked);
-                                   }}/>
+                          <Field
+                            type="checkbox"
+                            id="pregnancy"
+                            name="pregnancy"
+                            className="me-4"
+                            onChange={(e) => {
+                              setFieldValue("pregnancy", e.target.checked);
+                              setPregnancyData(e.target.checked);
+                            }}
+                          />
                           Are you currently pregnant?
                         </label>
-                        <ErrorMessage name="pregnancy" component="div" className="text-danger" />
+                        <ErrorMessage
+                          name="pregnancy"
+                          component="div"
+                          className="text-danger"
+                        />
                       </div>
                       <div className="p-2">
                         <label>
-                          <Field type="checkbox" id="lungDisease" name="lungDisease" className="me-4" onChange={(e) => { setFieldValue('lungDisease', e.target.checked);
-                          setLungDiseaseData(e.target.checked);
-                                   }}/>
+                          <Field
+                            type="checkbox"
+                            id="lungDisease"
+                            name="lungDisease"
+                            className="me-4"
+                            onChange={(e) => {
+                              setFieldValue("lungDisease", e.target.checked);
+                              setLungDiseaseData(e.target.checked);
+                            }}
+                          />
                           Prior history Asthma, COPD, Taking inhalers?
                         </label>
-                        <ErrorMessage name="pregnancy" component="div" className="text-danger" />
+                        <ErrorMessage
+                          name="pregnancy"
+                          component="div"
+                          className="text-danger"
+                        />
                       </div>
-                      <label className='mt-4'>If No Any Comorbidities Click On Submit Button</label>
+                      <label className="mt-4">
+                        If No Any Comorbidities Click On Submit Button
+                      </label>
                       <div className="mt-4">
-                      <button type="button" className="text-start btn btn-primary display-4" onClick={() => preview("diagnosis")} 
-                               >Back</button>
-                        <button type="submit" className=" text-end btn btn-primary display-4" onClick={() => submit("symptoms")} 
-                               >{editing? "Edit" : "Next"}</button>
+                        <button
+                          type="button"
+                          className="text-start btn btn-primary display-4"
+                          onClick={() => preview("diagnosis")}
+                        >
+                          Back
+                        </button>
+                        <button
+                          type="submit"
+                          className=" text-end btn btn-primary display-4"
+                          onClick={() => submit("symptoms")}
+                        >
+                          {editing ? "Edit" : "Next"}
+                        </button>
                       </div>
                     </Form>
-                  )
+                  );
                 }}
               </Formik>
             </Col>
             <Col md={3} className="">
-            <Image
-              src={ComorbiditiesImg}
-              height={300}
-              width={300}
-             alt="Hypertension"
+              <Image
+                src={ComorbiditiesImg}
+                height={300}
+                width={300}
+                alt="Hypertension"
               />
             </Col>
           </Row>
@@ -201,157 +304,3 @@ const Comorbidities = ({submit,preview}) => {
   );
 };
 export default Comorbidities;
-
-
-
-
-
-// import React, { useEffect,  useState, useMemo } from 'react';
-// import { useRouter } from 'next/router';
-// import { Formik, Field, Form, ErrorMessage } from 'formik';
-// import * as Yup from 'yup';
-// import { submitComorbiditiesAPI, getComorbiditiesDetailsAPI } from '../../services/call';
-// import { getCookie } from 'cookies-next';
-// import notify from "../../helpers/notify";
-// import { ComorbiditiesInterface, initialComorbiditiesValues } from '../../interfaces/comorbidities';
-// import { Col, Row } from 'react-bootstrap';
-
-// const validationSchema = Yup.object({
-//   cva: Yup.boolean(),
-//   coronaryArteryDisease: Yup.boolean(),
-//   heartFailure: Yup.boolean(),
-//   diabetes: Yup.boolean(),
-//   pregnancy: Yup.boolean(),
-//   lungDisease : Yup.boolean(),
-// });
-
-// const Comorbidities = ({submit,preview}) => {
-//   const router = useRouter();
-//   const [processing, setProcessing] = useState(false);
-//   const [comorbiditiesId, setComorbiditiesId] = useState(undefined);
-
-//   const handleSubmit = async (values: ComorbiditiesInterface) => {
- 
-//     const [data, err] = await submitComorbiditiesAPI(values);
-//     if (data) {
-//       notify.success("Succesfully Comorbidities");
-//     }
-//     if (err) {
-//       setTimeout(() => {
-//         setProcessing(false);
-//         notify.error(err?.message);
-//       }, 1000);
-//     }
-//   };
-//   useEffect(() => {
-//     const id = getCookie('comorbiditiesId')
-//     setComorbiditiesId(id)
-//   }, []);
-
-//   return (
-//     <>
-//       <Row className="media-container-row">
-//         <h4 className="card-title align-left py-2 mbr-bold mbr-fonts-style mbr-text align-center display-7">Comorbidities</h4>
-//         <Col md={12} className="p-3 align-left">
-//           <Row className="media-container-row">
-//             <Col md={6} className="align-left">
-//               <Formik initialValues={initialComorbiditiesValues} validationSchema={validationSchema} onSubmit={handleSubmit} enableReinitialize={true}>
-//                 {({ setFieldValue }) => {
-//                   useEffect(() => {
-//                     const fetchDiagnosisDetailData = async () => {
-//                       const [data, err] = await getComorbiditiesDetailsAPI(comorbiditiesId);
-//                       console.log('data',data);
-                      
-//                         if(data){
-//                         const { cva, coronaryArteryDisease, heartFailure, diabetes, pregnancy, lungDisease } = data
-//                         setFieldValue('cva', cva);
-//                         setFieldValue('coronaryArteryDisease', coronaryArteryDisease);
-//                         setFieldValue('heartFailure', heartFailure);
-//                         setFieldValue('diabetes', diabetes);
-//                         setFieldValue('pregnancy', pregnancy);
-//                         setFieldValue('lungDisease', lungDisease);
-//                       }
-//                       if (err) {
-//                         setTimeout(() => {
-//                           setProcessing(false);
-//                           notify.error(err?.message);
-//                         }, 1000);
-//                       }
-//                     }
-//                     if (comorbiditiesId) {
-//                       setFieldValue('comorbiditiesId', comorbiditiesId);
-//                       fetchDiagnosisDetailData();
-//                     }
-//                   }, [comorbiditiesId]);
-
-//                   return (
-//                     <Form>
-//                       <div className="p-2">
-//                         <label>
-//                           <Field type="checkbox" id="cva" name="cva" className="me-4" onChange={(e) => { setFieldValue('cva', e.target.checked);
-//                                    }}/>
-//                           Prior history of sudden onset weakness or sudden onset blurring of vision?
-//                         </label>
-//                         <ErrorMessage name="cva" component="div" className="text-danger" />
-//                       </div>
-//                       <div className="p-2">
-//                         <label>
-//                           <Field type="checkbox" id="coronaryArteryDisease" name="coronaryArteryDisease" className="me-4" onChange={(e) => { setFieldValue('coronaryArteryDisease', e.target.checked);
-//                                    }}/>
-//                           Coronary artery disease / Previous heart attacks
-//                         </label>
-//                         <ErrorMessage name="coronaryArteryDisease" component="div" className="text-danger"/>
-//                       </div>
-//                       <div className="p-2">
-//                         <label>
-//                           <Field type="checkbox" id="heartFailure" name="heartFailure" className="me-4" onChange={(e) => { setFieldValue('heartFailure', e.target.checked);
-//                                    }}/>
-//                           Heart failure
-//                         </label>
-//                         <ErrorMessage name="heartFailure" component="div" className="text-danger" />
-//                       </div>
-//                       <div className="p-2">
-//                         <label>
-//                           <Field type="checkbox" id="diabetes" name="diabetes" className="me-4" onChange={(e) => { setFieldValue('diabetes', e.target.checked);
-//                                    }}/>
-//                           Are you diabetic?
-//                         </label>
-//                         <ErrorMessage name="diabetes" component="div" className="text-danger" />
-//                       </div>
-//                       <div className="p-2">
-//                         <label>
-//                           <Field type="checkbox" id="pregnancy" name="pregnancy" className="me-4" onChange={(e) => { setFieldValue('pregnancy', e.target.checked);
-//                                    }}/>
-//                           Are you currently pregnant?
-//                         </label>
-//                         <ErrorMessage name="pregnancy" component="div" className="text-danger" />
-//                       </div>
-//                       <div className="p-2">
-//                         <label>
-//                           <Field type="checkbox" id="lungDisease" name="lungDisease" className="me-4" onChange={(e) => { setFieldValue('lungDisease', e.target.checked);
-//                                    }}/>
-//                           Prior history Asthma, COPD, Taking inhalers?
-//                         </label>
-//                         <ErrorMessage name="pregnancy" component="div" className="text-danger" />
-//                       </div>
-//                       <div className="mt-4">
-//                       <button type="button" className="text-start btn btn-primary display-4" onClick={() => preview("diagnosis")} 
-//                                >Back</button>
-//                         <button type="submit" className=" text-end btn btn-primary display-4" onClick={() => submit("symptoms")} 
-//                                >Next</button>
-//                       </div>
-//                     </Form>
-//                   )
-//                 }}
-//               </Formik>
-//             </Col>
-//             <Col md={3} className="align-left">
-//             </Col>
-//           </Row>
-//         </Col>
-//         <Col md={2} className="p-3 align-left"></Col>
-//       </Row>
-//     </>
-//   );
-// };
-// export default Comorbidities;

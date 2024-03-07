@@ -41,6 +41,7 @@ const AuthState = (props) => {
   const LoginToAccount = async (body) => {
     const [data, err] = await loginUserAPI(body);
     if (data?.success === true) {
+      console.log("Successfully Login user with ID:", data?.data._id);
       console.log("Succesfully Login user");
       setIsAuthenticated(true);
       setUserInfo(data?.data);
@@ -48,14 +49,33 @@ const AuthState = (props) => {
 
       notify.success("Succesfully Login");
 
+      // if (data) {
+      //   const id = data?.data._id;
+      //   const [idData, errs] = await profileAPIData(id);
+      //   if (idData != null) {
+      //     if (idData?.data._id === id) {
+      //       router.push("/dashboard");
+      //     } else {
+      //       router.push("/createProfile");
+      //     }
+      //   } else {
+      //     router.push("/createProfile");
+      //   }
+      // }
+
       if (data) {
         const id = data?.data._id;
         const [idData, errs] = await profileAPIData(id);
+
         if (idData != null) {
-          if (idData?.data._id === id) {
+          if (
+            idData?.data.dateOfBirth &&
+            idData?.data.address &&
+            idData?.data.gender
+          ) {
             router.push("/dashboard");
           } else {
-            router.push("/dashboard");
+            router.push("/createProfile");
           }
         } else {
           router.push("/createProfile");
