@@ -125,13 +125,13 @@ const Symptoms = ({ submit, preview }) => {
         </h4>
 
         <Col md={8}>
-          {/* <Formik
+          <Formik
             initialValues={symptomsData}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
             enableReinitialize={true}
-          > */}
-          <Formik
+          >
+          {/* <Formik
             initialValues={{
               previousHeartAttacks: !!symptomsData.previousHeartAttacks,
               breathlessness: !!symptomsData.breathlessness,
@@ -142,7 +142,7 @@ const Symptoms = ({ submit, preview }) => {
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
             enableReinitialize={true}
-          >
+          > */}
             {({ setFieldValue }) => {
               return (
                 <>

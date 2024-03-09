@@ -249,7 +249,7 @@ const RiskStratification = ({ preview }) => {
           </tbody>
         </Table>
         <div className="float-end py-5">
-        <button type="button" className="btn btn-primary display-4" onClick={() => preview("contraindications")}>Back</button>
+        <button type="button" className="btn btn-primary display-4" onClick={() => preview("decideContraindication")}>Back</button>
         </div>
       </Container>
       </>
