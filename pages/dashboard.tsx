@@ -70,7 +70,7 @@ const Dashboard = () => {
               className="mb-3"
               justify
             >
-              <Tab eventKey="diagnosis" title="Diagnosis">
+              <Tab eventKey="diagnosis" title="BP Reading">
                 <Diagnosis submit={handleButtonClick} />
               </Tab>
               <Tab

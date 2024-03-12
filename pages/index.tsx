@@ -22,24 +22,24 @@ const IndexPage = () => {
             <Container>
               <Row className="align-items-center body-content justify-content-xs-start justify-content-sm-between">
                 <Col md={12} lg={5} className="content align-left py-4">
-                  <h1 className="align-left pb-3 custom-font">
-                    Hypertension Training School
-                  </h1>
+                  <h1 className="align-left pb-3 custom-font">My BP Coach</h1>
                   <p className="mbr-text pb-3 align-left display-7">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                    eu dui non diam eleifend egestas id a ligula.
+                    Do you have uncontrolled blood pressure records and regret
+                    long waiting queues at a hospital, just for a 5 minute
+                    consultation. Presenting digital personalized care your high
+                    blood pressures at the click of your phone buttons.
                   </p>
 
                   <div className="align-left mbr-section-btn ">
-                    <Button
+                    {/* <Button
                       className="btn btn-md btn-primary "
                       href="https://hypertension.co"
                     >
                       VIEW MORE
-                    </Button>
+                    </Button> */}
                     <Button
                       className="btn btn-md btn-primary"
-                      href="https://hypertension.co"
+                      href="/signup"
                     >
                       BOOK NOW
                     </Button>

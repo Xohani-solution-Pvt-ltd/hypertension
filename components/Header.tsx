@@ -42,7 +42,7 @@ export default function Header({}) {
             />
           </Navbar.Brand>
           <h4 className=" text-2xl font-semibold text-danger-emphasis">
-            HYPERTENSION
+            My BP Coach
           </h4>
           <Navbar.Toggle
             aria-controls="basic-navbar-nav"

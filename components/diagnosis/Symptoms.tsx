@@ -131,7 +131,7 @@ const Symptoms = ({ submit, preview }) => {
             onSubmit={handleSubmit}
             enableReinitialize={true}
           >
-          {/* <Formik
+            {/* <Formik
             initialValues={{
               previousHeartAttacks: !!symptomsData.previousHeartAttacks,
               breathlessness: !!symptomsData.breathlessness,
