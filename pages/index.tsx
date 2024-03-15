@@ -41,7 +41,7 @@ const IndexPage = () => {
                       className="btn btn-md btn-primary"
                       href="/signup"
                     >
-                      BOOK NOW
+                      CHECK NOW
                     </Button>
                   </div>
                 </Col>

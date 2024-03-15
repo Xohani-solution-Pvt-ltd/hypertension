@@ -1274,7 +1274,7 @@ const BloodTest = ({ submit, preview }) => {
     }
   }, []);
 
-  console.log("bloodTestData=", bloodTestData);
+  // console.log("bloodTestData=", bloodTestData);
   useEffect(() => {
     if (bloodTestData != undefined) {
       setHbA1cLevelData(bloodTestData.hbA1cLevel);
