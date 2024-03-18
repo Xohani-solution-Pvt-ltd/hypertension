@@ -84,7 +84,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       diabetes,
       pregnancy,
       lungDisease,
-      subitems, // Include subitems in the request body
     } = req.body;
 
     try {
@@ -105,12 +104,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const newComorbidities = new ComorbiditiesModel({
         userid: user._id,
         cva: {
-          hasCVA: cva.hasCVA,
-          subitems: {
-            paralysis: subitems.paralysis || false,
-            slurringOfSpeech: subitems.slurringOfSpeech || false,
-            blurringOfVision: subitems.blurringOfVision || false,
-          },
+          paralysis: cva.paralysis || false,
+          slurringOfSpeech: cva.slurringOfSpeech || false,
+          blurringOfVision: cva.blurringOfVision || false,
         },
         coronaryArteryDisease,
         heartFailure,

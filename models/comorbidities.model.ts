@@ -42,35 +42,20 @@ const ComorbiditiesSchema: Schema = new Schema({
     unique: true,
   },
   cva: {
-    type: {
-      hasCVA: {
-        type: Boolean,
-        default: false,
-      },
-      subitems: {
-        paralysis: {
-          type: Boolean,
-          default: false,
-        },
-        slurringOfSpeech: {
-          type: Boolean,
-          default: false,
-        },
-        blurringOfVision: {
-          type: Boolean,
-          default: false,
-        },
-      },
+    paralysis: {
+      type: Boolean,
+      default: false,
     },
-    default: {
-      hasCVA: false,
-      subitems: {
-        paralysis: false,
-        slurringOfSpeech: false,
-        blurringOfVision: false,
-      },
+    slurringOfSpeech: {
+      type: Boolean,
+      default: false,
+    },
+    blurringOfVision: {
+      type: Boolean,
+      default: false,
     },
   },
+
   heartFailure: {
     type: Boolean,
     default: false,

@@ -337,7 +337,7 @@ const validationSchema = Yup.object({
 
 const Comorbidities = ({ submit, preview }) => {
   const [comorbiditiesId, setComorbiditiesId] = useState(undefined);
-  const [cvaData, setCvaData] = useState(false);
+  const [cvaData, setCvaData] = useState(initialComorbiditiesValues.cva);
   const [cadData, setCadData] = useState(false);
   const [heartFailureData, setHeartFailureData] = useState(false);
   const [diabetesData, setDiabetesData] = useState(false);
@@ -348,10 +348,18 @@ const Comorbidities = ({ submit, preview }) => {
     initialComorbiditiesValues
   );
   const [cvaSubItemsVisible, setCvaSubItemsVisible] = useState(false);
+  const [priorParalysis, setPriorParalysis] = useState(false);
+  const [slurringOfSpeech, setSlurringOfSpeech] = useState(false);
+  const [blurringOfVision, setBlurringOfVision] = useState(false);
 
   const handleSubmit = async () => {
     const inputData: ComorbiditiesInterface = {
-      cva: cvaData,
+      // cva: cvaData,
+      cva: {
+        paralysis: priorParalysis,
+        slurringOfSpeech: slurringOfSpeech,
+        blurringOfVision: blurringOfVision,
+      },
       coronaryArteryDisease: cadData,
       heartFailure: heartFailureData,
       diabetes: diabetesData,
@@ -359,6 +367,7 @@ const Comorbidities = ({ submit, preview }) => {
       lungDisease: lungDiseaseData,
     };
     console.log("Input Data:", inputData);
+
     if (
       cvaData ||
       cadData ||
@@ -476,6 +485,13 @@ const Comorbidities = ({ submit, preview }) => {
                                   id="priorParalysis"
                                   name="priorParalysis"
                                   className="me-4"
+                                  onChange={(e) => {
+                                    setFieldValue(
+                                      "priorParalysis",
+                                      e.target.checked
+                                    );
+                                    setPriorParalysis(e.target.checked);
+                                  }}
                                 />
                                 Prior paralysis / weakness of arms or legs
                               </label>
@@ -487,6 +503,13 @@ const Comorbidities = ({ submit, preview }) => {
                                   id="slurringOfSpeech"
                                   name="slurringOfSpeech"
                                   className="me-4"
+                                  onChange={(e) => {
+                                    setFieldValue(
+                                      "slurringOfSpeech",
+                                      e.target.checked
+                                    );
+                                    setSlurringOfSpeech(e.target.checked);
+                                  }}
                                 />
                                 Prior slurring of speech
                               </label>
@@ -498,6 +521,13 @@ const Comorbidities = ({ submit, preview }) => {
                                   id="blurringOfVision"
                                   name="blurringOfVision"
                                   className="me-4"
+                                  onChange={(e) => {
+                                    setFieldValue(
+                                      "blurringOfVision",
+                                      e.target.checked
+                                    );
+                                    setBlurringOfVision(e.target.checked);
+                                  }}
                                 />
                                 Prior blurring of vision
                               </label>

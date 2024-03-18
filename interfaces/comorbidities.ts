@@ -1,5 +1,10 @@
 export interface ComorbiditiesInterface {
-  cva: boolean;
+  // cva: boolean;
+  cva: {
+    paralysis: boolean;
+    slurringOfSpeech: boolean;
+    blurringOfVision: boolean;
+  };
   coronaryArteryDisease: boolean;
   heartFailure: boolean;
   diabetes: boolean;
@@ -7,10 +12,14 @@ export interface ComorbiditiesInterface {
   lungDisease: boolean;
 }
 export const initialComorbiditiesValues: ComorbiditiesInterface = {
-  cva: undefined,
-  coronaryArteryDisease: undefined,
-  heartFailure: undefined,
-  diabetes: undefined,
-  pregnancy: undefined,
-  lungDisease: undefined,
+  cva: {
+    paralysis: false,
+    slurringOfSpeech: false,
+    blurringOfVision: false,
+  },
+  coronaryArteryDisease: false,
+  heartFailure: false,
+  diabetes: false,
+  pregnancy: false,
+  lungDisease: false,
 };
