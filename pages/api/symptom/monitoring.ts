@@ -8,13 +8,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   connectMongo();
 
   if (req.method === "POST") {
-    const {
-      previousHeartAttacks,
-      breathlessness,
-      minorNYHA,
-      majorNYHA,
-      legSwelling,
-    } = req.body;
+    const { previousHeartAttacks, breathlessness, legSwelling } = req.body;
     try {
       const { token } = req.headers;
       if (!token) {
@@ -31,9 +25,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const newSymptoms = new SymptomModel({
         userid: user._id,
         previousHeartAttacks,
-        breathlessness,
-        minorNYHA,
-        majorNYHA,
+        breathlessness: {
+          minorNYHA: breathlessness.minorNYHA || false,
+          majorNYHA: breathlessness.majorNYHA || false,
+        },
         legSwelling,
       });
       const savedSymptoms = await newSymptoms.save();

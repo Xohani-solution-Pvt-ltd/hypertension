@@ -1,36 +1,129 @@
+// import { NextApiRequest, NextApiResponse } from "next";
+// import { connectMongo } from "../../../../utils/mongodb";
+//  import SymptomModel from "../../../../models/symptom.model";
+
+// const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+//   connectMongo()
+
+//   if (req.method === "PUT") {
+//     const { id } = req.query;
+//     const {
+//       previousHeartAttacks,
+//       breathlessness,
+//       minorNYHA,
+//       majorNYHA,
+//       legSwelling,
+//     } = req.body;
+
+//     try {
+//       const updatedSymptoms = await SymptomModel.findByIdAndUpdate(
+//         id,
+//         {
+//           previousHeartAttacks,
+//           breathlessness,
+//           minorNYHA,
+//           majorNYHA,
+//           legSwelling,
+//         },
+//         { new: true }
+//       );
+//       res.status(200).json({
+//         success: true,
+//         message: 'Symptoms updated successfully',
+//         data: updatedSymptoms,
+//       });
+//     } catch (error) {
+//       res.status(400).json({
+//         success: false,
+//         message: error.message,
+//       });
+//     }
+//   }else if (req.method === "GET") {
+//     try {
+//       const symptoms = await SymptomModel.findOne({ symptomsId :req.query._id });
+//       res.status(200).json({
+//         success: true,
+//         message: "successfully",
+//         data: symptoms
+//       });
+//     }catch (error){
+//         res.status(500).json({
+//           success: false,
+//           message: "Failed to retrieve symptoms" });
+//        }
+//   }else if (req.method === "DELETE"){
+//     try {
+//       const { id } = req.query;
+//       const deletedSymptom = await SymptomModel.findByIdAndDelete(id);
+//       if (!deletedSymptom){
+//         return res.status(404).json({ error: "Symptom not found" });
+//        }
+//        res.status(200).json({
+//         success: true,
+//         message: "Deleted successfully",
+//         data: deletedSymptom
+//       })
+//     } catch (error) {
+//       res.status(500).json({ error: "Failed to delete the symptom" });
+//     }
+//     }
+//   else
+//   {
+//     res.status(405).json({
+//       success: false,
+//       message: "Invalid method",
+//     });
+//     }
+//   }
+
+// export default handler;
+
 import { NextApiRequest, NextApiResponse } from "next";
 import { connectMongo } from "../../../../utils/mongodb";
- import SymptomModel from "../../../../models/symptom.model";
+import SymptomModel from "../../../../models/symptom.model";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  connectMongo()
-
-  if (req.method === "PUT") {
-    const { id } = req.query; 
-    const {
-      previousHeartAttacks,
-      breathlessness,
-      minorNYHA,
-      majorNYHA,
-      legSwelling,
-    } = req.body;
-    
+  connectMongo();
+  if (req.method === "GET") {
     try {
-      const updatedSymptoms = await SymptomModel.findByIdAndUpdate(
-        id,
-        {
-          previousHeartAttacks,
-          breathlessness,
-          minorNYHA,
-          majorNYHA,
-          legSwelling,
-        },
-        { new: true }
-      );
+      const symptomsData = await SymptomModel.findOne({
+        symptomsId: req.query._id,
+      });
       res.status(200).json({
         success: true,
-        message: 'Symptoms updated successfully',
-        data: updatedSymptoms,
+        message: "fetch data successfully",
+        data: symptomsData,
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: "Failed to retrieve data",
+      });
+    }
+  } else if (req.method === "PUT") {
+    const { id } = req.query;
+
+    const { previousHeartAttacks, breathlessness, legSwelling } = req.body;
+    try {
+      const existingSymptom = await SymptomModel.findByIdAndUpdate(id);
+      if (!existingSymptom) {
+        res.status(404).json({
+          success: false,
+          message: "Symptom not found",
+        });
+        return;
+      }
+
+      existingSymptom.previousHeartAttacks = previousHeartAttacks;
+      existingSymptom.breathlessness = breathlessness;
+      existingSymptom.legSwelling = legSwelling;
+
+      const updatedSymptom = await existingSymptom.save();
+
+      res.status(200).json({
+        success: true,
+        message: "Symptom updated successfully",
+        data: updatedSymptom,
       });
     } catch (error) {
       res.status(400).json({
@@ -38,42 +131,27 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         message: error.message,
       });
     }
-  }else if (req.method === "GET") {
-    try {
-      const symptoms = await SymptomModel.findOne({ symptomsId :req.query._id });
-      res.status(200).json({
-        success: true,
-        message: "successfully",
-        data: symptoms
-      });
-    }catch (error){
-        res.status(500).json({ 
-          success: false,
-          message: "Failed to retrieve symptoms" });
-       }
-  }else if (req.method === "DELETE"){
+  } else if (req.method === "DELETE") {
     try {
       const { id } = req.query;
       const deletedSymptom = await SymptomModel.findByIdAndDelete(id);
-      if (!deletedSymptom){
+      if (!deletedSymptom) {
         return res.status(404).json({ error: "Symptom not found" });
-       }
-       res.status(200).json({
+      }
+      res.status(200).json({
         success: true,
-        message: "Deleted successfully",
-        data: deletedSymptom
-      })
+        message: "Deleted Symptom successfully",
+        data: deletedSymptom,
+      });
     } catch (error) {
-      res.status(500).json({ error: "Failed to delete the symptom" });
+      res.status(500).json({ error: "Failed to delete the Symptom" });
     }
-    }
-  else
-  {
+  } else {
     res.status(405).json({
       success: false,
       message: "Invalid method",
     });
-    }
   }
+};
 
 export default handler;

@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState, useMemo } from "react";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import Link from "next/link";
 import { Container, Row, Col, Button, Nav, Tab, Card } from "react-bootstrap";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -22,40 +20,44 @@ const validationSchema = Yup.object({
   userid: Yup.string(),
   previousHeartAttacks: Yup.boolean(),
   breathlessness: Yup.boolean(),
-  minorNYHA: Yup.boolean(),
-  majorNYHA: Yup.boolean(),
+  // minorNYHA: Yup.boolean(),
+  // majorNYHA: Yup.boolean(),
   legSwelling: Yup.boolean(),
 });
+
+const initialValues = {
+  previousHeartAttacks: false,
+  breathlessness: false,
+  legSwelling: false,
+};
 
 const Symptoms = ({ submit, preview }) => {
   const [symptomsId, setSymptomsId] = useState(undefined);
   const [symptomsData, setSymptomsData] = useState(initialSymptomsValue);
   const [previousHeartAttacksData, setPreviousHeartAttacksData] =
     useState(false);
-  const [breathlessnessData, setBreathlessnessData] = useState(false);
+  const [breathlessnessData, setBreathlessnessData] = useState(
+    initialSymptomsValue.breathlessness
+  );
   const [legSwellingData, setLegSwellingData] = useState(false);
   const [minorNYHAData, setMinorNYHA] = useState(false);
   const [majorNYHAData, setMajorNYHA] = useState(false);
   const [editing, setEditing] = useState(false);
+  const [brethlessnessSubItemsVisible, setBrethlessnessSubItemsVisible] =
+    useState(false);
 
   const handleSubmit = async () => {
-    const InputData: SymptomsInterface = {
+    const inputData: SymptomsInterface = {
       previousHeartAttacks: previousHeartAttacksData,
-      breathlessness: breathlessnessData,
+      breathlessness: { minorNYHA: minorNYHAData, majorNYHA: majorNYHAData },
       legSwelling: legSwellingData,
-      minorNYHA: minorNYHAData,
-      majorNYHA: majorNYHAData,
     };
-    if (
-      previousHeartAttacksData ||
-      breathlessnessData ||
-      legSwellingData ||
-      minorNYHAData ||
-      majorNYHAData
-    ) {
-      if (editing) {
+    console.log("Input Data:", inputData);
+
+    if (previousHeartAttacksData || breathlessnessData || legSwellingData) {
+      if (editing === true) {
         if (symptomsId) {
-          const [data, err] = await updateSymptomsAPI(symptomsId, InputData);
+          const [data, err] = await updateSymptomsAPI(symptomsId, inputData);
           if (data) {
             notify.success("Successfully updated Symptoms");
           }
@@ -63,32 +65,24 @@ const Symptoms = ({ submit, preview }) => {
           notify.error("Symptoms ID is missing. Cannot update.");
         }
       } else {
-        const [data, err] = await submitSymptomsMonitoringAPI(InputData);
+        const [data, err] = await submitSymptomsMonitoringAPI(inputData);
         if (data) {
           setEditing(true);
           setSymptomsId(data.id);
-          notify.success("successfully Added Symptoms");
-        } else {
-          notify.error("Not Added Symptoms");
+          notify.success("Succesfully Symptoms");
         }
-      }
-    } else {
-      const [data, err] = await submitSymptomsMonitoringAPI(InputData);
-      if (data) {
-        setEditing(true);
-        setSymptomsId(data.id);
-        notify.success("successfully Added Symptoms");
-      } else {
-        notify.error("Not Added Symptoms");
+        if (err) {
+          notify.error(err?.message);
+        }
       }
     }
   };
 
   const fetchSymptomsDataDetails = async (id) => {
     const [data, err] = await getSymptomsMonitoringAPI(id);
-    console.log("data=", data);
+    // console.log("data=", data);
 
-    if (data) {
+    if (data && data.data) {
       setSymptomsData(data.data);
     }
     if (err) {
@@ -98,7 +92,7 @@ const Symptoms = ({ submit, preview }) => {
 
   useEffect(() => {
     const id = getCookie("symptomsId");
-    console.log("data of symptoms", id);
+    // console.log("data of symptoms", id);
     setSymptomsId(id);
     if (id) {
       setEditing(true);
@@ -108,12 +102,12 @@ const Symptoms = ({ submit, preview }) => {
 
   useEffect(() => {
     if (symptomsData != undefined) {
-      console.log("dataof symptoms", symptomsData);
+      // console.log("dataof symptoms", symptomsData);
       setPreviousHeartAttacksData(symptomsData.previousHeartAttacks);
       setBreathlessnessData(symptomsData.breathlessness);
       setLegSwellingData(symptomsData.legSwelling);
-      setMajorNYHA(symptomsData.majorNYHA);
-      setMinorNYHA(symptomsData.minorNYHA);
+      // setMajorNYHA(symptomsData.majorNYHA);
+      // setMinorNYHA(symptomsData.minorNYHA);
     }
   }, [symptomsData]);
 
@@ -126,23 +120,11 @@ const Symptoms = ({ submit, preview }) => {
 
         <Col md={8}>
           <Formik
-            initialValues={symptomsData}
+            initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
             enableReinitialize={true}
           >
-            {/* <Formik
-            initialValues={{
-              previousHeartAttacks: !!symptomsData.previousHeartAttacks,
-              breathlessness: !!symptomsData.breathlessness,
-              minorNYHA: !!symptomsData.minorNYHA,
-              majorNYHA: !!symptomsData.majorNYHA,
-              legSwelling: !!symptomsData.legSwelling,
-            }}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}
-            enableReinitialize={true}
-          > */}
             {({ setFieldValue }) => {
               return (
                 <>
@@ -180,56 +162,52 @@ const Symptoms = ({ submit, preview }) => {
                           onChange={(e) => {
                             setFieldValue("breathlessness", e.target.checked);
                             setBreathlessnessData(e.target.checked);
+                            setBrethlessnessSubItemsVisible(e.target.checked);
                           }}
                         />
                         Breathlessness
                       </label>
+                      {brethlessnessSubItemsVisible && (
+                        <div>
+                          <div className="p-2">
+                            <label>
+                              <Field
+                                type="checkbox"
+                                id="minorNYHA"
+                                name="minorNYHA"
+                                className="me-4"
+                                onChange={(e) => {
+                                  setFieldValue("minorNYHA", e.target.checked);
+                                  setMinorNYHA(e.target.checked);
+                                }}
+                              />
+                              Minor NYHA
+                            </label>
+                          </div>
+                          <div className="p-2">
+                            <label>
+                              <Field
+                                type="checkbox"
+                                id="majorNYHA"
+                                name="majorNYHA"
+                                className="me-4"
+                                onChange={(e) => {
+                                  setFieldValue("majorNYHA", e.target.checked);
+                                  setMajorNYHA(e.target.checked);
+                                }}
+                              />
+                              Major NYHA
+                            </label>
+                          </div>
+                        </div>
+                      )}
                       <ErrorMessage
                         name="breathlessness"
                         component="div"
                         className="text-danger"
                       />
                     </div>
-                    <div className="p-2">
-                      <label>
-                        <Field
-                          type="checkbox"
-                          id="minorNYHA"
-                          name="minorNYHA"
-                          className="me-4"
-                          onChange={(e) => {
-                            setFieldValue("minorNYHA", e.target.checked);
-                            setMinorNYHA(e.target.checked);
-                          }}
-                        />
-                        Minor NYHA
-                      </label>
-                      <ErrorMessage
-                        name="minorNYHA"
-                        component="div"
-                        className="text-danger"
-                      />
-                    </div>
-                    <div className="p-2">
-                      <label>
-                        <Field
-                          type="checkbox"
-                          id="majorNYHA"
-                          name="majorNYHA"
-                          className="me-4"
-                          onChange={(e) => {
-                            setFieldValue("majorNYHA", e.target.checked);
-                            setMajorNYHA(e.target.checked);
-                          }}
-                        />
-                        Major NYHA
-                      </label>
-                      <ErrorMessage
-                        name="majorNYHA"
-                        component="div"
-                        className="text-danger"
-                      />
-                    </div>
+
                     <div className="p-2">
                       <label>
                         <Field
@@ -253,6 +231,22 @@ const Symptoms = ({ submit, preview }) => {
                     <div className="text-left mt-4">
                       <label>If No Any symptoms Click On Submit Button</label>
                     </div>
+                    <div className="text-start">
+                      <Button
+                        type="button"
+                        className="btn btn-primary display-4"
+                        onClick={() => preview("comorbidities")}
+                      >
+                        Back
+                      </Button>
+                      <button
+                        type="submit"
+                        className="float-end btn btn-primary display-4"
+                        onClick={() => submit("bloodTest")}
+                      >
+                        {editing ? "Edit" : "Next"}
+                      </button>
+                    </div>
                   </Form>
                 </>
               );
@@ -267,23 +261,6 @@ const Symptoms = ({ submit, preview }) => {
             alt="Hypertension"
           />
         </Col>
-
-        <div className="text-start">
-          <Button
-            type="button"
-            className="btn btn-primary display-4"
-            onClick={() => preview("comorbidities")}
-          >
-            Back
-          </Button>
-          <button
-            type="submit"
-            className="float-end btn btn-primary display-4"
-            onClick={() => submit("bloodTest")}
-          >
-            {editing ? "Edit" : "Next"}
-          </button>
-        </div>
       </Row>
     </>
   );

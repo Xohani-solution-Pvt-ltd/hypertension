@@ -335,6 +335,15 @@ const validationSchema = Yup.object({
   lungDisease: Yup.boolean(),
 });
 
+const initialValues = {
+  cva: false,
+  coronaryArteryDisease: false,
+  heartFailure: false,
+  diabetes: false,
+  pregnancy: false,
+  lungDisease: false,
+};
+
 const Comorbidities = ({ submit, preview }) => {
   const [comorbiditiesId, setComorbiditiesId] = useState(undefined);
   const [cvaData, setCvaData] = useState(initialComorbiditiesValues.cva);
@@ -366,7 +375,7 @@ const Comorbidities = ({ submit, preview }) => {
       pregnancy: pregnancyData,
       lungDisease: lungDiseaseData,
     };
-    console.log("Input Data:", inputData);
+    // console.log("Input Data:", inputData);
 
     if (
       cvaData ||
@@ -390,7 +399,6 @@ const Comorbidities = ({ submit, preview }) => {
         }
       } else {
         const [data, err] = await submitComorbiditiesAPI(inputData);
-        console.log("API Response:", data, err);
         if (data) {
           setEditing(true);
           setComorbiditiesId(data.id);
@@ -399,16 +407,6 @@ const Comorbidities = ({ submit, preview }) => {
         if (err) {
           notify.error(err?.message);
         }
-      }
-    } else {
-      const [data, err] = await submitComorbiditiesAPI(inputData);
-      if (data) {
-        setEditing(true);
-        setComorbiditiesId(data.id);
-        notify.success("Succesfully Comorbidities");
-      }
-      if (err) {
-        notify.error(err?.message);
       }
     }
   };
@@ -453,7 +451,7 @@ const Comorbidities = ({ submit, preview }) => {
           <Row className="media-container-row">
             <Col md={6} className="align-left">
               <Formik
-                initialValues={comorbiditiesData}
+                initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}
                 enableReinitialize={true}
