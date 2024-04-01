@@ -6,6 +6,7 @@ import BloodTestModel from "../../../models/bloodtest.model";
 import ComorbiditiesModel from "../../../models/comorbidities.model";
 import SymptomModel from "../../../models/symptom.model";
 import ProfileModel from "../../../models/createProfile.model";
+import eGFRModel from "../../../models/egfr.model";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
@@ -18,12 +19,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         comorbiditiesData,
         symptomsData,
         bloodTestData,
+        eGFR,
       ] = await Promise.all([
         ProfileModel.findOne({userId : id}),
         DiagnosisModel.findOne({diagnosisId : id}),
         ComorbiditiesModel.findOne({comorbiditiesId:id}),
         SymptomModel.findOne({ symptomsId: id }),
-        BloodTestModel.findOne({bloodTestId : id})
+        BloodTestModel.findOne({bloodTestId : id}),
+        eGFRModel.findOne({eGFRId:id})
       ]);
 
       res.status(200).json({
@@ -34,7 +37,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           diagnosisData,
           comorbiditiesData,
           symptomsData,
-          bloodTestData
+          bloodTestData,
+          eGFR
         },
       });
     } else {

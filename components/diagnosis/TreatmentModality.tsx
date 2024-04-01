@@ -15,6 +15,7 @@ const RiskStratification = ({ preview }) => {
   const [results7, setResults7] = useState('prescriptions');
   const [results8, setResults8] = useState('prescriptions');
   const [results9, setResults9] = useState('prescriptions');
+  const [medicineSuggestion, setMedicineSuggestion] = useState('');
 
   const [criteria, setCriteria] = useState({
     'cva': null,
@@ -47,7 +48,8 @@ const RiskStratification = ({ preview }) => {
         data.data.comorbiditiesData &&
         data.data.bloodTestData &&
         data.data.symptomsData &&
-        data.data.userData
+        data.data.userData &&
+        data.data.eGFR
       ) {
 
 
@@ -56,6 +58,7 @@ const RiskStratification = ({ preview }) => {
         const symptomsData = data.data.symptomsData;
 
         const UserData = data.data.userData;
+        const eGFR = data.data.eGFR
 
         setCriteria((prevCriteria) => ({
           ...prevCriteria,
@@ -74,11 +77,11 @@ const RiskStratification = ({ preview }) => {
           'kidneyInterpretation': bloodTestData.kidneyInterpretation === "Normal",
           'ejectNormalInterpretation': bloodTestData.ejectionInterpretation === "Normal",
           'ejectHfrefInterpretation': bloodTestData.ejectionInterpretation === "HfrEF",
-          'eGFR': bloodTestData.eGFRResult,
+          'eGFR': eGFR.eGFRResult,
           'ejectHfprefInterpretation': bloodTestData.ejectionInterpretation === "HfpeEF",
           'ejectCadInterpretation': bloodTestData.ejectionInterpretation === "CAD",
           'presentdiabetes': comorbiditiesData.diabetes === true,
-          'age': UserData.age,
+          'age': eGFR.age,
         }));
       } else {
 
@@ -206,11 +209,33 @@ const RiskStratification = ({ preview }) => {
     checkRisk7();
     checkRisk8();
     checkRisk9();
-  }, []);
+    const calculateMedicineSuggestion = () => {
+    if (results1) {
+      setMedicineSuggestion('Treatment A + B or C + D');
+    } else if (results2) {
+      setMedicineSuggestion('Treatment E + D2, B');
+    } else if (results3) {
+      setMedicineSuggestion('Treatment C + D2, B + D2');
+    } else if (results4) {
+      setMedicineSuggestion('Treatment A3 + B, D3 + D2');
+    } else if (results5) {
+      setMedicineSuggestion('Treatment A1 + D3');
+    } else if (results6) {
+      setMedicineSuggestion('Treatment A + B');
+    } else if (results7) {
+      setMedicineSuggestion('Treatment A + D1');
+    } else if (results8) {
+      setMedicineSuggestion('Treatment A + D1');
+    } else if (results9) {
+      setMedicineSuggestion('Treatment C');
+    }
+  }
+  calculateMedicineSuggestion();
+  }, [results1, results2, results3, results4, results5, results6, results7, results8, results9]);
 
   return (
     <>
-      <Container fluid>
+      {/* <Container fluid>
        <div className="text-center pt-5">
       <h1>Treatment check</h1>
       <button onClick={checkRisk1}>Check Risk</button>
@@ -251,6 +276,16 @@ const RiskStratification = ({ preview }) => {
         <div className="float-end py-5">
         <button type="button" className="btn btn-primary display-4" onClick={() => preview("decideContraindication")}>Back</button>
         </div>
+      </Container> */}
+       <Container fluid>
+        {/* Your JSX */}
+        <div className="text-center pt-5">
+          <h1>Treatment check</h1>
+          <button onClick={checkRisk1}>Check Risk</button>
+          <p>{results1}</p>
+          <p>Suggested Medicine: {medicineSuggestion}</p>
+        </div>
+        {/* Rest of your JSX */}
       </Container>
       </>
         );
