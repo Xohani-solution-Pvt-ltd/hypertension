@@ -91,6 +91,22 @@ import ProfileModel from "../../../models/createProfile.model";
 import { verifyJWTandCheckUser } from "../../../utils/userFromJWT";
 import { setCookie } from "cookies-next";
 
+function calculateAge(dateOfBirth) {
+  const today = new Date();
+  const birthDate = new Date(dateOfBirth);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const monthDiff = today.getMonth() - birthDate.getMonth();
+
+  if (
+    monthDiff < 0 ||
+    (monthDiff === 0 && today.getDate() < birthDate.getDate())
+  ) {
+    age--;
+  }
+
+  return age;
+}
+
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   connectMongo();
 
@@ -139,10 +155,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         return;
       }
 
-      // Add logic for calculating eGFRResult and ejectionInterpretation if needed
-
       const userDetail = await ProfileModel.findOne({ profileId: user.userid });
-      const { gender, age, weight } = userDetail;
+
+      const { gender, dateOfBirth, weight } = userDetail;
+      const age = calculateAge(dateOfBirth);
+      console.log("Calculated age:", age);
 
       let eGFRResult = 0;
       if (gender === "Male") {
@@ -158,7 +175,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           eGFRResult = 0;
         }
       }
-      console.log("dataof egfr", eGFRResult);
+      console.log("data of egfr", eGFRResult);
 
       let ejectionInterpretation = "";
       if (ejectionFraction && coronaryArteryDisease) {
