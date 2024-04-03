@@ -283,6 +283,7 @@ const RiskStratification = ({ preview }) => {
           <h1>Treatment check</h1>
           <button onClick={checkRisk1}>Check Risk</button>
           <p>{results1}</p>
+          <p>{results2}</p>
           <p>Suggested Medicine: {medicineSuggestion}</p>
         </div>
         {/* Rest of your JSX */}
