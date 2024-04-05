@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Container, Table } from "react-bootstrap";
@@ -6,90 +5,95 @@ import Image from "next/image";
 // import TreatmentImg from '../../assets/images/Treatment.jpg';
 
 const RiskStratification = ({ preview }) => {
-  const [results1, setResults1] = useState('prescriptions');
-  const [results2, setResults2] = useState('prescriptions');
-  const [results3, setResults3] = useState('prescriptions');
-  const [results4, setResults4] = useState('prescriptions');
-  const [results5, setResults5] = useState('prescriptions');
-  const [results6, setResults6] = useState('prescriptions');
-  const [results7, setResults7] = useState('prescriptions');
-  const [results8, setResults8] = useState('prescriptions');
-  const [results9, setResults9] = useState('prescriptions');
-  const [medicineSuggestion, setMedicineSuggestion] = useState('');
+  const [results1, setResults1] = useState("prescriptions");
+  const [results2, setResults2] = useState("prescriptions");
+  const [results3, setResults3] = useState("prescriptions");
+  const [results4, setResults4] = useState("prescriptions");
+  const [results5, setResults5] = useState("prescriptions");
+  const [results6, setResults6] = useState("prescriptions");
+  const [results7, setResults7] = useState("prescriptions");
+  const [results8, setResults8] = useState("prescriptions");
+  const [results9, setResults9] = useState("prescriptions");
+  const [medicineSuggestion, setMedicineSuggestion] = useState("");
 
   const [criteria, setCriteria] = useState({
-    'cva': null,
-    'coronaryArteryDisease': null,
-    'heartFailure': null,
-    'diabetes': null,
-    'pregnancy': null,
-    'lungDisease': null,
-    'previousHeartAttacks': null,
-    'breathlessness': null,
-    'legSwelling': null,
-    'hBA1CInterpretation': undefined,
-    'kidneyInterpretation': undefined,
-    'ejectNormalInterpretation': undefined,
-    'ejectHfrefInterpretation': undefined,
-    'eGFR': undefined,
-    'ejectHfprefInterpretation': undefined,
-    'ejectCadInterpretation': undefined,
-    'presentdiabetes': null,
-    'age': null,
+    cva: null,
+    coronaryArteryDisease: null,
+    heartFailure: null,
+    diabetes: null,
+    pregnancy: null,
+    lungDisease: null,
+    previousHeartAttacks: null,
+    breathlessness: null,
+    legSwelling: null,
+    hBA1CInterpretation: undefined,
+    kidneyInterpretation: undefined,
+    ejectNormalInterpretation: undefined,
+    ejectHfrefInterpretation: undefined,
+    eGFR: undefined,
+    ejectHfprefInterpretation: undefined,
+    ejectCadInterpretation: undefined,
+    presentdiabetes: null,
+    age: null,
   });
 
   const fetchCriteriaData = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/allFetchData');
+      const response = await axios.get(
+        "http://localhost:3000/api/allFetchData"
+      );
       const data = response.data;
+      console.log("Response Data:", data);
       if (
         data &&
         data.data &&
         data.data.comorbiditiesData &&
         data.data.bloodTestData &&
         data.data.symptomsData &&
-        data.data.userData &&
-        data.data.eGFR
+        data.data.userData 
+        
       ) {
-
-
         const comorbiditiesData = data.data.comorbiditiesData;
         const bloodTestData = data.data.bloodTestData;
         const symptomsData = data.data.symptomsData;
 
         const UserData = data.data.userData;
-        const eGFR = data.data.eGFR
+        
 
         setCriteria((prevCriteria) => ({
           ...prevCriteria,
 
-          'cva': comorbiditiesData.cva === false,
-          'coronaryArteryDisease': comorbiditiesData.coronaryArteryDisease === false,
-          'heartFailure': comorbiditiesData.heartFailure === false,
-          'diabetes': comorbiditiesData.diabetes === false,
-          'pregnancy': comorbiditiesData.pregnancy === false,
-          'lungDisease': comorbiditiesData.lungDisease === false,
-          'previousHeartAttacks': symptomsData.previousHeartAttacks === false,
-          'breathlessness': symptomsData.breathlessness === false,
-          'legSwelling': symptomsData.legSwelling === false,
+          cva: comorbiditiesData.cva === false,
+          coronaryArteryDisease:
+            comorbiditiesData.coronaryArteryDisease === false,
+          heartFailure: comorbiditiesData.heartFailure === false,
+          diabetes: comorbiditiesData.diabetes === false,
+          pregnancy: comorbiditiesData.pregnancy === false,
+          lungDisease: comorbiditiesData.lungDisease === false,
+          previousHeartAttacks: symptomsData.previousHeartAttacks === false,
+          breathlessness: symptomsData.breathlessness === false,
+          legSwelling: symptomsData.legSwelling === false,
 
-          'hBA1CInterpretation': bloodTestData.hBA1CInterpretation === "Normal",
-          'kidneyInterpretation': bloodTestData.kidneyInterpretation === "Normal",
-          'ejectNormalInterpretation': bloodTestData.ejectionInterpretation === "Normal",
-          'ejectHfrefInterpretation': bloodTestData.ejectionInterpretation === "HfrEF",
-          'eGFR': eGFR.eGFRResult,
-          'ejectHfprefInterpretation': bloodTestData.ejectionInterpretation === "HfpeEF",
-          'ejectCadInterpretation': bloodTestData.ejectionInterpretation === "CAD",
-          'presentdiabetes': comorbiditiesData.diabetes === true,
-          'age': eGFR.age,
+          hBA1CInterpretation: bloodTestData.hBA1CInterpretation === "Normal",
+          kidneyInterpretation: bloodTestData.kidneyInterpretation === "Normal",
+          ejectNormalInterpretation:
+            bloodTestData.ejectionInterpretation === "Normal",
+          ejectHfrefInterpretation:
+            bloodTestData.ejectionInterpretation === "HfrEF",
+          eGFR: bloodTestData.eGFRResult,
+          ejectHfprefInterpretation:
+            bloodTestData.ejectionInterpretation === "HfpeEF",
+          ejectCadInterpretation:
+            bloodTestData.ejectionInterpretation === "CAD",
+          presentdiabetes: comorbiditiesData.diabetes === true,
+          age: bloodTestData.age,
         }));
+        console.log("Criteria State:", criteria);
       } else {
-
-        console.error('Required data properties are undefined');
+        console.error("Required data properties are undefined");
       }
-    }
-    catch (error) {
-      console.error('Error fetching data:', error);
+    } catch (error) {
+      console.error("Error fetching data:", error);
     }
   };
 
@@ -98,102 +102,102 @@ const RiskStratification = ({ preview }) => {
   }, []);
 
   const checkRisk1 = () => {
-    let riskLevel = '';
-    if (criteria['cva'] &&
-      criteria['coronaryArteryDisease'] &&
-      criteria['heartFailure'] &&
-      criteria['diabetes'] &&
-      criteria['pregnancy'] &&
-      criteria['lungDisease'] &&
-      criteria['hBA1CInterpretation'] &&
-      criteria['kidneyInterpretation'] &&
-      criteria['ejectNormalInterpretation']
+    let riskLevel = "";
+    if (
+      criteria["cva"] &&
+      criteria["coronaryArteryDisease"] &&
+      criteria["heartFailure"] &&
+      criteria["diabetes"] &&
+      criteria["pregnancy"] &&
+      criteria["lungDisease"] &&
+      criteria["hBA1CInterpretation"] &&
+      criteria["kidneyInterpretation"] &&
+      criteria["ejectNormalInterpretation"]
     ) {
-      riskLevel = ' group 1 = treatment A + B or C + D';
+      riskLevel = " group 1 = treatment A + B or C + D";
     }
 
     setResults1(riskLevel);
   };
 
   const checkRisk2 = () => {
-    let riskLevel = '';
+    let riskLevel = "";
 
-    if (criteria['eGFR'] < 60 && criteria['ejectHfrefInterpretation']
-    ) {
-      riskLevel = ' group 2 = treatment E + D2 , B ';
+    if (criteria["eGFR"] < 60 && criteria["ejectHfrefInterpretation"]) {
+      riskLevel = " group 2 = treatment E + D2 , B ";
     }
 
     setResults2(riskLevel);
   };
 
   const checkRisk3 = () => {
-    let riskLevel = '';
-    if (criteria['eGFR'] < 60 && criteria['ejectHfprefInterpretation'] || criteria['ejectCadInterpretation']) {
-      riskLevel = 'group 3 = treatment C + D2 , B + D2';
+    let riskLevel = "";
+    if (
+      (criteria["eGFR"] < 60 && criteria["ejectHfprefInterpretation"]) ||
+      criteria["ejectCadInterpretation"]
+    ) {
+      riskLevel = "group 3 = treatment C + D2 , B + D2";
     }
     setResults3(riskLevel);
   };
 
   const checkRisk4 = () => {
-    let riskLevel = '';
-    if (criteria['eGFR'] > 60 && criteria['ejectHfrefInterpretation']
-    ) {
-      riskLevel = ' group 4 = treatment A3 + B , D3 + D2 ';
+    let riskLevel = "";
+    if (criteria["eGFR"] > 60 && criteria["ejectHfrefInterpretation"]) {
+      riskLevel = " group 4 = treatment A3 + B , D3 + D2 ";
     }
     setResults4(riskLevel);
   };
 
   const checkRisk5 = () => {
-    let riskLevel = '';
+    let riskLevel = "";
 
-    if (criteria['eGFR'] > 60 && criteria['ejectHfprefInterpretation']
-    ) {
-      riskLevel = ' group 5 = treatment A1 + D3 ';
+    if (criteria["eGFR"] > 60 && criteria["ejectHfprefInterpretation"]) {
+      riskLevel = " group 5 = treatment A1 + D3 ";
     }
 
     setResults5(riskLevel);
   };
 
   const checkRisk6 = () => {
-    let riskLevel = '';
+    let riskLevel = "";
 
-    if (criteria['eGFR'] > 60 && criteria['ejectCadInterpretation']
-    ) {
-      riskLevel = ' group 6 = treatment A + B ';
+    if (criteria["eGFR"] > 60 && criteria["ejectCadInterpretation"]) {
+      riskLevel = " group 6 = treatment A + B ";
     }
 
     setResults6(riskLevel);
   };
 
   const checkRisk7 = () => {
-    let riskLevel = '';
+    let riskLevel = "";
 
-    if (criteria['eGFR'] > 60 && criteria['cva']
-    ) {
-      riskLevel = ' group 7 = treatment A + D1 ';
+    if (criteria["eGFR"] > 60 && criteria["cva"]) {
+      riskLevel = " group 7 = treatment A + D1 ";
     }
 
     setResults7(riskLevel);
   };
 
   const checkRisk8 = () => {
-    let riskLevel = '';
+    let riskLevel = "";
 
-    if (criteria['eGFR'] > 60 && criteria['presentdiabetes'] && criteria['hBA1CInterpretation']
+    if (
+      criteria["eGFR"] > 60 &&
+      criteria["presentdiabetes"] &&
+      criteria["hBA1CInterpretation"]
     ) {
-      riskLevel = ' group 8 = treatment A + D1 ';
+      riskLevel = " group 8 = treatment A + D1 ";
     }
 
     setResults8(riskLevel);
   };
 
   const checkRisk9 = () => {
-    let riskLevel = '';
+    let riskLevel = "";
 
-    if (criteria['eGFR'] > 60 && criteria['age'] > 80
-    ) {
-      riskLevel = ' group 9 = treatment C';
-
+    if (criteria["eGFR"] > 60 && criteria["age"] > 80) {
+      riskLevel = " group 9 = treatment C";
     }
 
     setResults9(riskLevel);
@@ -210,28 +214,38 @@ const RiskStratification = ({ preview }) => {
     checkRisk8();
     checkRisk9();
     const calculateMedicineSuggestion = () => {
-    if (results1) {
-      setMedicineSuggestion('Treatment A + B or C + D');
-    } else if (results2) {
-      setMedicineSuggestion('Treatment E + D2, B');
-    } else if (results3) {
-      setMedicineSuggestion('Treatment C + D2, B + D2');
-    } else if (results4) {
-      setMedicineSuggestion('Treatment A3 + B, D3 + D2');
-    } else if (results5) {
-      setMedicineSuggestion('Treatment A1 + D3');
-    } else if (results6) {
-      setMedicineSuggestion('Treatment A + B');
-    } else if (results7) {
-      setMedicineSuggestion('Treatment A + D1');
-    } else if (results8) {
-      setMedicineSuggestion('Treatment A + D1');
-    } else if (results9) {
-      setMedicineSuggestion('Treatment C');
-    }
-  }
-  calculateMedicineSuggestion();
-  }, [results1, results2, results3, results4, results5, results6, results7, results8, results9]);
+      if (results1) {
+        setMedicineSuggestion("Treatment A + B or C + D");
+      } else if (results2) {
+        setMedicineSuggestion("Treatment E + D2, B");
+      } else if (results3) {
+        setMedicineSuggestion("Treatment C + D2, B + D2");
+      } else if (results4) {
+        setMedicineSuggestion("Treatment A3 + B, D3 + D2");
+      } else if (results5) {
+        setMedicineSuggestion("Treatment A1 + D3");
+      } else if (results6) {
+        setMedicineSuggestion("Treatment A + B");
+      } else if (results7) {
+        setMedicineSuggestion("Treatment A + D1");
+      } else if (results8) {
+        setMedicineSuggestion("Treatment A + D1");
+      } else if (results9) {
+        setMedicineSuggestion("Treatment C");
+      }
+    };
+    calculateMedicineSuggestion();
+  }, [
+    results1,
+    results2,
+    results3,
+    results4,
+    results5,
+    results6,
+    results7,
+    results8,
+    results9,
+  ]);
 
   return (
     <>
@@ -277,22 +291,21 @@ const RiskStratification = ({ preview }) => {
         <button type="button" className="btn btn-primary display-4" onClick={() => preview("decideContraindication")}>Back</button>
         </div>
       </Container> */}
-       <Container fluid>
+      <Container fluid>
         {/* Your JSX */}
         <div className="text-center pt-5">
           <h1>Treatment check</h1>
           <button onClick={checkRisk1}>Check Risk</button>
           <p>{results1}</p>
           <p>{results2}</p>
+          <p>eGFR: {criteria.eGFR}</p>
+          <p>Age: {criteria.age}</p>
           <p>Suggested Medicine: {medicineSuggestion}</p>
         </div>
         {/* Rest of your JSX */}
       </Container>
-      </>
-        );
-    };
+    </>
+  );
+};
 
- export default RiskStratification;
-
-
-
+export default RiskStratification;

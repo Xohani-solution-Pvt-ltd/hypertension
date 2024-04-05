@@ -27,6 +27,8 @@ export interface BloodTestInterface {
     renalArteryDoppler: String,
     coronaryArteryDisease: String,
     ejectionFraction: Number,
+    eGFRResult: Number,
+    age: Number,
 }
 
 export const intialBloodTestValue: BloodTestInterface = {
@@ -58,6 +60,8 @@ export const intialBloodTestValue: BloodTestInterface = {
     renalArteryDoppler: undefined,
     coronaryArteryDisease: undefined,
     ejectionFraction: undefined,
+    eGFRResult: undefined,
+    age: undefined,
 }
 
 

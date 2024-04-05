@@ -80,10 +80,7 @@ const BloodTestSchema: Schema = new Schema({
         type: String,
         enum: ['Yes', 'No']
     },
-    eGFRResult: {
-        type: Number,
-        // default: false
-    },
+    
     sodium: {
         type: Number,
         required: true
@@ -129,6 +126,15 @@ const BloodTestSchema: Schema = new Schema({
     // ejectionInterpretation: {
     //     type: String,
     // },
+
+    eGFRResult: {
+        type: Number,
+        // default: false
+    },
+    age: {
+        type: Number,
+        // default: false
+    },
     createdAt: { type: Date, default: new Date() },
 });
 

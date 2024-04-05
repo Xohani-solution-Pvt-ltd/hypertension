@@ -140,6 +140,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       renalArteryDoppler,
       coronaryArteryDisease,
       ejectionFraction,
+      eGFRResult,
+      age,
     } = req.body;
     try {
       const { token } = req.headers;
@@ -230,6 +232,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         renalArteryDoppler,
         coronaryArteryDisease,
         ejectionFraction,
+        eGFRResult,
+        age,
       });
 
       const savedBloodTest = await newBloodTest.save();

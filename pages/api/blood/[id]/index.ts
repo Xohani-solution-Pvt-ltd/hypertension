@@ -8,7 +8,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "PUT") {
     const { id } = req.query;
     const {
-      hbA1cLevel,normalHbA1cLevel, hBA1CInterpretation, totalCholesterol, normalTotalCholesterol,lipidInterpretation, hdlCholesterol,normalHdlCholesterol, hdlInterpretation, ldlCholesterol,normalLdlCholesterol, ldlInterpretation, triglycerides,normalTriglycerides, triglyceridesInterpretation, albumin, creatinine, acrResult, sodium, potassium, uricAcid, kidneyInterpretation, tshLevel, normalTshLevel,tshInterpretation, renalArteryDoppler, coronaryArteryDisease, ejectionFraction } = req.body;
+      hbA1cLevel,normalHbA1cLevel, hBA1CInterpretation, totalCholesterol, normalTotalCholesterol,lipidInterpretation, hdlCholesterol,normalHdlCholesterol, hdlInterpretation, ldlCholesterol,normalLdlCholesterol, ldlInterpretation, triglycerides,normalTriglycerides, triglyceridesInterpretation, albumin, creatinine, acrResult, sodium, potassium, uricAcid, kidneyInterpretation, tshLevel, normalTshLevel,tshInterpretation, renalArteryDoppler, coronaryArteryDisease, ejectionFraction, eGFRResult, age } = req.body;
 
     try {
 
@@ -48,6 +48,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       updatedBloodTest.renalArteryDoppler = renalArteryDoppler;
       updatedBloodTest.coronaryArteryDisease = coronaryArteryDisease;
       updatedBloodTest.ejectionFraction = ejectionFraction;
+      updatedBloodTest.eGFRResult = eGFRResult;
+      updatedBloodTest.age = age;
+
       const updatedBloodTestData = await updatedBloodTest.save();
 
       res.status(200).json({
