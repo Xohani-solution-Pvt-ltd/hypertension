@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import { Form, Row, Col } from 'react-bootstrap';
+import React, { useState } from "react";
+import { Form, Row, Col } from "react-bootstrap";
 
 const ComplianceCheck = () => {
-    return (
-        <Form>
+  return (
+    <Form>
       <Row>
         <Col md={6} className="mt-5">
           Enter Blood Pressure
@@ -26,7 +26,7 @@ const ComplianceCheck = () => {
         </Col>
       </Row>
     </Form>
-    );
+  );
 };
 
 export default ComplianceCheck;

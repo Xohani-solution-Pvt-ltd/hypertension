@@ -1,7 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Container, Table } from "react-bootstrap";
 import Image from "next/image";
+import { AuthContext } from "../../context/authentication";
 // import TreatmentImg from '../../assets/images/Treatment.jpg';
 
 const RiskStratification = ({ preview }) => {
@@ -15,6 +16,7 @@ const RiskStratification = ({ preview }) => {
   const [results8, setResults8] = useState("prescriptions");
   const [results9, setResults9] = useState("prescriptions");
   const [medicineSuggestion, setMedicineSuggestion] = useState("");
+  const { userInfo } = useContext(AuthContext);
 
   const [criteria, setCriteria] = useState({
     cva: null,
@@ -40,7 +42,7 @@ const RiskStratification = ({ preview }) => {
   const fetchCriteriaData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/allFetchData"
+        `http://localhost:3000/api/allFetchData?id=${userInfo._id}`
       );
       const data = response.data;
       console.log("Response Data:", data);
@@ -50,15 +52,13 @@ const RiskStratification = ({ preview }) => {
         data.data.comorbiditiesData &&
         data.data.bloodTestData &&
         data.data.symptomsData &&
-        data.data.userData 
-        
+        data.data.userData
       ) {
         const comorbiditiesData = data.data.comorbiditiesData;
         const bloodTestData = data.data.bloodTestData;
         const symptomsData = data.data.symptomsData;
 
         const UserData = data.data.userData;
-        
 
         setCriteria((prevCriteria) => ({
           ...prevCriteria,

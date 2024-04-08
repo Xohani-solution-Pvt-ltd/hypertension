@@ -8,7 +8,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "GET") {
     try {
       const comorbiditiesData = await ComorbiditiesModel.findOne({
-        comorbiditiesId: req.query._id,
+        userid: req.query.id,
       });
       res.status(200).json({
         success: true,

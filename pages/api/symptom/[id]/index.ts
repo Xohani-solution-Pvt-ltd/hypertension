@@ -87,7 +87,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "GET") {
     try {
       const symptomsData = await SymptomModel.findOne({
-        symptomsId: req.query._id,
+        userid: req.query.id,
       });
       res.status(200).json({
         success: true,

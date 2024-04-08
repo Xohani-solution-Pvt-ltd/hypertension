@@ -3,15 +3,44 @@ import { connectMongo } from "../../../../utils/mongodb";
 import BloodTestModel from "../../../../models/bloodtest.model";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  connectMongo()
+  connectMongo();
 
   if (req.method === "PUT") {
     const { id } = req.query;
     const {
-      hbA1cLevel,normalHbA1cLevel, hBA1CInterpretation, totalCholesterol, normalTotalCholesterol,lipidInterpretation, hdlCholesterol,normalHdlCholesterol, hdlInterpretation, ldlCholesterol,normalLdlCholesterol, ldlInterpretation, triglycerides,normalTriglycerides, triglyceridesInterpretation, albumin, creatinine, acrResult, sodium, potassium, uricAcid, kidneyInterpretation, tshLevel, normalTshLevel,tshInterpretation, renalArteryDoppler, coronaryArteryDisease, ejectionFraction, eGFRResult, age } = req.body;
+      hbA1cLevel,
+      normalHbA1cLevel,
+      hBA1CInterpretation,
+      totalCholesterol,
+      normalTotalCholesterol,
+      lipidInterpretation,
+      hdlCholesterol,
+      normalHdlCholesterol,
+      hdlInterpretation,
+      ldlCholesterol,
+      normalLdlCholesterol,
+      ldlInterpretation,
+      triglycerides,
+      normalTriglycerides,
+      triglyceridesInterpretation,
+      albumin,
+      creatinine,
+      acrResult,
+      sodium,
+      potassium,
+      uricAcid,
+      kidneyInterpretation,
+      tshLevel,
+      normalTshLevel,
+      tshInterpretation,
+      renalArteryDoppler,
+      coronaryArteryDisease,
+      ejectionFraction,
+      eGFRResult,
+      age,
+    } = req.body;
 
     try {
-
       const updatedBloodTest = await BloodTestModel.findByIdAndUpdate(id);
       if (!updatedBloodTest) {
         res.status(404).json({
@@ -34,7 +63,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       updatedBloodTest.ldlInterpretation = ldlInterpretation;
       updatedBloodTest.triglycerides = triglycerides;
       updatedBloodTest.normalTriglycerides = normalTriglycerides;
-      updatedBloodTest.triglyceridesInterpretation = triglyceridesInterpretation;
+      updatedBloodTest.triglyceridesInterpretation =
+        triglyceridesInterpretation;
       updatedBloodTest.albumin = albumin;
       updatedBloodTest.creatinine = creatinine;
       updatedBloodTest.acrResult = acrResult;
@@ -55,7 +85,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       res.status(200).json({
         success: true,
-        message: 'BloodTest updated successfully',
+        message: "BloodTest updated successfully",
         data: updatedBloodTestData,
       });
     } catch (error) {
@@ -66,16 +96,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   } else if (req.method === "GET") {
     try {
-      const BloodTest = await BloodTestModel.findOne({ bloodTestId: req.query._id });
+      const BloodTest = await BloodTestModel.findOne({ userid: req.query.id });
       res.status(200).json({
         success: true,
         message: "successfully",
-        data: BloodTest
+        data: BloodTest,
       });
     } catch (error) {
       res.status(500).json({
         success: false,
-        message: "Failed to retrieve BloodTest"
+        message: "Failed to retrieve BloodTest",
       });
     }
   } else if (req.method === "DELETE") {
@@ -88,8 +118,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(200).json({
         success: true,
         message: "Deleted successfully",
-        data: deletedBloodTest
-      })
+        data: deletedBloodTest,
+      });
     } catch (error) {
       res.status(500).json({ error: "Failed to delete the BloodTest" });
     }
@@ -99,6 +129,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       message: "Invalid method",
     });
   }
-}
+};
 
 export default handler;

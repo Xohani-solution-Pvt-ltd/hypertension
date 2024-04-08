@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useMemo } from "react";
+import React, { useEffect, useRef, useState, useMemo, useContext } from "react";
 import Image from "next/image";
 import { Container, Row, Col, Button, Nav, Tab, Card } from "react-bootstrap";
 import { Formik, Field, Form, ErrorMessage } from "formik";
@@ -15,6 +15,7 @@ import {
   initialSymptomsValue,
 } from "../../interfaces/symptoms";
 import SymptomsImg from "../../assets/images/Symptoms.png";
+import { AuthContext } from "../../context/authentication";
 
 const validationSchema = Yup.object({
   userid: Yup.string(),
@@ -32,6 +33,7 @@ const initialValues = {
 };
 
 const Symptoms = ({ submit, preview }) => {
+  const { userInfo } = useContext(AuthContext);
   const [symptomsId, setSymptomsId] = useState(undefined);
   const [symptomsData, setSymptomsData] = useState(initialSymptomsValue);
   const [previousHeartAttacksData, setPreviousHeartAttacksData] =
@@ -82,8 +84,10 @@ const Symptoms = ({ submit, preview }) => {
     const [data, err] = await getSymptomsMonitoringAPI(id);
     // console.log("data=", data);
 
-    if (data && data.data) {
+    if (data?.data != null) {
       setSymptomsData(data.data);
+      setEditing(true);
+      setSymptomsId(data.data._id);
     }
     if (err) {
       notify.error(err?.message);
@@ -91,11 +95,14 @@ const Symptoms = ({ submit, preview }) => {
   };
 
   useEffect(() => {
-    const id = getCookie("symptomsId");
+    // const id = getCookie("symptomsId");
     // console.log("data of symptoms", id);
-    setSymptomsId(id);
-    if (id) {
-      setEditing(true);
+    // setSymptomsId(id);
+    // if (id) {
+    //   setEditing(true);
+    //   fetchSymptomsDataDetails(id);
+    if (userInfo && userInfo._id) {
+      const id = userInfo._id;
       fetchSymptomsDataDetails(id);
     }
   }, []);

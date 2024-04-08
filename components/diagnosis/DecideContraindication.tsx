@@ -1,11 +1,13 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Form } from 'react-bootstrap';
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
+import { Container, Row, Col, Form } from "react-bootstrap";
+import { AuthContext } from "../../context/authentication";
 
 const DecideContraindication = ({ submit, preview }) => {
-  const [contraindication1, setContraindication1] = useState('');
-  const [contraindication2, setContraindication2] = useState('');
-  const [contraindication3, setContraindication3] = useState('');
+  const { userInfo } = useContext(AuthContext);
+  const [contraindication1, setContraindication1] = useState("");
+  const [contraindication2, setContraindication2] = useState("");
+  const [contraindication3, setContraindication3] = useState("");
 
   const [criteria, setCriteria] = useState({
     Cr: undefined,
@@ -16,10 +18,17 @@ const DecideContraindication = ({ submit, preview }) => {
 
   const fetchCriteriaData = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/allFetchData');
+      const response = await axios.get(
+        `http://localhost:3000/api/allFetchData?id=${userInfo._id}`
+      );
       const data = response.data;
 
-      if (data && data.data && data.data.bloodTestData && data.data.diagnosisData) {
+      if (
+        data &&
+        data.data &&
+        data.data.bloodTestData &&
+        data.data.diagnosisData
+      ) {
         const bloodTestData = data.data.bloodTestData;
         const diagnosisTestData = data.data.diagnosisData;
 
@@ -36,33 +45,33 @@ const DecideContraindication = ({ submit, preview }) => {
           UricAcid,
         }));
       } else {
-        console.error('Required data properties are undefined');
+        console.error("Required data properties are undefined");
       }
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error("Error fetching data:", error);
     }
   };
 
   const checkRisk1 = () => {
-    let RiskOneLevel = '';
-    if (criteria['Cr'] > 2.5 || criteria['K'] > 5.5) {
-      RiskOneLevel = 'No Ace (A1) , No ARB (A2) , No MRA (D3)';
+    let RiskOneLevel = "";
+    if (criteria["Cr"] > 2.5 || criteria["K"] > 5.5) {
+      RiskOneLevel = "No Ace (A1) , No ARB (A2) , No MRA (D3)";
     }
     setContraindication1(RiskOneLevel);
   };
 
   const checkRisk2 = () => {
-    let RiskTwoLevel = '';
-    if (criteria['PulseRate'] < 60) {
-      RiskTwoLevel = 'No B# (B)';
+    let RiskTwoLevel = "";
+    if (criteria["PulseRate"] < 60) {
+      RiskTwoLevel = "No B# (B)";
     }
     setContraindication2(RiskTwoLevel);
   };
 
   const checkRisk3 = () => {
-    let RiskThreeLevel = '';
-    if (criteria['UricAcid'] > 9) {
-      RiskThreeLevel = 'No Thiazide (D1)';
+    let RiskThreeLevel = "";
+    if (criteria["UricAcid"] > 9) {
+      RiskThreeLevel = "No Thiazide (D1)";
     }
     setContraindication3(RiskThreeLevel);
   };
@@ -79,24 +88,24 @@ const DecideContraindication = ({ submit, preview }) => {
 
   return (
     <>
-    <div className="text-center pt-5">
-      <h3>Decide Contraindications</h3>
-      <p>{contraindication1}</p>
-      <p>{contraindication2}</p>
-      <p>{contraindication3}</p>
+      <div className="text-center pt-5">
+        <h3>Decide Contraindications</h3>
+        <p>{contraindication1}</p>
+        <p>{contraindication2}</p>
+        <p>{contraindication3}</p>
       </div>
       <div className="mt-4">
         <button
           type="button"
           className="btn btn-primary display-4"
-          onClick={() => preview('stratification')}
+          onClick={() => preview("stratification")}
         >
           Back
         </button>
         <button
           type="submit"
           className="float-end btn btn-primary display-4"
-          onClick={() => submit('treatment')}
+          onClick={() => submit("treatment")}
         >
           Next
         </button>
