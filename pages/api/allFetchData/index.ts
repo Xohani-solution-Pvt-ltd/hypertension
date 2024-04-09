@@ -21,12 +21,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         bloodTestData,
         eGFR,
       ] = await Promise.all([
-        ProfileModel.findOne({userId : id}),
-        DiagnosisModel.findOne({diagnosisId : id}),
-        ComorbiditiesModel.findOne({comorbiditiesId:id}),
-        SymptomModel.findOne({ symptomsId: id }),
-        BloodTestModel.findOne({bloodTestId : id}),
-        eGFRModel.findOne({eGFRId:id})
+        ProfileModel.findOne({userid : id}),
+        DiagnosisModel.findOne({userid : id}),
+        ComorbiditiesModel.findOne({userid:id}),
+        SymptomModel.findOne({ userid: id }),
+        BloodTestModel.findOne({userid : id}),
+        eGFRModel.findOne({userid:id})
       ]);
 
       res.status(200).json({
