@@ -305,8 +305,17 @@ const BloodTest = ({ submit, preview }) => {
                           className="form-control"
                           placeholder="Enter HbA1c Range (e.g., 0 - 7)"
                           onChange={(e) => {
-                            setFieldValue("hbA1cLevel", e.target.value);
-                            setHbA1cLevelData(e.target.value);
+                            const hbA1cLevel = parseFloat(e.target.value);
+                            setFieldValue("hbA1cLevel", hbA1cLevel);
+                            setHbA1cLevelData(hbA1cLevel);
+
+                            const interpretation =
+                              hbA1cLevel > 7 ? "Abnormal" : "Normal";
+                            setFieldValue(
+                              "hBA1CInterpretation",
+                              interpretation
+                            );
+                            setHBA1CInterpretationData(interpretation);
                           }}
                         />
                         <ErrorMessage
@@ -325,13 +334,7 @@ const BloodTest = ({ submit, preview }) => {
                           id="hBA1CInterpretation"
                           name="hBA1CInterpretation"
                           className="form-control"
-                          onChange={(e) => {
-                            setFieldValue(
-                              "hBA1CInterpretation",
-                              e.target.value
-                            );
-                            setHBA1CInterpretationData(e.target.value);
-                          }}
+                          disabled
                         >
                           <option
                             value=""
@@ -421,9 +424,19 @@ const BloodTest = ({ submit, preview }) => {
                           name="hdlCholesterol"
                           className="form-control"
                           placeholder="Enter HDL Cholesterol (e.g., 60 - 80)"
+                          // onChange={(e) => {
+                          //   setFieldValue("hdlCholesterol", e.target.value);
+                          //   setHdlCholesterolData(e.target.value);
+                          // }}
                           onChange={(e) => {
-                            setFieldValue("hdlCholesterol", e.target.value);
-                            setHdlCholesterolData(e.target.value);
+                            const hdlCholesterol = parseFloat(e.target.value);
+                            setFieldValue("hdlCholesterol", hdlCholesterol);
+                            setHdlCholesterolData(hdlCholesterol);
+
+                            const interpretation =
+                              hdlCholesterol > 80 ? "Abnormal" : "Normal";
+                            setFieldValue("hdlInterpretation", interpretation);
+                            setHdlInterpretationData(interpretation);
                           }}
                         />
                         <ErrorMessage
@@ -442,10 +455,11 @@ const BloodTest = ({ submit, preview }) => {
                           id="hdlInterpretation"
                           name="hdlInterpretation"
                           className="form-control"
-                          onChange={(e) => {
-                            setFieldValue("hdlInterpretation", e.target.value);
-                            setHdlInterpretationData(e.target.value);
-                          }}
+                          disabled
+                          // onChange={(e) => {
+                          //   setFieldValue("hdlInterpretation", e.target.value);
+                          //   setHdlInterpretationData(e.target.value);
+                          // }}
                         >
                           <option
                             value=""
@@ -475,8 +489,14 @@ const BloodTest = ({ submit, preview }) => {
                           className="form-control"
                           placeholder="Enter LDL Cholesterol (e.g., 80 - 100)"
                           onChange={(e) => {
-                            setFieldValue("ldlCholesterol", e.target.value);
-                            setLdlCholesterolData(e.target.value);
+                            const ldlCholesterol = parseFloat(e.target.value);
+                            setFieldValue("ldlCholesterol", ldlCholesterol);
+                            setLdlCholesterolData(ldlCholesterol);
+
+                            const interpretation =
+                              ldlCholesterol > 100 ? "Abnormal" : "Normal";
+                            setFieldValue("ldlInterpretation", interpretation);
+                            setLdlInterpretationData(interpretation);
                           }}
                         />
                         <ErrorMessage
@@ -495,10 +515,7 @@ const BloodTest = ({ submit, preview }) => {
                           id="ldlInterpretation"
                           name="ldlInterpretation"
                           className="form-control"
-                          onChange={(e) => {
-                            setFieldValue("ldlInterpretation", e.target.value);
-                            setLdlInterpretationData(e.target.value);
-                          }}
+                          disabled
                         >
                           <option
                             value=""
@@ -528,8 +545,17 @@ const BloodTest = ({ submit, preview }) => {
                           className="form-control"
                           placeholder="Enter Triglycerides (e.g., 150 - 499)"
                           onChange={(e) => {
-                            setFieldValue("triglycerides", e.target.value);
-                            setTriglyceridesData(e.target.value);
+                            const triglycerides = parseFloat(e.target.value);
+                            setFieldValue("triglycerides", triglycerides);
+                            setTriglyceridesData(triglycerides);
+
+                            const interpretation =
+                              triglycerides > 499 ? "Abnormal" : "Normal";
+                            setFieldValue(
+                              "triglyceridesInterpretation",
+                              interpretation
+                            );
+                            setTriglyceridesInterpretationData(interpretation);
                           }}
                         />
                         <ErrorMessage
@@ -548,13 +574,7 @@ const BloodTest = ({ submit, preview }) => {
                           id="triglyceridesInterpretation"
                           name="triglyceridesInterpretation"
                           className="form-control"
-                          onChange={(e) => {
-                            setFieldValue(
-                              "triglyceridesInterpretation",
-                              e.target.value
-                            );
-                            setTriglyceridesInterpretationData(e.target.value);
-                          }}
+                          disabled
                         >
                           <option
                             value=""
