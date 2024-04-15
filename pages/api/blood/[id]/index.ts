@@ -1,6 +1,23 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { connectMongo } from "../../../../utils/mongodb";
 import BloodTestModel from "../../../../models/bloodtest.model";
+import ProfileModel from "../../../../models/createProfile.model";
+
+const calculateAge = (dateOfBirth) => {
+  const today = new Date();
+  const birthDate = new Date(dateOfBirth);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const monthDiff = today.getMonth() - birthDate.getMonth();
+
+  if (
+    monthDiff < 0 ||
+    (monthDiff === 0 && today.getDate() < birthDate.getDate())
+  ) {
+    age--;
+  }
+
+  return age;
+};
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   connectMongo();
@@ -36,8 +53,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       renalArteryDoppler,
       coronaryArteryDisease,
       ejectionFraction,
-      eGFRResult,
-      age,
     } = req.body;
 
     try {
@@ -49,6 +64,25 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         });
         return;
       }
+
+      const userDetail = await ProfileModel.findOne({
+        userid: updatedBloodTest.userid,
+      });
+      const { dateOfBirth } = userDetail;
+      const age = calculateAge(dateOfBirth);
+
+      let eGFRResult = 0;
+      if (userDetail.gender === "Male") {
+        if (age > 0 && userDetail.weight > 0 && creatinine > 0) {
+          eGFRResult = ((140 - age) * userDetail.weight) / (72 * creatinine);
+        }
+      } else if (userDetail.gender === "Female") {
+        if (age > 0 && userDetail.weight > 0 && creatinine > 0) {
+          eGFRResult =
+            (((140 - age) * userDetail.weight) / (72 * creatinine)) * 0.85;
+        }
+      }
+
       updatedBloodTest.hbA1cLevel = hbA1cLevel;
       updatedBloodTest.normalHbA1cLevel = normalHbA1cLevel;
       updatedBloodTest.hBA1CInterpretation = hBA1CInterpretation;
