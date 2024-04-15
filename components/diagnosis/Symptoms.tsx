@@ -35,7 +35,14 @@ const initialValues = {
 const Symptoms = ({ submit, preview }) => {
   const { userInfo } = useContext(AuthContext);
   const [symptomsId, setSymptomsId] = useState(undefined);
-  const [symptomsData, setSymptomsData] = useState(initialSymptomsValue);
+  // const [symptomsData, setSymptomsData] = useState(initialSymptomsValue);
+  const [symptomsData, setSymptomsData] = useState({
+    previousHeartAttacks: false,
+    breathlessness: false,
+    legSwelling: false,
+    minorNYHA: false,
+    majorNYHA: false,
+  });
   const [previousHeartAttacksData, setPreviousHeartAttacksData] =
     useState(false);
   const [breathlessnessData, setBreathlessnessData] = useState(
@@ -95,12 +102,6 @@ const Symptoms = ({ submit, preview }) => {
   };
 
   useEffect(() => {
-    // const id = getCookie("symptomsId");
-    // console.log("data of symptoms", id);
-    // setSymptomsId(id);
-    // if (id) {
-    //   setEditing(true);
-    //   fetchSymptomsDataDetails(id);
     if (userInfo && userInfo._id) {
       const id = userInfo._id;
       fetchSymptomsDataDetails(id);
@@ -127,12 +128,12 @@ const Symptoms = ({ submit, preview }) => {
 
         <Col md={8}>
           <Formik
-            initialValues={initialValues}
+            initialValues={symptomsData}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
             enableReinitialize={true}
           >
-            {({ setFieldValue }) => {
+            {({ values, setFieldValue }) => {
               return (
                 <>
                   <Form>
@@ -165,10 +166,15 @@ const Symptoms = ({ submit, preview }) => {
                           type="checkbox"
                           id="breathlessness"
                           name="breathlessness"
+                          checked={values.breathlessness}
                           className="me-4"
                           onChange={(e) => {
                             setFieldValue("breathlessness", e.target.checked);
                             setBreathlessnessData(e.target.checked);
+                            setSymptomsData({
+                              ...symptomsData,
+                              breathlessness: e.target.checked,
+                            });
                             setBrethlessnessSubItemsVisible(e.target.checked);
                           }}
                         />

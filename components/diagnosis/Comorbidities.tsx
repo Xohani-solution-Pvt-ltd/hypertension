@@ -46,9 +46,20 @@ const Comorbidities = ({ submit, preview }) => {
   const [pregnancyData, setPregnancyData] = useState(false);
   const [lungDiseaseData, setLungDiseaseData] = useState(false);
   const [editing, setEditing] = useState(false);
-  const [comorbiditiesData, setComorbiditiesData] = useState(
-    initialComorbiditiesValues
-  );
+  // const [comorbiditiesData, setComorbiditiesData] = useState(
+  //   initialComorbiditiesValues
+  // );
+  const [comorbiditiesData, setComorbiditiesData] = useState({
+    cva: false,
+    coronaryArteryDisease: false,
+    heartFailure: false,
+    diabetes: false,
+    pregnancy: false,
+    lungDisease: false,
+    priorParalysis: false,
+    slurringOfSpeech: false,
+    blurringOfVision: false,
+  });
   const [cvaSubItemsVisible, setCvaSubItemsVisible] = useState(false);
   const [priorParalysis, setPriorParalysis] = useState(false);
   const [slurringOfSpeech, setSlurringOfSpeech] = useState(false);
@@ -128,14 +139,6 @@ const Comorbidities = ({ submit, preview }) => {
   }, [comorbiditiesData]);
 
   useEffect(() => {
-    // const id = getCookie("comorbiditiesId");
-    // // const id = userInfo._id;
-    // setComorbiditiesId(id);
-    // if (id) {
-    //   setEditing(true);
-    //   fetchComorbiditiesData(id);
-    // }
-
     if (userInfo && userInfo._id) {
       const id = userInfo._id;
       fetchComorbiditiesData(id);
@@ -152,12 +155,12 @@ const Comorbidities = ({ submit, preview }) => {
           <Row className="media-container-row">
             <Col md={6} className="align-left">
               <Formik
-                initialValues={initialValues}
+                initialValues={comorbiditiesData}
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}
                 enableReinitialize={true}
               >
-                {({ setFieldValue }) => {
+                {({ values, setFieldValue }) => {
                   return (
                     <Form>
                       <div className="p-2">
@@ -166,10 +169,15 @@ const Comorbidities = ({ submit, preview }) => {
                             type="checkbox"
                             id="cva"
                             name="cva"
+                            checked={values.cva}
                             className="me-4"
                             onChange={(e) => {
                               setFieldValue("cva", e.target.checked);
                               setCvaData(e.target.checked);
+                              setComorbiditiesData({
+                                ...comorbiditiesData,
+                                cva: e.target.checked,
+                              });
                               setCvaSubItemsVisible(e.target.checked);
                             }}
                           />
