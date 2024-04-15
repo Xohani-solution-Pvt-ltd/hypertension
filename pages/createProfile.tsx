@@ -79,12 +79,20 @@ const Login = () => {
         <Row className="d-flex justify-content-center pt-5">
           <Card
             className="bg-light"
-            style={{ width: "40rem", border: "groove", maxHeight: "57rem" }}
+            style={{ width: "40rem", border: "groove", maxHeight: "58rem" }}
           >
             <Card.Body>
-              <Card.Title>
+              {/* <Card.Title>
                 <h1 className="text-center text-bold">User Profile Creation</h1>
-              </Card.Title>
+              </Card.Title> */}
+              <h4 className=" text-center text-primary">
+                Personal Information
+              </h4>
+              <p>
+                {" "}
+                Unlock Your Identity: Share Your Personal Information for a
+                Better Experience.
+              </p>
               <Form className="mt-8 space-y-6" onSubmit={Submit}>
                 <Form.Group controlId="dateOfBirth" className="mb-4">
                   <Form.Label>Date of Birth</Form.Label>
