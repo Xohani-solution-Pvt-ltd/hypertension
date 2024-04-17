@@ -6,6 +6,7 @@ import { AuthContext } from "../../context/authentication";
 // import TreatmentImg from '../../assets/images/Treatment.jpg';
 
 const RiskStratification = ({ preview }) => {
+  const { userInfo } = useContext(AuthContext);
   const [results1, setResults1] = useState("prescriptions");
   const [results2, setResults2] = useState("prescriptions");
   const [results3, setResults3] = useState("prescriptions");
@@ -16,7 +17,6 @@ const RiskStratification = ({ preview }) => {
   const [results8, setResults8] = useState("prescriptions");
   const [results9, setResults9] = useState("prescriptions");
   const [medicineSuggestion, setMedicineSuggestion] = useState("");
-  const { userInfo } = useContext(AuthContext);
 
   const [criteria, setCriteria] = useState({
     cva: null,
@@ -89,6 +89,15 @@ const RiskStratification = ({ preview }) => {
           age: bloodTestData.age,
         }));
         console.log("Criteria State:", criteria);
+        checkRisk1();
+        checkRisk2();
+        checkRisk3();
+        checkRisk4();
+        checkRisk5();
+        checkRisk6();
+        checkRisk7();
+        checkRisk8();
+        checkRisk9();
       } else {
         console.error("Required data properties are undefined");
       }
@@ -96,10 +105,16 @@ const RiskStratification = ({ preview }) => {
       console.error("Error fetching data:", error);
     }
   };
-
   useEffect(() => {
+    console.log("Criteria State:", criteria);
+  }, [criteria]);
+
+  // useEffect(() => {
+  //   fetchCriteriaData();
+  // }, []);
+  const checkTreatment = () => {
     fetchCriteriaData();
-  }, []);
+  };
 
   const checkRisk1 = () => {
     let riskLevel = "";
@@ -204,6 +219,11 @@ const RiskStratification = ({ preview }) => {
   };
 
   useEffect(() => {
+    // Call checkTreatment on component mount
+    checkTreatment();
+  }, []);
+
+  useEffect(() => {
     checkRisk1();
     checkRisk2();
     checkRisk3();
@@ -295,9 +315,18 @@ const RiskStratification = ({ preview }) => {
         {/* Your JSX */}
         <div className="text-center pt-5">
           <h1>Treatment check</h1>
-          <button onClick={checkRisk1}>Check Risk</button>
+          {/* <button onClick={checkRisk1}>Check Risk</button> */}
+          <button onClick={checkTreatment}>Check Treatment</button>
           <p>{results1}</p>
           <p>{results2}</p>
+          <p>{results3}</p>
+          <p>{results4}</p>
+          <p>{results5}</p>
+          <p>{results6}</p>
+          <p>{results7}</p>
+          <p>{results8}</p>
+          <p>{results9}</p>
+
           <p>eGFR: {criteria.eGFR}</p>
           <p>Age: {criteria.age}</p>
           <p>Suggested Medicine: {medicineSuggestion}</p>
