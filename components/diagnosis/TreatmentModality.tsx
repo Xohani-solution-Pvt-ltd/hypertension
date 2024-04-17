@@ -3,9 +3,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { Container, Table } from "react-bootstrap";
 import Image from "next/image";
 import { AuthContext } from "../../context/authentication";
-// import TreatmentImg from '../../assets/images/Treatment.jpg';
 
-const RiskStratification = ({ preview }) => {
+const Treatment = ({ preview }) => {
   const { userInfo } = useContext(AuthContext);
   const [results1, setResults1] = useState("prescriptions");
   const [results2, setResults2] = useState("prescriptions");
@@ -109,9 +108,6 @@ const RiskStratification = ({ preview }) => {
     console.log("Criteria State:", criteria);
   }, [criteria]);
 
-  // useEffect(() => {
-  //   fetchCriteriaData();
-  // }, []);
   const checkTreatment = () => {
     fetchCriteriaData();
   };
@@ -219,7 +215,6 @@ const RiskStratification = ({ preview }) => {
   };
 
   useEffect(() => {
-    // Call checkTreatment on component mount
     checkTreatment();
   }, []);
 
@@ -269,72 +264,125 @@ const RiskStratification = ({ preview }) => {
 
   return (
     <>
-      {/* <Container fluid>
-       <div className="text-center pt-5">
-      <h1>Treatment check</h1>
-      <button onClick={checkRisk1}>Check Risk</button>
-      <p>{results1}</p>
-      </div>
-        <Table striped bordered hover style={{ width: '90%', maxHeight: 'auto', borderColor: 'black' }}>
+      <Container fluid>
+        <div className="text-center pt-5">
+          <h1>Treatment check</h1>
+          <button onClick={checkTreatment}>Check Treatment</button>
+          <p style={{ backgroundColor: "red" }}>{results1}</p>
+          <p style={{ backgroundColor: "red" }}>{results2}</p>
+          <p style={{ backgroundColor: "red" }}>{results3}</p>
+          <p style={{ backgroundColor: "red" }}>{results4}</p>
+          <p style={{ backgroundColor: "red" }}>{results5}</p>
+          <p style={{ backgroundColor: "red" }}>{results6}</p>
+          <p style={{ backgroundColor: "red" }}>{results7}</p>
+          <p style={{ backgroundColor: "red" }}>{results8}</p>
+          <p style={{ backgroundColor: "red" }}>{results9}</p>
+          <p>Suggested Medicine: {medicineSuggestion}</p>
+        </div>
+        <Table
+          striped
+          bordered
+          hover
+          style={{ width: "90%", maxHeight: "auto", borderColor: "black" }}
+        >
           <thead>
             <tr>
               <th>Class</th>
               <th>Name</th>
-              <th>intial Dose
-                (first visit)</th>
-              <th colSpan={1}></th>
-              <th>1st uptitration
-                (follow up)</th>
-              <th colSpan={1}></th>
+              <th>Initial Dose (first visit)</th>
+              <th></th>
+              <th>1st uptitration (follow up)</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td></td>
-              <td></td>
-              <td>Dose</td>
-              <td>Frequency</td>
-              <td>Dose</td>
-              <td>Frequency</td>
+              <td>A1</td>
+              <td>Ramipril</td>
+              <td>5 mg</td>
+              <td>Once a day</td>
+              <td>5 mg</td>
+              <td>Twice a day</td>
             </tr>
             <tr>
-              <td>{}</td>
-              <td>{}</td>
-              <td>{results3}</td>
-              <td>{}</td>
-              <td>{results3}</td>
-              <td>{}</td>
+              <td>A2</td>
+              <td>Telmisartan</td>
+              <td>40 mg</td>
+              <td>Once a day</td>
+              <td>40 mg</td>
+              <td>Twice a day</td>
+            </tr>
+            <tr>
+              <td>A3</td>
+              <td>Sacubtril + Valsartan</td>
+              <td>25 mg </td>
+              <td>Twice a day</td>
+              <td>50 mg</td>
+              <td>Twice a day</td>
+            </tr>
+            <tr>
+              <td>B</td>
+              <td>Metoprolol</td>
+              <td>25 mg </td>
+              <td>Once a day</td>
+              <td>25 mg</td>
+              <td>Twice a day</td>
+            </tr>
+            <tr>
+              <td>C</td>
+              <td>Amlodipine</td>
+              <td>5 mg </td>
+              <td>Once a day</td>
+              <td>10 mg</td>
+              <td>Once a day</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Clinidipine</td>
+              <td>10 mg </td>
+              <td>Once a day</td>
+              <td>10 mg</td>
+              <td>Twice a day</td>
+            </tr>
+            <tr>
+              <td>D1</td>
+              <td>Hydrochlorthiazide</td>
+              <td>12.5 mg </td>
+              <td>Once a day</td>
+              <td>25 mg</td>
+              <td>Twice a day</td>
+            </tr>
+            <tr>
+              <td>D2</td>
+              <td>Furosemide</td>
+              <td>40 mg </td>
+              <td>Once a day</td>
+              <td>40 mg</td>
+              <td>Twice a day</td>
+            </tr>
+            <tr>
+              <td>D3</td>
+              <td>Spironolactone</td>
+              <td>25 mg </td>
+              <td>Once a day</td>
+              <td>25 mg</td>
+              <td>Twice a day</td>
+            </tr>
+            <tr>
+              <td>E</td>
+              <td>
+                Isolazine (Isosorbide Dinitrate (20mg) + Hydralazine (37.5mg)
+              </td>
+              <td>1/2 Tablet </td>
+              <td>Three times a day</td>
+              <td>1 Tablet</td>
+              <td>Three times a day</td>
             </tr>
           </tbody>
         </Table>
-        <div className="float-end py-5">
-        <button type="button" className="btn btn-primary display-4" onClick={() => preview("decideContraindication")}>Back</button>
-        </div>
-      </Container> */}
-      <Container fluid>
-        {/* Your JSX */}
-        <div className="text-center pt-5">
-          <h1>Treatment check</h1>
-          {/* <button onClick={checkRisk1}>Check Risk</button> */}
-          <button onClick={checkTreatment}>Check Treatment</button>
-          <p>{results1}</p>
-          <p>{results2}</p>
-          <p>{results3}</p>
-          <p>{results4}</p>
-          <p>{results5}</p>
-          <p>{results6}</p>
-          <p>{results7}</p>
-          <p>{results8}</p>
-          <p>{results9}</p>
-
-          <p>eGFR: {criteria.eGFR}</p>
-          <p>Age: {criteria.age}</p>
-          <p>Suggested Medicine: {medicineSuggestion}</p>
-        </div>
-        {/* Rest of your JSX */}
       </Container>
     </>
   );
 };
 
-export default RiskStratification;
+export default Treatment;
