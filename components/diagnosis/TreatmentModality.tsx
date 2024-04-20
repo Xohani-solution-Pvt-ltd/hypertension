@@ -270,7 +270,7 @@ const Treatment = ({ preview }) => {
           className="text-center pt-5 d-flex"
           style={{ justifyContent: "center" }}
         >
-          <div className="" style={{marginRight:"100px"}}>
+          <div className="" style={{ marginRight: "100px" }}>
             <Image
               src={TreatmentImg}
               height={150}
@@ -303,7 +303,12 @@ const Treatment = ({ preview }) => {
           striped
           bordered
           hover
-          style={{ width: "100%", maxHeight: "auto", borderColor: "black", marginTop:"40px" }}
+          style={{
+            width: "100%",
+            maxHeight: "auto",
+            borderColor: "black",
+            marginTop: "40px",
+          }}
         >
           <thead>
             <tr>
