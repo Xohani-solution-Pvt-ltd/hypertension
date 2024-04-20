@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../../context/authentication";
+import Image from "next/image";
+import RiskImg from "../../assets/images/Riskchecker.jpg";
 
 const RiskStratification = ({ submit, preview }) => {
   const { userInfo } = useContext(AuthContext);
@@ -102,10 +104,20 @@ const RiskStratification = ({ submit, preview }) => {
   return (
     <>
       <div className="text-center pt-5">
-        <h3>Risk Checker</h3>
+      <h3>Risk Checker</h3>
+        <div className="">
+          <Image
+            src={RiskImg}
+            height={150}
+            width={300}
+            alt="Hypertension"
+          />
+        </div>
+        
         <button
           type="button"
           className="btn btn-primary display-4"
+          style={{marginTop:"20px"}}
           onClick={handleCalculateRisk}
         >
           Click here to see Risk

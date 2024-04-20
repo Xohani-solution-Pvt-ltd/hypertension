@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Container, Table } from "react-bootstrap";
 import Image from "next/image";
 import { AuthContext } from "../../context/authentication";
+import TreatmentImg from "../../assets/images/treatment.png";
 
 const Treatment = ({ preview }) => {
   const { userInfo } = useContext(AuthContext);
@@ -265,25 +266,44 @@ const Treatment = ({ preview }) => {
   return (
     <>
       <Container fluid>
-        <div className="text-center pt-5">
-          <h1>Treatment check</h1>
-          <button onClick={checkTreatment}>Check Treatment</button>
-          <p style={{ backgroundColor: "red" }}>{results1}</p>
-          <p style={{ backgroundColor: "red" }}>{results2}</p>
-          <p style={{ backgroundColor: "red" }}>{results3}</p>
-          <p style={{ backgroundColor: "red" }}>{results4}</p>
-          <p style={{ backgroundColor: "red" }}>{results5}</p>
-          <p style={{ backgroundColor: "red" }}>{results6}</p>
-          <p style={{ backgroundColor: "red" }}>{results7}</p>
-          <p style={{ backgroundColor: "red" }}>{results8}</p>
-          <p style={{ backgroundColor: "red" }}>{results9}</p>
-          <p>Suggested Medicine: {medicineSuggestion}</p>
+        <div
+          className="text-center pt-5 d-flex"
+          style={{ justifyContent: "center" }}
+        >
+          <div className="" style={{marginRight:"100px"}}>
+            <Image
+              src={TreatmentImg}
+              height={150}
+              width={150}
+              alt="Hypertension"
+            />
+          </div>
+          <div className="">
+            <h1>Treatment check</h1>
+            <button
+              type="button"
+              className="btn btn-primary display-4"
+              onClick={checkTreatment}
+            >
+              Check Treatment
+            </button>
+            <p style={{ backgroundColor: "red" }}>{results1}</p>
+            <p style={{ backgroundColor: "red" }}>{results2}</p>
+            <p style={{ backgroundColor: "red" }}>{results3}</p>
+            <p style={{ backgroundColor: "red" }}>{results4}</p>
+            <p style={{ backgroundColor: "red" }}>{results5}</p>
+            <p style={{ backgroundColor: "red" }}>{results6}</p>
+            <p style={{ backgroundColor: "red" }}>{results7}</p>
+            <p style={{ backgroundColor: "red" }}>{results8}</p>
+            <p style={{ backgroundColor: "red" }}>{results9}</p>
+            <p>Suggested Medicine: {medicineSuggestion}</p>
+          </div>
         </div>
         <Table
           striped
           bordered
           hover
-          style={{ width: "90%", maxHeight: "auto", borderColor: "black" }}
+          style={{ width: "100%", maxHeight: "auto", borderColor: "black", marginTop:"40px" }}
         >
           <thead>
             <tr>
