@@ -83,6 +83,29 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         }
       }
 
+      let ejectionInterpretation = "";
+      if (ejectionFraction && coronaryArteryDisease) {
+        if (
+          ejectionFraction >= 40 &&
+          ejectionFraction <= 60 &&
+          coronaryArteryDisease === "Absent"
+        ) {
+          ejectionInterpretation = "HfpeEF";
+        } else if (
+          ejectionFraction > 40 &&
+          coronaryArteryDisease === "Present"
+        ) {
+          ejectionInterpretation = "CAD";
+        } else if (
+          ejectionFraction > 60 &&
+          coronaryArteryDisease === "Absent"
+        ) {
+          ejectionInterpretation = "Normal";
+        } else if (ejectionFraction < 40) {
+          ejectionInterpretation = "HfrEF";
+        }
+      }
+
       updatedBloodTest.hbA1cLevel = hbA1cLevel;
       updatedBloodTest.normalHbA1cLevel = normalHbA1cLevel;
       updatedBloodTest.hBA1CInterpretation = hBA1CInterpretation;
@@ -114,6 +137,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       updatedBloodTest.ejectionFraction = ejectionFraction;
       updatedBloodTest.eGFRResult = eGFRResult;
       updatedBloodTest.age = age;
+      updatedBloodTest.ejectionInterpretation = ejectionInterpretation;
 
       const updatedBloodTestData = await updatedBloodTest.save();
 

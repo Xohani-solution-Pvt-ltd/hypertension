@@ -296,7 +296,7 @@ const Treatment = ({ preview }) => {
             <p style={{ backgroundColor: "red" }}>{results7}</p>
             <p style={{ backgroundColor: "red" }}>{results8}</p>
             <p style={{ backgroundColor: "red" }}>{results9}</p>
-            <p>Suggested Medicine: {medicineSuggestion}</p>
+            {/* <p>Suggested Medicine: {medicineSuggestion}</p> */}
           </div>
         </div>
         <Table
