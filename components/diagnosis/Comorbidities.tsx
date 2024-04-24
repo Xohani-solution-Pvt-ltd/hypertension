@@ -19,7 +19,11 @@ import ComorbiditiesImg from "../../assets/images/Comorbidities.jpg";
 import { AuthContext } from "../../context/authentication";
 
 const validationSchema = Yup.object({
-  cva: Yup.boolean(),
+  cva: Yup.object({
+    paralysis: Yup.boolean(),
+    slurringOfSpeech: Yup.boolean(),
+    blurringOfVision: Yup.boolean(),
+  }),
   coronaryArteryDisease: Yup.boolean(),
   heartFailure: Yup.boolean(),
   diabetes: Yup.boolean(),
@@ -28,7 +32,11 @@ const validationSchema = Yup.object({
 });
 
 const initialValues = {
-  cva: false,
+  cva: {
+    paralysis: false,
+    slurringOfSpeech: false,
+    blurringOfVision: false,
+  },
   coronaryArteryDisease: false,
   heartFailure: false,
   diabetes: false,
@@ -46,20 +54,19 @@ const Comorbidities = ({ submit, preview }) => {
   const [pregnancyData, setPregnancyData] = useState(false);
   const [lungDiseaseData, setLungDiseaseData] = useState(false);
   const [editing, setEditing] = useState(false);
-  // const [comorbiditiesData, setComorbiditiesData] = useState(
-  //   initialComorbiditiesValues
-  // );
-  const [comorbiditiesData, setComorbiditiesData] = useState({
-    cva: false,
-    coronaryArteryDisease: false,
-    heartFailure: false,
-    diabetes: false,
-    pregnancy: false,
-    lungDisease: false,
-    priorParalysis: false,
-    slurringOfSpeech: false,
-    blurringOfVision: false,
-  });
+  const [comorbiditiesData, setComorbiditiesData] =
+    useState<ComorbiditiesInterface>({
+      cva: {
+        paralysis: false,
+        slurringOfSpeech: false,
+        blurringOfVision: false,
+      },
+      coronaryArteryDisease: false,
+      heartFailure: false,
+      diabetes: false,
+      pregnancy: false,
+      lungDisease: false,
+    });
   const [cvaSubItemsVisible, setCvaSubItemsVisible] = useState(false);
   const [priorParalysis, setPriorParalysis] = useState(false);
   const [slurringOfSpeech, setSlurringOfSpeech] = useState(false);
@@ -79,7 +86,6 @@ const Comorbidities = ({ submit, preview }) => {
       pregnancy: pregnancyData,
       lungDisease: lungDiseaseData,
     };
-    // console.log("Input Data:", inputData);
 
     if (
       cvaData ||
@@ -129,7 +135,9 @@ const Comorbidities = ({ submit, preview }) => {
 
   useEffect(() => {
     if (comorbiditiesData != undefined) {
-      setCvaData(comorbiditiesData.cva);
+      setPriorParalysis(comorbiditiesData.cva.paralysis);
+      setSlurringOfSpeech(comorbiditiesData.cva.slurringOfSpeech);
+      setBlurringOfVision(comorbiditiesData.cva.blurringOfVision);
       setCadData(comorbiditiesData.coronaryArteryDisease);
       setHeartFailureData(comorbiditiesData.heartFailure);
       setDiabetesData(comorbiditiesData.diabetes);
@@ -169,16 +177,20 @@ const Comorbidities = ({ submit, preview }) => {
                             type="checkbox"
                             id="cva"
                             name="cva"
-                            checked={values.cva}
+                            checked={
+                              cvaSubItemsVisible ||
+                              priorParalysis ||
+                              slurringOfSpeech ||
+                              blurringOfVision
+                            }
                             className="me-4"
                             onChange={(e) => {
-                              setFieldValue("cva", e.target.checked);
-                              setCvaData(e.target.checked);
-                              setComorbiditiesData({
-                                ...comorbiditiesData,
-                                cva: e.target.checked,
+                              setFieldValue("cva", {
+                                paralysis: priorParalysis,
+                                slurringOfSpeech: slurringOfSpeech,
+                                blurringOfVision: blurringOfVision,
                               });
-                              setCvaSubItemsVisible(e.target.checked);
+                              setCvaSubItemsVisible(!cvaSubItemsVisible);
                             }}
                           />
                           Any history of paralysis/ atrang/ lakua
@@ -191,6 +203,7 @@ const Comorbidities = ({ submit, preview }) => {
                                   type="checkbox"
                                   id="priorParalysis"
                                   name="priorParalysis"
+                                  checked={priorParalysis}
                                   className="me-4"
                                   onChange={(e) => {
                                     setFieldValue(
@@ -209,6 +222,7 @@ const Comorbidities = ({ submit, preview }) => {
                                   type="checkbox"
                                   id="slurringOfSpeech"
                                   name="slurringOfSpeech"
+                                  checked={slurringOfSpeech}
                                   className="me-4"
                                   onChange={(e) => {
                                     setFieldValue(
@@ -227,6 +241,7 @@ const Comorbidities = ({ submit, preview }) => {
                                   type="checkbox"
                                   id="blurringOfVision"
                                   name="blurringOfVision"
+                                  checked={blurringOfVision}
                                   className="me-4"
                                   onChange={(e) => {
                                     setFieldValue(

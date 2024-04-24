@@ -20,28 +20,32 @@ import { AuthContext } from "../../context/authentication";
 const validationSchema = Yup.object({
   userid: Yup.string(),
   previousHeartAttacks: Yup.boolean(),
-  breathlessness: Yup.boolean(),
-  // minorNYHA: Yup.boolean(),
-  // majorNYHA: Yup.boolean(),
+  breathlessness: Yup.object({
+    minorNYHA: Yup.boolean(),
+    majorNYHA: Yup.boolean(),
+  }),
   legSwelling: Yup.boolean(),
 });
 
 const initialValues = {
   previousHeartAttacks: false,
-  breathlessness: false,
+  breathlessness: {
+    minorNYHA: false,
+    majorNYHA: false,
+  },
   legSwelling: false,
 };
 
 const Symptoms = ({ submit, preview }) => {
   const { userInfo } = useContext(AuthContext);
   const [symptomsId, setSymptomsId] = useState(undefined);
-  // const [symptomsData, setSymptomsData] = useState(initialSymptomsValue);
-  const [symptomsData, setSymptomsData] = useState({
+  const [symptomsData, setSymptomsData] = useState<SymptomsInterface>({
     previousHeartAttacks: false,
-    breathlessness: false,
+    breathlessness: {
+      minorNYHA: false,
+      majorNYHA: false,
+    },
     legSwelling: false,
-    minorNYHA: false,
-    majorNYHA: false,
   });
   const [previousHeartAttacksData, setPreviousHeartAttacksData] =
     useState(false);
@@ -89,7 +93,6 @@ const Symptoms = ({ submit, preview }) => {
 
   const fetchSymptomsDataDetails = async (id) => {
     const [data, err] = await getSymptomsMonitoringAPI(id);
-    // console.log("data=", data);
 
     if (data?.data != null) {
       setSymptomsData(data.data);
@@ -110,12 +113,10 @@ const Symptoms = ({ submit, preview }) => {
 
   useEffect(() => {
     if (symptomsData != undefined) {
-      // console.log("dataof symptoms", symptomsData);
       setPreviousHeartAttacksData(symptomsData.previousHeartAttacks);
-      setBreathlessnessData(symptomsData.breathlessness);
+      setMajorNYHA(symptomsData.breathlessness.majorNYHA);
+      setMinorNYHA(symptomsData.breathlessness.minorNYHA);
       setLegSwellingData(symptomsData.legSwelling);
-      // setMajorNYHA(symptomsData.majorNYHA);
-      // setMinorNYHA(symptomsData.minorNYHA);
     }
   }, [symptomsData]);
 
@@ -166,16 +167,20 @@ const Symptoms = ({ submit, preview }) => {
                           type="checkbox"
                           id="breathlessness"
                           name="breathlessness"
-                          checked={values.breathlessness}
+                          checked={
+                            brethlessnessSubItemsVisible ||
+                            minorNYHAData ||
+                            majorNYHAData
+                          }
                           className="me-4"
                           onChange={(e) => {
-                            setFieldValue("breathlessness", e.target.checked);
-                            setBreathlessnessData(e.target.checked);
-                            setSymptomsData({
-                              ...symptomsData,
-                              breathlessness: e.target.checked,
+                            setFieldValue("breathlessness", {
+                              minorNYHA: minorNYHAData,
+                              majorNYHA: majorNYHAData,
                             });
-                            setBrethlessnessSubItemsVisible(e.target.checked);
+                            setBrethlessnessSubItemsVisible(
+                              !brethlessnessSubItemsVisible
+                            );
                           }}
                         />
                         Breathlessness
@@ -188,6 +193,7 @@ const Symptoms = ({ submit, preview }) => {
                                 type="checkbox"
                                 id="minorNYHA"
                                 name="minorNYHA"
+                                checked={minorNYHAData}
                                 className="me-4"
                                 onChange={(e) => {
                                   setFieldValue("minorNYHA", e.target.checked);
@@ -204,6 +210,7 @@ const Symptoms = ({ submit, preview }) => {
                                 id="majorNYHA"
                                 name="majorNYHA"
                                 className="me-4"
+                                checked={majorNYHAData}
                                 onChange={(e) => {
                                   setFieldValue("majorNYHA", e.target.checked);
                                   setMajorNYHA(e.target.checked);

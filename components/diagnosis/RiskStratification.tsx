@@ -29,15 +29,19 @@ const RiskStratification = ({ submit, preview }) => {
         const symptomsData = data.data.symptomsData;
 
         const criteria = {
-          cva: comorbiditiesData.cva === true,
-          coronaryArteryDisease:
-            comorbiditiesData.coronaryArteryDisease === true,
-          previousHeartAttacks: symptomsData.previousHeartAttacks === true,
-          breathlessness: symptomsData.breathlessness === true,
-          cad: bloodTestData.ejectionInterpretation === "CAD",
-          heartFailure: comorbiditiesData.heartFailure === true,
-          hfrEF: bloodTestData.ejectionInterpretation === "HfrEF",
-          hfpeEF: bloodTestData.ejectionInterpretation === "HfpeEF",
+          cva:
+            comorbiditiesData.cva.paralysis ||
+            comorbiditiesData.cva.blurringOfVision ||
+            comorbiditiesData.cva.slurringOfSpeech,
+          coronaryArteryDisease: comorbiditiesData.coronaryArteryDisease,
+          previousHeartAttacks: symptomsData.previousHeartAttacks,
+          breathlessness:
+            symptomsData.breathlessness.minorNYHA ||
+            symptomsData.breathlessness.majorNYHA,
+          cad: bloodTestData.ejectionInterpretation,
+          heartFailure: comorbiditiesData.heartFailure,
+          hfrEF: bloodTestData.ejectionInterpretation,
+          hfpeEF: bloodTestData.ejectionInterpretation,
           eGFR: bloodTestData.eGFRResult,
         };
 

@@ -63,29 +63,29 @@ const Treatment = ({ preview }) => {
         setCriteria((prevCriteria) => ({
           ...prevCriteria,
 
-          cva: comorbiditiesData.cva === false,
-          coronaryArteryDisease:
-            comorbiditiesData.coronaryArteryDisease === false,
-          heartFailure: comorbiditiesData.heartFailure === false,
-          diabetes: comorbiditiesData.diabetes === false,
-          pregnancy: comorbiditiesData.pregnancy === false,
-          lungDisease: comorbiditiesData.lungDisease === false,
-          previousHeartAttacks: symptomsData.previousHeartAttacks === false,
-          breathlessness: symptomsData.breathlessness === false,
-          legSwelling: symptomsData.legSwelling === false,
+          cva:
+            comorbiditiesData.cva.paralysis ||
+            comorbiditiesData.cva.blurringOfVision ||
+            comorbiditiesData.cva.slurringOfSpeech,
+          coronaryArteryDisease: comorbiditiesData.coronaryArteryDisease,
+          heartFailure: comorbiditiesData.heartFailure,
+          diabetes: comorbiditiesData.diabetes,
+          pregnancy: comorbiditiesData.pregnancy,
+          lungDisease: comorbiditiesData.lungDisease,
+          previousHeartAttacks: symptomsData.previousHeartAttacks,
+          breathlessness:
+            symptomsData.breathlessness.minorNYHA ||
+            symptomsData.breathlessness.majorNYHA,
+          legSwelling: symptomsData.legSwelling,
 
-          hBA1CInterpretation: bloodTestData.hBA1CInterpretation === "Normal",
-          kidneyInterpretation: bloodTestData.kidneyInterpretation === "Normal",
-          ejectNormalInterpretation:
-            bloodTestData.ejectionInterpretation === "Normal",
-          ejectHfrefInterpretation:
-            bloodTestData.ejectionInterpretation === "HfrEF",
+          hBA1CInterpretation: bloodTestData.hBA1CInterpretation,
+          kidneyInterpretation: bloodTestData.kidneyInterpretation,
+          ejectNormalInterpretation: bloodTestData.ejectionInterpretation,
+          ejectHfrefInterpretation: bloodTestData.ejectionInterpretation,
           eGFR: bloodTestData.eGFRResult,
-          ejectHfprefInterpretation:
-            bloodTestData.ejectionInterpretation === "HfpeEF",
-          ejectCadInterpretation:
-            bloodTestData.ejectionInterpretation === "CAD",
-          presentdiabetes: comorbiditiesData.diabetes === true,
+          ejectHfprefInterpretation: bloodTestData.ejectionInterpretation,
+          ejectCadInterpretation: bloodTestData.ejectionInterpretation,
+          presentdiabetes: comorbiditiesData.diabetes,
           age: bloodTestData.age,
         }));
         console.log("Criteria State:", criteria);
