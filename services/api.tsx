@@ -24,7 +24,6 @@ async function handleResponse(p_response) {
   }
 }
 
-
 const get = (p_route, p_useHost = true, noCache = false) => {
   const newHeaders = headers;
 
@@ -36,7 +35,6 @@ const get = (p_route, p_useHost = true, noCache = false) => {
     headers: newHeaders,
   }).then((p_response) => handleResponse(p_response));
 };
-
 
 const post = (p_route, p_body, p_useHost = true) => {
   return fetch(p_useHost ? `${API_HOST}` + p_route : p_route, {
@@ -73,8 +71,7 @@ const jwtGet = (p_route, p_useHost = true, noCache = false) => {
   }).then((p_response) => handleResponse(p_response));
 };
 
-
-const put = (p_route,p_body, p_useHost = true) => {
+const put = (p_route, p_body, p_useHost = true) => {
   return fetch(p_useHost ? `${API_HOST}` + p_route : p_route, {
     headers: { ...headers, ...authHeader, token: getToken() },
     method: "PUT",
@@ -88,7 +85,6 @@ const del = (p_route, p_useHost = true) => {
     method: "DELETE",
   }).then(async (p_response) => await handleResponse(p_response));
 };
-
 
 export const api = {
   get,

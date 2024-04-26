@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import Image from "next/image";
-// import DownloadseconadryImg from '../assets/images/Downloadseconadry.png'
 import logo3 from "../assets/images/logo3.png";
 import { APP_INFO } from "../environments/index";
 import { AuthContext } from "../context/authentication";
@@ -23,15 +22,6 @@ export default function Header({}) {
     <section>
       <Container fluid>
         <Navbar className=" fixed-top flex items-center justify-between bg-light px-4">
-          {/* <Navbar.Brand href="/">
-            <Image
-              className="pr-2"
-              src={DownloadseconadryImg}
-              height={35}
-              width={35}
-              alt={`Logo | ${TITLE}`}
-            />
-          </Navbar.Brand>  */}
           <Navbar.Brand href="/">
             <Image
               className="pr-2"
@@ -83,7 +73,7 @@ export default function Header({}) {
                   <Nav.Link href="/login" className="nav-link mouse-hover">
                     Login
                   </Nav.Link>
-                  {/* <Nav.Link href="/login" className="nav-link mouse-hover" /> */}
+
                   <>
                     <Nav.Link href="/signup" className="nav-link mouse-hover">
                       Signup

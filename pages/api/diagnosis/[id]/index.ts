@@ -9,7 +9,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (req.method === "GET") {
     try {
-      console.log("data>>", req.query);
       const diagnosisData = await DiagnosisModel.findOne({
         userid: req.query.id,
       });

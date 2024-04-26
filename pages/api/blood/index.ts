@@ -76,7 +76,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       const { gender, dateOfBirth, weight } = userDetail;
       const age = calculateAge(dateOfBirth);
-      console.log("Calculated age:", age);
 
       let eGFRResult = 0;
       if (gender === "Male") {
@@ -92,7 +91,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           eGFRResult = 0;
         }
       }
-      console.log("data of egfr", eGFRResult);
 
       let ejectionInterpretation = "";
       if (ejectionFraction && coronaryArteryDisease) {

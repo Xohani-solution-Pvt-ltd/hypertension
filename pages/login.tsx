@@ -28,7 +28,6 @@ const Login = () => {
         setProcess(false);
       }, 1000);
     }
-    console.log("Submitted values:", values);
   };
 
   return (

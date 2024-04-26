@@ -1,5 +1,4 @@
 export interface ComorbiditiesInterface {
-  // cva: boolean;
   cva: {
     paralysis: boolean;
     slurringOfSpeech: boolean;

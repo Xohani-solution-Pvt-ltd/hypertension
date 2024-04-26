@@ -1,14 +1,15 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { connectMongo } from "../../../utils/mongodb";
- import UserModel from "../../../models/user.model";
+import UserModel from "../../../models/user.model";
 import bcrypt from "bcryptjs";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  connectMongo()
+  connectMongo();
 
-  if(req.method === "POST") {
+  if (req.method === "POST") {
     // Create a new user
-    const { fullName, email, password, mobile,address,age,gender } = req.body;
+    const { fullName, email, password, mobile, address, age, gender } =
+      req.body;
     try {
       const hashedPassword = await bcrypt.hash(password, 5);
       const user = await UserModel.create({
@@ -18,7 +19,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         mobile,
         address,
         age,
-        gender
+        gender,
       });
       res.status(201).json({
         success: true,
@@ -31,18 +32,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         message: error.message,
       });
     }
-  }else if (req.method === "GET") {
+  } else if (req.method === "GET") {
     // Retrieve all users
     const { page = 1, limit = 100 } = req.query;
     const parsedPage = parseInt(page as string);
     const parsedLimit = parseInt(limit as string);
 
     try {
-       const totalUsers = await UserModel.countDocuments({});
-       const totalPages = Math.ceil(totalUsers / parsedLimit);
+      const totalUsers = await UserModel.countDocuments({});
+      const totalPages = Math.ceil(totalUsers / parsedLimit);
 
       const users = await UserModel.find({})
-      .skip((parsedPage - 1) * parsedLimit)
+        .skip((parsedPage - 1) * parsedLimit)
         .limit(parsedLimit);
 
       res.status(200).json({
@@ -53,7 +54,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           totalUsers,
         },
         data: users,
-        
       });
     } catch (error) {
       res.status(400).json({
@@ -61,10 +61,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         message: error.message,
       });
     }
-  }else if(req.method === "GET") {
-    // Retrieve a user by ID
+  } else if (req.method === "GET") {
     const { id } = req.query;
-    console.log("data",id)
+
     try {
       const user = await UserModel.findById(id);
       if (!user) {
@@ -85,8 +84,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         message: error.message,
       });
     }
-}else if(req.method === 'PUT'){
-    const { id, fullName, email, password, mobile, address,age,gender } = req.body;
+  } else if (req.method === "PUT") {
+    const { id, fullName, email, password, mobile, address, age, gender } =
+      req.body;
     try {
       const updatedUser = await UserModel.findByIdAndUpdate(
         id,
@@ -97,13 +97,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           mobile,
           address,
           age,
-          gender
+          gender,
         },
         { new: true }
       );
       res.status(200).json({
         success: true,
-        message: 'User updated successfully',
+        message: "User updated successfully",
         data: updatedUser,
       });
     } catch (error) {
@@ -112,7 +112,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         message: error.message,
       });
     }
-  }else if (req.method === "DELETE") {
+  } else if (req.method === "DELETE") {
     // Delete a user
     const { id } = req.body;
     try {
@@ -137,4 +137,3 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 export default handler;
-

@@ -1,10 +1,6 @@
-import React, { useEffect, useRef, useState, useMemo, useContext } from "react";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import AccusureImg from "../../assets/images/accusure.jpeg";
-import Link from "next/link";
+import React, { useEffect, useState, useMemo, useContext } from "react";
 import { Container, Row, Col, Button, Nav, Tab, Card } from "react-bootstrap";
-import { Formik, Field, Form, ErrorMessage, useFormikContext } from "formik";
+import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import {
   getBloodTestAPI,
@@ -228,19 +224,12 @@ const BloodTest = ({ submit, preview }) => {
   };
 
   useEffect(() => {
-    // const id = getCookie("bloodTestId");
-    // setBloodTestId(id);
-    // if (id) {
-    //   setEditing(true);
-    //   fetchBloodTestDetails(id);
-    // }
     if (userInfo && userInfo._id) {
       const id = userInfo._id;
       fetchBloodTestDetails(id);
     }
   }, []);
 
-  // console.log("bloodTestData=", bloodTestData);
   useEffect(() => {
     if (bloodTestData != undefined) {
       setHbA1cLevelData(bloodTestData.hbA1cLevel);
@@ -424,10 +413,6 @@ const BloodTest = ({ submit, preview }) => {
                           name="hdlCholesterol"
                           className="form-control"
                           placeholder="Enter HDL Cholesterol (e.g., 60 - 80)"
-                          // onChange={(e) => {
-                          //   setFieldValue("hdlCholesterol", e.target.value);
-                          //   setHdlCholesterolData(e.target.value);
-                          // }}
                           onChange={(e) => {
                             const hdlCholesterol = parseFloat(e.target.value);
                             setFieldValue("hdlCholesterol", hdlCholesterol);
@@ -456,10 +441,6 @@ const BloodTest = ({ submit, preview }) => {
                           name="hdlInterpretation"
                           className="form-control"
                           disabled
-                          // onChange={(e) => {
-                          //   setFieldValue("hdlInterpretation", e.target.value);
-                          //   setHdlInterpretationData(e.target.value);
-                          // }}
                         >
                           <option
                             value=""

@@ -3,7 +3,6 @@ import { Container } from "react-bootstrap";
 import { APP_INFO } from "../environments/index";
 import Loading from "../components/Loading";
 import React, { useState, useEffect } from "react";
-// import styles from "./about.module.css"; // Import your CSS module
 
 export default function About() {
   const { TITLE } = APP_INFO;

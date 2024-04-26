@@ -6,7 +6,7 @@ import React from "react";
 import { getUsers } from "../services/call";
 import { User, Response } from "../interfaces/index";
 import Layout from "../components/Layout";
-import { Table } from 'react-bootstrap';
+import { Table } from "react-bootstrap";
 
 const UserList = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -20,13 +20,12 @@ const UserList = () => {
         notify.success("users fetch successfully");
         return null;
       } else if (err) {
-        console.log(err?.message);
         notify.error(err?.message);
         return err;
       }
       setLoading(false);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error("Error fetching data:", error);
       setLoading(false);
     }
   };
@@ -34,7 +33,6 @@ const UserList = () => {
   useEffect(() => {
     fetchUsers();
   }, []);
-  console.log('users', users);
 
   return (
     <Layout title="User List">
@@ -77,4 +75,3 @@ const UserList = () => {
 };
 
 export default UserList;
-

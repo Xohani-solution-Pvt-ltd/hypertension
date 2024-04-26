@@ -11,10 +11,6 @@ const BloodTestSchema: Schema = new Schema({
     type: Number,
     required: true,
   },
-  // normalHbA1cLevel:{
-  //     type : Number,
-  //     required : true
-  // },
   hBA1CInterpretation: {
     type: String,
     enum: ["Normal", "Abnormal"],
@@ -24,10 +20,6 @@ const BloodTestSchema: Schema = new Schema({
     type: Number,
     required: true,
   },
-  // normalTotalCholesterol:{
-  //     type : Number,
-  //     required : true
-  // },
   lipidInterpretation: {
     type: String,
     enum: ["Normal", "Abnormal"],
@@ -37,10 +29,6 @@ const BloodTestSchema: Schema = new Schema({
     type: Number,
     required: true,
   },
-  // normalHdlCholesterol:{
-  //     type : Number,
-  //     required : true
-  // },
   hdlInterpretation: {
     type: String,
     enum: ["Normal", "Abnormal"],
@@ -50,10 +38,6 @@ const BloodTestSchema: Schema = new Schema({
     type: Number,
     required: true,
   },
-  // normalLdlCholesterol:{
-  //     type : Number,
-  //     required : true
-  // },
   ldlInterpretation: {
     type: String,
     enum: ["Normal", "Abnormal"],
@@ -63,10 +47,6 @@ const BloodTestSchema: Schema = new Schema({
     type: Number,
     required: true,
   },
-  // normalTriglycerides:{
-  //     type : Number,
-  //     required : true
-  // },
   triglyceridesInterpretation: {
     type: String,
     enum: ["Normal", "Abnormal"],
@@ -84,7 +64,6 @@ const BloodTestSchema: Schema = new Schema({
     type: String,
     enum: ["Yes", "No"],
   },
-
   sodium: {
     type: Number,
     required: true,
@@ -106,14 +85,9 @@ const BloodTestSchema: Schema = new Schema({
     type: Number,
     required: true,
   },
-  // normalTshLevel:{
-  //     type : Number,
-  //     required : true
-  // },
   tshInterpretation: {
     type: String,
     enum: ["High", "Normal", "Low"],
-    // required: true
   },
   renalArteryDoppler: {
     type: String,
@@ -130,7 +104,6 @@ const BloodTestSchema: Schema = new Schema({
   ejectionInterpretation: {
     type: String,
   },
-
   eGFRResult: {
     type: Number,
     // default: false

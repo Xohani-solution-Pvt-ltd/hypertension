@@ -80,14 +80,6 @@ const Login = () => {
                 We take privacy issues seriously. You can be sure that your
                 personal data is securely protected.
               </Card.Text>
-              {/* <h4 className=" text-center text-primary">
-                Personal Information
-              </h4>
-              <p>
-                {" "}
-                Unlock Your Identity: Share Your Personal Information for a
-                Better Experience.
-              </p> */}
               <Form className="mt-8 space-y-6" onSubmit={Submit}>
                 <Row>
                   <Col md={6}>

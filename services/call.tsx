@@ -68,19 +68,6 @@ const createProfileAPI = async (body) => {
   return [data, err];
 };
 
-// export const profileAPIData = async (id) => {
-//   let err = null;
-//   let data = null;
-//   try {
-//     data = await jwtGet(`/createProfile/${id}`);
-//   } catch (e) {
-//     if (e?.response?.status === 400) {
-//       err = e?.json;
-//     }
-//   }
-//   return [data, err];
-// };
-
 export const profileAPIData = async (id) => {
   let err = null;
   let data = null;

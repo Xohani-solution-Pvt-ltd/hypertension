@@ -11,7 +11,6 @@ const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
     });
     return;
   }
-  console.log(user);
   res.status(200).json({
     statusCode: 200,
     success: true,

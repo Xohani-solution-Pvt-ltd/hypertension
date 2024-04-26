@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState, useMemo, useContext } from "react";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import AccusureImg from "../../assets/images/accusure.jpeg";
-import Link from "next/link";
 import { Container, Row, Col, Button, Nav, Tab, Card } from "react-bootstrap";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -105,7 +103,6 @@ const Diagnosis = ({ submit }) => {
   }, [diagnosisData]);
 
   useEffect(() => {
-    // const id=userInfo._id;
     if (userInfo && userInfo._id) {
       const id = userInfo._id;
       fetchDiagnosisDetailData(id);
@@ -201,8 +198,6 @@ const Diagnosis = ({ submit }) => {
                           type="submit"
                           className="btn btn-primary display-4"
                           onClick={() => submit("comorbidities")}
-
-                          // disabled={editing ? checkedData : !checkedData}
                         >
                           {editing ? "Edit" : "Create"}
                         </button>

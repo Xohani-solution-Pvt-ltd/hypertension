@@ -41,8 +41,6 @@ const AuthState = (props) => {
   const LoginToAccount = async (body) => {
     const [data, err] = await loginUserAPI(body);
     if (data?.success === true) {
-      console.log("Successfully Login user with ID:", data?.data._id);
-      console.log("Succesfully Login user");
       setIsAuthenticated(true);
       setUserInfo(data?.data);
       setToken(data?.token);
@@ -70,7 +68,6 @@ const AuthState = (props) => {
 
       return null;
     } else if (err) {
-      console.log(err?.message);
       notify.error(err?.message);
       return err;
     }
@@ -79,12 +76,10 @@ const AuthState = (props) => {
   const CreateAccount = async (body) => {
     const [data, err] = await createUserAPI(body);
     if (data?.success === true) {
-      console.log("Account Created Succesfully user!");
       router.push("/login");
       notify.success("Account Created Succesfully user!");
       return null;
     } else if (err) {
-      console.log(err?.message);
       notify.error(err?.message);
       return err;
     }
@@ -93,12 +88,10 @@ const AuthState = (props) => {
   const CreateProfile = async (body) => {
     const [data, err] = await createProfileAPI(body);
     if (data?.success === true) {
-      console.log("Profile Created Succesfully!");
       router.push("/dashboard");
       notify.success("Profile Created Succesfully!");
       return null;
     } else if (err) {
-      console.log(err?.message);
       notify.error(err?.message);
       return err;
     }
@@ -113,10 +106,8 @@ const AuthState = (props) => {
     const [data, err] = await getUserDetailsAPI();
     if (data?.success === true) {
       setIsAuthenticated(true);
-      console.log(data.data);
       setUserInfo(data?.data);
     } else if (err) {
-      console.log(err?.message);
       notify.error(err?.message);
       LogoutUser();
     }
@@ -131,7 +122,6 @@ const AuthState = (props) => {
       email: "",
     });
     removeToken();
-    console.log("log out user successfully");
   };
   return (
     <AuthContext.Provider

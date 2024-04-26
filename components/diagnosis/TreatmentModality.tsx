@@ -45,7 +45,6 @@ const Treatment = ({ preview }) => {
         `http://localhost:3000/api/allFetchData?id=${userInfo._id}`
       );
       const data = response.data;
-      console.log("Response Data:", data);
       if (
         data &&
         data.data &&

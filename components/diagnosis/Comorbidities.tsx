@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useMemo, useContext } from "react";
-import { useRouter } from "next/router";
+import React, { useEffect, useState, useContext } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import {
@@ -74,7 +73,6 @@ const Comorbidities = ({ submit, preview }) => {
 
   const handleSubmit = async () => {
     const inputData: ComorbiditiesInterface = {
-      // cva: cvaData,
       cva: {
         paralysis: priorParalysis,
         slurringOfSpeech: slurringOfSpeech,

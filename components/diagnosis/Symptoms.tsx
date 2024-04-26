@@ -65,7 +65,6 @@ const Symptoms = ({ submit, preview }) => {
       breathlessness: { minorNYHA: minorNYHAData, majorNYHA: majorNYHAData },
       legSwelling: legSwellingData,
     };
-    console.log("Input Data:", inputData);
 
     if (previousHeartAttacksData || breathlessnessData || legSwellingData) {
       if (editing === true) {

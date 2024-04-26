@@ -41,7 +41,6 @@ const Login = () => {
         selectedPhysicalActivity
       )
     ) {
-      console.log("Fill All values");
       notify.error("Fill All values");
       return;
     }

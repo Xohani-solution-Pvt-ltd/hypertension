@@ -31,16 +31,7 @@ const IndexPage = () => {
                   </p>
 
                   <div className="align-left mbr-section-btn ">
-                    {/* <Button
-                      className="btn btn-md btn-primary "
-                      href="https://hypertension.co"
-                    >
-                      VIEW MORE
-                    </Button> */}
-                    <Button
-                      className="btn btn-md btn-primary"
-                      href="/signup"
-                    >
+                    <Button className="btn btn-md btn-primary" href="/signup">
                       CHECK NOW
                     </Button>
                   </div>

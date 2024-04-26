@@ -1,25 +1,20 @@
-// ChangePasswordPage.tsx
-
-import { useState } from 'react';
-import axios from 'axios';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { useState } from "react";
+import axios from "axios";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
 const ChangePasswordPage = () => {
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [error, setError] = useState('');
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('/api/changepassword', {
+      const response = await axios.post("/api/changepassword", {
         password: currentPassword,
         newPassword: newPassword,
       });
-
-      // Password changed successfully
-      console.log(response.data.message);
     } catch (error) {
       setError(error.response.data.message);
     }
