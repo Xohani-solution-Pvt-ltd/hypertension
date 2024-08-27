@@ -123,6 +123,10 @@ const BloodTest = ({ submit, preview }) => {
   const [ejectionFractionData, setEjectionFractionData] = useState(undefined);
   const [editing, setEditing] = useState(false);
   const [bloodTestData, setBloodTestData] = useState(intialBloodTestValue);
+  const [eGFRResultData, setEGFRResultData] = useState(undefined);
+  const [ageData, setAgeData] = useState(undefined);
+  const [ejectionInterpretationData, setEjectionInterpretationData] =
+    useState(undefined);
 
   const handleSubmit = async () => {
     const bloodInputData: BloodTestInterface = {
@@ -154,6 +158,9 @@ const BloodTest = ({ submit, preview }) => {
       renalArteryDoppler: renalArteryDopplerData,
       coronaryArteryDisease: coronaryArteryDiseaseData,
       ejectionFraction: ejectionFractionData,
+      eGFRResult: eGFRResultData,
+      age: ageData,
+      ejectionInterpretation: ejectionInterpretationData,
     };
 
     if (
@@ -184,7 +191,11 @@ const BloodTest = ({ submit, preview }) => {
       tshInterpretationData ||
       renalArteryDopplerData ||
       coronaryArteryDiseaseData ||
-      ejectionFractionData
+      ejectionFractionData ||
+      eGFRResultData ||
+      ageData ||
+      eGFRResultData
+
     ) {
       if (editing) {
         if (bloodTestId) {
