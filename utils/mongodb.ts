@@ -6,7 +6,8 @@ declare global {
     };
 }
 
-const { MONGO_URI } = process.env;
+// const { MONGO_URI } = process.env;
+const  MONGO_URI  = "mongodb+srv://himanshumankar:<Himsbawa@9729>@cluster0.cehu0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 if (!MONGO_URI) throw new Error('MONGO_URI is not defined.');
 
