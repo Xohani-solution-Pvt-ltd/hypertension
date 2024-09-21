@@ -12,7 +12,7 @@ const RiskStratification = ({ submit, preview }) => {
   const fetchCriteriaData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/allFetchData?id=${userInfo._id}`
+        `http://mongodb+srv://himanshumankar22:Hypertension1@cluster0.n7fxd.mongodb.net/hyperTDB?retryWrites=true&w=majority&appName=Cluster0/api/allFetchData?id=${userInfo._id}`
       );
       const data = response.data;
 
