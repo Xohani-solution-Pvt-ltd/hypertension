@@ -181,7 +181,7 @@ export default function Footer() {
           >
             <h3 style={{ fontSize: "22px" }}>
               {" "}
-              © 2023 Hypertension All Rights Reserved.
+              © 2026 Hypertension All Rights Reserved.
             </h3>
           </span>
         </Container>
